@@ -1,0 +1,389 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dl68fjdomxivu"]
+
+[ext_resource type="Texture2D" uid="uid://8mr7280cpv1r" path="res://assets/enemies/Lobo/Lobo-attack.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="F3_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(48, 775, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 91.0
+metadata/pose_art_offset_x = 16.5
+
+[sub_resource type="AtlasTexture" id="F3_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(296, 775, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 92.0
+metadata/pose_art_offset_x = 15.0
+
+[sub_resource type="AtlasTexture" id="F3_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(545, 775, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 91.0
+metadata/pose_art_offset_x = 8.5
+
+[sub_resource type="AtlasTexture" id="F3_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(794, 775, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 92.0
+metadata/pose_art_offset_x = -11.5
+
+[sub_resource type="AtlasTexture" id="F3_4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1042, 775, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 91.0
+metadata/pose_art_offset_x = -1.0
+
+[sub_resource type="AtlasTexture" id="F4_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(48, 1031, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 91.0
+metadata/pose_art_offset_x = 21.0
+
+[sub_resource type="AtlasTexture" id="F4_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(296, 1031, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 91.0
+metadata/pose_art_offset_x = 24.5
+
+[sub_resource type="AtlasTexture" id="F4_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(545, 1031, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 91.0
+metadata/pose_art_offset_x = 20.0
+
+[sub_resource type="AtlasTexture" id="F5_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(545, 1286, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 89.0
+metadata/pose_art_offset_x = -7.5
+
+[sub_resource type="AtlasTexture" id="F5_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(794, 1286, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 88.0
+metadata/pose_art_offset_x = -9.0
+
+[sub_resource type="AtlasTexture" id="F7_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(48, 1798, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 88.0
+metadata/pose_art_offset_x = 24.5
+
+[sub_resource type="AtlasTexture" id="F7_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(296, 1798, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 22.0
+
+[sub_resource type="AtlasTexture" id="F7_4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1042, 1798, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 87.0
+metadata/pose_art_offset_x = -0.5
+
+[sub_resource type="AtlasTexture" id="F5_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(48, 1286, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 82.0
+metadata/pose_art_offset_x = 1.0
+
+[sub_resource type="AtlasTexture" id="F5_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(296, 1286, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 24.0
+
+[sub_resource type="AtlasTexture" id="F0_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(48, 8, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F0_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(296, 8, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 2.5
+
+[sub_resource type="AtlasTexture" id="F0_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(545, 8, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 5.0
+
+[sub_resource type="AtlasTexture" id="F6_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(48, 1542, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 92.0
+metadata/pose_art_offset_x = 27.0
+
+[sub_resource type="AtlasTexture" id="F6_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(296, 1542, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 12.5
+
+[sub_resource type="AtlasTexture" id="F6_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(545, 1542, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 11.0
+
+[sub_resource type="AtlasTexture" id="F6_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(794, 1542, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 92.0
+metadata/pose_art_offset_x = -4.5
+
+[sub_resource type="AtlasTexture" id="F6_4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1042, 1542, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 89.0
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="F0_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(794, 8, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = -3.0
+
+[sub_resource type="AtlasTexture" id="F0_4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1042, 8, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F2_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(48, 519, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 87.0
+metadata/pose_art_offset_x = 13.0
+
+[sub_resource type="AtlasTexture" id="F2_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(296, 519, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 88.0
+metadata/pose_art_offset_x = 11.0
+
+[sub_resource type="AtlasTexture" id="F2_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(545, 519, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 90.0
+metadata/pose_art_offset_x = 4.0
+
+[sub_resource type="AtlasTexture" id="F2_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(794, 519, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 92.0
+metadata/pose_art_offset_x = 1.0
+
+[sub_resource type="AtlasTexture" id="F2_4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1042, 519, 248, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 92.0
+metadata/pose_art_offset_x = -5.0
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F3_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F3_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F3_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F3_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("F3_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("F4_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F4_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F4_2")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F5_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F5_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("F7_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F7_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F7_4")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F5_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F5_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F5_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F5_3")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F0_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F0_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F0_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F0_1")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F6_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F6_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F6_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F6_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("F6_4")
+}],
+"loop": 0,
+"name": &"kick",
+"speed": 9.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F0_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F0_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F0_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F0_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("F0_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("F2_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F2_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F2_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F2_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("F2_4")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 9.0
+}]

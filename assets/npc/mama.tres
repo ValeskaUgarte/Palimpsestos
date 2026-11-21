@@ -1,0 +1,38 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cjjaf7opn80mx"]
+
+[ext_resource type="Texture2D" uid="uid://b2vgbsluhq2ip" path="res://assets/npc/MamaCaperusita.png" id="1_v7tpc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs8hm"]
+atlas = ExtResource("1_v7tpc")
+region = Rect2(0, 0, 1024, 1536)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs8hm")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"react",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"talk",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]

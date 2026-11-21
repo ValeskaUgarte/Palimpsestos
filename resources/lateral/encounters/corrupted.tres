@@ -1,0 +1,11 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/lateral/encounter_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+encounter_id = "guardian_2"
+mode = 1
+title = "El Lobo · guardián de la historia"
+arena_scene = "res://scenes/demo/arenas/arena3_corrupto.tscn"
+enemy_scene = "res://scenes/characters/enemies/Lobo.tscn"
+selection_allowed = true
+boss = true

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/lateral/encounter_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+encounter_id = "normal_wolf"
+mode = 0
+title = "Lobo del sendero"
+enemy_scene = "res://scenes/characters/enemies/Wolf1.tscn"

@@ -1,0 +1,205 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/lateral/stage.gd" id="e1"]
+[ext_resource type="Texture2D" path="res://assets/characters/elliot/Elliot.png" id="e2"]
+[ext_resource type="Texture2D" path="res://assets/art/presentation/ruins.png" id="e3"]
+[ext_resource type="Shader" path="res://assets/shaders/forest_presentation.gdshader" id="e4"]
+[ext_resource type="Script" path="res://scripts/lateral/world_marker.gd" id="e5"]
+[ext_resource type="PackedScene" path="res://scenes/lateral/encounter_zone.tscn" id="e6"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/Ethan.tscn" id="e7"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/Stephy.tscn" id="e8"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/Caperucita.tscn" id="e9"]
+[ext_resource type="Texture2D" path="res://assets/characters/John/Jhon.png" id="e10"]
+[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas.png" id="e11"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf1.tscn" id="e12"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfWhite.tscn" id="e13"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Gnomo.tscn" id="e14"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf2.tscn" id="e15"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("e4")
+shader_parameter/tone = Vector3(1.1, 0.68, 0.72)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(2400, 220)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3"]
+size = Vector2(40, 900)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4"]
+size = Vector2(40, 900)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5"]
+size = Vector2(240, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6"]
+size = Vector2(240, 85)
+
+[node name="Inframundo3" type="Node2D"]
+script = ExtResource("e1")
+exploration_title = "Inframundo 3 · La versión borrada"
+chapter_index = 2
+realm_kind = "underworld"
+
+[node name="Elliot_Inicio" type="Sprite2D" parent="."]
+texture = ExtResource("e2")
+position = Vector2(300, 330)
+scale = Vector2(0.2214, 0.2214)
+metadata/ph_fighter = "elliot"
+
+[node name="Pintura" type="Sprite2D" parent="."]
+texture = ExtResource("e3")
+material = SubResource("ShaderMaterial_1")
+position = Vector2(1200, 243.3636)
+scale = Vector2(1.4354, 1.4354)
+z_index = -10
+
+[node name="Suelo" type="StaticBody2D" parent="."]
+position = Vector2(1200, 610)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="Suelo"]
+shape = SubResource("RectangleShape2D_2")
+
+[node name="Vista" type="ColorRect" parent="Suelo"]
+position = Vector2(-1200, -110)
+size = Vector2(2400, 220)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="MuroIzquierdo" type="StaticBody2D" parent="."]
+position = Vector2(-20, 350)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="MuroIzquierdo"]
+shape = SubResource("RectangleShape2D_3")
+
+[node name="Vista" type="ColorRect" parent="MuroIzquierdo"]
+position = Vector2(-20, -450)
+size = Vector2(40, 900)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="MuroDerecho" type="StaticBody2D" parent="."]
+position = Vector2(2420, 350)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="MuroDerecho"]
+shape = SubResource("RectangleShape2D_4")
+
+[node name="Vista" type="ColorRect" parent="MuroDerecho"]
+position = Vector2(-20, -450)
+size = Vector2(40, 900)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="Plataforma1" type="StaticBody2D" parent="."]
+position = Vector2(680, 475)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="Plataforma1"]
+shape = SubResource("RectangleShape2D_5")
+
+[node name="Vista" type="ColorRect" parent="Plataforma1"]
+position = Vector2(-120, -25)
+size = Vector2(240, 50)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="Plataforma2" type="StaticBody2D" parent="."]
+position = Vector2(940, 457.5)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="Plataforma2"]
+shape = SubResource("RectangleShape2D_6")
+
+[node name="Vista" type="ColorRect" parent="Plataforma2"]
+position = Vector2(-120, -42.5)
+size = Vector2(240, 85)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="PortalSalida" type="Node2D" parent="."]
+script = ExtResource("e5")
+position = Vector2(2130, 390)
+portal = true
+
+[node name="Vista" type="ColorRect" parent="PortalSalida"]
+position = Vector2(-40, -80)
+size = Vector2(80, 160)
+color = Color(0.4, 0.78, 1, 0.35)
+
+[node name="MarcadorEncuentro" type="Node2D" parent="."]
+script = ExtResource("e5")
+position = Vector2(1250, 420)
+
+[node name="Vista" type="ColorRect" parent="MarcadorEncuentro"]
+position = Vector2(-40, -80)
+size = Vector2(80, 160)
+color = Color(0.5, 0.9, 0.7, 0.3)
+
+[node name="ZonaEncuentro" parent="." instance=ExtResource("e6")]
+position = Vector2(1250, 320)
+
+[node name="Vista" type="ColorRect" parent="ZonaEncuentro"]
+position = Vector2(-70, -180)
+size = Vector2(140, 360)
+color = Color(0.9, 0.7, 0.2, 0.25)
+
+[node name="Ethan" parent="." instance=ExtResource("e7")]
+position = Vector2(1100, 500)
+metadata/ph_npc = true
+
+[node name="Stephy" parent="." instance=ExtResource("e8")]
+position = Vector2(1550, 500)
+metadata/ph_npc = true
+
+[node name="Caperucita" parent="." instance=ExtResource("e9")]
+position = Vector2(1770, 500)
+metadata/ph_npc = true
+
+[node name="Jhon_Companero" type="Sprite2D" parent="."]
+texture = ExtResource("e10")
+position = Vector2(160, 330)
+scale = Vector2(0.2214, 0.2214)
+metadata/ph_fighter = "jhon"
+
+[node name="Thomas_Companero" type="Sprite2D" parent="."]
+texture = ExtResource("e11")
+position = Vector2(70, 330)
+scale = Vector2(0.2214, 0.2214)
+metadata/ph_fighter = "thomas"
+
+[node name="Lobo_Sendero" parent="." instance=ExtResource("e12")]
+position = Vector2(430, 500)
+metadata/ph_enemy = "normal_2"
+
+[node name="Oleada1_WolfWhite" parent="." instance=ExtResource("e13")]
+position = Vector2(850, 500)
+metadata/ph_enemy = "wave_underworld_2_0"
+
+[node name="Oleada2_Gnomo" parent="." instance=ExtResource("e14")]
+position = Vector2(980, 500)
+metadata/ph_enemy = "wave_underworld_2_1"
+
+[node name="Oleada3_Wolf2" parent="." instance=ExtResource("e15")]
+position = Vector2(1120, 500)
+metadata/ph_enemy = "wave_underworld_2_2"
+
+[node name="Oleada4_WolfWhite" parent="." instance=ExtResource("e13")]
+position = Vector2(1600, 500)
+metadata/ph_enemy = "wave_underworld_2_3"
+
+[node name="Oleada5_Gnomo" parent="." instance=ExtResource("e14")]
+position = Vector2(1740, 500)
+metadata/ph_enemy = "wave_underworld_2_4"
+
+[node name="Oleada6_Wolf1" parent="." instance=ExtResource("e12")]
+position = Vector2(1880, 500)
+metadata/ph_enemy = "wave_underworld_2_5"
+
+[node name="Oleada7_Wolf2" parent="." instance=ExtResource("e15")]
+position = Vector2(2040, 500)
+metadata/ph_enemy = "wave_underworld_2_6"
+
+[node name="Oleada8_WolfWhite" parent="." instance=ExtResource("e13")]
+position = Vector2(2170, 500)
+metadata/ph_enemy = "wave_underworld_2_7"
+
+[node name="Extra1_Wolf1" parent="." instance=ExtResource("e12")]
+position = Vector2(1550, 500)
+metadata/ph_enemy = ""
+
+[node name="Extra2_Wolf1" parent="." instance=ExtResource("e12")]
+position = Vector2(1800, 500)
+metadata/ph_enemy = ""

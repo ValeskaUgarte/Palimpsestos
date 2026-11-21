@@ -1,0 +1,38 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dvgmprkaw4u45"]
+
+[ext_resource type="Texture2D" uid="uid://cv8ffvv7b1aub" path="res://assets/npc/AbuelitaCaperusita.png" id="1_fchvl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_312du"]
+atlas = ExtResource("1_fchvl")
+region = Rect2(0, 0, 1024, 1536)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_312du")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"react",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"talk",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]

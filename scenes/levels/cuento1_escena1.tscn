@@ -1,0 +1,977 @@
+[gd_scene format=3 uid="uid://gmqvkyt0tabi"]
+
+[ext_resource type="Script" uid="uid://uh8pe5vq1oc" path="res://scripts/systems/level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://3p36cjprpd2q" path="res://scenes/characters/player/Elliot.tscn" id="2_elliot"]
+[ext_resource type="Script" uid="uid://d1gvc8dhojq1q" path="res://scenes/levels/story_narration.gd" id="2_tlkg4"]
+[ext_resource type="PackedScene" uid="uid://bxsw6g3gikck0" path="res://scenes/characters/enemies/RangerWood.tscn" id="3_ranger"]
+[ext_resource type="PackedScene" uid="uid://b5hulsa2v6cik" path="res://scenes/characters/enemies/Wolf2.tscn" id="4b_wolf2"]
+[ext_resource type="PackedScene" uid="uid://drlittrjn26le" path="res://scenes/characters/enemies/Wolf1.tscn" id="4_wolf1"]
+[ext_resource type="PackedScene" uid="uid://bcl3bguxilfg" path="res://scenes/characters/npc/NPC_Mama.tscn" id="5_mama"]
+[ext_resource type="PackedScene" uid="uid://c7v8j0ticoo3o" path="res://scenes/characters/npc/NPC_Vecina.tscn" id="5_npc"]
+[ext_resource type="PackedScene" uid="uid://ce7ioblmk5vao" path="res://scenes/ui/hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="7_pause"]
+[ext_resource type="Script" uid="uid://2go41el7ernn" path="res://scripts/systems/level_exit.gd" id="8_exit"]
+[ext_resource type="Script" uid="uid://c5cxk03mlno5p" path="res://scripts/systems/clue_sign.gd" id="9_clue"]
+[ext_resource type="Script" uid="uid://dnj6o1lp13ii6" path="res://scripts/systems/monolith_puzzle.gd" id="10_monolith"]
+[ext_resource type="Script" uid="uid://bhxuxkw6ihg2q" path="res://scripts/systems/monolith_rune.gd" id="11_rune"]
+[ext_resource type="PackedScene" uid="uid://dx7lq25hkulp5" path="res://scenes/characters/npc/Ethan.tscn" id="12_ethan"]
+[ext_resource type="Script" uid="uid://bttj3ypna3gy" path="res://scripts/systems/story_trigger.gd" id="13_story"]
+[ext_resource type="Texture2D" uid="uid://nwy5lrb7gtti" path="res://assets/characters/ethan/Ethan.png" id="14_ethan_portrait"]
+[ext_resource type="Texture2D" uid="uid://slfd3fg80ua7" path="res://assets/characters/elliot/Elliot.png" id="15_elliot_portrait"]
+[ext_resource type="PackedScene" uid="uid://bw2lsbac70y7n" path="res://scenes/ui/chapter_presentation.tscn" id="20_presentation"]
+[ext_resource type="Script" uid="uid://ckl6gi28axmih" path="res://scripts/systems/walkable_path.gd" id="21_path"]
+[ext_resource type="Script" uid="uid://xhnwp8w1jf3s" path="res://scripts/systems/story_portal.gd" id="24_portal"]
+[ext_resource type="Texture2D" uid="uid://b4dylkcx3tkn8" path="res://assets/ui/tableros/desaparecida.png" id="49_lqi5l"]
+[ext_resource type="Texture2D" uid="uid://dxvjnspfns01o" path="res://assets/ui/tableros/nina_perdida.png" id="50_lqi5l"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Anciano.tscn" id="amb_anciano"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Caballo.tscn" id="amb_caballo"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Gato.tscn" id="amb_gato"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Guardia.tscn" id="amb_guardia"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Hombre.tscn" id="amb_hombre"]
+[ext_resource type="PackedScene" uid="uid://de7vssn6faim0" path="res://scenes/characters/pueblo/Mujer.tscn" id="amb_mujer"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Nina.tscn" id="amb_nina"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Nino.tscn" id="amb_nino"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Perro.tscn" id="amb_perro"]
+[ext_resource type="Texture2D" uid="uid://beoagtch4mo4q" path="res://assets/npc/Gretel.png" id="hyg_gretel"]
+[ext_resource type="Texture2D" uid="uid://ctd15os2tr87o" path="res://assets/npc/Hansel.png" id="hyg_hansel"]
+[ext_resource type="Texture2D" uid="uid://cwew6mcas2vd6" path="res://assets/npc/Madre_HyG.png" id="hyg_madre"]
+[ext_resource type="Texture2D" uid="uid://trcj4v0qasv5" path="res://assets/npc/Padre_HyG.png" id="hyg_padre"]
+[ext_resource type="Texture2D" uid="uid://ctvbxmmtda3f5" path="res://assets/npc/Vieja.png" id="hyg_vieja"]
+[ext_resource type="Texture2D" uid="uid://b8dmc8tthot7m" path="res://assets/ui/items/empanada.png" id="it_empanada"]
+[ext_resource type="Texture2D" uid="uid://djr7gbywwa1gs" path="res://assets/ui/items/mate.png" id="it_mate"]
+[ext_resource type="Texture2D" uid="uid://b1nry0m0x7fjq" path="res://assets/ui/items/pan.png" id="it_pan"]
+[ext_resource type="Texture2D" uid="uid://ca13scjk4besb" path="res://assets/ui/items/pastel.png" id="it_pastel"]
+[ext_resource type="Texture2D" uid="uid://d28qvh863tbqh" path="res://assets/ui/items/pocion_roja.png" id="it_pocion"]
+[ext_resource type="Texture2D" uid="uid://blks3gcifqwh6" path="res://assets/ui/items/pocion_verde.png" id="it_pocion_verde"]
+[ext_resource type="Texture2D" uid="uid://him4mvrxeiei" path="res://assets/ui/items/sello_azul.png" id="it_sello_azul"]
+[ext_resource type="Texture2D" uid="uid://dr30k4bs5k3vu" path="res://assets/ui/items/sello_verde.png" id="it_sello_verde"]
+[ext_resource type="Texture2D" uid="uid://dqtv4er2gb3dn" path="res://assets/ui/items/sopa.png" id="it_sopa"]
+[ext_resource type="Shader" uid="uid://dt4xchaj55h3q" path="res://scripts/shaders/forest_join.gdshader" id="join_shader"]
+[ext_resource type="PackedScene" path="res://scenes/props/JumpObstacle.tscn" id="jump_obstacle"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf3.tscn" id="new_wolf3"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfPunch.tscn" id="new_wolfpunch"]
+[ext_resource type="Script" uid="uid://cg851yyi33cds" path="res://scripts/systems/cilindros.gd" id="pares_mesa"]
+[ext_resource type="Script" uid="uid://d1wb2ekkvc6r5" path="res://scripts/systems/story_pickup.gd" id="pickup_gd"]
+[ext_resource type="Texture2D" uid="uid://c8v37ecilef1s" path="res://assets/ui/diario/item_flores.png" id="pk_tex_1"]
+[ext_resource type="Texture2D" uid="uid://bey2rf4tqpyt7" path="res://assets/ui/diario/cartel_tablero.png" id="pk_tex_2"]
+[ext_resource type="Texture2D" uid="uid://vbyidpy51h88" path="res://assets/ui/tableros/periodico.png" id="pk_tex_3"]
+[ext_resource type="Texture2D" uid="uid://b0qnht4u1vc4b" path="res://assets/ui/diario/item_pluma.png" id="pk_tex_4"]
+[ext_resource type="Texture2D" uid="uid://c1p7efssab16c" path="res://assets/ui/diario/item_huella.png" id="pk_tex_5"]
+[ext_resource type="Texture2D" uid="uid://beot7x6ta6yrp" path="res://assets/ui/diario/cartel_flechas.png" id="pk_tex_6"]
+[ext_resource type="Texture2D" uid="uid://bx5vraotapq4q" path="res://assets/ui/pack_gotico/obj_pergamino.png" id="pk_tex_10"]
+[ext_resource type="Texture2D" uid="uid://xj1cisvi8lu3" path="res://assets/ui/pack_gotico/obj_papiro.png" id="pk_tex_11"]
+[ext_resource type="Texture2D" uid="uid://do5qtnl8br2vc" path="res://assets/escenas/cuento1/escena_a1.png" id="scene_a1"]
+[ext_resource type="Texture2D" uid="uid://3jl71fs5iiqo" path="res://assets/escenas/cuento1/escena_a12.png" id="scene_a12"]
+[ext_resource type="Texture2D" uid="uid://bavdb05bdkdmp" path="res://assets/escenas/cuento1/escena_a13.png" id="scene_a13"]
+[ext_resource type="Script" uid="uid://blsfycm1a7crf" path="res://scripts/systems/story_trail.gd" id="trail_s1"]
+[ext_resource type="PackedScene" path="res://scenes/props/valla.tscn" id="valla_prop"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Gnomo.tscn" id="wave_gnomo"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfWhite.tscn" id="wave_wolfwhite"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_join_scene"]
+shader = ExtResource("join_shader")
+shader_parameter/blend_width = 0.03
+
+[sub_resource type="RectangleShape2D" id="WallH"]
+size = Vector2(20456, 40)
+
+[sub_resource type="RectangleShape2D" id="WallV"]
+size = Vector2(40, 1200)
+
+[sub_resource type="CircleShape2D" id="EthanTriggerShape"]
+radius = 130.0
+
+[sub_resource type="CircleShape2D" id="ClueShape"]
+radius = 60.0
+
+[sub_resource type="RectangleShape2D" id="MonolithShape"]
+size = Vector2(500, 400)
+
+[sub_resource type="CircleShape2D" id="RuneShape"]
+radius = 40.0
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(60, 1200)
+
+[sub_resource type="RectangleShape2D" id="ZonaNarracion"]
+size = Vector2(260, 520)
+
+[sub_resource type="RectangleShape2D" id="ZonaConversacion"]
+size = Vector2(340, 520)
+
+[node name="Cuento1_Escena1" type="Node2D" unique_id=1488940594]
+script = ExtResource("1_level")
+camera_bounds = Rect2(-970, -560, 20426, 1120)
+camera_horizon_y = -35.0
+fog_zones = PackedVector2Array(10500, 15500)
+fog_fade = 900.0
+fog_density = 0.8
+rain_zones = PackedVector2Array(2000, 10000, 16500, 20000)
+rain_fade = 700.0
+
+[node name="NarracionHistoria" type="CanvasLayer" parent="." unique_id=72313448]
+script = ExtResource("2_tlkg4")
+
+[node name="Ground" type="ColorRect" parent="." unique_id=42172030]
+offset_left = -1065.0
+offset_top = -602.0
+offset_right = 19517.0
+offset_bottom = 598.0
+color = Color(0.2, 0.34, 0.18, 1)
+
+[node name="Escena_a1" type="Sprite2D" parent="." unique_id=712487544]
+position = Vector2(2473.7295, -31.2)
+scale = Vector2(3.709984, 3.6652)
+texture = ExtResource("scene_a1")
+
+[node name="Escena_a12" type="Sprite2D" parent="." unique_id=557169072]
+material = SubResource("ShaderMaterial_join_scene")
+position = Vector2(9488.7, -22.3)
+scale = Vector2(3.8389, 3.8389)
+texture = ExtResource("scene_a12")
+
+[node name="Escena_a13" type="Sprite2D" parent="." unique_id=1063920286]
+material = SubResource("ShaderMaterial_join_scene")
+position = Vector2(16225.1, -44.1)
+scale = Vector2(3.4177, 3.4177)
+texture = ExtResource("scene_a13")
+
+[node name="Aldeano_Nino" parent="." unique_id=1135289572 instance=ExtResource("amb_nino")]
+position = Vector2(100, 238)
+x_min = -400.0
+x_max = 400.0
+speed = 110.0
+
+[node name="Sprite" parent="Aldeano_Nino" index="0"]
+scale = Vector2(0.6, 0.6)
+
+[node name="Aldeano_Guardia" parent="." unique_id=348331811 instance=ExtResource("amb_guardia")]
+position = Vector2(1000, 245)
+
+[node name="Aldeano_Hombre" parent="." unique_id=1311580142 instance=ExtResource("amb_hombre")]
+position = Vector2(-700, 250)
+x_min = -250.0
+x_max = 250.0
+
+[node name="Sprite" parent="Aldeano_Hombre" index="0"]
+position = Vector2(-23.619518, -120.79399)
+scale = Vector2(1.1064028, 1.2047344)
+animation = &"walk"
+frame = 13
+frame_progress = 1.0
+
+[node name="Aldeano_Anciano" parent="." unique_id=1963293875 instance=ExtResource("amb_anciano")]
+position = Vector2(500, 270)
+
+[node name="Sprite" parent="Aldeano_Anciano" index="0"]
+position = Vector2(34.64631, -114.79209)
+scale = Vector2(1.4894243, 1.5953742)
+animation = &"walk"
+frame_progress = 0.26988703
+
+[node name="Aldeano_Mujer" parent="." unique_id=1253616783 instance=ExtResource("amb_mujer")]
+position = Vector2(-612, 263)
+
+[node name="Sprite" parent="Aldeano_Mujer" index="0"]
+position = Vector2(-339.99997, -106.250015)
+scale = Vector2(1.5278322, 1.6374509)
+animation = &"walk"
+frame_progress = 0.7874064
+
+[node name="Caballo" parent="." unique_id=1630862842 instance=ExtResource("amb_caballo")]
+position = Vector2(1424, 253)
+x_min = -125.0
+x_max = 125.0
+
+[node name="Sprite" parent="Caballo" index="0"]
+position = Vector2(220.99997, -153)
+
+[node name="Aldeano_Nino2" parent="." unique_id=815524378 instance=ExtResource("amb_nino")]
+position = Vector2(2750, 245)
+x_min = -450.0
+x_max = 450.0
+speed = 100.0
+
+[node name="Sprite" parent="Aldeano_Nino2" index="0"]
+position = Vector2(-62.999985, -44)
+scale = Vector2(1.403966, 1.1923003)
+animation = &"walk"
+frame = 19
+frame_progress = 1.0
+
+[node name="Aldeano_Anciano2" parent="." unique_id=1417433480 instance=ExtResource("amb_anciano")]
+position = Vector2(3250, 275)
+x_min = -350.0
+x_max = 350.0
+
+[node name="Obstaculo1_pila" parent="." unique_id=1548712512 instance=ExtResource("jump_obstacle")]
+position = Vector2(3600, 275)
+region = Rect2(439, 18, 247, 168)
+target_height = 80.0
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Obstaculo2_tronco1" parent="." unique_id=2083604362 instance=ExtResource("jump_obstacle")]
+position = Vector2(5200, 275)
+region = Rect2(1188, 62, 251, 119)
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Obstaculo3_losa" parent="." unique_id=1988238150 instance=ExtResource("jump_obstacle")]
+position = Vector2(6700, 275)
+region = Rect2(702, 91, 157, 72)
+target_height = 45.0
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Obstaculo5_tronco2" parent="." unique_id=2000013728 instance=ExtResource("jump_obstacle")]
+position = Vector2(9700, 275)
+region = Rect2(1481, 59, 250, 113)
+target_height = 58.0
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Obstaculo6_plana" parent="." unique_id=1840822992 instance=ExtResource("jump_obstacle")]
+position = Vector2(11100, 275)
+region = Rect2(1044, 109, 125, 50)
+target_height = 38.0
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Obstaculo8_tronco3" parent="." unique_id=1864498168 instance=ExtResource("jump_obstacle")]
+position = Vector2(13800, 275)
+region = Rect2(1937, 96, 219, 89)
+target_height = 50.0
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Obstaculo9_roca" parent="." unique_id=1496919745 instance=ExtResource("jump_obstacle")]
+position = Vector2(15200, 275)
+region = Rect2(882, 97, 141, 71)
+target_height = 55.0
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Obstaculo10_tronco1" parent="." unique_id=1923689818 instance=ExtResource("jump_obstacle")]
+position = Vector2(17300, 275)
+region = Rect2(1188, 62, 251, 119)
+clear_height = 10.0
+half_width = 10.0
+
+[node name="Aldeana_Nina" parent="." unique_id=1218587646 instance=ExtResource("amb_nina")]
+position = Vector2(800, 305)
+
+[node name="Sprite" parent="Aldeana_Nina" index="0"]
+position = Vector2(21.516172, -76.28575)
+scale = Vector2(0.9884079, 1.2008924)
+animation = &"walk"
+frame_progress = 0.6744161
+
+[node name="Perro" parent="." unique_id=2127423587 instance=ExtResource("amb_perro")]
+position = Vector2(-100, 312)
+x_min = -400.0
+x_max = 400.0
+
+[node name="Gato" parent="." unique_id=1156564016 instance=ExtResource("amb_gato")]
+position = Vector2(1075, 318)
+x_min = -175.0
+x_max = 175.0
+
+[node name="LoboPunch" parent="." unique_id=1986360575 instance=ExtResource("new_wolfpunch")]
+position = Vector2(7245, 205)
+
+[node name="Visual" parent="LoboPunch" index="0" unique_id=2054604276]
+animation = &"death"
+
+[node name="Lobo3Blanco" parent="." unique_id=505055407 instance=ExtResource("new_wolf3")]
+position = Vector2(13486, 273)
+
+[node name="Visual" parent="Lobo3Blanco" index="0" unique_id=2054604276]
+animation = &"walk"
+
+[node name="Walls" type="Node2D" parent="." unique_id=287564162]
+
+[node name="WallTop" type="StaticBody2D" parent="Walls" unique_id=51186205]
+position = Vector2(0, -600)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallTop" unique_id=734085428]
+position = Vector2(9228, 0)
+shape = SubResource("WallH")
+
+[node name="WallBottom" type="StaticBody2D" parent="Walls" unique_id=803115739]
+position = Vector2(0, 600)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBottom" unique_id=1717773800]
+position = Vector2(9228, 0)
+shape = SubResource("WallH")
+
+[node name="WallLeft" type="StaticBody2D" parent="Walls" unique_id=1173942268]
+position = Vector2(-1000, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft" unique_id=745234205]
+position = Vector2(0, 15)
+shape = SubResource("WallV")
+
+[node name="WallRight" type="StaticBody2D" parent="Walls" unique_id=125268152]
+position = Vector2(19456, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight" unique_id=447241830]
+shape = SubResource("WallV")
+
+[node name="Elliot" parent="." unique_id=23638345 instance=ExtResource("2_elliot")]
+position = Vector2(-265, 123)
+
+[node name="AnimatedSprite2D" parent="Elliot" index="0" unique_id=2041307235]
+position = Vector2(9.000003, 59)
+animation = &"idle"
+
+[node name="CollisionShape2D" parent="Elliot" index="1" unique_id=767236952]
+position = Vector2(0, 33)
+
+[node name="CollisionShape2D" parent="Elliot/Hurtbox" parent_id_path=PackedInt32Array(23638345, 1679854044) index="0" unique_id=120741942]
+position = Vector2(-4, 34)
+
+[node name="Hitbox" parent="Elliot" index="3" unique_id=241028676]
+position = Vector2(1, 16)
+
+[node name="CollisionShape2D" parent="Elliot/Hitbox" index="0" unique_id=1062113029]
+position = Vector2(-6, 20)
+
+[node name="Camera2D" parent="Elliot" index="4" unique_id=2077325822]
+position = Vector2(-12, 49)
+
+[node name="RangerWood" parent="." unique_id=2069088770 instance=ExtResource("3_ranger")]
+position = Vector2(5527, 144)
+slide_on_ceiling = false
+
+[node name="Visual" parent="RangerWood" index="0" unique_id=1223183067]
+position = Vector2(394, -24)
+
+[node name="CollisionShape2D" parent="RangerWood" index="1" unique_id=183576592]
+position = Vector2(391, 4)
+
+[node name="CollisionShape2D" parent="RangerWood/Hurtbox" parent_id_path=PackedInt32Array(2069088770, 139528050) index="0" unique_id=1409883443]
+position = Vector2(423, -79)
+
+[node name="CollisionShape2D" parent="RangerWood/Hitbox" parent_id_path=PackedInt32Array(2069088770, 1424869262) index="0" unique_id=1987142242]
+position = Vector2(431, -48)
+
+[node name="CollisionShape2D" parent="RangerWood/DetectionArea" parent_id_path=PackedInt32Array(2069088770, 1340406709) index="0" unique_id=1054602036]
+position = Vector2(398, -73)
+
+[node name="Ethan" parent="." unique_id=952834545 instance=ExtResource("12_ethan")]
+position = Vector2(6209, 299)
+
+[node name="Motion" parent="Ethan" index="0" unique_id=606193905]
+position = Vector2(-13.743243, -173.1892)
+scale = Vector2(0.24324325, 0.24324325)
+animation = &"idle"
+
+[node name="EthanEncuentro" type="Area2D" parent="." unique_id=808560117]
+position = Vector2(6100, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_speakers = Array[String](["Ethan", "Elliot", "Ethan", "", "Elliot"])
+conversation_lines = Array[String](["¡Eh! ¿Muchacho, eres nuevo aquí?", "Creo que sí - contesta Elliot mientras ríe nerviosamente.", "Me parecía, aún se ven algunos cables.", "Algo en esa frase le dolió, y no supo dónde.", "Genial, dos locos en un día…. Por cierto…. ¿Qué estoy haciendo aquí?"])
+conversation_portraits = Array[Texture2D]([ExtResource("14_ethan_portrait"), ExtResource("15_elliot_portrait"), ExtResource("14_ethan_portrait"), null, ExtResource("15_elliot_portrait")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EthanEncuentro" unique_id=860479721]
+shape = SubResource("EthanTriggerShape")
+
+[node name="Wolf1" parent="." unique_id=525150428 instance=ExtResource("4_wolf1")]
+position = Vector2(13088, 245)
+
+[node name="WolfSolo1" parent="." unique_id=120940619 instance=ExtResource("4_wolf1")]
+position = Vector2(4523, 245)
+
+[node name="WolfDuo1" parent="." unique_id=184634969 instance=ExtResource("4_wolf1")]
+position = Vector2(7585, 224)
+
+[node name="WolfDuo2" parent="." unique_id=476708815 instance=ExtResource("4b_wolf2")]
+position = Vector2(8635, 236)
+
+[node name="WolfTrio1" parent="." unique_id=217212761 instance=ExtResource("4_wolf1")]
+position = Vector2(11605, 248)
+
+[node name="WolfTrio2" parent="." unique_id=426112203 instance=ExtResource("4b_wolf2")]
+position = Vector2(10236, 198)
+
+[node name="Visual" parent="WolfTrio2" index="0" unique_id=450480685]
+animation = &"attack"
+frame_progress = 0.0
+
+[node name="WolfTrio3" parent="." unique_id=1142728437 instance=ExtResource("4_wolf1")]
+position = Vector2(11937, 277)
+
+[node name="Visual" parent="WolfTrio3" index="0" unique_id=2054604276]
+animation = &"walk"
+
+[node name="NPC_Mama" parent="." unique_id=1777418703 instance=ExtResource("5_mama")]
+position = Vector2(-746, 193)
+
+[node name="Motion" parent="NPC_Mama" index="0"]
+position = Vector2(321.2925, -43.002045)
+scale = Vector2(0.2242023, 0.2242023)
+standing_height = 330.25
+foot_position = Vector2(318.49, 116.63)
+
+[node name="CollisionShape2D" parent="NPC_Mama" index="1" unique_id=1172121729]
+position = Vector2(326, -36)
+
+[node name="NPC_Vecina" parent="." unique_id=2091243322 instance=ExtResource("5_npc")]
+position = Vector2(-477, 211)
+dialogue_lines = Array[String]([])
+
+[node name="Motion" parent="NPC_Vecina" index="0" unique_id=1815825590]
+position = Vector2(-52.68662, -52.000916)
+scale = Vector2(0.22686721, 0.22686721)
+
+[node name="CollisionShape2D" parent="NPC_Vecina" index="1" unique_id=183638987]
+position = Vector2(-103, -39)
+
+[node name="Oleada1_WolfWhite" parent="." unique_id=17119763 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(4915, 224)
+
+[node name="Oleada2_Gnomo" parent="." unique_id=551277831 instance=ExtResource("wave_gnomo")]
+position = Vector2(9160, 218)
+
+[node name="Oleada3_WolfWhite" parent="." unique_id=1586392776 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(12753, 236)
+
+[node name="Oleada4_Gnomo" parent="." unique_id=1663373097 instance=ExtResource("wave_gnomo")]
+position = Vector2(15420, 192)
+
+[node name="Oleada5_Wolf2" parent="." unique_id=906289797 instance=ExtResource("4b_wolf2")]
+position = Vector2(17447, 193)
+
+[node name="Oleada6_WolfWhite" parent="." unique_id=880051778 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(17125, 214)
+
+[node name="Oleada7_Gnomo" parent="." unique_id=75411960 instance=ExtResource("wave_gnomo")]
+position = Vector2(17783, 227)
+
+[node name="Oleada8_Wolf1" parent="." unique_id=492520007 instance=ExtResource("4_wolf1")]
+position = Vector2(17860, 300)
+
+[node name="HUD" parent="." unique_id=300448353 instance=ExtResource("6_hud")]
+
+[node name="PauseMenu" parent="." unique_id=1602141505 instance=ExtResource("7_pause")]
+
+[node name="ClueSign" type="Area2D" parent="." unique_id=100000001]
+position = Vector2(14750, 220)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("9_clue")
+lines = Array[String](["Hay un mensaje tallado en una roca junto al camino:", "\"Un trazo... después dos... y al fin tres.\"", "La piedra muestra tres símbolos: uno con un solo trazo, otro con dos trazos, otro con tres. Tócalos en ese orden: uno, dos y tres."])
+speaker_name = "Nota en la roca"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClueSign" unique_id=1123627326]
+position = Vector2(-6, 1)
+shape = SubResource("ClueShape")
+
+[node name="Monolito" type="Area2D" parent="." unique_id=100000002]
+position = Vector2(16600, 76)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("10_monolith")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monolito" unique_id=1803959136]
+position = Vector2(-52, 18)
+shape = SubResource("MonolithShape")
+
+[node name="DebugZone" type="ColorRect" parent="Monolito" unique_id=570614301]
+offset_left = -180.0
+offset_top = -160.0
+offset_right = 180.0
+offset_bottom = 160.0
+mouse_filter = 2
+color = Color(1, 0.9, 0.2, 0.12)
+
+[node name="DebugLabel" type="Label" parent="Monolito" unique_id=1767237670]
+offset_left = -150.0
+offset_top = -190.0
+offset_right = 150.0
+offset_bottom = -160.0
+theme_override_colors/font_color = Color(0.83, 0.78, 0.65, 1)
+theme_override_font_sizes/font_size = 14
+text = "MONOLITO (E)"
+horizontal_alignment = 1
+
+[node name="Runa1" type="Area2D" parent="Monolito" unique_id=901370048]
+position = Vector2(-190, 194)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_rune")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monolito/Runa1" unique_id=1769911022]
+shape = SubResource("RuneShape")
+
+[node name="DebugDot" type="ColorRect" parent="Monolito/Runa1" unique_id=943988006]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+color = Color(1, 0.2, 0.2, 0.6)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugLabel" type="Label" parent="Monolito/Runa1" unique_id=556739212]
+offset_left = -30.0
+offset_top = -45.0
+offset_right = 30.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(1, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Runa2" type="Area2D" parent="Monolito" unique_id=574523712]
+position = Vector2(-30, 194)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_rune")
+rune_id = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monolito/Runa2" unique_id=1773801081]
+shape = SubResource("RuneShape")
+
+[node name="DebugDot" type="ColorRect" parent="Monolito/Runa2" unique_id=445907807]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+color = Color(0.2, 1, 0.3, 0.6)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugLabel" type="Label" parent="Monolito/Runa2" unique_id=1837241986]
+offset_left = -30.0
+offset_top = -45.0
+offset_right = 30.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(0.6, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 16
+text = "2"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Runa3" type="Area2D" parent="Monolito" unique_id=2098549352]
+position = Vector2(130, 194)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_rune")
+rune_id = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monolito/Runa3" unique_id=1453885896]
+shape = SubResource("RuneShape")
+
+[node name="DebugDot" type="ColorRect" parent="Monolito/Runa3" unique_id=251918188]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+color = Color(0.3, 0.5, 1, 0.6)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugLabel" type="Label" parent="Monolito/Runa3" unique_id=1980362692]
+offset_left = -30.0
+offset_top = -45.0
+offset_right = 30.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(0.7, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "3"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ChapterExit" type="Area2D" parent="." unique_id=399716573]
+position = Vector2(19300, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("8_exit")
+next_scene_path = "res://scenes/levels/cuento1_escena2.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChapterExit" unique_id=552458531]
+shape = SubResource("ExitShape")
+
+[node name="ChapterPresentation" parent="." unique_id=479318198 instance=ExtResource("20_presentation")]
+chapter_title = "El bosque antiguo"
+chapter_subtitle = "En el margen de un cuento conocido."
+
+[node name="WalkablePath" type="StaticBody2D" parent="." unique_id=1148074888]
+collision_mask = 0
+script = ExtResource("21_path")
+upper_edge = PackedVector2Array(-1000, 249, 19456, 249)
+lower_edge = PackedVector2Array(-1000, 301, 19456, 301)
+
+[node name="StoryPortal" type="Node2D" parent="." unique_id=2079344328]
+position = Vector2(16500, 270)
+script = ExtResource("24_portal")
+
+[node name="MesaEscritura" type="Area2D" parent="." unique_id=1674776958]
+position = Vector2(18000, 275)
+script = ExtResource("pares_mesa")
+
+[node name="RutaCuento" type="Node2D" parent="." unique_id=2144128205]
+script = ExtResource("trail_s1")
+preset = "escena1"
+
+[node name="Objeto_flores_0" type="Area2D" parent="RutaCuento" unique_id=400582373]
+position = Vector2(3800, 270)
+script = ExtResource("pickup_gd")
+item_id = "flores"
+author_lines = Array[String](["Los autores: la niña no fue a coger flores. Eso lo añadieron después."])
+key = "escena1_0"
+icon_texture = ExtResource("pk_tex_1")
+
+[node name="Tablero_periodico" type="Area2D" parent="RutaCuento" unique_id=475069575]
+position = Vector2(3198, 353)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("pickup_gd")
+lines = Array[String](["Cuidado con los lobos del camino. Anoche atacaron dos ovejas al atardecer."])
+key = "escena1_1"
+icon_texture = ExtResource("pk_tex_2")
+draw_width = 185.0
+poster_texture = ExtResource("pk_tex_3")
+
+[node name="Objeto_pluma_2" type="Area2D" parent="RutaCuento" unique_id=890900870]
+position = Vector2(5200, 270)
+script = ExtResource("pickup_gd")
+item_id = "pluma"
+key = "escena1_2"
+icon_texture = ExtResource("pk_tex_4")
+
+[node name="Objeto_huella_3" type="Area2D" parent="RutaCuento" unique_id=857968928]
+position = Vector2(8400, 270)
+script = ExtResource("pickup_gd")
+item_id = "huella"
+author_lines = Array[String](["Los autores: lo que dejó esta huella fue borrado de todas las versiones. Lo sabemos."])
+key = "escena1_3"
+icon_texture = ExtResource("pk_tex_5")
+
+[node name="Tablero_pasteles_caseros" type="Area2D" parent="RutaCuento" unique_id=49021456]
+position = Vector2(8158, 368)
+script = ExtResource("pickup_gd")
+lines = Array[String](["Hallado en el río: un zapato pequeño y rojo. Su dueña, avisar a la guardia."])
+key = "escena1_4"
+icon_texture = ExtResource("pk_tex_6")
+draw_width = 185.0
+poster_texture = ExtResource("49_lqi5l")
+
+[node name="Tablero_se_busca_ayuda" type="Area2D" parent="RutaCuento" unique_id=693242836]
+position = Vector2(12287, 357)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("pickup_gd")
+lines = Array[String](["Los niños no deben hablar con desconocidos del bosque. Los que lo hacen tardan en volver."])
+key = "escena1_5"
+icon_texture = ExtResource("pk_tex_2")
+draw_width = 185.0
+poster_texture = ExtResource("50_lqi5l")
+
+[node name="Objeto_pocion_6" type="Area2D" parent="RutaCuento" unique_id=715341208]
+position = Vector2(9816, 243)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("pickup_gd")
+item_id = "pocion"
+key = "escena1_6"
+icon_texture = ExtResource("it_pocion")
+draw_width = 80.0
+
+[node name="Objeto_carta_7" type="Area2D" parent="RutaCuento" unique_id=1504263360]
+position = Vector2(10736, 268)
+scale = Vector2(0.7, 0.7)
+script = ExtResource("pickup_gd")
+item_id = "carta"
+key = "escena1_7"
+icon_texture = ExtResource("pk_tex_10")
+
+[node name="Pista_Pisadas" type="Area2D" parent="RutaCuento" unique_id=423477407]
+position = Vector2(12900, 270)
+script = ExtResource("pickup_gd")
+lines = Array[String](["Pisadas que se apartan del camino hacia el bosque. Nadie las siguió."])
+key = "escena1_8"
+
+[node name="Objeto_mapa_9" type="Area2D" parent="RutaCuento" unique_id=93749938]
+position = Vector2(14300, 270)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("pickup_gd")
+item_id = "mapa"
+author_lines = Array[String](["Los autores: el mapa siempre estuvo ahí. Nadie quiso leerlo."])
+key = "escena1_9"
+icon_texture = ExtResource("pk_tex_11")
+
+[node name="Pista_NotaTronco" type="Area2D" parent="RutaCuento" unique_id=930717799]
+position = Vector2(17500, 270)
+script = ExtResource("pickup_gd")
+lines = Array[String](["Una nota clavada en el tronco, con letra de abuela: «Lo que la siguió. Lo que la distrajo. Lo que cantaba. Lo que llevaba.»"])
+key = "escena1_10"
+
+[node name="Objeto_pocion_11" type="Area2D" parent="RutaCuento" unique_id=1802517592]
+position = Vector2(15809, 242)
+scale = Vector2(0.7, 0.7)
+script = ExtResource("pickup_gd")
+item_id = "pocion_verde"
+key = "escena1_11"
+icon_texture = ExtResource("it_pocion_verde")
+draw_width = 80.0
+
+[node name="Objeto_pan_n0" type="Area2D" parent="RutaCuento" unique_id=335739493]
+position = Vector2(2400, 270)
+script = ExtResource("pickup_gd")
+item_id = "pan"
+lines = Array[String](["Una nota doblada junto al pan: «Harina, agua, sal. Y no te apartes del fuego.»"])
+key = "escena1_n0"
+icon_texture = ExtResource("it_pan")
+draw_width = 60.0
+
+[node name="Objeto_sello_verde_n1" type="Area2D" parent="RutaCuento" unique_id=974226765]
+position = Vector2(4500, 270)
+script = ExtResource("pickup_gd")
+item_id = "sello_verde"
+key = "escena1_n1"
+icon_texture = ExtResource("it_sello_verde")
+draw_width = 44.0
+
+[node name="Objeto_empanada_n2" type="Area2D" parent="RutaCuento" unique_id=665043185]
+position = Vector2(6600, 270)
+script = ExtResource("pickup_gd")
+item_id = "empanada"
+key = "escena1_n2"
+icon_texture = ExtResource("it_empanada")
+draw_width = 58.0
+
+[node name="Objeto_mate_n3" type="Area2D" parent="RutaCuento" unique_id=1022522782]
+position = Vector2(9000, 270)
+script = ExtResource("pickup_gd")
+item_id = "mate"
+key = "escena1_n3"
+icon_texture = ExtResource("it_mate")
+draw_width = 34.0
+
+[node name="Objeto_sopa_n4" type="Area2D" parent="RutaCuento" unique_id=469527187]
+position = Vector2(11500, 270)
+script = ExtResource("pickup_gd")
+item_id = "sopa"
+key = "escena1_n4"
+icon_texture = ExtResource("it_sopa")
+draw_width = 56.0
+
+[node name="Objeto_sello_azul_n5" type="Area2D" parent="RutaCuento" unique_id=294600012]
+position = Vector2(13500, 270)
+script = ExtResource("pickup_gd")
+item_id = "sello_azul"
+key = "escena1_n5"
+icon_texture = ExtResource("it_sello_azul")
+draw_width = 44.0
+
+[node name="Objeto_pastel_n6" type="Area2D" parent="RutaCuento" unique_id=2014728562]
+position = Vector2(16700, 270)
+script = ExtResource("pickup_gd")
+item_id = "pastel"
+key = "escena1_n6"
+icon_texture = ExtResource("it_pastel")
+draw_width = 56.0
+
+[node name="Valla1" parent="." unique_id=2005347656 instance=ExtResource("valla_prop")]
+position = Vector2(1198, 364)
+
+[node name="Valla2" parent="." unique_id=1957897701 instance=ExtResource("valla_prop")]
+position = Vector2(2700, 332)
+
+[node name="Valla3" parent="." unique_id=1297060591 instance=ExtResource("valla_prop")]
+position = Vector2(4300, 332)
+
+[node name="Narr_Apertura" type="Area2D" parent="." unique_id=7443713]
+position = Vector2(-265, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+lines = Array[String](["Hay puertas que se abren hacia una casa, y otras que se abren hacia una página. Esta no era de las primeras."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Narr_Apertura" unique_id=693580530]
+shape = SubResource("ZonaNarracion")
+
+[node name="Narr_Pan" type="Area2D" parent="." unique_id=833739290]
+position = Vector2(300, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+lines = Array[String](["En aquel pueblo se hablaba de pan y de recetas, como si el mañana fuera cosa segura. Era la última hora en que alguien lo creería."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Narr_Pan" unique_id=1888707052]
+shape = SubResource("ZonaNarracion")
+
+[node name="Conv_Padres_HyG" type="Area2D" parent="." unique_id=146071909]
+position = Vector2(1295, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_speakers = Array[String](["Madre", "Padre", "Madre", "Padre", "Madre", "Padre", "Madre", "Padre"])
+conversation_lines = Array[String](["No queda ni una corteza, y los niños lloran de hambre por las noches.", "Todavía nos queda un último pan.", "Para los cuatro no alcanza. Para dos, quizá.", "¿Qué estás diciendo, mujer?", "Mañana, al amanecer, los llevaremos a lo más espeso del bosque. Les daremos un trozo de pan, encenderemos un fuego y los dejaremos allí.", "¿Y las fieras? Se los comerán.", "¿Prefieres oír cómo se apagan de hambre aquí?", "Que Dios me perdone."])
+conversation_portraits = Array[Texture2D]([null, null, null, null, null, null, null, null])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conv_Padres_HyG" unique_id=1914116767]
+shape = SubResource("ZonaConversacion")
+
+[node name="Narr_Bosque_Joven" type="Area2D" parent="." unique_id=1126060623]
+position = Vector2(4200, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+lines = Array[String](["El camino dejó atrás las casas con la misma indiferencia con que se deja atrás a quien ya no sirve. Los árboles se cerraron. Donde la luz se retira, algo más antiguo ocupa su lugar.", "Una joven cruzó el camino sin mirar a nadie, como cruzan los que ya saben adónde van. Tras ella, a prudente distancia, alguien que no quería ser visto."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Narr_Bosque_Joven" unique_id=1622295320]
+shape = SubResource("ZonaNarracion")
+
+[node name="Conv_HombreBosque" type="Area2D" parent="." unique_id=478777133]
+position = Vector2(5450, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_speakers = Array[String](["Hombre del bosque", "Elliot", "Hombre del bosque"])
+conversation_lines = Array[String](["¡Alto ahí! ¿Cómo te atreves a venir a mi bosque? No eres de por aquí.", "¿Qué…?", "Los que no son de aquí no suelen volver a salir."])
+conversation_portraits = Array[Texture2D]([null, ExtResource("15_elliot_portrait"), null])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conv_HombreBosque" unique_id=1160870016]
+shape = SubResource("ZonaConversacion")
+
+[node name="Conv_HombreBosque_Despues" type="Area2D" parent="." unique_id=908533217]
+position = Vector2(5800, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_speakers = Array[String](["", "Elliot"])
+conversation_lines = Array[String](["Algo en la espesura habló más fuerte que su hambre, y el hombre se fue como quien vuelve a su puesto.", "¿Qué rayos fue eso? ¿Está como poseído? ¿Qué fue lo que lo hizo escapar? ¿Y dónde demonios estoy?"])
+conversation_portraits = Array[Texture2D]([null, ExtResource("15_elliot_portrait")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conv_HombreBosque_Despues" unique_id=1157230644]
+shape = SubResource("ZonaConversacion")
+
+[node name="Narr_Cruce" type="Area2D" parent="." unique_id=356332954]
+position = Vector2(7850, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+lines = Array[String](["Hay decisiones que se toman a la ligera y se pagan despacio. Uno de los caminos llegaba antes. Elliot no lo sabía. El bosque sí."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Narr_Cruce" unique_id=1066245895]
+shape = SubResource("ZonaNarracion")
+
+[node name="Conv_Hansel_Gretel" type="Area2D" parent="." unique_id=1056514378]
+position = Vector2(9555, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_speakers = Array[String](["Niña", "Niño", "Niña", "Niño", ""])
+conversation_lines = Array[String](["Hermano, tengo hambre.", "Aguanta un poco. Dejé migas de pan por todo el camino; solo tenemos que seguirlas.", "Hermano… ya no hay migas.", "Los pájaros.", "Dos niños aprendían, demasiado pronto, que el bosque no devuelve lo que se le deja."])
+conversation_portraits = Array[Texture2D]([null, null, null, null, null])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conv_Hansel_Gretel" unique_id=721179328]
+shape = SubResource("ZonaConversacion")
+
+[node name="Narr_Casa_Stephy" type="Area2D" parent="." unique_id=964405646]
+position = Vector2(11800, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+lines = Array[String](["Una mujer que no quería ser vista se detuvo ante una ventana, y miró dentro."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Narr_Casa_Stephy" unique_id=1176342901]
+shape = SubResource("ZonaNarracion")
+
+[node name="Conv_Vieja" type="Area2D" parent="." unique_id=600959316]
+position = Vector2(14100, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+lines = Array[String](["Qué bien huele el hambre ajena."])
+speaker = "Vieja"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conv_Vieja" unique_id=944805044]
+shape = SubResource("ZonaNarracion")
+
+[node name="Narr_Cierre" type="Area2D" parent="." unique_id=476807519]
+position = Vector2(18700, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+lines = Array[String](["Quien llega al final de un camino cree haberlo recorrido. El camino, en cambio, apenas había empezado a leerlo."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Narr_Cierre" unique_id=1600769081]
+shape = SubResource("ZonaNarracion")
+
+[node name="NPC_Padre_HyG" type="Sprite2D" parent="." unique_id=397359071]
+modulate = Color(0.8, 0.88, 0.93, 1)
+z_index = 1
+position = Vector2(1250, 120)
+scale = Vector2(0.5156, 0.5156)
+texture = ExtResource("hyg_padre")
+
+[node name="NPC_Madre_HyG" type="Sprite2D" parent="." unique_id=1599234376]
+modulate = Color(0.8, 0.88, 0.93, 1)
+z_index = 1
+position = Vector2(1340, 135)
+scale = Vector2(0.4688, 0.4688)
+texture = ExtResource("hyg_madre")
+
+[node name="NPC_Hansel" type="Sprite2D" parent="." unique_id=1412318618]
+modulate = Color(0.8, 0.88, 0.93, 1)
+z_index = 1
+position = Vector2(9510, 160)
+scale = Vector2(0.3906, 0.3906)
+texture = ExtResource("hyg_hansel")
+
+[node name="NPC_Gretel" type="Sprite2D" parent="." unique_id=2119755408]
+modulate = Color(0.8, 0.88, 0.93, 1)
+z_index = 1
+position = Vector2(9600, 165)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("hyg_gretel")
+
+[node name="NPC_Vieja" type="Sprite2D" parent="." unique_id=302949355]
+modulate = Color(0.8, 0.88, 0.93, 1)
+z_index = 1
+position = Vector2(14220, 150)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("hyg_vieja")
+
+[editable path="Aldeano_Nino"]
+[editable path="Aldeano_Guardia"]
+[editable path="Aldeano_Hombre"]
+[editable path="Aldeano_Anciano"]
+[editable path="Aldeano_Mujer"]
+[editable path="Caballo"]
+[editable path="Aldeano_Nino2"]
+[editable path="Aldeano_Anciano2"]
+[editable path="Aldeana_Nina"]
+[editable path="Perro"]
+[editable path="Gato"]
+[editable path="LoboPunch"]
+[editable path="Lobo3Blanco"]
+[editable path="Elliot"]
+[editable path="RangerWood"]
+[editable path="Ethan"]
+[editable path="Wolf1"]
+[editable path="WolfSolo1"]
+[editable path="WolfDuo1"]
+[editable path="WolfDuo2"]
+[editable path="WolfTrio1"]
+[editable path="WolfTrio2"]
+[editable path="WolfTrio3"]
+[editable path="NPC_Mama"]
+[editable path="NPC_Vecina"]
+[editable path="Oleada1_WolfWhite"]
+[editable path="Oleada2_Gnomo"]
+[editable path="Oleada3_WolfWhite"]
+[editable path="Oleada4_Gnomo"]
+[editable path="Oleada5_Wolf2"]
+[editable path="Oleada6_WolfWhite"]
+[editable path="Oleada7_Gnomo"]
+[editable path="Oleada8_Wolf1"]

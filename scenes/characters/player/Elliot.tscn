@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://3p36cjprpd2q"]
+
+[ext_resource type="Script" uid="uid://blnxde2ber0wx" path="res://scripts/systems/health_component.gd" id="5_edfix"]
+[ext_resource type="Script" uid="uid://s73cjmqs0k0e" path="res://scenes/characters/player/hurtbox.gd" id="5_rve51"]
+[ext_resource type="Script" uid="uid://bun78dfsgh8i5" path="res://scripts/characters/player.gd" id="6_player"]
+[ext_resource type="Script" uid="uid://b7gdg51tdkwjt" path="res://scripts/systems/cinematic_camera.gd" id="7_camera"]
+[ext_resource type="SpriteFrames" uid="uid://cntw0dppqacw8" path="res://assets/characters/elliot/elliot-actions.tres" id="8_v2_frames"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0p5fm"]
+size = Vector2(232, 332)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vaj24"]
+size = Vector2(232, 338)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1nky"]
+size = Vector2(232, 343)
+
+[node name="Elliot" type="CharacterBody2D" unique_id=760189373]
+collision_layer = 2
+script = ExtResource("6_player")
+jump_art_scale = 0.57536765
+jump_art_baseline = 200.0
+clip_scale = {
+"attack": 1.7564,
+"attack_1": 1.6316,
+"attack_2": 1.8902,
+"finisher": 1.7514,
+"hurt": 1.7664,
+"idle": 1.6146,
+"interact": 1.6146,
+"jump": 1.8902,
+"kick": 1.7033,
+"walk": 1.4155
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2041307235]
+position = Vector2(-4.999999, 68)
+scale = Vector2(0.87666667, 1.05)
+sprite_frames = ExtResource("8_v2_frames")
+animation = &"kick"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=767236952]
+position = Vector2(20, -2)
+shape = SubResource("RectangleShape2D_0p5fm")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1679854044]
+collision_layer = 8
+collision_mask = 64
+script = ExtResource("5_rve51")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=120741942]
+position = Vector2(20, 1)
+shape = SubResource("RectangleShape2D_vaj24")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=241028676]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1062113029]
+position = Vector2(20, 3.5)
+shape = SubResource("RectangleShape2D_u1nky")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2077325822]
+position = Vector2(20, 40)
+zoom = Vector2(0.92, 0.92)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("7_camera")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=239073166]
+script = ExtResource("5_edfix")

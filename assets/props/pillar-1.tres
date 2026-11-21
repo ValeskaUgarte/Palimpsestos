@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/props/rune-pillars.png" id="1_ckixo"]
+
+[resource]
+atlas = ExtResource("1_ckixo")
+region = Rect2(57, 18, 410, 982)

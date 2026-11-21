@@ -1,0 +1,11 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/lateral/encounter_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+encounter_id = "guardian_0"
+mode = 1
+title = "Una presencia corrompida"
+arena_scene = "res://scenes/demo/arenas/arena1_bosque.tscn"
+enemy_scene = "res://scenes/characters/enemies/Wolf1.tscn"
+selection_allowed = false
+boss = false

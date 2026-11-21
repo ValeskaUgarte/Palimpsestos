@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c7v8j0ticoo3o"]
+
+[ext_resource type="Script" uid="uid://dikq4vygq0135" path="res://scripts/characters/npc.gd" id="1_npc"]
+[ext_resource type="Texture2D" uid="uid://c73p7bnqghecg" path="res://assets/npc/VecinaCaperusita.png" id="2_texture"]
+[ext_resource type="SpriteFrames" path="res://assets/npc/vecina.tres" id="motion_frames"]
+[ext_resource type="Script" uid="uid://n5et6o07pksb" path="res://scripts/characters/npc_motion.gd" id="motion_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_npc"]
+radius = 110.0
+
+[node name="NPC_Vecina" type="Area2D" unique_id=1834329088]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_npc")
+dialogue_lines = Array[String](["¡Hola! Ten cuidado en el bosque.", "Dicen que hay lobos rondando por ahí."])
+
+[node name="Motion" type="AnimatedSprite2D" parent="." unique_id=1815825590]
+sprite_frames = ExtResource("motion_frames")
+animation = &"idle"
+script = ExtResource("motion_script")
+standing_height = 328.05
+foot_position = Vector2(-45.2, 103.63)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183638987]
+position = Vector2(-19, 13)
+shape = SubResource("CircleShape2D_npc")

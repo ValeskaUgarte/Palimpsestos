@@ -1,0 +1,62 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/story_boss.gd" id="1_ai"]
+[ext_resource type="Script" path="res://scenes/characters/player/hurtbox.gd" id="2_hurtbox"]
+[ext_resource type="Script" path="res://scripts/systems/health_component.gd" id="3_health"]
+[ext_resource type="SpriteFrames" path="res://assets/enemies/Lobo/lobo-actions.tres" id="9_visual_v3"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape_lobo"]
+size = Vector2(300, 540)
+
+[sub_resource type="RectangleShape2D" id="HurtShape_lobo"]
+size = Vector2(300, 540)
+
+[sub_resource type="RectangleShape2D" id="HitShape_lobo"]
+size = Vector2(400, 400)
+
+[sub_resource type="CircleShape2D" id="DetectShape_lobo"]
+radius = 760.0
+
+[node name="Lobo" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_ai")
+faces_right_by_default = false
+impact_resistance = 0.8
+attack_damage = 60
+speed = 75.0
+attack_range = 190.0
+
+[node name="Visual" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.7, 2.7)
+sprite_frames = ExtResource("9_visual_v3")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("BodyShape_lobo")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+script = ExtResource("2_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("HurtShape_lobo")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("HitShape_lobo")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_health")
+max_health = 5000
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("DetectShape_lobo")

@@ -1,0 +1,272 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://oroio6gjmy0y"]
+
+[ext_resource type="Texture2D" uid="uid://dor0lgivycxic" path="res://assets/enemies/Wolf2/Wolf2-movement.png" id="S1"]
+
+[sub_resource type="AtlasTexture" id="F14"]
+atlas = ExtResource("S1")
+region = Rect2(21, 436, 194, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 61.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F15"]
+atlas = ExtResource("S1")
+region = Rect2(426, 436, 165, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 62.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F16"]
+atlas = ExtResource("S1")
+region = Rect2(788, 436, 155, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 52.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F17"]
+atlas = ExtResource("S1")
+region = Rect2(1356, 436, 163, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 59.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F18"]
+atlas = ExtResource("S1")
+region = Rect2(1356, 436, 163, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 59.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F19"]
+atlas = ExtResource("S1")
+region = Rect2(411, 308, 168, 122)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 49.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F20"]
+atlas = ExtResource("S1")
+region = Rect2(13, 572, 207, 276)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 129.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F21"]
+atlas = ExtResource("S1")
+region = Rect2(613, 572, 364, 276)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 133.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F1"]
+atlas = ExtResource("S1")
+region = Rect2(872, 7, 140, 145)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 67.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F2"]
+atlas = ExtResource("S1")
+region = Rect2(1036, 7, 156, 145)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 68.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F3"]
+atlas = ExtResource("S1")
+region = Rect2(1207, 7, 146, 145)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 68.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F4"]
+atlas = ExtResource("S1")
+region = Rect2(1366, 7, 158, 145)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 69.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F5"]
+atlas = ExtResource("S1")
+region = Rect2(11, 163, 148, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 62.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F6"]
+atlas = ExtResource("S1")
+region = Rect2(174, 163, 158, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 61.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F7"]
+atlas = ExtResource("S1")
+region = Rect2(337, 163, 165, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 62.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F8"]
+atlas = ExtResource("S1")
+region = Rect2(520, 163, 158, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 63.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F9"]
+atlas = ExtResource("S1")
+region = Rect2(689, 163, 158, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 64.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F10"]
+atlas = ExtResource("S1")
+region = Rect2(847, 163, 165, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 61.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F11"]
+atlas = ExtResource("S1")
+region = Rect2(1024, 163, 167, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 62.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F12"]
+atlas = ExtResource("S1")
+region = Rect2(1195, 163, 159, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 62.5
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F13"]
+atlas = ExtResource("S1")
+region = Rect2(1360, 163, 168, 135)
+filter_clip = true
+metadata/pose_art_scale = 1.66949
+metadata/pose_art_baseline = 61.5
+metadata/pose_art_offset_x = 0.0
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F14")
+}, {
+"duration": 1.0,
+"texture": SubResource("F15")
+}, {
+"duration": 1.0,
+"texture": SubResource("F16")
+}, {
+"duration": 1.0,
+"texture": SubResource("F17")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F18")
+}, {
+"duration": 1.0,
+"texture": SubResource("F19")
+}, {
+"duration": 1.0,
+"texture": SubResource("F20")
+}, {
+"duration": 1.0,
+"texture": SubResource("F21")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 6.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F3")
+}, {
+"duration": 1.0,
+"texture": SubResource("F4")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"kick",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F5")
+}, {
+"duration": 1.0,
+"texture": SubResource("F6")
+}, {
+"duration": 1.0,
+"texture": SubResource("F7")
+}, {
+"duration": 1.0,
+"texture": SubResource("F8")
+}, {
+"duration": 1.0,
+"texture": SubResource("F9")
+}, {
+"duration": 1.0,
+"texture": SubResource("F10")
+}, {
+"duration": 1.0,
+"texture": SubResource("F11")
+}, {
+"duration": 1.0,
+"texture": SubResource("F12")
+}, {
+"duration": 1.0,
+"texture": SubResource("F13")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 12.0
+}]

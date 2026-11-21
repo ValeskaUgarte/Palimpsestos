@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dwfrwsc4ypp2g"]
+
+[ext_resource type="Script" uid="uid://fak3n616vx5e" path="res://scripts/characters/enemy_ai.gd" id="1_ai"]
+[ext_resource type="Script" uid="uid://s73cjmqs0k0e" path="res://scenes/characters/player/hurtbox.gd" id="2_hurtbox"]
+[ext_resource type="Script" uid="uid://blnxde2ber0wx" path="res://scripts/systems/health_component.gd" id="3_health"]
+[ext_resource type="SpriteFrames" uid="uid://oroio6gjmy0y" path="res://assets/enemies/Wolf2/wolfdark-actions.tres" id="9_visual_v3"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape_w2"]
+size = Vector2(278, 280)
+
+[sub_resource type="RectangleShape2D" id="HurtShape_w2"]
+size = Vector2(285, 280)
+
+[sub_resource type="RectangleShape2D" id="HitShape_w2"]
+size = Vector2(264, 255)
+
+[sub_resource type="CircleShape2D" id="DetectShape_w2"]
+radius = 320.0
+
+[node name="WolfDark" type="CharacterBody2D" unique_id=925563957]
+collision_layer = 4
+script = ExtResource("1_ai")
+speed = 115.0
+attack_damage = 8
+attack_range = 125.0
+faces_right_by_default = false
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=450480685]
+self_modulate = Color(0.86, 0.8, 0.72, 1)
+scale = Vector2(1.08, 1.08)
+sprite_frames = ExtResource("9_visual_v3")
+animation = &"attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=990416798]
+position = Vector2(-75, 83)
+shape = SubResource("BodyShape_w2")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=330758111]
+collision_layer = 16
+collision_mask = 32
+script = ExtResource("2_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=750201784]
+position = Vector2(-74.5, 82)
+shape = SubResource("HurtShape_w2")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=606852235]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=958983694]
+position = Vector2(-76, 90)
+shape = SubResource("HitShape_w2")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=83562277]
+script = ExtResource("3_health")
+max_health = 25
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1193191947]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1639473353]
+position = Vector2(-223, 222)
+shape = SubResource("DetectShape_w2")

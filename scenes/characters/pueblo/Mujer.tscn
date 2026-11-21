@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://de7vssn6faim0"]
+
+[ext_resource type="Script" uid="uid://b5ia4kesg75uq" path="res://scripts/systems/ambient_walker.gd" id="1_walker"]
+[ext_resource type="SpriteFrames" uid="uid://b427wlgo6hmwq" path="res://assets/npc/pueblo/mujer.tres" id="2_frames"]
+
+[node name="Mujer" type="Node2D" unique_id=1759099347]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_walker")
+auto_fit = false
+frames = ExtResource("2_frames")
+x_min = -300.0
+x_max = 300.0
+speed = 40.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_frames")
+animation = &"idle"
+position = Vector2(-0.46875, -141.5625)
+scale = Vector2(1.875, 1.875)

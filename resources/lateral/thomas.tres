@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/lateral/fighter_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+scene = "res://scenes/characters/player/Thomas.tscn"
+display_name = "THOMAS"
+style = "Peso · recuperación más comprometida"
+speed = 180.0
+air_control = 0.6
+attack_speed = 1.0
+attack_width = 95.0
+attack_offset = 68.0
+weight = 1.2

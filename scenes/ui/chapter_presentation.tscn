@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bw2lsbac70y7n"]
+
+[ext_resource type="Script" uid="uid://cx6kiik7u7no5" path="res://scripts/ui/chapter_presentation.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://b4gkxw1sf8547" path="res://assets/shaders/manuscript_frame.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="FrameMaterial"]
+shader = ExtResource("2_shader")
+shader_parameter/edge_strength = 0.22
+shader_parameter/ink_color = Color(0.045, 0.032, 0.055, 1)
+
+[node name="ChapterPresentation" type="CanvasLayer" unique_id=2107301005]
+layer = 0
+script = ExtResource("1_script")
+
+[node name="Frame" type="ColorRect" parent="." unique_id=956658125]
+material = SubResource("FrameMaterial")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleCard" type="VBoxContainer" parent="." unique_id=787267846]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 76.0
+offset_right = -24.0
+offset_bottom = 152.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="ChapterNumber" type="Label" parent="TitleCard" unique_id=1907844318]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.73, 0.6, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0.025, 0.02, 0.03, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 12
+text = "P A L I M P S E S T O S   /   C U E N T O  I"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="TitleCard" unique_id=1267783364]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.86, 0.7, 1)
+theme_override_colors/font_shadow_color = Color(0.025, 0.02, 0.03, 0.95)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Subtitle" type="Label" parent="TitleCard" unique_id=978336355]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81, 0.76, 0.66, 1)
+theme_override_colors/font_shadow_color = Color(0.025, 0.02, 0.03, 0.95)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 2

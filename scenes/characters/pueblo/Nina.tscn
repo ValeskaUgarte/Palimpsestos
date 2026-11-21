@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/ambient_walker.gd" id="1_walker"]
+[ext_resource type="SpriteFrames" path="res://assets/npc/pueblo/nina.tres" id="2_frames"]
+
+[node name="Nina" type="Node2D"]
+script = ExtResource("1_walker")
+auto_fit = false
+frames = ExtResource("2_frames")
+x_min = -300.0
+x_max = 300.0
+speed = 50.0
+move_animation = &"walk"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_frames")
+animation = &"idle"
+position = Vector2(12.19536, -108.4032)
+scale = Vector2(1.80672, 1.80672)

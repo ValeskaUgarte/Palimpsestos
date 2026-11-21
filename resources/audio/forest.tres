@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PalimAmbienceProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/audio/ambience_profile.gd" id="1"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wind_01.wav" id="loop"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/leaves_01.wav" id="event1"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/leaves_02.wav" id="event2"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/leaves_03.wav" id="event3"]
+
+[resource]
+script = ExtResource("1")
+surface_type = "forest"
+loop = ExtResource("loop")
+events = Array[AudioStream]([ExtResource("event1"), ExtResource("event2"), ExtResource("event3")])

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/lateral/fighter_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+scene = "res://scenes/characters/player/Elliot.tscn"
+display_name = "ELLIOT"
+style = "Equilibrio · cadena adaptable"
+speed = 205.0
+air_control = 0.75
+attack_speed = 1.12
+attack_width = 88.0
+attack_offset = 64.0
+weight = 1.0

@@ -1,0 +1,93 @@
+[gd_resource type="Theme" format=3 uid="uid://c85hchdewusob"]
+
+[sub_resource type="StyleBoxFlat" id="Hover"]
+content_margin_left = 24.0
+content_margin_top = 14.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+bg_color = Color(0.13, 0.15, 0.14, 1)
+border_width_bottom = 2
+border_color = Color(0.76, 0.64, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="Button"]
+content_margin_left = 24.0
+content_margin_top = 14.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+bg_color = Color(0.065, 0.075, 0.075, 0.95)
+border_width_bottom = 1
+border_color = Color(0.45, 0.38, 0.24, 0.7)
+
+[sub_resource type="StyleBoxFlat" id="Pressed"]
+content_margin_left = 24.0
+content_margin_top = 14.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+bg_color = Color(0.035, 0.04, 0.04, 1)
+border_width_bottom = 1
+border_color = Color(0.67, 0.49, 0.3, 1)
+
+[sub_resource type="Gradient" id="Knob_gradient"]
+offsets = PackedFloat32Array(0, 0.6, 0.9, 1)
+colors = PackedColorArray(0.88, 0.78, 0.53, 1, 0.55, 0.4, 0.2, 1, 0.2, 0.16, 0.1, 1, 0.2, 0.16, 0.1, 0)
+
+[sub_resource type="GradientTexture2D" id="Knob"]
+gradient = SubResource("Knob_gradient")
+width = 18
+height = 18
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="Slider_fill"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.52, 0.44, 0.28, 1)
+
+[sub_resource type="StyleBoxFlat" id="Slider_track"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.06, 0.075, 0.07, 1)
+border_width_bottom = 1
+border_color = Color(0.45, 0.38, 0.23, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.055, 0.067, 0.065, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.42, 0.35, 0.22, 0.9)
+
+[sub_resource type="StyleBoxEmpty" id="Empty"]
+
+[sub_resource type="SystemFont" id="Serif"]
+font_names = PackedStringArray("Georgia", "Noto Serif", "DejaVu Serif")
+
+[resource]
+default_font = SubResource("Serif")
+default_font_size = 18
+Button/colors/font_color = Color(0.88, 0.83, 0.7, 1)
+Button/colors/font_focus_color = Color(1, 0.94, 0.77, 1)
+Button/colors/font_hover_color = Color(1, 0.94, 0.77, 1)
+Button/styles/focus = SubResource("Hover")
+Button/styles/hover = SubResource("Hover")
+Button/styles/normal = SubResource("Button")
+Button/styles/pressed = SubResource("Pressed")
+HSlider/icons/grabber = SubResource("Knob")
+HSlider/icons/grabber_highlight = SubResource("Knob")
+HSlider/styles/grabber_area = SubResource("Slider_fill")
+HSlider/styles/grabber_area_highlight = SubResource("Slider_fill")
+HSlider/styles/slider = SubResource("Slider_track")
+Label/colors/font_color = Color(0.86, 0.81, 0.69, 1)
+Panel/styles/panel = SubResource("Panel")
+PanelContainer/styles/panel = SubResource("Panel")
+TextureButton/styles/focus = SubResource("Empty")

@@ -1,0 +1,135 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/lateral/side_route.gd" id="r1"]
+[ext_resource type="Texture2D" path="res://assets/characters/elliot/Elliot.png" id="r2"]
+[ext_resource type="Texture2D" path="res://assets/art/presentation/wetland.png" id="r3"]
+[ext_resource type="Script" path="res://scripts/lateral/world_marker.gd" id="r4"]
+[ext_resource type="Texture2D" path="res://assets/characters/John/Jhon.png" id="r5"]
+[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas.png" id="r6"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf1.tscn" id="r7"]
+[ext_resource type="Shader" path="res://assets/shaders/forest_presentation.gdshader" id="r8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7"]
+shader = ExtResource("r8")
+shader_parameter/tone = Vector3(0.97, 1.02, 1.03)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8"]
+size = Vector2(2400, 220)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_9"]
+size = Vector2(40, 900)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10"]
+size = Vector2(40, 900)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11"]
+size = Vector2(240, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12"]
+size = Vector2(240, 85)
+
+[node name="Ruta_Pantano" type="Node2D"]
+script = ExtResource("r1")
+route_kind = "wetland"
+
+[node name="Elliot_Inicio" type="Sprite2D" parent="."]
+texture = ExtResource("r2")
+position = Vector2(300, 330)
+scale = Vector2(0.2214, 0.2214)
+metadata/ph_fighter = "elliot"
+
+[node name="Pintura" type="Sprite2D" parent="."]
+texture = ExtResource("r3")
+material = SubResource("ShaderMaterial_7")
+position = Vector2(1200, 243.3636)
+scale = Vector2(1.4354, 1.4354)
+z_index = -10
+
+[node name="Suelo" type="StaticBody2D" parent="."]
+position = Vector2(1200, 610)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="Suelo"]
+shape = SubResource("RectangleShape2D_8")
+
+[node name="Vista" type="ColorRect" parent="Suelo"]
+position = Vector2(-1200, -110)
+size = Vector2(2400, 220)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="MuroIzquierdo" type="StaticBody2D" parent="."]
+position = Vector2(-20, 350)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="MuroIzquierdo"]
+shape = SubResource("RectangleShape2D_9")
+
+[node name="Vista" type="ColorRect" parent="MuroIzquierdo"]
+position = Vector2(-20, -450)
+size = Vector2(40, 900)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="MuroDerecho" type="StaticBody2D" parent="."]
+position = Vector2(2420, 350)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="MuroDerecho"]
+shape = SubResource("RectangleShape2D_10")
+
+[node name="Vista" type="ColorRect" parent="MuroDerecho"]
+position = Vector2(-20, -450)
+size = Vector2(40, 900)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="Plataforma1" type="StaticBody2D" parent="."]
+position = Vector2(680, 475)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="Plataforma1"]
+shape = SubResource("RectangleShape2D_11")
+
+[node name="Vista" type="ColorRect" parent="Plataforma1"]
+position = Vector2(-120, -25)
+size = Vector2(240, 50)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="Plataforma2" type="StaticBody2D" parent="."]
+position = Vector2(940, 457.5)
+collision_layer = 1
+
+[node name="Forma" type="CollisionShape2D" parent="Plataforma2"]
+shape = SubResource("RectangleShape2D_12")
+
+[node name="Vista" type="ColorRect" parent="Plataforma2"]
+position = Vector2(-120, -42.5)
+size = Vector2(240, 85)
+color = Color(0.95, 0.35, 0.25, 0.3)
+
+[node name="PortalSalida" type="Node2D" parent="."]
+script = ExtResource("r4")
+position = Vector2(1940, 390)
+portal = true
+
+[node name="Vista" type="ColorRect" parent="PortalSalida"]
+position = Vector2(-40, -80)
+size = Vector2(80, 160)
+color = Color(0.4, 0.78, 1, 0.35)
+
+[node name="Jhon_Companero" type="Sprite2D" parent="."]
+texture = ExtResource("r5")
+position = Vector2(160, 330)
+scale = Vector2(0.2214, 0.2214)
+metadata/ph_fighter = "jhon"
+
+[node name="Thomas_Companero" type="Sprite2D" parent="."]
+texture = ExtResource("r6")
+position = Vector2(70, 330)
+scale = Vector2(0.2214, 0.2214)
+metadata/ph_fighter = "thomas"
+
+[node name="Guardian1_Wolf1" parent="." instance=ExtResource("r7")]
+position = Vector2(850, 500)
+metadata/ph_enemy = ""
+
+[node name="Guardian2_Wolf1" parent="." instance=ExtResource("r7")]
+position = Vector2(1350, 500)
+metadata/ph_enemy = ""
+
+[node name="Guardian3_Wolf1" parent="." instance=ExtResource("r7")]
+position = Vector2(1850, 500)
+metadata/ph_enemy = ""

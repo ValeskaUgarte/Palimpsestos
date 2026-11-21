@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bqbftey0wcqr1"]
+
+[ext_resource type="Script" uid="uid://s73cjmqs0k0e" path="res://scenes/characters/player/hurtbox.gd" id="4_0vvu2"]
+[ext_resource type="Script" uid="uid://blnxde2ber0wx" path="res://scripts/systems/health_component.gd" id="5_health"]
+[ext_resource type="Script" uid="uid://bun78dfsgh8i5" path="res://scripts/characters/player.gd" id="6_player"]
+[ext_resource type="SpriteFrames" uid="uid://c6a5ge5h2mfo1" path="res://assets/characters/John/jhon-actions.tres" id="10_aligned"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2mih"]
+size = Vector2(150, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2mih_hurt"]
+size = Vector2(150, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2mih_hit"]
+size = Vector2(150, 300)
+
+[node name="Jhon" type="CharacterBody2D" unique_id=2025477696]
+collision_layer = 2
+script = ExtResource("6_player")
+clip_scale = {"attack": 1.7021, "idle": 1.5764, "walk": 1.5764}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1828258767]
+position = Vector2(0, 5)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("10_aligned")
+animation = &"attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=22221187]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_u2mih")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1461753491]
+collision_layer = 8
+collision_mask = 64
+script = ExtResource("4_0vvu2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1892904728]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_u2mih_hurt")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=511394459]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=158967866]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_u2mih_hit")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1948348148]
+
+[node name="HealthComponent" type="Node" parent="." unique_id=590737122]
+script = ExtResource("5_health")

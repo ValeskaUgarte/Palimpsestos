@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/lateral/fighter_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+scene = "res://scenes/characters/player/Jhon.tscn"
+display_name = "JHON"
+style = "Agilidad · espada de mayor alcance"
+speed = 235.0
+air_control = 0.9
+attack_speed = 1.2
+attack_width = 130.0
+attack_offset = 85.0
+weight = 0.85

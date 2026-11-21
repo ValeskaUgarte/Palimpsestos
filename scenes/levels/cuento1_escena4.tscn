@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://c7lblul7e73pc"]
+
+[ext_resource type="Script" uid="uid://uh8pe5vq1oc" path="res://scripts/systems/level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://3p36cjprpd2q" path="res://scenes/characters/player/Elliot.tscn" id="3_elliot"]
+[ext_resource type="Texture2D" uid="uid://ck8f16rw3ktny" path="res://assets/escenarioCaperusita004a.png" id="3_gpstw"]
+[ext_resource type="PackedScene" uid="uid://bqbftey0wcqr1" path="res://scenes/characters/player/Jhon.tscn" id="4_jhon"]
+[ext_resource type="PackedScene" uid="uid://drsp32ijoxhea" path="res://scenes/characters/player/Thomas.tscn" id="5_thomas"]
+[ext_resource type="PackedScene" uid="uid://dckvwm2pdpkm6" path="res://scenes/characters/npc/Caperucita.tscn" id="7b_caperucita"]
+[ext_resource type="PackedScene" uid="uid://bdoosjg02tatf" path="res://scenes/characters/npc/Stephy.tscn" id="7_stephy"]
+[ext_resource type="PackedScene" uid="uid://ce7ioblmk5vao" path="res://scenes/ui/hud.tscn" id="10_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="11_pause"]
+[ext_resource type="Script" uid="uid://2go41el7ernn" path="res://scripts/systems/level_exit.gd" id="12_exit"]
+[ext_resource type="Script" uid="uid://bttj3ypna3gy" path="res://scripts/systems/story_trigger.gd" id="13_story"]
+[ext_resource type="PackedScene" uid="uid://bw2lsbac70y7n" path="res://scenes/ui/chapter_presentation.tscn" id="20_presentation"]
+[ext_resource type="Script" uid="uid://ckl6gi28axmih" path="res://scripts/systems/walkable_path.gd" id="21_path"]
+[ext_resource type="Resource" path="res://resources/audio/corrupted_forest.tres" id="30_ambience"]
+[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Gato.tscn" id="amb_gato"]
+
+[sub_resource type="RectangleShape2D" id="WallH4"]
+size = Vector2(3000, 40)
+
+[sub_resource type="RectangleShape2D" id="WallV4"]
+size = Vector2(40, 1100)
+
+[sub_resource type="RectangleShape2D" id="ExitShape4"]
+size = Vector2(60, 1000)
+
+[sub_resource type="RectangleShape2D" id="TrigShape4"]
+size = Vector2(140, 400)
+
+[node name="Cuento1_Escena4" type="Node2D" unique_id=717385309]
+script = ExtResource("1_level")
+camera_bounds = Rect2(-64, -383, 2558, 792)
+ambience_profile = ExtResource("30_ambience")
+interior = true
+
+[node name="Ground" type="ColorRect" parent="." unique_id=1879784366]
+offset_left = -100.0
+offset_top = -383.0
+offset_right = 2600.0
+offset_bottom = 409.0
+color = Color(0.1, 0.07, 0.05, 1)
+
+[node name="EscenarioCaperusita004" type="Sprite2D" parent="Ground" unique_id=1533782292]
+position = Vector2(36, 30.999964)
+scale = Vector2(1.29, 1.2400832)
+texture = ExtResource("3_gpstw")
+centered = false
+
+[node name="Walls" type="Node2D" parent="." unique_id=1951013451]
+
+[node name="WallTop" type="StaticBody2D" parent="Walls" unique_id=306660355]
+position = Vector2(0, -383)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallTop" unique_id=1977471552]
+position = Vector2(1250, 0)
+shape = SubResource("WallH4")
+
+[node name="WallBottom" type="StaticBody2D" parent="Walls" unique_id=1117925139]
+position = Vector2(0, 409)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBottom" unique_id=927102510]
+position = Vector2(1250, 0)
+shape = SubResource("WallH4")
+
+[node name="WallLeft" type="StaticBody2D" parent="Walls" unique_id=370075482]
+position = Vector2(-100, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft" unique_id=1009285164]
+shape = SubResource("WallV4")
+
+[node name="WallRight" type="StaticBody2D" parent="Walls" unique_id=693495510]
+position = Vector2(2490, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight" unique_id=698499546]
+shape = SubResource("WallV4")
+
+[node name="Elliot" parent="." unique_id=28264701 instance=ExtResource("3_elliot")]
+position = Vector2(289, 310)
+
+[node name="Jhon" parent="." unique_id=571965605 instance=ExtResource("4_jhon")]
+position = Vector2(92, 359)
+is_companion = true
+follow_target_path = NodePath("../Elliot")
+
+[node name="Thomas" parent="." unique_id=1583563083 instance=ExtResource("5_thomas")]
+position = Vector2(159, 351)
+is_companion = true
+follow_target_path = NodePath("../Elliot")
+
+[node name="Stephy" parent="." unique_id=1562404796 instance=ExtResource("7_stephy")]
+position = Vector2(1572, 329)
+dialogue_lines = Array[String]([])
+
+[node name="Caperucita" parent="." unique_id=1261094248 instance=ExtResource("7b_caperucita")]
+position = Vector2(1841, 295)
+dialogue_lines = Array[String]([])
+
+[node name="Gato" parent="." unique_id=885969539 instance=ExtResource("amb_gato")]
+position = Vector2(2011, 350)
+x_min = -50.0
+x_max = 50.0
+
+[node name="HUD" parent="." unique_id=890073974 instance=ExtResource("10_hud")]
+
+[node name="PauseMenu" parent="." unique_id=1832822332 instance=ExtResource("11_pause")]
+
+[node name="ChapterExit" type="Area2D" parent="." unique_id=991086270]
+position = Vector2(2400, 20)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_exit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChapterExit" unique_id=560191041]
+shape = SubResource("ExitShape4")
+
+[node name="ChapterPresentation" parent="." unique_id=2401601 instance=ExtResource("20_presentation")]
+chapter_title = "Lo que quedó en la mesa"
+chapter_subtitle = "Nadie preguntó de qué estaba hecha la cena."
+
+[node name="WalkablePath" type="StaticBody2D" parent="." unique_id=373105929]
+collision_mask = 0
+script = ExtResource("21_path")
+upper_edge = PackedVector2Array(-250, 235, 2700, 235)
+lower_edge = PackedVector2Array(-250, 350, 2700, 350)
+
+[node name="S4_Llegada" type="Area2D" parent="." unique_id=1382576158]
+position = Vector2(420, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Siguen los pasos de la joven hasta la casa del bosque. Stephy y ella han entrado primero.", "Elliot-Si la puerta está abierta, alguien nos espera. O alguien se fue con prisa."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Llegada" unique_id=1776524431]
+shape = SubResource("TrigShape4")
+
+[node name="S4_Puerta" type="Area2D" parent="." unique_id=151087305]
+position = Vector2(600, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["La puerta de la casa está abierta, y dentro la chimenea todavía guarda calor.", "Alguien se marchó de aquí con prisa. O con hambre."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Puerta" unique_id=458064093]
+shape = SubResource("TrigShape4")
+
+[node name="S4_Mesa" type="Area2D" parent="." unique_id=591791647]
+position = Vector2(720, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["La mesa está puesta para dos. En el platón quedan restos de carne cortada en rebanadas, y la grasa ya se ha cuajado.", "Junto al platón hay una botella de cristal con un fondo oscuro y espeso. No huele a vino.", "Un camino más corto lleva hasta aquí. Quien lo tomó llegó primero y tuvo tiempo de poner la mesa."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Mesa" unique_id=256078402]
+shape = SubResource("TrigShape4")
+
+[node name="S4_Chimenea" type="Area2D" parent="." unique_id=1059193980]
+position = Vector2(1380, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Entre las brasas quedan jirones de tela roja y un delantal medio quemado. Alguien los echó al fuego, uno por uno.", "Hay cosas que, una vez dentro de esta casa, nunca más se necesitan."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Chimenea" unique_id=1665762080]
+shape = SubResource("TrigShape4")
+
+[node name="S4_Gato" type="Area2D" parent="." unique_id=51208484]
+position = Vector2(1914, 214)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Un gato gris los observa desde lo alto de la cómoda, con los ojos muy abiertos. Mira a la joven. Solo a ella.", "Gato-¡Cochina!", "Gato-Has comido la carne y has bebido la sangre de tu abuela.", "Nadie se mueve. La joven tampoco.", "Caperucita-Estaba muy rica.", "Caperucita-Me dijo que comiera. Que en la alacena había carne y vino, y que ella ya no podía.", "Caperucita-Me pidió que echara mis cosas al fuego, una por una: el delantal, la capa... Y cada vez me decía lo mismo: «Nunca más la necesitarás».", "Caperucita-Yo le pregunté por sus manos, por sus ojos, por sus uñas, por sus dientes. Cada respuesta me la sabía antes de oírla.", "Caperucita-Pero seguí preguntando. Así es como se cuenta, ¿no? Así tiene que contarse.", "Caperucita-Y la última respuesta fue: «Para comerte mejor».", "La joven se mira las manos, como si buscara en ellas lo que ya no está.", "Stephy-No sigas. Mírame a mí.", "Caperucita-Pero estoy aquí... ¿Por qué sigo aquí?"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Gato" unique_id=26464357]
+position = Vector2(-86, -11)
+shape = SubResource("TrigShape4")
+
+[node name="S4_Cama" type="Area2D" parent="." unique_id=1757813770]
+position = Vector2(2200, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["La cama está deshecha. Las sábanas conservan la forma de un cuerpo grande y peludo que se acostó a esperar.", "Sobre la almohada hay un camisón de anciana, hecho jirones y manchado. Nadie lo ha lavado todavía.", "Elliot-¿Y la dueña de esta casa?", "En algún lugar, alguien ha dejado de escribir su final."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Cama" unique_id=977043895]
+shape = SubResource("TrigShape4")

@@ -1,0 +1,452 @@
+[gd_scene format=3 uid="uid://dbl8lt6gpa1qp"]
+
+[ext_resource type="Script" uid="uid://uh8pe5vq1oc" path="res://scripts/systems/level.gd" id="1_level"]
+[ext_resource type="Texture2D" uid="uid://djnat7cbhjnvy" path="res://assets/escenarioCaperusita003.png" id="3_341m5"]
+[ext_resource type="PackedScene" uid="uid://3p36cjprpd2q" path="res://scenes/characters/player/Elliot.tscn" id="3_elliot"]
+[ext_resource type="PackedScene" uid="uid://bqbftey0wcqr1" path="res://scenes/characters/player/Jhon.tscn" id="4_jhon"]
+[ext_resource type="PackedScene" uid="uid://drsp32ijoxhea" path="res://scenes/characters/player/Thomas.tscn" id="5_thomas"]
+[ext_resource type="PackedScene" uid="uid://dx7lq25hkulp5" path="res://scenes/characters/npc/Ethan.tscn" id="6_ethan"]
+[ext_resource type="PackedScene" uid="uid://dckvwm2pdpkm6" path="res://scenes/characters/npc/Caperucita.tscn" id="7b_caperucita"]
+[ext_resource type="PackedScene" uid="uid://bdoosjg02tatf" path="res://scenes/characters/npc/Stephy.tscn" id="7_stephy"]
+[ext_resource type="PackedScene" uid="uid://bxsw6g3gikck0" path="res://scenes/characters/enemies/RangerWood.tscn" id="8_ranger"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Lobo.tscn" id="9_lobo"]
+[ext_resource type="PackedScene" uid="uid://ce7ioblmk5vao" path="res://scenes/ui/hud.tscn" id="10_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="11_pause"]
+[ext_resource type="Script" uid="uid://2go41el7ernn" path="res://scripts/systems/level_exit.gd" id="12_exit"]
+[ext_resource type="Script" uid="uid://bttj3ypna3gy" path="res://scripts/systems/story_trigger.gd" id="13_story"]
+[ext_resource type="Texture2D" uid="uid://bbrb10y4ayq4l" path="res://assets/characters/Thomas/Thomas.png" id="14_thomas_portrait"]
+[ext_resource type="Texture2D" uid="uid://slfd3fg80ua7" path="res://assets/characters/elliot/Elliot.png" id="15_elliot_portrait"]
+[ext_resource type="Texture2D" uid="uid://nwy5lrb7gtti" path="res://assets/characters/ethan/Ethan.png" id="16_ethan_portrait"]
+[ext_resource type="PackedScene" uid="uid://bw2lsbac70y7n" path="res://scenes/ui/chapter_presentation.tscn" id="20_presentation"]
+[ext_resource type="Script" uid="uid://ckl6gi28axmih" path="res://scripts/systems/walkable_path.gd" id="21_path"]
+[ext_resource type="Resource" path="res://resources/audio/corrupted_forest.tres" id="30_ambience"]
+[ext_resource type="Script" uid="uid://drhoq75iy3nm4" path="res://scripts/systems/defeat_dialogue.gd" id="defeat_gd"]
+[ext_resource type="Texture2D" uid="uid://ds6q6v5xahbuk" path="res://assets/ui/items/leche.png" id="it_leche"]
+[ext_resource type="Texture2D" uid="uid://djr7gbywwa1gs" path="res://assets/ui/items/mate.png" id="it_mate"]
+[ext_resource type="Texture2D" uid="uid://b1nry0m0x7fjq" path="res://assets/ui/items/pan.png" id="it_pan"]
+[ext_resource type="Texture2D" uid="uid://b35fnax02arfa" path="res://assets/ui/items/pocion_amarilla.png" id="it_pocion_amarilla"]
+[ext_resource type="Texture2D" uid="uid://him4mvrxeiei" path="res://assets/ui/items/sello_azul.png" id="it_sello_azul"]
+[ext_resource type="Texture2D" uid="uid://dqtv4er2gb3dn" path="res://assets/ui/items/sopa.png" id="it_sopa"]
+[ext_resource type="Script" uid="uid://d1wb2ekkvc6r5" path="res://scripts/systems/story_pickup.gd" id="pickup_gd"]
+[ext_resource type="Texture2D" uid="uid://cd8vh2cvd0ww0" path="res://assets/ui/acertijos/prueba_familia.png" id="pk_foto"]
+[ext_resource type="Texture2D" uid="uid://c1p7efssab16c" path="res://assets/ui/diario/item_huella.png" id="pk_tex_1"]
+[ext_resource type="Texture2D" uid="uid://bey2rf4tqpyt7" path="res://assets/ui/diario/cartel_tablero.png" id="pk_tex_2"]
+[ext_resource type="Texture2D" uid="uid://bgk75bkyj3oxs" path="res://assets/ui/tableros/venta_caza.png" id="pk_tex_3"]
+[ext_resource type="Texture2D" uid="uid://cjni5kp2jdmn5" path="res://assets/ui/diario/item_pocion.png" id="pk_tex_4"]
+[ext_resource type="Script" uid="uid://blsfycm1a7crf" path="res://scripts/systems/story_trail.gd" id="trail_s3"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Gnomo.tscn" id="wave_gnomo"]
+[ext_resource type="PackedScene" uid="uid://drlittrjn26le" path="res://scenes/characters/enemies/Wolf1.tscn" id="wave_wolf1"]
+[ext_resource type="PackedScene" uid="uid://b5hulsa2v6cik" path="res://scenes/characters/enemies/Wolf2.tscn" id="wave_wolf2"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfWhite.tscn" id="wave_wolfwhite"]
+
+[sub_resource type="RectangleShape2D" id="WallH3"]
+size = Vector2(13432, 40)
+
+[sub_resource type="RectangleShape2D" id="WallV3"]
+size = Vector2(40, 1100)
+
+[sub_resource type="RectangleShape2D" id="ThomasIntroShape"]
+size = Vector2(200, 400)
+
+[sub_resource type="RectangleShape2D" id="ExitShape3"]
+size = Vector2(60, 1000)
+
+[sub_resource type="RectangleShape2D" id="TrigShape3"]
+size = Vector2(140, 400)
+
+[node name="Cuento1_Escena3" type="Node2D" unique_id=289416566]
+script = ExtResource("1_level")
+camera_bounds = Rect2(-150, -356, 13032, 762)
+ambience_profile = ExtResource("30_ambience")
+
+[node name="Ground" type="ColorRect" parent="." unique_id=513140581]
+offset_left = -150.0
+offset_top = -356.0
+offset_right = 12882.0
+offset_bottom = 406.0
+color = Color(0.2, 0.34, 0.18, 1)
+
+[node name="EscenarioCaperusita003" type="Sprite2D" parent="Ground" unique_id=1642224979]
+position = Vector2(25, -46.999992)
+scale = Vector2(6.017972, 3.4372294)
+texture = ExtResource("3_341m5")
+centered = false
+
+[node name="Walls" type="Node2D" parent="." unique_id=827089856]
+
+[node name="WallTop" type="StaticBody2D" parent="Walls" unique_id=102674200]
+position = Vector2(0, -356)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallTop" unique_id=540439917]
+position = Vector2(6441, 0)
+shape = SubResource("WallH3")
+
+[node name="WallBottom" type="StaticBody2D" parent="Walls" unique_id=2030151561]
+position = Vector2(0, 406)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBottom" unique_id=221320498]
+position = Vector2(6441, 0)
+shape = SubResource("WallH3")
+
+[node name="WallLeft" type="StaticBody2D" parent="Walls" unique_id=1689625902]
+position = Vector2(-150, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft" unique_id=868586856]
+shape = SubResource("WallV3")
+
+[node name="WallRight" type="StaticBody2D" parent="Walls" unique_id=1092044974]
+position = Vector2(12982, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight" unique_id=401386824]
+position = Vector2(-249, -7)
+shape = SubResource("WallV3")
+
+[node name="Elliot" parent="." unique_id=467960434 instance=ExtResource("3_elliot")]
+position = Vector2(450, 230)
+
+[node name="AnimatedSprite2D" parent="Elliot" index="0" unique_id=2041307235]
+frame = 22
+frame_progress = 0.0
+
+[node name="Jhon" parent="." unique_id=166489790 instance=ExtResource("4_jhon")]
+position = Vector2(250, 280)
+is_companion = true
+follow_target_path = NodePath("../Elliot")
+
+[node name="RangerWood" parent="." unique_id=110381537 instance=ExtResource("8_ranger")]
+position = Vector2(4194, 200)
+
+[node name="ThomasIntro" type="Area2D" parent="." unique_id=20677953]
+position = Vector2(5344, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_speakers = Array[String](["Thomas", "Elliot", "Thomas", "Ethan", "Thomas"])
+conversation_lines = Array[String](["¿Acaso no ven tremenda bestia tras esa niña y ustedes solo miran?", "¿Qué demonios? Yo no vi nada, solo a una jovencita corriendo - contesta Elliot con temor.", "¿Acaso no ves? Una bestia enorme, tenemos que hacer algo.", "No, no, no, a mí no me metan. - dice Ethan retrocediendo.", "Cobarde. - y se dirige a Jhon y Elliot - ¿Y ustedes?"])
+conversation_portraits = Array[Texture2D]([ExtResource("14_thomas_portrait"), ExtResource("15_elliot_portrait"), ExtResource("14_thomas_portrait"), ExtResource("16_ethan_portrait"), ExtResource("14_thomas_portrait")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThomasIntro" unique_id=82109559]
+shape = SubResource("ThomasIntroShape")
+
+[node name="Thomas" parent="." unique_id=1331697511 instance=ExtResource("5_thomas")]
+position = Vector2(5727, 300)
+is_companion = true
+follow_target_path = NodePath("../Elliot")
+
+[node name="AnimatedSprite2D" parent="Thomas" index="0" unique_id=1088320422]
+animation = &"death"
+frame = 24
+
+[node name="Ethan" parent="." unique_id=679848846 instance=ExtResource("6_ethan")]
+position = Vector2(6570, 296)
+
+[node name="Motion" parent="Ethan" index="0" unique_id=606193905]
+position = Vector2(-13.743243, -173.1892)
+scale = Vector2(0.24324325, 0.24324325)
+animation = &"idle"
+
+[node name="CollisionShape2D" parent="Ethan" index="1" unique_id=806882543]
+position = Vector2(218, 142)
+
+[node name="Stephy" parent="." unique_id=1808651330 instance=ExtResource("7_stephy")]
+position = Vector2(7529, 296)
+
+[node name="Motion" parent="Stephy" index="0" unique_id=1542141713]
+position = Vector2(8.823529, -150.80214)
+scale = Vector2(1.6042781, 1.6042781)
+animation = &"idle"
+frame = 0
+frame_progress = 0.0
+
+[node name="Caperucita" parent="." unique_id=538501278 instance=ExtResource("7b_caperucita")]
+position = Vector2(7938, 296)
+dialogue_lines = Array[String]([])
+
+[node name="Motion" parent="Caperucita" index="0" unique_id=822710853]
+position = Vector2(-0.16129032, -76.29032)
+scale = Vector2(0.16129032, 0.16129032)
+animation = &"idle"
+
+[node name="RangerWood2" parent="." unique_id=1737031192 instance=ExtResource("8_ranger")]
+position = Vector2(8794, 200)
+
+[node name="Lobo" parent="." unique_id=1525697113 instance=ExtResource("9_lobo")]
+position = Vector2(10503, 27)
+arena_min_x = 10761.1
+arena_max_x = 12192.1
+
+[node name="Oleada1_Wolf1" parent="." unique_id=930711030 instance=ExtResource("wave_wolf1")]
+position = Vector2(3555, 280)
+
+[node name="Oleada2_WolfWhite" parent="." unique_id=41540382 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(3862, 300)
+
+[node name="Oleada3_Gnomo" parent="." unique_id=209664788 instance=ExtResource("wave_gnomo")]
+position = Vector2(4705, 290)
+
+[node name="Oleada4_Wolf2" parent="." unique_id=1848293394 instance=ExtResource("wave_wolf2")]
+position = Vector2(5088, 320)
+
+[node name="Oleada5_WolfWhite" parent="." unique_id=440918539 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(9432, 290)
+
+[node name="Oleada6_Gnomo" parent="." unique_id=13894791 instance=ExtResource("wave_gnomo")]
+position = Vector2(10199, 300)
+
+[node name="Oleada7_Wolf2" parent="." unique_id=802082824 instance=ExtResource("wave_wolf2")]
+position = Vector2(9816, 310)
+
+[node name="Oleada8_WolfWhite" parent="." unique_id=1662316271 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(10071, 290)
+
+[node name="Oleada9_Wolf1" parent="." unique_id=1940151871 instance=ExtResource("wave_wolf1")]
+position = Vector2(1300, 300)
+
+[node name="Oleada10_WolfWhite" parent="." unique_id=1938759155 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(1900, 320)
+
+[node name="Oleada11_Wolf2" parent="." unique_id=1725611005 instance=ExtResource("wave_wolf2")]
+position = Vector2(2500, 300)
+
+[node name="Oleada12_Gnomo" parent="." unique_id=216296220 instance=ExtResource("wave_gnomo")]
+position = Vector2(3050, 310)
+
+[node name="Oleada13_Wolf1" parent="." unique_id=97171229 instance=ExtResource("wave_wolf1")]
+position = Vector2(6150, 300)
+
+[node name="Oleada14_WolfWhite" parent="." unique_id=1528449554 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(6650, 320)
+
+[node name="Oleada15_Gnomo" parent="." unique_id=887558207 instance=ExtResource("wave_gnomo")]
+position = Vector2(7150, 300)
+
+[node name="Oleada16_Wolf2" parent="." unique_id=1176738576 instance=ExtResource("wave_wolf2")]
+position = Vector2(7650, 310)
+
+[node name="Oleada17_Wolf1" parent="." unique_id=564460623 instance=ExtResource("wave_wolf1")]
+position = Vector2(8150, 300)
+
+[node name="Oleada18_WolfWhite" parent="." unique_id=382031104 instance=ExtResource("wave_wolfwhite")]
+position = Vector2(8650, 320)
+
+[node name="Oleada19_Wolf2" parent="." unique_id=1270465696 instance=ExtResource("wave_wolf2")]
+position = Vector2(9100, 300)
+
+[node name="HUD" parent="." unique_id=1066236678 instance=ExtResource("10_hud")]
+
+[node name="PauseMenu" parent="." unique_id=1324868627 instance=ExtResource("11_pause")]
+
+[node name="ChapterExit" type="Area2D" parent="." unique_id=1701096956]
+position = Vector2(12143, 44)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_exit")
+next_scene_path = "res://scenes/levels/cuento1_escena4.tscn"
+required_enemy = NodePath("../Lobo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChapterExit" unique_id=1626132641]
+position = Vector2(-59, -21)
+shape = SubResource("ExitShape3")
+
+[node name="ChapterPresentation" parent="." unique_id=1519221232 instance=ExtResource("20_presentation")]
+chapter_title = "Las historias olvidadas"
+chapter_subtitle = "No todo lo escrito permanece."
+
+[node name="WalkablePath" type="StaticBody2D" parent="." unique_id=1572870275]
+collision_mask = 0
+script = ExtResource("21_path")
+upper_edge = PackedVector2Array(-406, 285, 4577, 285, 5599, 250, 7899, 250, 8921, 285, 13393, 285)
+lower_edge = PackedVector2Array(-406, 400, 4577, 400, 5599, 350, 7899, 350, 8921, 400, 13393, 400)
+
+[node name="RutaCuento" type="Node2D" parent="." unique_id=243002978]
+script = ExtResource("trail_s3")
+preset = "escena3"
+
+[node name="Objeto_huella_0" type="Area2D" parent="RutaCuento" unique_id=816247957]
+position = Vector2(5088, 320)
+script = ExtResource("pickup_gd")
+item_id = "huella"
+key = "escena3_0"
+icon_texture = ExtResource("pk_tex_1")
+
+[node name="Tablero_venta_caza" type="Area2D" parent="RutaCuento" unique_id=273276358]
+position = Vector2(6342, 373)
+script = ExtResource("pickup_gd")
+lines = Array[String](["Cuidado con los lobos del camino de las flores. Anoche atacaron dos ovejas al atardecer."])
+key = "escena3_1"
+icon_texture = ExtResource("pk_tex_2")
+draw_width = 185.0
+poster_texture = ExtResource("pk_tex_3")
+
+[node name="Objeto_pocion_2" type="Area2D" parent="RutaCuento" unique_id=1674556294]
+position = Vector2(10199, 320)
+script = ExtResource("pickup_gd")
+item_id = "pocion_azul"
+key = "escena3_2"
+icon_texture = ExtResource("pk_tex_4")
+
+[node name="Objeto_pan_n0" type="Area2D" parent="RutaCuento" unique_id=995029742]
+position = Vector2(3044, 320)
+script = ExtResource("pickup_gd")
+item_id = "pan"
+key = "escena3_n0"
+icon_texture = ExtResource("it_pan")
+draw_width = 60.0
+
+[node name="Objeto_mate_n1" type="Area2D" parent="RutaCuento" unique_id=1686662081]
+position = Vector2(7133, 320)
+script = ExtResource("pickup_gd")
+item_id = "mate"
+key = "escena3_n1"
+icon_texture = ExtResource("it_mate")
+draw_width = 34.0
+
+[node name="Objeto_sopa_n2" type="Area2D" parent="RutaCuento" unique_id=1012348797]
+position = Vector2(7899, 320)
+script = ExtResource("pickup_gd")
+item_id = "sopa"
+key = "escena3_n2"
+icon_texture = ExtResource("it_sopa")
+draw_width = 56.0
+
+[node name="Objeto_leche_n3" type="Area2D" parent="RutaCuento" unique_id=881055499]
+position = Vector2(8410, 320)
+script = ExtResource("pickup_gd")
+item_id = "leche"
+key = "escena3_n3"
+icon_texture = ExtResource("it_leche")
+draw_width = 44.0
+
+[node name="Objeto_sello_azul_n4" type="Area2D" parent="RutaCuento" unique_id=1986388232]
+position = Vector2(9177, 320)
+script = ExtResource("pickup_gd")
+item_id = "sello_azul"
+key = "escena3_n4"
+icon_texture = ExtResource("it_sello_azul")
+draw_width = 44.0
+
+[node name="Objeto_pocion_amarilla_n5" type="Area2D" parent="RutaCuento" unique_id=1295875549]
+position = Vector2(10582, 320)
+script = ExtResource("pickup_gd")
+item_id = "pocion_amarilla"
+key = "escena3_n5"
+icon_texture = ExtResource("it_pocion_amarilla")
+draw_width = 46.0
+
+[node name="Foto_familiar" type="Area2D" parent="RutaCuento" unique_id=1820850223]
+position = Vector2(2763, 320)
+script = ExtResource("pickup_gd")
+lines = Array[String](["Una foto familiar, fuera de lugar en mitad del camino. Tras ella, un mensaje escrito a mano:", "«En la salud y en la pobreza… No son solo votos del matrimonio…»"])
+key = "escena3_foto"
+icon_texture = ExtResource("pk_foto")
+draw_width = 58.0
+
+[node name="S3_FotoAviso" type="Area2D" parent="." unique_id=1432800345]
+position = Vector2(2610, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Jhon detiene su marcha: un objeto fuera de lugar ha llamado su atención. Es una foto familiar y, tras ella, hay un mensaje."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_FotoAviso" unique_id=1503163969]
+shape = SubResource("TrigShape3")
+
+[node name="S3_Aullido" type="Area2D" parent="." unique_id=1921678176]
+position = Vector2(3019, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Un aullido los saca de sus pensamientos: a Jhon, de la foto y su mensaje; a Elliot, de su curiosidad por ambos. Y, de pronto, un grito desgarrador a poca distancia.", "Elliot-¿Eso fue un grito?", "Jhon-Viene de más adelante. Vamos."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Aullido" unique_id=1199215463]
+shape = SubResource("TrigShape3")
+
+[node name="S3_RangerVuelve" type="Area2D" parent="." unique_id=1199375951]
+position = Vector2(3376, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Al dirigir su atención al grito, vuelve a aparecer el mismo hombre del comienzo: el guardabosque, con nuevas ganas de atacar.", "Ranger-¡¡¡Criaturas apestosas, van a ver!!!", "Jhon-¿Lo conocemos?", "Elliot-Un viejo amigo.", "Ranger Wood ataca, y Elliot y Jhon contraatacan con desesperación. Ninguno de los dos sabe pelear, y las criaturas ya fueron bastante difíciles como para enfrentarse a un hombre tan grande y agresivo."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_RangerVuelve" unique_id=594545906]
+shape = SubResource("TrigShape3")
+
+[node name="S3_RangerCae" type="Node" parent="." unique_id=1261459702]
+script = ExtResource("defeat_gd")
+enemy_path = NodePath("../RangerWood")
+lines = Array[String](["La pelea fue agotadora, pero por fin lograron derrotarlo. Mientras cae, el guardabosque dice algo que los deja intrigados y más asustados que al principio.", "Ranger-No continúen... este no es su lugar.", "Elliot-¿Qué quiso decir con eso? Esta es la tercera cosa rara que nos pasa hoy.", "Jhon-Primero la foto, luego el grito, ahora esto. Algo en este bosque no encaja.", "Siguen su camino con la cabeza llena de preguntas."])
+
+[node name="S3_Casa" type="Area2D" parent="." unique_id=1620208162]
+position = Vector2(4961, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Más adelante, entre las rocas, alguien sale corriendo, gritando y llorando. Un poco más allá, Ethan solo observa."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Casa" unique_id=858838622]
+shape = SubResource("TrigShape3")
+
+[node name="S3_Guardabosque" type="Area2D" parent="." unique_id=694830211]
+position = Vector2(7005, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Se acerca el guardabosque, siguiendo a la joven. Ella ve a Stephy y corre a buscar su protección, abrazándola, tiritando de miedo."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Guardabosque" unique_id=1933685182]
+shape = SubResource("TrigShape3")
+
+[node name="S3_Combate2" type="Area2D" parent="." unique_id=985999434]
+position = Vector2(8410, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Comienza el siguiente combate. El guardabosque se interpone una vez más, y Thomas se enfurece.", "Thomas-¿Te enfrentas a nosotros y dejas escapar a esa bestia? ¿Dónde está tu conciencia?", "Elliot-Este tipo está loco. Es la segunda vez que me ataca hoy."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Combate2" unique_id=822569007]
+shape = SubResource("TrigShape3")
+
+[node name="S3_Ranger2Cae" type="Node" parent="." unique_id=1992159606]
+script = ExtResource("defeat_gd")
+enemy_path = NodePath("../RangerWood2")
+lines = Array[String](["Cae el guardabosque, todavía sin explicación para su actitud, mientras la joven y Stephy siguen temblando, aterradas.", "Caperucita-¿Y el lobo?", "Elliot-¿Cuál lobo? ¿Esa bestia gigante es un lobo?", "Thomas-Ya vamos por él, princesita.", "Elliot-¡¡¿QUÉ?!!", "Al ver a las dos chicas temblando, aflora su naturaleza protectora y, sin pensarlo, afirma:", "Elliot-Tranquila, pequeña. Hoy cenamos lobo a las brasas.", "Thomas mira a Ethan, que desvía la mirada, y luego se dirige a Elliot y a Jhon.", "Thomas-Vamos.", "Corren hacia donde huyó el lobo para darle alcance. Thomas se arrepiente un poco: era enorme."])
+delay = 1.2
+
+[node name="S3_LoboAmenaza" type="Area2D" parent="." unique_id=835155954]
+position = Vector2(9852, 39)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["Siguiendo los aullidos llegan a una gran sala de piedra: un círculo rojo en el suelo y dos cabezas de lobo talladas en la roca. Algo enorme los espera sin prisa.", "Lobo-Qué amables... Me traen la cena hasta la puerta.", "Elliot-Así que eres tú lo que asustó a esa niña.", "Lobo-Ella eligió el camino largo y yo el corto. Siempre llego primero, y siempre encuentro la mesa puesta.", "Lobo-Huelo su miedo desde aquí. Es casi tan dulce como el de ella.", "Lobo-Ya cené. Y aún tengo hambre. Vengan, uno por uno o todos juntos: mi estómago no distingue."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_LoboAmenaza" unique_id=825108012]
+position = Vector2(-325, -117)
+shape = SubResource("TrigShape3")
+
+[node name="S3_LoboCae" type="Node" parent="." unique_id=1669891984]
+script = ExtResource("defeat_gd")
+enemy_path = NodePath("../Lobo")
+lines = Array[String](["La bestia cae por fin y su último aullido se apaga entre los árboles.", "Elliot-Se acabó.", "Al fondo de la cueva hay una salida, y al otro lado, una casa con la puerta abierta."])
+delay = 1.6
+
+[editable path="Elliot"]
+[editable path="Jhon"]
+[editable path="RangerWood"]
+[editable path="Thomas"]
+[editable path="Ethan"]
+[editable path="Stephy"]
+[editable path="Caperucita"]
+[editable path="RangerWood2"]
+[editable path="Lobo"]
+[editable path="Oleada1_Wolf1"]
+[editable path="Oleada2_WolfWhite"]
+[editable path="Oleada3_Gnomo"]
+[editable path="Oleada4_Wolf2"]
+[editable path="Oleada5_WolfWhite"]
+[editable path="Oleada6_Gnomo"]
+[editable path="Oleada7_Wolf2"]
+[editable path="Oleada8_WolfWhite"]

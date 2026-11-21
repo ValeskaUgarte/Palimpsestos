@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://b8i6yrtws0v4x"]
+
+[ext_resource type="Script" uid="uid://bfut11n5ypddv" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://chg273kxsfa5t" path="res://assets/ui/botones.png" id="2_botones"]
+[ext_resource type="Texture2D" uid="uid://d1m7y715rwjnu" path="res://assets/menu_bg_plain.jpg" id="3_bg"]
+[ext_resource type="Texture2D" uid="uid://csw0mwncmjlb4" path="res://assets/ui/palimpsestos_logo.png" id="4_logo"]
+[ext_resource type="PackedScene" uid="uid://bw2lsbac70y7n" path="res://scenes/ui/chapter_presentation.tscn" id="5_presentation"]
+[ext_resource type="Texture2D" uid="uid://b8gndblre1abl" path="res://assets/ui/kit/btn_nueva_partida.png" id="6_demo_nueva"]
+[ext_resource type="Texture2D" uid="uid://bj4da4k34e75e" path="res://assets/ui/kit/btn_continuar_demo.png" id="7_demo_continuar"]
+[ext_resource type="Texture2D" uid="uid://dhtpi3qn44qn8" path="res://assets/ui/kit/btn_importar_checkpoint.png" id="8_demo_importar"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/menu/menu_iniciar.png" id="ext_menu_iniciar"]
+[ext_resource type="Texture2D" path="res://assets/ui/menu/menu_cargar.png" id="ext_menu_cargar"]
+[ext_resource type="Texture2D" path="res://assets/ui/menu/menu_config.png" id="ext_menu_config"]
+[ext_resource type="Texture2D" path="res://assets/ui/menu/menu_mapa.png" id="ext_menu_mapa"]
+[ext_resource type="Texture2D" path="res://assets/ui/menu/menu_creditos.png" id="ext_menu_creditos"]
+[ext_resource type="Texture2D" path="res://assets/ui/menu/menu_salir.png" id="ext_menu_salir"]
+
+[node name="MainMenu" type="Control" unique_id=1847915892]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="TextureRect" parent="." unique_id=2123769522]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Logo" type="TextureRect" parent="." unique_id=1450539933]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 30.0
+offset_right = 320.0
+offset_bottom = 137.0
+grow_horizontal = 2
+texture = ExtResource("4_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Tagline" type="Label" parent="." unique_id=1752797178]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+offset_top = 143.0
+offset_bottom = 167.0
+theme_override_colors/font_color = Color(0.84, 0.76, 0.61, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.015, 0.025, 0.95)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 15
+text = "Toda nueva historia deja algo atrás."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2053391852]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 175.0
+offset_right = 150.0
+offset_bottom = 675.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="PlayButton" type="TextureButton" parent="VBoxContainer" unique_id=1781408130]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+texture_normal = ExtResource("ext_menu_iniciar")
+ignore_texture_size = true
+stretch_mode = 5
+
+
+[node name="Etiqueta" type="Label" parent="VBoxContainer/PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+z_index = 1
+theme_override_colors/font_color = Color(0.96, 0.88, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Iniciar"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="LoadButton" type="TextureButton" parent="VBoxContainer" unique_id=1346191085]
+custom_minimum_size = Vector2(300, 72)
+layout_mode = 2
+texture_normal = ExtResource("ext_menu_cargar")
+ignore_texture_size = true
+stretch_mode = 5
+
+
+[node name="Etiqueta" type="Label" parent="VBoxContainer/LoadButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+z_index = 1
+theme_override_colors/font_color = Color(0.96, 0.88, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Cargar"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="ConfigButton" type="TextureButton" parent="VBoxContainer" unique_id=1086830763]
+custom_minimum_size = Vector2(300, 72)
+layout_mode = 2
+texture_normal = ExtResource("ext_menu_config")
+ignore_texture_size = true
+stretch_mode = 5
+
+
+[node name="Etiqueta" type="Label" parent="VBoxContainer/ConfigButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+z_index = 1
+theme_override_colors/font_color = Color(0.96, 0.88, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Config"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="MapButton" type="TextureButton" parent="VBoxContainer" unique_id=292472534]
+custom_minimum_size = Vector2(300, 96)
+layout_mode = 2
+texture_normal = ExtResource("ext_menu_mapa")
+ignore_texture_size = true
+stretch_mode = 5
+
+
+[node name="Etiqueta" type="Label" parent="VBoxContainer/MapButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+z_index = 1
+theme_override_colors/font_color = Color(0.96, 0.88, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Mapa"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="CreditsButton" type="TextureButton" parent="VBoxContainer" unique_id=256728125]
+custom_minimum_size = Vector2(300, 66)
+layout_mode = 2
+texture_normal = ExtResource("ext_menu_creditos")
+ignore_texture_size = true
+stretch_mode = 5
+
+
+[node name="Etiqueta" type="Label" parent="VBoxContainer/CreditsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+z_index = 1
+theme_override_colors/font_color = Color(0.96, 0.88, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Créditos"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer" unique_id=1734037619]
+custom_minimum_size = Vector2(300, 72)
+layout_mode = 2
+texture_normal = ExtResource("ext_menu_salir")
+ignore_texture_size = true
+stretch_mode = 5
+
+
+[node name="Etiqueta" type="Label" parent="VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+z_index = 1
+theme_override_colors/font_color = Color(0.96, 0.88, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Salir"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="DemoCombate" type="VBoxContainer" parent="." unique_id=806087034]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -214.0
+offset_right = -22.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="TituloDemo" type="Label" parent="DemoCombate" unique_id=389654532]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.76, 0.61, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.015, 0.025, 0.95)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 15
+text = "Demo de combate · opcional"
+horizontal_alignment = 2
+
+[node name="DemoNuevaButton" type="TextureButton" parent="DemoCombate" unique_id=1932864413]
+custom_minimum_size = Vector2(153, 46)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Nueva partida"
+texture_normal = ExtResource("6_demo_nueva")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DemoContinuarButton" type="TextureButton" parent="DemoCombate" unique_id=1426926796]
+custom_minimum_size = Vector2(156, 46)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Continuar demo"
+texture_normal = ExtResource("7_demo_continuar")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DemoImportarButton" type="TextureButton" parent="DemoCombate" unique_id=882788501]
+custom_minimum_size = Vector2(172, 49)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Importar checkpoint anterior"
+texture_normal = ExtResource("8_demo_importar")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="LoadToast" type="Label" parent="." unique_id=58786452]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.94
+anchor_right = 0.5
+anchor_bottom = 0.94
+offset_left = -160.0
+offset_right = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 18
+text = "No hay partidas guardadas"
+horizontal_alignment = 1
+
+[node name="ChapterPresentation" parent="." unique_id=2034533184 instance=ExtResource("5_presentation")]
+edge_strength = 0.3
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="VBoxContainer/ConfigButton" to="." method="_on_config_pressed"]
+[connection signal="pressed" from="VBoxContainer/MapButton" to="." method="_on_map_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="DemoCombate/DemoNuevaButton" to="." method="_on_demo_new_pressed"]
+[connection signal="pressed" from="DemoCombate/DemoContinuarButton" to="." method="_on_demo_continue_pressed"]
+[connection signal="pressed" from="DemoCombate/DemoImportarButton" to="." method="_on_demo_import_pressed"]

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bcl3bguxilfg"]
+
+[ext_resource type="Script" uid="uid://dikq4vygq0135" path="res://scripts/characters/npc.gd" id="1_npc"]
+[ext_resource type="Texture2D" uid="uid://b2vgbsluhq2ip" path="res://assets/npc/MamaCaperusita.png" id="2_texture"]
+[ext_resource type="Script" path="res://scripts/characters/npc_motion.gd" id="motion_script"]
+[ext_resource type="SpriteFrames" path="res://assets/npc/mama.tres" id="motion_frames"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mama"]
+radius = 110.0
+
+[node name="NPC_Mama" type="Area2D" unique_id=757279779]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_npc")
+dialogue_lines = Array[String](["Vecina-Dame la receta, esos panes te quedan exquisitos", "Mamá-jajajaja claro que sí, toma nota", "Elliot-mmmm está lindo el lugar...", "Mamá-¿Joven, tiene lápiz y papel que le sobre?", "Elliot-No señoras, disculpen", "Mamá-Memoriza niña, es super fácil"])
+
+[node name="Motion" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("motion_frames")
+animation = &"idle"
+script = ExtResource("motion_script")
+standing_height = 246.94
+foot_position = Vector2(-24.49, 147.11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1172121729]
+position = Vector2(-19, 13)
+shape = SubResource("CircleShape2D_mama")

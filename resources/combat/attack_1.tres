@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/characters/attack_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+animation = &"attack_1"
+fallback_animation = &"attack"
+playback_speed = 1.0
+advance_pixels = 8.0
+hitbox_size = Vector2(88, 100)
+hitbox_offset = Vector2(64, -145)
+impact_strength = 0.7
+impact_direction = Vector2(1, -0.12)
+swing_cue = &"attack_swing"
+hit_cue = &"attack_hit"

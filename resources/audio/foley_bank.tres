@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="PalimFoleyBank" format=3]
+
+[ext_resource type="Script" path="res://scripts/audio/foley_bank.gd" id="bank"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/clue.wav" id="1"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/corruption.wav" id="2"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/damage.wav" id="3"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/death.wav" id="4"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/dialogue.wav" id="5"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/door_open.wav" id="6"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/finisher.wav" id="7"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/forest_step_01.wav" id="8"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/forest_step_02.wav" id="9"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/forest_step_03.wav" id="10"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/forest_step_04.wav" id="11"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/impact.wav" id="12"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/impact_heavy.wav" id="13"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/leaves_01.wav" id="14"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/leaves_02.wav" id="15"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/leaves_03.wav" id="16"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/page_turn.wav" id="17"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/puzzle_complete.wav" id="18"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/rune_activate.wav" id="19"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/rune_error.wav" id="20"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/stone_step_01.wav" id="21"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/stone_step_02.wav" id="22"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/stone_step_03.wav" id="23"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/stone_step_04.wav" id="24"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/swing.wav" id="25"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/ui_accept.wav" id="26"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wet_step_01.wav" id="27"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wet_step_02.wav" id="28"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wet_step_03.wav" id="29"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wet_step_04.wav" id="30"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wind_01.wav" id="31"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wind_02.wav" id="32"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wind_03.wav" id="33"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wood_step_01.wav" id="34"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wood_step_02.wav" id="35"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wood_step_03.wav" id="36"]
+[ext_resource type="AudioStream" path="res://assets/audio/original/wood_step_04.wav" id="37"]
+
+[resource]
+script = ExtResource("bank")
+forest = Array[AudioStream]([ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")])
+stone = Array[AudioStream]([ExtResource("21"), ExtResource("22"), ExtResource("23"), ExtResource("24")])
+wood = Array[AudioStream]([ExtResource("34"), ExtResource("35"), ExtResource("36"), ExtResource("37")])
+wet = Array[AudioStream]([ExtResource("27"), ExtResource("28"), ExtResource("29"), ExtResource("30")])
+dirt = Array[AudioStream]([ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")])
+grass = Array[AudioStream]([ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")])
+interactions = Dictionary[StringName, AudioStream]({&"impact": ExtResource("12"), &"impact_heavy": ExtResource("13"), &"finisher": ExtResource("7"), &"damage": ExtResource("3"), &"death": ExtResource("4"), &"rune_activate": ExtResource("19"), &"rune_error": ExtResource("20"), &"puzzle_complete": ExtResource("18"), &"door_open": ExtResource("6"), &"page_turn": ExtResource("17"), &"dialogue": ExtResource("5"), &"ui_accept": ExtResource("26"), &"clue": ExtResource("1"), &"corruption": ExtResource("2"), &"attack": ExtResource("25"), &"attack_swing": ExtResource("25"), &"attack_hit": ExtResource("12"), &"kick_swing": ExtResource("25"), &"kick_hit": ExtResource("13"), &"finisher_hit": ExtResource("7"), &"player_hurt": ExtResource("3")})

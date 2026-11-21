@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://fak3n616vx5e" path="res://scripts/characters/enemy_ai.gd" id="1_ai"]
+[ext_resource type="Script" uid="uid://s73cjmqs0k0e" path="res://scenes/characters/player/hurtbox.gd" id="2_hurtbox"]
+[ext_resource type="Script" uid="uid://blnxde2ber0wx" path="res://scripts/systems/health_component.gd" id="3_health"]
+[ext_resource type="SpriteFrames" path="res://assets/enemies/Wolf3/wolf3-actions.tres" id="9_visual_v3"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape_w1"]
+size = Vector2(342, 280)
+
+[sub_resource type="RectangleShape2D" id="HurtShape_w1"]
+size = Vector2(322, 280)
+
+[sub_resource type="RectangleShape2D" id="HitShape_w1"]
+size = Vector2(290.5, 233)
+
+[sub_resource type="CircleShape2D" id="DetectShape_w1"]
+radius = 320.0
+
+[node name="Wolf3" type="CharacterBody2D" unique_id=1139271720]
+collision_layer = 4
+script = ExtResource("1_ai")
+speed = 110.0
+attack_damage = 8
+attack_range = 125.0
+faces_right_by_default = true
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=2054604276]
+scale = Vector2(1, 1)
+sprite_frames = ExtResource("9_visual_v3")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1146218106]
+position = Vector2(-90, -40)
+shape = SubResource("BodyShape_w1")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=337663872]
+collision_layer = 16
+collision_mask = 32
+script = ExtResource("2_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=952099484]
+position = Vector2(-94, -41)
+shape = SubResource("HurtShape_w1")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1853136117]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1964788985]
+position = Vector2(-91.25, -46.5)
+shape = SubResource("HitShape_w1")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1585982344]
+script = ExtResource("3_health")
+max_health = 25
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=2052361832]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1195138901]
+position = Vector2(-98, -55)
+shape = SubResource("DetectShape_w1")

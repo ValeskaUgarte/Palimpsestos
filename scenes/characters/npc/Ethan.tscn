@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dx7lq25hkulp5"]
+
+[ext_resource type="Script" uid="uid://dikq4vygq0135" path="res://scripts/characters/npc.gd" id="1_npc"]
+[ext_resource type="Texture2D" uid="uid://nwy5lrb7gtti" path="res://assets/characters/ethan/Ethan.png" id="2_texture"]
+[ext_resource type="SpriteFrames" uid="uid://de7xrptgukyf1" path="res://assets/characters/ethan/ethan-actions.tres" id="motion_frames"]
+[ext_resource type="Script" uid="uid://n5et6o07pksb" path="res://scripts/characters/npc_motion.gd" id="motion_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ethan"]
+radius = 110.0
+
+[node name="Ethan" type="Area2D" unique_id=184127893]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_npc")
+dialogue_lines = Array[String](["No, no, no, a mí no me metan."])
+portrait = ExtResource("2_texture")
+
+[node name="Motion" type="AnimatedSprite2D" parent="." unique_id=606193905]
+position = Vector2(93.36, 86.86)
+scale = Vector2(0.989375, 0.93859375)
+sprite_frames = ExtResource("motion_frames")
+animation = &"walk"
+script = ExtResource("motion_script")
+standing_height = 360.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=806882543]
+position = Vector2(83, 92)
+shape = SubResource("CircleShape2D_ethan")

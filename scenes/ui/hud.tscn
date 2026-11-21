@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ce7ioblmk5vao"]
+
+[ext_resource type="Script" uid="uid://bmng6opplwbpm" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" uid="uid://chg273kxsfa5t" path="res://assets/ui/botones.png" id="2_atlas"]
+
+[sub_resource type="AtlasTexture" id="Atlas_health"]
+atlas = ExtResource("2_atlas")
+region = Rect2(1008, 395, 266, 55)
+
+[node name="HUD" type="CanvasLayer" unique_id=654659599]
+script = ExtResource("1_hud")
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1742195753]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 290.0
+offset_bottom = 79.0
+mouse_filter = 2
+max_value = 1000.0
+value = 100.0
+texture_under = SubResource("Atlas_health")
+texture_progress = SubResource("Atlas_health")
+tint_under = Color(0.3, 0.27, 0.25, 1)
+
+[node name="HealthLabel" type="Label" parent="HealthBar" unique_id=1723860835]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 49.0
+offset_right = 235.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.88, 0.83, 0.7, 1)
+theme_override_colors/font_shadow_color = Color(0.025, 0.025, 0.025, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+text = "100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bxsw6g3gikck0"]
+
+[ext_resource type="Script" uid="uid://fak3n616vx5e" path="res://scripts/characters/enemy_ai.gd" id="1_ai"]
+[ext_resource type="Script" uid="uid://s73cjmqs0k0e" path="res://scenes/characters/player/hurtbox.gd" id="2_hurtbox"]
+[ext_resource type="Script" uid="uid://blnxde2ber0wx" path="res://scripts/systems/health_component.gd" id="3_health"]
+[ext_resource type="SpriteFrames" uid="uid://bacjpchus0q2y" path="res://assets/enemies/RangerWood/ranger-actions.tres" id="9_visual_v3"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape_rw"]
+size = Vector2(220, 390)
+
+[sub_resource type="RectangleShape2D" id="HurtShape_rw"]
+size = Vector2(278, 610)
+
+[sub_resource type="RectangleShape2D" id="HitShape_rw"]
+size = Vector2(319, 509)
+
+[sub_resource type="CircleShape2D" id="DetectShape_rw"]
+radius = 471.15707
+
+[node name="RangerWood" type="CharacterBody2D" unique_id=1694194806]
+collision_layer = 4
+script = ExtResource("1_ai")
+attack_range = 150.0
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=1223183067]
+scale = Vector2(1.8, 1.8)
+sprite_frames = ExtResource("9_visual_v3")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183576592]
+shape = SubResource("BodyShape_rw")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=139528050]
+collision_layer = 16
+collision_mask = 32
+script = ExtResource("2_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1409883443]
+position = Vector2(29, -110)
+shape = SubResource("HurtShape_rw")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1424869262]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1987142242]
+position = Vector2(14, -131)
+shape = SubResource("HitShape_rw")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=815028786]
+script = ExtResource("3_health")
+max_health = 40
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1340406709]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1054602036]
+position = Vector2(412, -94)
+shape = SubResource("DetectShape_rw")
