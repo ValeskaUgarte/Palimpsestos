@@ -15,6 +15,7 @@ var _armed: bool = false
 
 
 func _ready() -> void:
+	z_index = 0  # los actores (personajes, enemigos, NPC) van en z_index 1: el cartel siempre queda DETRÁS
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 

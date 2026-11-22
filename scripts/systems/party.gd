@@ -263,6 +263,8 @@ func _check_joins() -> void:
 		var pos: Vector2 = member.global_position
 		if absf(pos.x - center.x) <= half.x + SCREEN_MARGIN:
 			_joined[member.get_instance_id()] = true
+			# Se recuerda para que, al cambiar de tramo (o volver atrás), aparezca junto a Elliot (ver level.gd).
+			GameSession.set_flag("unido_" + String(member.name))
 			_add_card(member)
 
 

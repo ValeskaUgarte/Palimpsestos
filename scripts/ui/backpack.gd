@@ -520,9 +520,9 @@ func _status_bar(title: String, color: Color) -> Array:
 func _refresh_status() -> void:
 	if _fatigue_bar == null:
 		return
-	_fatigue_bar.value = PlayerStatus.fatigue()
+	_fatigue_bar.value = PlayerStatus.energy()
 	_fear_bar.value = PlayerStatus.fear()
-	_fatigue_label.text = "Cansancio: %s (%d)" % [PlayerStatus.fatigue_name(), int(PlayerStatus.fatigue())]
+	_fatigue_label.text = "Energía: %s (%d)" % [PlayerStatus.fatigue_name(), int(PlayerStatus.energy())]
 	_fear_label.text = "Miedo: %s (%d)" % [PlayerStatus.fear_name(), int(PlayerStatus.fear())]
 	var guard := int(round(PlayerStatus.GUARD_PER_SEAL * 100.0 * PlayerStatus.seals("guardia")))
 	var skill := int(round(PlayerStatus.SKILL_PER_SEAL * 100.0 * PlayerStatus.seals("habilidad")))

@@ -23,6 +23,9 @@ extends Node2D
 
 const GROUND_SHADOW: Script = preload("res://scripts/characters/ground_shadow.gd")
 
+var _part_index: int = -1
+var _arrival_dir: float = 1.0
+
 @onready var hud: CanvasLayer = $HUD
 @onready var player: CharacterBody2D = $Elliot
 
@@ -32,6 +35,7 @@ func _ready() -> void:
 	if part >= 0:
 		_apply_part(part)
 	_prepare_path_collisions()
+	_place_companions()
 	_setup_depth_sorting()
 	_prepare_atmosphere()
 	AudioLandscape.set_profile(ambience_profile)
@@ -97,21 +101,70 @@ func _apply_part(index: int) -> void:
 			wall_right.position.x = right + 20.0
 	_cull_children(self, left - MARGIN, right + MARGIN)
 	var start: float = part.start
+	# Al volver atrás desde el tramo siguiente, Elliot aparece junto a su salida derecha (GameSession.part_start_override).
+	_part_index = index
+	_arrival_dir = GameSession.part_arrival_dir
+	if GameSession.part_start_override != INF:
+		start = clampf(GameSession.part_start_override, left + 120.0, right - 120.0)
+	GameSession.part_start_override = INF
+	GameSession.part_arrival_dir = 1.0
 	var elliot := get_node_or_null("Elliot") as Node2D
 	if elliot != null and not GameSession.resume_requested:
 		elliot.global_position.x = start
-	# Compañeros: si están fuera del tramo, se colocan detrás de Elliot.
-	var spot := 0
-	for companion in get_children():
-		if not (companion is CharacterBody2D and companion.is_in_group("companion")):
-			continue
-		if companion.global_position.x < left - 60.0 or companion.global_position.x > right + 60.0:
-			companion.global_position.x = start - 110.0 - 45.0 * spot
-			spot += 1
 	_setup_exits(index, right)
 	var presentation := get_node_or_null("ChapterPresentation")
 	if presentation != null and presentation.has_method("present_title"):
 		presentation.present_title(part.title, part.sub)
+
+# Compañeros al empezar un tramo: junto a Elliot, detrás de él (según el sentido de llegada), sobre el camino,
+# dentro de las paredes del tramo y fuera de los obstáculos. Se ejecuta tras _prepare_path_collisions para usar
+# los pies reales. Solo se respeta la posición del editor de un compañero que AÚN NO se ha unido y espera más
+# adelante (encuentro de la historia: Jhon en la escena 2, Thomas en la escena 3).
+const COMPANION_GAP := 110.0
+const COMPANION_SPACING := 45.0
+const COMPANION_WALL_MARGIN := 50.0
+
+func _place_companions() -> void:
+	if _part_index < 0 or GameSession.resume_requested or player == null:
+		return
+	var part: Dictionary = GameSession.PARTS[_part_index]
+	var left: float = part.from
+	var right: float = part.to
+	var path := get_node_or_null("WalkablePath")
+	var base: Vector2 = player.ground_position()
+	var spot := 0
+	for companion in get_children():
+		if not (companion is CharacterBody2D and companion.is_in_group("companion")):
+			continue
+		var met: bool = GameSession.has_flag("unido_" + String(companion.name))
+		var x: float = companion.global_position.x
+		var waiting_ahead: bool = not met and _arrival_dir > 0.0 and x >= left and x <= right and x > base.x + 300.0
+		if waiting_ahead:
+			continue
+		var wanted_x: float = base.x - _arrival_dir * (COMPANION_GAP + COMPANION_SPACING * spot)
+		wanted_x = clampf(wanted_x, left + COMPANION_WALL_MARGIN, right - COMPANION_WALL_MARGIN)
+		wanted_x = _clear_of_obstacles(wanted_x, left, right)
+		var wanted := Vector2(wanted_x, base.y + (14.0 if spot % 2 == 0 else -14.0))
+		if path != null:
+			wanted = path.call("constrain_foot", wanted, 26.0)
+		companion.global_position += wanted - companion.call("ground_position")
+		companion.set("_follow_side", -_arrival_dir)
+		spot += 1
+
+# Mueve una X fuera de la zona bloqueante de las piedras y troncos (hacia atrás respecto al sentido de llegada).
+func _clear_of_obstacles(x: float, left: float, right: float) -> float:
+	for attempt in 8:
+		var blocked := false
+		for obstacle in get_tree().get_nodes_in_group("jump_obstacle"):
+			if not is_ancestor_of(obstacle) or not obstacle.has_method("_zone_half_width"):
+				continue
+			if absf((obstacle as Node2D).global_position.x - x) < float(obstacle.call("_zone_half_width")) + 40.0:
+				blocked = true
+				break
+		if not blocked:
+			return x
+		x = clampf(x - _arrival_dir * 60.0, left + COMPANION_WALL_MARGIN, right - COMPANION_WALL_MARGIN)
+	return x
 
 func _cull_children(parent: Node, lo: float, hi: float) -> void:
 	for child in parent.get_children():
@@ -183,8 +236,29 @@ func _setup_exits(index: int, right: float) -> void:
 		segment_exit.add_child(shape)
 		segment_exit.position = Vector2(right - 30.0, 0.0)
 		add_child(segment_exit)
+	# Salida hacia atrás: en el borde izquierdo de los tramos que tienen otro antes en la misma escena. Permite volver
+	# a hablar con un personaje anterior (p. ej. Caperucita desde la casa de la abuelita).
+	var has_prev_here: bool = index > 0 and parts[index - 1].level == scene_file_path
+	if has_prev_here:
+		var back_exit := Area2D.new()
+		back_exit.name = "BackExit"
+		back_exit.collision_layer = 0
+		back_exit.collision_mask = 2
+		back_exit.set_script(LEVEL_EXIT_SCRIPT)
+		back_exit.next_scene_path = scene_file_path
+		back_exit.next_part = index - 1
+		back_exit.arrive_x = float(parts[index - 1].to) - 260.0
+		back_exit.arrive_dir = -1.0
+		back_exit.one_shot = true
+		var back_shape := CollisionShape2D.new()
+		var back_rectangle := RectangleShape2D.new()
+		back_rectangle.size = Vector2(120, 1200)
+		back_shape.shape = back_rectangle
+		back_exit.add_child(back_shape)
+		back_exit.position = Vector2(float(parts[index].from) + 20.0, 0.0)
+		add_child(back_exit)
 	for node in get_children():
-		if node is Area2D and node.get_script() == LEVEL_EXIT_SCRIPT and node != chapter and node.name != "SegmentExit":
+		if node is Area2D and node.get_script() == LEVEL_EXIT_SCRIPT and node != chapter and node.name != "SegmentExit" and node.name != "BackExit":
 			if node.process_mode != Node.PROCESS_MODE_DISABLED:
 				node.next_part = GameSession.first_part_of(String(node.next_scene_path))
 

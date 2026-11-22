@@ -5,6 +5,7 @@ extends CanvasLayer
 
 # Bajo la barra de vida: cansancio y miedo. El mapa pequeño va arriba a la derecha, junto a la mochila.
 const MINIMAP_SIZE := Vector2(96, 64)
+const BACKPACK_ICON_REGION := Rect2(0, 0, 190, 195)
 var _fatigue_bar: ProgressBar = null
 var _fear_bar: ProgressBar = null
 var _minimap: StoryTile = null
@@ -18,7 +19,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if _fatigue_bar != null:
-		_fatigue_bar.value = PlayerStatus.fatigue()
+		_fatigue_bar.value = PlayerStatus.energy()  # la barra muestra la ENERGÍA que queda (llena = descansado)
 		_fear_bar.value = PlayerStatus.fear()
 	# Cada medio segundo se anota hasta dónde ha llegado Elliot y se actualiza el mapa pequeño.
 	_route_clock += delta
@@ -41,10 +42,14 @@ func _build_shortcuts() -> void:
 	add_child(row)
 	_build_minimap(row)
 	var backpack := TextureButton.new()
-	backpack.texture_normal = load("res://assets/ui/nuevos/botones_texto/mochila.png") as Texture2D
+	# El PNG trae la palabra «Mochila» dibujada: se recorta solo el medallón con la mochila (sin texto).
+	var atlas := AtlasTexture.new()
+	atlas.atlas = load("res://assets/ui/nuevos/botones_texto/mochila.png") as Texture2D
+	atlas.region = BACKPACK_ICON_REGION
+	backpack.texture_normal = atlas
 	backpack.ignore_texture_size = true
 	backpack.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-	backpack.custom_minimum_size = Vector2(150, 60)
+	backpack.custom_minimum_size = Vector2(64, 64)
 	backpack.focus_mode = Control.FOCUS_NONE
 	backpack.tooltip_text = "Mochila [I]"
 	backpack.pressed.connect(_on_backpack_pressed)
@@ -82,7 +87,7 @@ func _build_status_widgets() -> void:
 	column.add_theme_constant_override("separation", 4)
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(column)
-	_fatigue_bar = _thin_bar(column, "Cansancio", Color(0.85, 0.62, 0.25), FRAME_FATIGUE, HOLE_FATIGUE)
+	_fatigue_bar = _thin_bar(column, "Energía", Color(0.85, 0.62, 0.25), FRAME_FATIGUE, HOLE_FATIGUE)
 	_fear_bar = _thin_bar(column, "Miedo", Color(0.55, 0.4, 0.8), FRAME_FEAR, HOLE_FEAR)
 
 

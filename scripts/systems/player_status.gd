@@ -1,13 +1,14 @@
 extends Node
 ## ESTADO DEL PERSONAJE (autoload "PlayerStatus").
 ##
-## CANSANCIO (0-100): DINÁMICO, sube y baja todo el rato según lo que hace Elliot:
-##   - Pelear y saltar (acciones rápidas) lo suben rápido; en peleas largas, más rápido todavía.
-##   - Correr / sprint lo sube rápido (cuando exista esa acción; ya está preparado).
-##   - Caminar lo baja un poco.
-##   - Quedarse quieto lo baja rápido, y mientras más rato descansa, más rápido.
-##   - Cansado, cada esfuerzo cuesta más. Comer (pan, empanada, sopa, mate...) lo baja de golpe.
-##   Cansado (60+): -10% de velocidad y de daño. Agotado (85+): -25% de ambos.
+## ENERGÍA / CANSANCIO: internamente se guarda el CANSANCIO (0-100, clave "fatiga"); la barra del HUD muestra
+## la ENERGÍA que queda (energy() = 100 - cansancio: llena = descansado, vacía = agotado).
+##   - Pelear y saltar lo gastan rápido; en peleas largas, más rápido todavía.
+##   - Correr / sprint lo gasta rápido (cuando exista esa acción; ya está preparado).
+##   - Caminar la gasta despacio (sin pelear, tarda más de un minuto en cansarse).
+##   - QUIETO y sin atacar la recupera: una barra vacía se llena en unos 8-10 s (más rápido mientras más rato descansa).
+##   - Cansado, cada esfuerzo cuesta más. Comer (pan, empanada, sopa, mate...) la recupera de golpe.
+##   Cansado (60+ de cansancio): -10% de velocidad y de daño. Agotado (85+): -25% de ambos.
 ## MIEDO (0-100): sube cerca del lobo final, con la vida baja o rodeado de enemigos; baja solo cuando pasa el
 ##   peligro (o con mate, leche y el sello de sanación). Asustado (50+): -10% de daño. Aterrado (80+): -20%.
 ## MEJORAS (sellos, se guardan con la partida): habilidad (+10% de daño), combo (+4 al 3er golpe)
@@ -24,7 +25,7 @@ const SCARED_AT := 50.0
 const TERROR_AT := 80.0
 
 # CANSANCIO DINÁMICO (puntos por segundo; positivo = sube, negativo = baja). Todo se ajusta desde aquí.
-const FATIGUE_WALK := -4.0        # caminar: baja rápido (50 -> 0 en unos 12 s)
+const FATIGUE_WALK := 0.8         # caminar: sube despacio (de 0 a 'cansado' en ~75 s caminando)
 const FATIGUE_RUN := 8.0          # correr / sprint: sube muy rápido (sin tecla aún)
 const FATIGUE_FIGHT_MIN := 6.0    # pelear: sube muy rápido...
 const FATIGUE_FIGHT_MAX := 12.0   # ...y más en peleas largas
@@ -32,10 +33,11 @@ const FATIGUE_FIGHT_RAMP := 6.0   # segundos de pelea seguida para llegar al má
 const FATIGUE_JUMP := 4.0         # mientras está en el aire
 const FATIGUE_WINDED := 0.4       # con el cansancio al 100, cada esfuerzo cuesta hasta un 40% más
 const FIGHT_GRACE := 1.0          # pausa (s) entre golpes que aún cuenta como "peleando seguido"
-# Quieto: baja desde el primer instante, cada vez más rápido (REST_MIN -> REST_MAX en REST_RAMP segundos).
-const FATIGUE_REST_MIN := 4.0
-const FATIGUE_REST_MAX := 8.0
-const FATIGUE_REST_RAMP := 4.0
+# Quieto y sin atacar: el cansancio baja desde el primer instante, cada vez más rápido
+# (REST_MIN -> REST_MAX en REST_RAMP segundos). De 100 a 0 tarda ~8.4 s.
+const FATIGUE_REST_MIN := 7.0
+const FATIGUE_REST_MAX := 13.0
+const FATIGUE_REST_RAMP := 3.0
 
 # Miedo por segundo (positivo sube, negativo baja).
 const FEAR_BOSS := 5.0
@@ -72,15 +74,17 @@ func reset() -> void:
 
 func _process(delta: float) -> void:
 	var player := _hero()
-	if player == null or get_tree().paused or DialogueManager.visible or ScenePages.busy:
+	if player == null or get_tree().paused or ScenePages.busy:
 		return
 	if combo_temp_left > 0.0:
 		combo_temp_left = maxf(0.0, combo_temp_left - delta)
 	var data := _d()
 	# --- cansancio (dinámico: sube y baja según lo que hace) ---
-	var moving: bool = player.velocity.length() > 20.0
-	var attacking: bool = bool(player.get("is_attacking"))
-	var jumping: bool = bool(player.get("is_jumping"))
+	# Con un diálogo abierto el personaje está parado: cuenta como quieto (descansa), pero no se mueve ni pelea.
+	var talking: bool = DialogueManager.visible
+	var moving: bool = player.velocity.length() > 20.0 and not talking
+	var attacking: bool = bool(player.get("is_attacking")) and not talking
+	var jumping: bool = bool(player.get("is_jumping")) and not talking
 	# Correr / sprint: se activa si el personaje tiene "is_running" o existe una acción "sprint" (aún no hay).
 	var run_flag = player.get("is_running")  # puede no existir (null): por eso no se convierte con bool()
 	var running: bool = moving and ((run_flag is bool and run_flag) or (InputMap.has_action("sprint") and Input.is_action_pressed("sprint")))
@@ -105,14 +109,17 @@ func _process(delta: float) -> void:
 		rate = effort * (1.0 + FATIGUE_WINDED * (current / 100.0))
 		_still_time = 0.0
 	elif moving:
-		# Caminando tranquilo: baja un poco.
+		# Caminando tranquilo: sube despacio (no recupera: solo descansa quien se queda quieto).
 		rate = FATIGUE_WALK
 		_still_time = 0.0
 	else:
-		# Quieto: baja rápido, y más rápido mientras más rato descansa.
+		# Quieto (sin atacar ni saltar): recupera rápido, y más rápido mientras más rato descansa.
 		_still_time += delta
 		rate = -lerpf(FATIGUE_REST_MIN, FATIGUE_REST_MAX, clampf(_still_time / FATIGUE_REST_RAMP, 0.0, 1.0))
 	data["fatiga"] = clampf(current + rate * delta, 0.0, 100.0)
+	if talking:
+		_announce_changes(data)  # en un diálogo solo se descansa; el miedo queda congelado como antes
+		return
 	# --- miedo ---
 	var fear_rate := FEAR_CALM
 	var danger := false
@@ -143,6 +150,11 @@ func _process(delta: float) -> void:
 # ---------------------------------------------------------------------------------------------
 func fatigue() -> float:
 	return float(_d()["fatiga"])
+
+
+## Energía que le queda (0-100): llena = descansado. Es lo que dibuja la barra del HUD.
+func energy() -> float:
+	return 100.0 - fatigue()
 
 
 func fear() -> float:

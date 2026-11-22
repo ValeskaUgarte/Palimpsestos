@@ -6,19 +6,20 @@ const LEVELS = ["res://scenes/levels/cuento1_escena1.tscn","res://scenes/levels/
 ## Cada tramo es una escena para el mapa, el menú de jugadas guardadas y la demo:
 ##   level: archivo de la escena original donde está el tramo.
 ##   from / to: límites en X del mundo (la cámara y las paredes de Elliot se ajustan a ellos).
-##   start: X donde aparece Elliot al empezar el tramo.
+##   start: X donde aparece Elliot al empezar el tramo (en los tramos que no son el primero de su escena queda a 260 px
+##          del borde izquierdo: así los compañeros caben detrás de él, dentro de las paredes del tramo).
 ##   title / sub: título y subtítulo que se muestran al entrar.
 ##   mark: posición (0 a 1) del punto de la escena sobre el camino del mapa.
 ## Para cambiar un corte, edita from/to aquí. Los enemigos, PNJ y pistas fuera del tramo se ocultan y se desactivan.
 const PARTS := [
 	{"level": "res://scenes/levels/cuento1_escena1.tscn", "from": -1000.0, "to": 6000.0, "start": -265.0, "title": "El bosque antiguo", "sub": "En el margen de un cuento conocido.", "mark": 0.05},
-	{"level": "res://scenes/levels/cuento1_escena1.tscn", "from": 6000.0, "to": 13000.0, "start": 6060.0, "title": "El camino de los lobos", "sub": "Cada paso deja una huella.", "mark": 0.1767},
-	{"level": "res://scenes/levels/cuento1_escena1.tscn", "from": 13000.0, "to": 19456.0, "start": 13060.0, "title": "Las runas del monolito", "sub": "Solo el orden abre el camino.", "mark": 0.3033},
+	{"level": "res://scenes/levels/cuento1_escena1.tscn", "from": 6000.0, "to": 13000.0, "start": 6260.0, "title": "El camino de los lobos", "sub": "Cada paso deja una huella.", "mark": 0.1767},
+	{"level": "res://scenes/levels/cuento1_escena1.tscn", "from": 13000.0, "to": 19456.0, "start": 13260.0, "title": "Las runas del monolito", "sub": "Solo el orden abre el camino.", "mark": 0.3033},
 	{"level": "res://scenes/levels/cuento1_escena2.tscn", "from": 0.0, "to": 4800.0, "start": 500.0, "title": "Dos caminos", "sub": "Donde la piedra guarda memoria.", "mark": 0.38},
-	{"level": "res://scenes/levels/cuento1_escena2.tscn", "from": 4800.0, "to": 9000.0, "start": 4860.0, "title": "El rastro de las flores", "sub": "Huellas que no son de nadie.", "mark": 0.5},
-	{"level": "res://scenes/levels/cuento1_escena2.tscn", "from": 9000.0, "to": 13200.0, "start": 9060.0, "title": "La casa de la abuelita", "sub": "Nada es lo que parece.", "mark": 0.62},
+	{"level": "res://scenes/levels/cuento1_escena2.tscn", "from": 4800.0, "to": 9000.0, "start": 5060.0, "title": "El rastro de las flores", "sub": "Huellas que no son de nadie.", "mark": 0.5},
+	{"level": "res://scenes/levels/cuento1_escena2.tscn", "from": 9000.0, "to": 13200.0, "start": 9260.0, "title": "La casa de la abuelita", "sub": "Nada es lo que parece.", "mark": 0.62},
 	{"level": "res://scenes/levels/cuento1_escena3.tscn", "from": -150.0, "to": 6100.0, "start": 450.0, "title": "Las historias olvidadas", "sub": "No todo lo escrito permanece.", "mark": 0.71},
-	{"level": "res://scenes/levels/cuento1_escena3.tscn", "from": 6100.0, "to": 12200.0, "start": 6160.0, "title": "El claro del lobo", "sub": "Ya no hay camino de vuelta.", "mark": 0.825},
+	{"level": "res://scenes/levels/cuento1_escena3.tscn", "from": 6100.0, "to": 12200.0, "start": 6360.0, "title": "El claro del lobo", "sub": "Ya no hay camino de vuelta.", "mark": 0.825},
 	{"level": "res://scenes/levels/cuento1_escena4.tscn", "from": -100.0, "to": 2490.0, "start": 289.0, "title": "Lo que quedó en la mesa", "sub": "Nadie preguntó de qué estaba hecha la cena.", "mark": 0.94},
 ]
 ## true = todas las escenas están abiertas para saltar a cualquiera desde el mapa o desde Jugadas guardadas (demo).
@@ -40,7 +41,13 @@ var _carry_health: Dictionary = {}
 ## Progreso global (no depende del punto exacto de la partida): escenas alcanzadas y acertijos resueltos.
 ## Se guarda en user://progreso.json. Sirve para entrar directamente a cualquier escena ya alcanzada.
 const PROGRESS_PATH: String = "user://progreso.json"
-var progress: Dictionary = {"reached": 0, "flags": {}, "items": {}}
+## Ruta efectiva del progreso (las pruebas la redirigen a un temporal).
+var progress_path: String = PROGRESS_PATH
+var progress: Dictionary = {"reached": 0, "flags": {}, "items": {}, "seen": {}}
+## X de aparición forzada al cambiar de tramo (p. ej. al volver atrás por la izquierda). INF = usar el "start" del tramo.
+var part_start_override: float = INF
+## Sentido en que llega el grupo al tramo: 1 = avanzando (compañeros detrás, a la izquierda), -1 = volviendo atrás.
+var part_arrival_dir: float = 1.0
 
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
@@ -209,8 +216,15 @@ func enter_level(level: Node) -> void:
 			puzzle.get_node("DebugLabel").text="Camino abierto"
 			puzzle._open_gate()
 			level.get_node("StoryPortal").activate()
+		var walk_path=level.get_node_or_null("WalkablePath")
+		var spot:=0
 		for ally in get_tree().get_nodes_in_group("companion"):
-			ally.global_position+=player.ground_position()+ally.companion_follow_offset-ally.ground_position()
+			if not level.is_ancestor_of(ally):continue
+			var wanted:Vector2=player.ground_position()+ally.companion_follow_offset+Vector2(-45.0*spot,0.0)
+			if part>=0:wanted.x=clampf(wanted.x,float(PARTS[part].from)+50.0,float(PARTS[part].to)-50.0)
+			if walk_path!=null:wanted=walk_path.constrain_foot(wanted,26)
+			ally.global_position+=wanted-ally.ground_position()
+			spot+=1
 		player.get_node("Camera2D").reset_smoothing()
 	else:_apply_carried_health(level)
 	_last_checkpoint=level.get_node("Elliot").ground_position()
@@ -242,9 +256,9 @@ func quit_game(exit_code: int = 0) -> void:
 # PROGRESO GLOBAL: escenas alcanzadas y acertijos resueltos (entrar directamente a una escena)
 # ---------------------------------------------------------------------------------------------
 func load_progress() -> void:
-	if not FileAccess.file_exists(PROGRESS_PATH):
+	if not FileAccess.file_exists(progress_path):
 		return
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string(PROGRESS_PATH))
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(progress_path))
 	if not parsed is Dictionary:
 		return
 	var version: int = int(parsed.get("version", 1))
@@ -258,6 +272,9 @@ func load_progress() -> void:
 	var status = parsed.get("status", {})
 	if status is Dictionary:
 		progress["status"] = status
+	var seen = parsed.get("seen", {})
+	if seen is Dictionary:
+		progress["seen"] = seen
 	if version >= 2:
 		progress["reached"] = clampi(int(parsed.get("reached", 0)), 0, PARTS.size() - 1)
 		var route = parsed.get("route", [])
@@ -281,7 +298,7 @@ func load_progress() -> void:
 
 
 func save_progress() -> void:
-	var file := FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
+	var file := FileAccess.open(progress_path, FileAccess.WRITE)
 	if file == null:
 		last_error = FileAccess.get_open_error()
 		return
@@ -292,7 +309,9 @@ func save_progress() -> void:
 
 
 func reset_progress() -> void:
-	progress = {"reached": 0, "flags": {}, "items": {}, "status": {}, "route": []}
+	progress = {"reached": 0, "flags": {}, "items": {}, "status": {}, "route": [], "seen": {}}
+	part_start_override = INF
+	part_arrival_dir = 1.0
 	save_progress()
 
 
@@ -373,6 +392,37 @@ func set_flag(key: String) -> void:
 
 func has_flag(key: String) -> bool:
 	return bool(progress["flags"].get(key, false))
+
+
+## DIÁLOGOS AUTOMÁTICOS YA VISTOS (no se repiten al recargar el tramo ni al continuar la partida).
+## La clave es: ruta de la escena + nombre del nodo + hash del texto (ver dialogue_key).
+static func dialogue_key(scene_path: String, node_name: String, text: String) -> String:
+	return "%s|%s|%s" % [scene_path, node_name, text.sha256_text().substr(0, 16)]
+
+
+## Ruta del nivel (de LEVELS) al que pertenece un nodo, o "" si no está dentro de un nivel del cuento.
+static func level_path_of(node: Node) -> String:
+	var current: Node = node
+	while current != null:
+		if current.scene_file_path in LEVELS:
+			return current.scene_file_path
+		current = current.get_parent()
+	return ""
+
+
+func dialogue_seen(key: String) -> bool:
+	return progress.get("seen", {}).has(key)
+
+
+func mark_dialogue_seen(key: String) -> void:
+	if not enabled:
+		return
+	if not progress.has("seen") or not progress["seen"] is Dictionary:
+		progress["seen"] = {}
+	if progress["seen"].has(key):
+		return
+	progress["seen"][key] = true
+	save_progress()
 
 
 ## MOCHILA: objetos del cuento con su cantidad (se guardan con el progreso).

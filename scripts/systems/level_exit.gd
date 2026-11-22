@@ -9,6 +9,10 @@ extends Area2D
 @export var required_enemy: NodePath
 ## Escena jugable (índice en GameSession.PARTS) a la que lleva la salida. -1 = escena completa.
 var next_part: int = -1
+## Si no es INF, X donde aparece Elliot en el tramo de destino (volver atrás: junto a su salida derecha).
+var arrive_x: float = INF
+## Sentido de llegada: 1 = avanzando, -1 = volviendo atrás (los compañeros se colocan al otro lado).
+var arrive_dir: float = 1.0
 var _blocked_note: bool = false
 
 var _triggered: bool = false
@@ -46,6 +50,8 @@ func _change_scene() -> void:
 	# La energía del grupo pasa a la escena siguiente tal como está (no se restablece).
 	GameSession.capture_party_health(get_tree().current_scene)
 	GameSession.current_part = next_part
+	GameSession.part_start_override = arrive_x
+	GameSession.part_arrival_dir = arrive_dir
 	ScenePages.travel(next_scene_path)
 
 func _on_guardian_defeated() -> void:

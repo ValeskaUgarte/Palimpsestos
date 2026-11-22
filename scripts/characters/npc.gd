@@ -6,6 +6,12 @@ extends Area2D
 @export var speaker_label: String = ""  # nombre que se muestra en el pergamino (vacío = el nombre del nodo)
 ## true = la conversación empieza sola al acercarte (no hace falta pulsar E). Cada vez que entras al área se habla una vez.
 @export var auto_start: bool = true
+## SEGUNDA CONVERSACIÓN (evento): cuando exista la bandera "followup_requires_flag" (GameSession) y aún no exista
+## "followup_sets_flag", el NPC habla con estas líneas en vez de las normales, empezando solo al acercarte (una única vez).
+## Al terminar pone "followup_sets_flag". Ejemplo: Caperucita, al volver de hablar con la abuelita.
+@export var followup_lines: Array[String] = []
+@export var followup_requires_flag: String = ""
+@export var followup_sets_flag: String = ""
 ## Se emite cada vez que termina de hablar contigo (útil para destrabar cosas de la escena).
 signal conversation_finished
 ## Se emite justo cuando empieza a hablar contigo (el nodo Motion la usa para reproducir la animación "talk").
@@ -16,6 +22,33 @@ var _completed: bool = false
 var _started_this_visit: bool = false
 
 var _cached_key: String = ""
+## Ya se habló con él en esta partida (recordado en GameSession): no vuelve a empezar solo al recargar el tramo.
+var _auto_done: bool = false
+var _followup_talking: bool = false
+
+func followup_pending() -> bool:
+	if followup_lines.is_empty() or followup_sets_flag == "":
+		return false
+	if followup_requires_flag != "" and not GameSession.has_flag(followup_requires_flag):
+		return false
+	return not GameSession.has_flag(followup_sets_flag)
+var _session_key: String = ""
+
+# Clave de sesión: ruta de la escena del nivel + nombre del nodo + hash del texto.
+func _session_dialogue_key() -> String:
+	if _session_key == "":
+		var level_path := ""
+		var node: Node = get_parent()
+		while node != null:
+			if node.scene_file_path in GameSession.LEVELS:
+				level_path = node.scene_file_path
+				break
+			node = node.get_parent()
+		if level_path == "":
+			return ""
+		_session_key = "npc|" + GameSession.dialogue_key(level_path, String(name), "
+".join(dialogue_lines))
+	return _session_key
 
 func _dialogue_key() -> String:
 	# Se calcula una sola vez: _process lo consultaba cada cuadro (join + sha256 por NPC).
@@ -26,7 +59,17 @@ func _dialogue_key() -> String:
 func _on_dialogue_finished() -> void:
 	if not _talking: return
 	_talking = false
-	_completed = not repeatable
+	var was_followup := _followup_talking
+	_followup_talking = false
+	if was_followup:
+		GameSession.set_flag(followup_sets_flag)
+	else:
+		_completed = not repeatable
+	# La conversación nueva sustituye a la primera: tampoco ésta vuelve a empezar sola.
+	_auto_done = true
+	var session_key := _session_dialogue_key()
+	if session_key != "":
+		GameSession.mark_dialogue_seen(session_key)
 	conversation_finished.emit()
 	if get_tree().current_scene != null and get_tree().current_scene.scene_file_path == LateralStory.world_scene():
 		var key = _dialogue_key()
@@ -38,6 +81,11 @@ func _on_dialogue_finished() -> void:
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	var session_key := _session_dialogue_key()
+	if session_key != "" and GameSession.dialogue_seen(session_key):
+		# Repetible: sigue disponible con E, pero ya no empieza sola. No repetible: ya está hecho.
+		_auto_done = true
+		_completed = not repeatable
 	DialogueManager.dialogue_finished.connect(_on_dialogue_finished)
 
 func _on_body_entered(body: Node2D) -> void:
@@ -58,13 +106,15 @@ func _process(_delta: float) -> void:
 	# diálogo, este script también detectaba ese mismo E y volvía a llamar
 	# show_dialogue(), reiniciando la conversación desde la primera línea.
 	# Por eso sentías que tenías que apretar E "para siempre" sin avanzar.
-	if _completed or dialogue_lines.is_empty(): return
-	if get_tree().current_scene != null and get_tree().current_scene.scene_file_path == LateralStory.world_scene() and _dialogue_key() in LateralStory.resolved: return
+	var followup := followup_pending()
+	if (_completed and not followup) or dialogue_lines.is_empty(): return
+	if get_tree().current_scene != null and get_tree().current_scene.scene_file_path == LateralStory.world_scene() and _dialogue_key() in LateralStory.resolved and not followup: return
 	if not player_in_range or not DialogueManager.can_start_dialogue(): return
 	var pressed := Input.is_action_just_pressed("interact")
-	var automatic := auto_start and not _started_this_visit
+	var automatic := auto_start and not _started_this_visit and (followup or not _auto_done)
 	if pressed or automatic:
 		_started_this_visit = true
 		_talking = true
+		_followup_talking = followup
 		conversation_started.emit()
-		DialogueManager.show_dialogue(dialogue_lines, speaker_label if speaker_label != "" else String(name), portrait)
+		DialogueManager.show_dialogue(followup_lines if followup else dialogue_lines, speaker_label if speaker_label != "" else String(name), portrait)

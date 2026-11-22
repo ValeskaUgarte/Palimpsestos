@@ -7,6 +7,8 @@ extends "res://scripts/characters/player.gd"
 @export var coyote_seconds: float = 0.10
 @export var jump_buffer_seconds: float = 0.12
 @export var air_control: float = 0.75
+## Impulso del salto del modo demo (el del modo historia, jump_impulse, es más alto): el demo ya se sentía bien así.
+@export var lateral_jump_impulse: float = 500.0
 var _coyote_left: float = 0.0
 var _jump_buffer_left: float = 0.0
 var _jump_clock: float = 0.0
@@ -91,7 +93,7 @@ func _after_lateral_move() -> void:
 	pass
 
 func _begin_jump() -> void:
-	velocity.y = -jump_impulse
+	velocity.y = -lateral_jump_impulse
 	_coyote_left = 0.0
 	_jump_buffer_left = 0.0
 	_jump_clock = 0.0

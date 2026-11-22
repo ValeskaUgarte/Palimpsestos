@@ -38,10 +38,10 @@ func run() -> void:
 	check(absf(p.ground_position().y-foot_y)<0.1,"Caminar altera altura del suelo")
 	var max_height: float=0
 	p._begin_jump()
-	for i in range(50):
+	for i in range(60):
 		await physics_frame
 		max_height=maxf(max_height,p.jump_height)
-	check(max_height>75 and max_height<85 and not p.is_jumping,"Salto/aterrizaje incorrecto")
+	check(max_height>120 and max_height<140 and not p.is_jumping,"Salto/aterrizaje incorrecto")
 	p.take_damage(1,p.ground_position()+Vector2(80,180))
 	check(p.knockback.y==0,"Impacto vertical")
 	for i in range(40):await physics_frame

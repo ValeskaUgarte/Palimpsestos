@@ -84,9 +84,9 @@ func _ready() -> void:
 	if key == "":
 		key = "%s_%s" % [get_tree().current_scene.name if get_tree().current_scene != null else "", name]
 	_base_y = position.y
-	# Tableros y pistas (sin objeto) van por delante de los personajes (z_index 1): Elliot pasa por detrás.
+	# Tableros, carteles y pistas (sin objeto) van DETRÁS de los personajes (z_index 1): los actores pasan por delante.
 	if item_id == "":
-		z_index = 2
+		z_index = 0
 	if item_id != "" and GameSession.has_flag("pick:" + key):
 		queue_free()
 

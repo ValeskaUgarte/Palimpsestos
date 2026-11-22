@@ -9,7 +9,7 @@ var _dead: bool = false
 @export var kick_damage: int = 20          # la patada pega más fuerte
 @export var combo_window: float = 0.6      # segundos que hay para encadenar el siguiente golpe
 @export var combo_damage_bonus: int = 8    # daño extra en el 3er golpe del combo (el "finisher")
-@export var jump_impulse: float = 500.0
+@export var jump_impulse: float = 625.0  # apex = v^2/(2g) = ~130 px; vuelo = 2v/g = ~0.83 s
 @export var jump_gravity: float = 1500.0
 @export var jump_art_scale: float = 1.0
 @export var jump_art_baseline: float = 0.0
@@ -38,7 +38,7 @@ const JUMP_FALL_FRAME_SPEED: float = 900.0
 ## Qué tan rápido va cuando se apura (multiplica su velocidad).
 @export var companion_hurry_multiplier: float = 1.35
 ## Distancia (px) antes de un obstáculo a la que el compañero salta.
-@export var companion_jump_gap: float = 55.0
+@export var companion_jump_gap: float = 60.0
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Hitbox
@@ -394,6 +394,9 @@ func _begin_jump() -> void:
 		anim.pause()
 		anim.frame = 0
 		_fit_pose()
+	else:
+		# Sin clip de salto propio (0 frames): pose de respaldo (idle) durante todo el vuelo; nunca T-pose ni oculto.
+		_play_ground_animation("jump")
 
 
 func _update_jump(delta: float) -> void:
@@ -429,7 +432,7 @@ func _update_jump(delta: float) -> void:
 				var rise_time: float = jump_impulse / maxf(jump_gravity, 1.0)
 				target_frame = mini(int(_jump_elapsed / rise_time * half), half - 1)
 			else:
-				target_frame = mini(half + int(clampf(-_jump_velocity / JUMP_FALL_FRAME_SPEED, 0.0, 1.0) * half), count - 1)
+				target_frame = mini(half + int(clampf(-_jump_velocity / (JUMP_FALL_FRAME_SPEED * jump_impulse / 500.0), 0.0, 1.0) * half), count - 1)
 			if anim.frame != target_frame:
 				anim.frame = target_frame
 		# _fit_pose() es la ÚNICA que coloca el sprite (escala, pies y altura). Antes _update_jump (física) y

@@ -100,14 +100,13 @@ func rewrite(message: String) -> void:
 	if _memory == null:
 		_memory = Label.new()
 		_memory.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		# Arriba a la derecha, justo debajo de la mochila y el mapa (que ocupan hasta y≈88).
-		_memory.anchor_left = 0.5
-		_memory.anchor_right = 1
-		_memory.offset_left = 0
-		_memory.offset_right = -24
-		_memory.offset_top = 100
-		_memory.offset_bottom = 130
-		_memory.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		# Abajo al centro (nada de texto en la esquina superior derecha), sobre la pista de controles.
+		_memory.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+		_memory.offset_left = -400
+		_memory.offset_right = 400
+		_memory.offset_top = -110
+		_memory.offset_bottom = -76
+		_memory.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_memory.add_theme_color_override("font_color", Color(0.87,0.83,0.7))
 		_memory.add_theme_color_override("font_shadow_color",Color(0.01,0.02,0.02))
 		_memory.add_theme_constant_override("shadow_offset_y",2)

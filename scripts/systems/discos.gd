@@ -16,6 +16,8 @@ extends Node2D
 
 const FLAG_SOLVED := "cueva_resuelta"
 const FLAG_CALLED := "abuela_envia_cueva"
+## Segundo paso: al volver de la casa, Caperucita (evento de su segunda conversación) deja que Elliot pruebe la roca.
+const FLAG_GATE := "caperucita_abre_cueva"
 
 ## Imagen de cada anillo, de fuera hacia dentro (en assets/ui/acertijos/).
 const RING_FILES := [
@@ -77,6 +79,9 @@ const WHEEL_ON_STONE := 0.9
 @export var slide_distance: float = 260.0
 ## La abuela (guía) que manda a volver a la cueva. Hasta que habla con ella, el monolito no responde.
 @export var guide_path: NodePath = ^"../Abuelita"
+## Personaje que, tras hablar con la abuela, deja pasar al acertijo (su segunda conversación pone FLAG_GATE).
+## Vacío = basta con haber hablado con la abuela.
+@export var gatekeeper_path: NodePath = ^"../Caperucita"
 ## Salida de la cueva a la escena 3 (se abre al resolver los anillos).
 @export var exit_path: NodePath = ^"../ExitCueva"
 @export var monolith_texture: Texture2D = preload("res://assets/ui/acertijos/monolito_discos.png")
@@ -130,19 +135,40 @@ func _ready() -> void:
 		_slide = slide_distance
 		_set_solved_angles()
 		_enable_exit()
-	if GameSession.has_flag(FLAG_CALLED) or GameSession.has_flag(FLAG_SOLVED):
-		_active = true
+	var gatekeeper := get_node_or_null(gatekeeper_path) if String(gatekeeper_path) != "" else null
+	if gatekeeper != null and gatekeeper.has_signal("conversation_finished"):
+		gatekeeper.conversation_finished.connect(_refresh_active)
+	_refresh_active(false)
 	_zone.monitoring = _active
+
+
+## El monolito responde cuando la abuela mandó volver y Caperucita ya dio su paso (o no hay Caperucita en la escena).
+func _gate_open() -> bool:
+	if GameSession.has_flag(FLAG_SOLVED):
+		return true
+	if not GameSession.has_flag(FLAG_CALLED):
+		return false
+	var gatekeeper := get_node_or_null(gatekeeper_path) if String(gatekeeper_path) != "" else null
+	return gatekeeper == null or GameSession.has_flag(FLAG_GATE)
+
+
+func _refresh_active(announce: bool = true) -> void:
+	if _active or not _gate_open():
+		return
+	_active = true
+	if _zone != null:
+		_zone.monitoring = true
+	if announce:
+		Autores.say(["Los autores: la roca solo esperaba a que alguien la volviera a contar."])
 
 
 # La abuela termina de hablar: manda a Elliot de vuelta a la cueva y el monolito empieza a responder.
 func _on_grandma_done() -> void:
 	if _active or _solved:
 		return
-	_active = true
 	GameSession.set_flag(FLAG_CALLED)
-	_zone.monitoring = true
 	Autores.say(["Los autores: la abuela sabía dónde estaba la roca. Solo había que volver."])
+	_refresh_active()
 
 
 func _on_zone_entered(body: Node2D) -> void:

@@ -32,9 +32,21 @@ extends Area2D
 
 var _triggered: bool = false
 var _pending: bool = false  # Elliot entró a la zona pero el cuadro de diálogo estaba ocupado
+var _session_key: String = ""
+
+# Clave de sesión: escena + nombre del nodo + hash del texto. Así la narración no se repite al recargar el tramo.
+func _text_for_key() -> String:
+	return "
+".join(conversation_lines) if conversation_lines.size() > 0 else "
+".join(lines)
 
 func _ready() -> void:
 	add_to_group("narrative_trigger")
+	var level_path := GameSession.level_path_of(self)
+	if level_path != "":
+		_session_key = "trigger|" + GameSession.dialogue_key(level_path, String(name), _text_for_key())
+		if one_shot and GameSession.dialogue_seen(_session_key):
+			_triggered = true
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
@@ -51,6 +63,8 @@ func _physics_process(_delta: float) -> void:
 		return  # hay otro diálogo abierto: se reintenta en el siguiente cuadro
 	_pending = false
 	_triggered = true
+	if _session_key != "" and one_shot:
+		GameSession.mark_dialogue_seen(_session_key)
 	_show()
 
 func _player_inside() -> bool:

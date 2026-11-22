@@ -1,5 +1,5 @@
 extends SceneTree
-# Caminar debe bajar el cansancio.
+# Caminar sube el cansancio despacio (solo quedarse quieto recupera; ver energy_recovery.gd).
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -27,7 +27,7 @@ func run() -> void:
 	print("still=", ps.get("_still_time"), " since_attack=", ps.get("_since_attack"), " fight=", ps.get("_fight_time"), " vel=", hero.velocity, " combo_temp=", ps.get("combo_temp_left"))
 	print("process_frames_ok")
 	print("hero=", hero.name, " is_attacking=", hero.get("is_attacking"), " is_jumping=", hero.get("is_jumping"))
-	print("cansancio inicio=%.2f fin=%.2f cambio=%.2f en 5 s (esperado ~ -3.0)" % [start, end, end - start])
-	var walk_ok := absf((end - start) + 20.0) < 1.0
-	print("caminar 5 s: cambio=%.2f esperado=-20.00 %s" % [end - start, "OK" if walk_ok else "FALLA"])
+	print("cansancio inicio=%.2f fin=%.2f cambio=%.2f en 5 s (esperado ~ +4.0)" % [start, end, end - start])
+	var walk_ok := absf((end - start) - 4.0) < 1.0
+	print("caminar 5 s: cambio=%.2f esperado=+4.00 %s" % [end - start, "OK" if walk_ok else "FALLA"])
 	quit(0 if walk_ok else 1)
