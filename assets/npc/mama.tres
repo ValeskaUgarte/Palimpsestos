@@ -1,10 +1,111 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://cjjaf7opn80mx"]
 
 [ext_resource type="Texture2D" uid="uid://b2vgbsluhq2ip" path="res://assets/npc/MamaCaperusita.png" id="1_v7tpc"]
+[ext_resource type="Texture2D" path="res://assets/npc/MamaCaperusita-talk.png" id="H_talk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xs8hm"]
 atlas = ExtResource("1_v7tpc")
 region = Rect2(0, 0, 1024, 1536)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_0"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_1"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_2"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_3"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_4"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_5"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_6"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_7"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_8"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_9"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_10"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_11"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_12"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_13"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_14"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_15"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_16"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_17"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_18"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_19"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_20"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_21"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_22"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_23"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_MamaCape_24"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 1024, 256, 256)
 
 [resource]
 animations = [{
@@ -26,10 +127,85 @@ animations = [{
 "name": &"run",
 "speed": 12.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_19")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_20")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_21")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_22")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_23")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_MamaCape_24")
+}],
 "loop": 1,
 "name": &"talk",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [],
 "loop": 1,

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://o0veiomdpkad" path="res://assets/enemies/RangerWood/RangerWood-attack.png" id="S1"]
 [ext_resource type="Texture2D" uid="uid://bs4sckoacwt5n" path="res://assets/enemies/RangerWood/RangerWood-walk-trimmed.png" id="S2"]
 [ext_resource type="Texture2D" uid="uid://bq06idsh1jqp6" path="res://assets/enemies/RangerWood/Ranger-death.png" id="S3"]
+[ext_resource type="Texture2D" path="res://assets/enemies/RangerWood/RangerWood-hit_react-v1.png" id="H_hurt"]
 
 [sub_resource type="AtlasTexture" id="F18"]
 atlas = ExtResource("S1")
@@ -276,6 +277,134 @@ metadata/pose_art_scale = 1.49487
 metadata/pose_art_baseline = 94.0
 metadata/pose_art_offset_x = -6.0
 
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_0"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 0, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_1"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 0, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_2"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 0, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 105
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_3"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 105
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_4"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 105
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_5"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 105
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_6"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 105
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_7"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_8"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_9"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_10"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_11"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_12"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_13"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_14"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_RangerWo_15"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.40701
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = -17.5
+
 [resource]
 animations = [{
 "frames": [{
@@ -339,10 +468,58 @@ animations = [{
 "name": &"death",
 "speed": 10.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_RangerWo_15")
+}],
 "loop": 0,
 "name": &"hurt",
-"speed": 12.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,

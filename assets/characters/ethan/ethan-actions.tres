@@ -311,7 +311,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("W24")
 }],
-"loop": 0,
+"loop": 1,
 "name": &"walk",
 "speed": 12.0
 }]

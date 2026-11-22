@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b1nxlrt2kmnlm" path="res://assets/characters/John/Jhon-kick.png" id="3_d1log"]
 [ext_resource type="Texture2D" uid="uid://ctu8dgbk7i4pj" path="res://assets/characters/John/Jhon-walk-trimmed.png" id="S2"]
 [ext_resource type="Texture2D" uid="uid://c8c1sstyndtdo" path="res://assets/characters/John/Jhon-attack.png" id="S3"]
+[ext_resource type="Texture2D" path="res://assets/characters/John/Jhon-hurt.png" id="H_hurt"]
 
 [sub_resource type="AtlasTexture" id="F28"]
 atlas = ExtResource("S3")
@@ -489,6 +490,70 @@ metadata/fit_scale = 1.57635
 metadata/fit_baseline = 103.0
 metadata/fit_offset_x = 11.5
 
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_0"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_1"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_2"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_3"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_4"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_5"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_6"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_7"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_8"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_9"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_10"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_11"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_12"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_13"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_14"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Jhon-hur_15"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 1024, 256, 256)
+
 [resource]
 animations = [{
 "frames": [{
@@ -627,10 +692,58 @@ animations = [{
 "name": &"finisher",
 "speed": 12.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Jhon-hur_15")
+}],
 "loop": 0,
 "name": &"hurt",
-"speed": 10.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,

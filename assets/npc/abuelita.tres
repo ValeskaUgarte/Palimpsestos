@@ -1,16 +1,290 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dvgmprkaw4u45"]
 
 [ext_resource type="Texture2D" uid="uid://cv8ffvv7b1aub" path="res://assets/npc/AbuelitaCaperusita.png" id="1_fchvl"]
+[ext_resource type="Texture2D" path="res://assets/npc/Abuelita-idle.png" id="H_idle"]
+[ext_resource type="Texture2D" path="res://assets/npc/Abuelita-talk.png" id="H_talk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_312du"]
 atlas = ExtResource("1_fchvl")
 region = Rect2(0, 0, 1024, 1536)
 
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_0"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_1"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_2"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_3"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_4"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_5"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_6"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_7"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_8"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_9"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_10"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_11"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_12"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_13"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_14"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_15"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_16"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_17"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_18"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_19"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_20"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_21"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_22"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_23"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Abuelita_24"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_0"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_1"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_2"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_3"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_4"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_5"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_6"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_7"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_8"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_9"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_10"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_11"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_12"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_13"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_14"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_15"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_16"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_17"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_18"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_19"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_20"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_21"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_22"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_23"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Abuelita_24"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 1024, 256, 256)
+
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_312du")
+"texture": SubResource("Hidle_Abuelita_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_19")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_20")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_21")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_22")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_23")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Abuelita_24")
 }],
 "loop": 1,
 "name": &"idle",
@@ -26,10 +300,85 @@ animations = [{
 "name": &"run",
 "speed": 12.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_19")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_20")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_21")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_22")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_23")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Abuelita_24")
+}],
 "loop": 1,
 "name": &"talk",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [],
 "loop": 1,

@@ -1,0 +1,214 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/npc/Madre_HyG.png" id="1_idle"]
+[ext_resource type="Texture2D" path="res://assets/npc/Madre_HyG-talk.png" id="2_talk"]
+
+[sub_resource type="AtlasTexture" id="I0"]
+atlas = ExtResource("1_idle")
+region = Rect2(0, 0, 235, 640)
+
+[sub_resource type="AtlasTexture" id="T0"]
+atlas = ExtResource("2_talk")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T1"]
+atlas = ExtResource("2_talk")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T2"]
+atlas = ExtResource("2_talk")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T3"]
+atlas = ExtResource("2_talk")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T4"]
+atlas = ExtResource("2_talk")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T5"]
+atlas = ExtResource("2_talk")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T6"]
+atlas = ExtResource("2_talk")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T7"]
+atlas = ExtResource("2_talk")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T8"]
+atlas = ExtResource("2_talk")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T9"]
+atlas = ExtResource("2_talk")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T10"]
+atlas = ExtResource("2_talk")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T11"]
+atlas = ExtResource("2_talk")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T12"]
+atlas = ExtResource("2_talk")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T13"]
+atlas = ExtResource("2_talk")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T14"]
+atlas = ExtResource("2_talk")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T15"]
+atlas = ExtResource("2_talk")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T16"]
+atlas = ExtResource("2_talk")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T17"]
+atlas = ExtResource("2_talk")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T18"]
+atlas = ExtResource("2_talk")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T19"]
+atlas = ExtResource("2_talk")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T20"]
+atlas = ExtResource("2_talk")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T21"]
+atlas = ExtResource("2_talk")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T22"]
+atlas = ExtResource("2_talk")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T23"]
+atlas = ExtResource("2_talk")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="T24"]
+atlas = ExtResource("2_talk")
+region = Rect2(1024, 1024, 256, 256)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("I0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"react",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("T0")
+}, {
+"duration": 1.0,
+"texture": SubResource("T1")
+}, {
+"duration": 1.0,
+"texture": SubResource("T2")
+}, {
+"duration": 1.0,
+"texture": SubResource("T3")
+}, {
+"duration": 1.0,
+"texture": SubResource("T4")
+}, {
+"duration": 1.0,
+"texture": SubResource("T5")
+}, {
+"duration": 1.0,
+"texture": SubResource("T6")
+}, {
+"duration": 1.0,
+"texture": SubResource("T7")
+}, {
+"duration": 1.0,
+"texture": SubResource("T8")
+}, {
+"duration": 1.0,
+"texture": SubResource("T9")
+}, {
+"duration": 1.0,
+"texture": SubResource("T10")
+}, {
+"duration": 1.0,
+"texture": SubResource("T11")
+}, {
+"duration": 1.0,
+"texture": SubResource("T12")
+}, {
+"duration": 1.0,
+"texture": SubResource("T13")
+}, {
+"duration": 1.0,
+"texture": SubResource("T14")
+}, {
+"duration": 1.0,
+"texture": SubResource("T15")
+}, {
+"duration": 1.0,
+"texture": SubResource("T16")
+}, {
+"duration": 1.0,
+"texture": SubResource("T17")
+}, {
+"duration": 1.0,
+"texture": SubResource("T18")
+}, {
+"duration": 1.0,
+"texture": SubResource("T19")
+}, {
+"duration": 1.0,
+"texture": SubResource("T20")
+}, {
+"duration": 1.0,
+"texture": SubResource("T21")
+}, {
+"duration": 1.0,
+"texture": SubResource("T22")
+}, {
+"duration": 1.0,
+"texture": SubResource("T23")
+}, {
+"duration": 1.0,
+"texture": SubResource("T24")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]

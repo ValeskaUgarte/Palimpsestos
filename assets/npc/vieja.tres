@@ -1,0 +1,387 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" uid="uid://ctvbxmmtda3f5" path="res://assets/npc/Vieja.png" id="1_vieja"]
+[ext_resource type="Texture2D" path="res://assets/npc/Vieja-idle.png" id="H_idle"]
+[ext_resource type="Texture2D" path="res://assets/npc/Vieja-talk.png" id="H_talk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs8hm"]
+atlas = ExtResource("1_vieja")
+region = Rect2(0, 0, 314, 600)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_0"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_1"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_2"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_3"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_4"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_5"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_6"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_7"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_8"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_9"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_10"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_11"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_12"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_13"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_14"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_15"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_16"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_17"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_18"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_19"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_20"]
+atlas = ExtResource("H_idle")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_21"]
+atlas = ExtResource("H_idle")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_22"]
+atlas = ExtResource("H_idle")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_23"]
+atlas = ExtResource("H_idle")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hidle_Vieja-id_24"]
+atlas = ExtResource("H_idle")
+region = Rect2(1024, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_0"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_1"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_2"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_3"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_4"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_5"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_6"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_7"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_8"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_9"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_10"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_11"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_12"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_13"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_14"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_15"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_16"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_17"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_18"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_19"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_20"]
+atlas = ExtResource("H_talk")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_21"]
+atlas = ExtResource("H_talk")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_22"]
+atlas = ExtResource("H_talk")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_23"]
+atlas = ExtResource("H_talk")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Htalk_Vieja-ta_24"]
+atlas = ExtResource("H_talk")
+region = Rect2(1024, 1024, 256, 256)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_19")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_20")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_21")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_22")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_23")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hidle_Vieja-id_24")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"react",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_19")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_20")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_21")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_22")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_23")
+}, {
+"duration": 1.0,
+"texture": SubResource("Htalk_Vieja-ta_24")
+}],
+"loop": 1,
+"name": &"talk",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]

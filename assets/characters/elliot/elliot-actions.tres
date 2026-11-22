@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cjielo7md8jnf" path="res://assets/characters/elliot/Elliot-attack.png" id="S3"]
 [ext_resource type="Texture2D" uid="uid://cdc4rt6w5tr7y" path="res://assets/characters/elliot/Elliot-kick.png" id="S4"]
 [ext_resource type="Texture2D" uid="uid://duj6mjium62kb" path="res://assets/characters/elliot/Elliot-hurt.png" id="S5"]
+[ext_resource type="Texture2D" path="res://assets/characters/elliot/Elliot-death.png" id="H_death"]
 
 [sub_resource type="AtlasTexture" id="F29"]
 atlas = ExtResource("S3")
@@ -1112,6 +1113,86 @@ metadata/fit_scale = 1.41553
 metadata/fit_baseline = 108.0
 metadata/fit_offset_x = 6.0
 
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_0"]
+atlas = ExtResource("H_death")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_1"]
+atlas = ExtResource("H_death")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_2"]
+atlas = ExtResource("H_death")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_3"]
+atlas = ExtResource("H_death")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_4"]
+atlas = ExtResource("H_death")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_5"]
+atlas = ExtResource("H_death")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_6"]
+atlas = ExtResource("H_death")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_7"]
+atlas = ExtResource("H_death")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_8"]
+atlas = ExtResource("H_death")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_9"]
+atlas = ExtResource("H_death")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_10"]
+atlas = ExtResource("H_death")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_11"]
+atlas = ExtResource("H_death")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_12"]
+atlas = ExtResource("H_death")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_13"]
+atlas = ExtResource("H_death")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_14"]
+atlas = ExtResource("H_death")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_15"]
+atlas = ExtResource("H_death")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_16"]
+atlas = ExtResource("H_death")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_17"]
+atlas = ExtResource("H_death")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_18"]
+atlas = ExtResource("H_death")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hdeath_Elliot-d_19"]
+atlas = ExtResource("H_death")
+region = Rect2(1024, 768, 256, 256)
+
 [resource]
 animations = [{
 "frames": [{
@@ -1273,10 +1354,70 @@ animations = [{
 "name": &"attack_2",
 "speed": 21.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hdeath_Elliot-d_19")
+}],
 "loop": 0,
 "name": &"death",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,

@@ -1,6 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://fc5pydfnvnu4"]
 
 [ext_resource type="Texture2D" uid="uid://crqk8h7oivbmq" path="res://assets/enemies/Wolf1/wolf1-punch.png" id="S1"]
+[ext_resource type="Texture2D" path="res://assets/enemies/Wolf1/Wolf1-punch-hurt.png" id="H_hurt"]
 
 [sub_resource type="AtlasTexture" id="F15"]
 atlas = ExtResource("S1")
@@ -178,6 +179,134 @@ metadata/pose_art_scale = 1.25628
 metadata/pose_art_baseline = 105.0
 metadata/pose_art_offset_x = 25.5
 
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_0"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_1"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 101
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_2"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 105
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_3"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 104
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_4"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 104
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_5"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 103
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_6"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_7"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_8"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 103
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_9"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_10"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_11"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_12"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_13"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_14"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
+[sub_resource type="AtlasTexture" id="Hhurt_Wolf1-pu_15"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 1.15107
+metadata/pose_art_baseline = 97
+metadata/pose_art_offset_x = 18.5
+
 [resource]
 animations = [{
 "frames": [{
@@ -214,10 +343,58 @@ animations = [{
 "name": &"death",
 "speed": 6.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Wolf1-pu_15")
+}],
 "loop": 0,
 "name": &"hurt",
-"speed": 12.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,

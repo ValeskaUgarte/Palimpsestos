@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://csq2xnevo26yt" path="res://assets/characters/Thomas/thomas-kick-v1.png" id="3_urjjf"]
 [ext_resource type="Texture2D" uid="uid://cbid2jbjplxnn" path="res://assets/characters/Thomas/Thomas-walk-v1.png" id="5_wvntf"]
 [ext_resource type="Texture2D" uid="uid://28aqooth1mmc" path="res://assets/characters/Thomas/Thomas-punch.png" id="S3"]
+[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas-hurt-v1.png" id="H_hurt"]
+[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas-idle.png" id="H_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas-idle-anim.png" id="TI_sheet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mqbq"]
 atlas = ExtResource("S3")
@@ -207,7 +210,8 @@ atlas = ExtResource("2_d55w3")
 region = Rect2(1024, 1024, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8o7e"]
-region = Rect2(500, 544, 250, 272)
+atlas = ExtResource("H_idle")
+region = Rect2(0, 0, 250, 272)
 metadata/fit_scale = 1.17
 metadata/fit_baseline = 134.0
 metadata/fit_offset_x = 3.0
@@ -480,6 +484,170 @@ region = Rect2(512, 1024, 256, 256)
 atlas = ExtResource("5_wvntf")
 region = Rect2(768, 1024, 256, 256)
 
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_0"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_1"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_2"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_3"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_4"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_5"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_6"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_7"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_8"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_9"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_10"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_11"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_12"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_13"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_14"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_15"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_0"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_1"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_2"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_3"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_4"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_5"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_6"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_7"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_8"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_9"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_10"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_11"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_12"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_13"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_14"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_15"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_16"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_17"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_18"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_19"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_20"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_21"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_22"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_23"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_24"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 1024, 256, 256)
+
 [resource]
 animations = [{
 "frames": [{
@@ -657,18 +825,138 @@ animations = [{
 "name": &"finisher",
 "speed": 12.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Hhurt_Thomas-h_15")
+}],
 "loop": 0,
 "name": &"hurt",
-"speed": 10.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q8o7e")
+"texture": SubResource("TI_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_19")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_20")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_21")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_22")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_23")
+}, {
+"duration": 1.0,
+"texture": SubResource("TI_24")
 }],
 "loop": 1,
 "name": &"idle",
-"speed": 4.0
+"speed": 8.0
 }, {
 "frames": [],
 "loop": 0,
@@ -907,7 +1195,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tibsx")
 }],
-"loop": 0,
+"loop": 1,
 "name": &"walk",
 "speed": 16.0
 }]

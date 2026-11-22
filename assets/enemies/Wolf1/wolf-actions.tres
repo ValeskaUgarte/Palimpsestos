@@ -2,6 +2,87 @@
 
 [ext_resource type="Texture2D" uid="uid://puvn6ipsgyye" path="res://assets/enemies/Wolf1/Wolf1-actions.png" id="S1"]
 [ext_resource type="Texture2D" uid="uid://djjkph7xmfq51" path="res://assets/enemies/Wolf1/Wolf1-walk.png" id="S2"]
+[ext_resource type="Texture2D" path="res://assets/enemies/Wolf1/Wolf1-hurt.png" id="HURT_SHEET"]
+
+[sub_resource type="AtlasTexture" id="HURT1"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT2"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT3"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT4"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT5"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT6"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT7"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT8"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT9"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT10"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT11"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT12"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT13"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 768, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT14"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 768, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT15"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 768, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT16"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 768, 256, 256)
+filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxpdx"]
 atlas = ExtResource("S1")
@@ -253,10 +334,58 @@ animations = [{
 "name": &"death",
 "speed": 8.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("HURT1")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT2")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT3")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT4")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT5")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT6")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT7")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT8")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT9")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT10")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT11")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT12")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT13")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT14")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT15")
+}, {
+"duration": 1.0,
+"texture": SubResource("HURT16")
+}],
 "loop": 0,
 "name": &"hurt",
-"speed": 12.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -314,3 +443,4 @@ animations = [{
 "name": &"walk",
 "speed": 8.0
 }]
+metadata/flip_death = true
