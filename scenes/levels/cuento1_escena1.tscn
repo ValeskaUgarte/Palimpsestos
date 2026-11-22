@@ -38,6 +38,8 @@
 [ext_resource type="Texture2D" uid="uid://trcj4v0qasv5" path="res://assets/npc/Padre_HyG.png" id="hyg_padre"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Vieja.tscn" id="npc_vieja_scene"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Padre_HyG.tscn" id="npc_padre_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Hansel.tscn" id="npc_hansel_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Gretel.tscn" id="npc_gretel_scene"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Madre_HyG.tscn" id="npc_madre_scene"]
 [ext_resource type="Texture2D" uid="uid://b8dmc8tthot7m" path="res://assets/ui/items/empanada.png" id="it_empanada"]
 [ext_resource type="Texture2D" uid="uid://djr7gbywwa1gs" path="res://assets/ui/items/mate.png" id="it_mate"]
@@ -51,7 +53,6 @@
 [ext_resource type="Shader" uid="uid://dt4xchaj55h3q" path="res://scripts/shaders/forest_join.gdshader" id="join_shader"]
 [ext_resource type="PackedScene" path="res://scenes/props/JumpObstacle.tscn" id="jump_obstacle"]
 [ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf3.tscn" id="new_wolf3"]
-[ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfPunch.tscn" id="new_wolfpunch"]
 [ext_resource type="Script" uid="uid://cg851yyi33cds" path="res://scripts/systems/cilindros.gd" id="pares_mesa"]
 [ext_resource type="Script" uid="uid://d1wb2ekkvc6r5" path="res://scripts/systems/story_pickup.gd" id="pickup_gd"]
 [ext_resource type="Texture2D" uid="uid://c8v37ecilef1s" path="res://assets/ui/diario/item_flores.png" id="pk_tex_1"]
@@ -206,14 +207,8 @@ position = Vector2(-100, 312)
 x_min = -400.0
 x_max = 400.0
 
-[node name="LoboPunch" parent="." unique_id=1986360575 instance=ExtResource("new_wolfpunch")]
-position = Vector2(7245, 205)
-
-[node name="Visual" parent="LoboPunch" index="0" unique_id=2054604276]
-animation = &"death"
-
 [node name="Lobo3Blanco" parent="." unique_id=505055407 instance=ExtResource("new_wolf3")]
-position = Vector2(13486, 273)
+position = Vector2(13400, 273)
 
 [node name="Visual" parent="Lobo3Blanco" index="0" unique_id=2054604276]
 animation = &"walk"
@@ -274,7 +269,7 @@ position = Vector2(-6, 20)
 position = Vector2(-12, 49)
 
 [node name="RangerWood" parent="." unique_id=2069088770 instance=ExtResource("3_ranger")]
-position = Vector2(5527, 144)
+position = Vector2(5340, 144)
 slide_on_ceiling = false
 
 [node name="Visual" parent="RangerWood" index="0" unique_id=1223183067]
@@ -312,9 +307,6 @@ conversation_portraits = Array[Texture2D]([ExtResource("14_ethan_portrait"), Ext
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EthanEncuentro" unique_id=860479721]
 shape = SubResource("EthanTriggerShape")
 
-[node name="Wolf1" parent="." unique_id=525150428 instance=ExtResource("4_wolf1")]
-position = Vector2(13088, 245)
-
 [node name="WolfSolo1" parent="." unique_id=120940619 instance=ExtResource("4_wolf1")]
 position = Vector2(4523, 245)
 
@@ -326,19 +318,6 @@ position = Vector2(8635, 236)
 
 [node name="WolfTrio1" parent="." unique_id=217212761 instance=ExtResource("4_wolf1")]
 position = Vector2(11605, 248)
-
-[node name="WolfTrio2" parent="." unique_id=426112203 instance=ExtResource("4b_wolf2")]
-position = Vector2(10236, 198)
-
-[node name="Visual" parent="WolfTrio2" index="0" unique_id=450480685]
-animation = &"attack"
-frame_progress = 0.0
-
-[node name="WolfTrio3" parent="." unique_id=1142728437 instance=ExtResource("4_wolf1")]
-position = Vector2(11937, 277)
-
-[node name="Visual" parent="WolfTrio3" index="0" unique_id=2054604276]
-animation = &"walk"
 
 [node name="NPC_Mama" parent="." unique_id=1777418703 instance=ExtResource("5_mama")]
 position = Vector2(-746, 193)
@@ -369,29 +348,17 @@ idle_face_direction = 1.0
 [node name="CollisionShape2D" parent="NPC_Vecina" index="1" unique_id=183638987]
 position = Vector2(-103, -39)
 
-[node name="Oleada1_WolfWhite" parent="." unique_id=17119763 instance=ExtResource("wave_wolfwhite")]
-position = Vector2(4915, 224)
-
-[node name="Oleada2_Gnomo" parent="." unique_id=551277831 instance=ExtResource("wave_gnomo")]
-position = Vector2(9160, 218)
-
 [node name="Oleada3_WolfWhite" parent="." unique_id=1586392776 instance=ExtResource("wave_wolfwhite")]
 position = Vector2(12753, 236)
 
 [node name="Oleada4_Gnomo" parent="." unique_id=1663373097 instance=ExtResource("wave_gnomo")]
 position = Vector2(15420, 192)
 
-[node name="Oleada5_Wolf2" parent="." unique_id=906289797 instance=ExtResource("4b_wolf2")]
-position = Vector2(17447, 193)
-
 [node name="Oleada6_WolfWhite" parent="." unique_id=880051778 instance=ExtResource("wave_wolfwhite")]
 position = Vector2(17125, 214)
 
 [node name="Oleada7_Gnomo" parent="." unique_id=75411960 instance=ExtResource("wave_gnomo")]
 position = Vector2(17783, 227)
-
-[node name="Oleada8_Wolf1" parent="." unique_id=492520007 instance=ExtResource("4_wolf1")]
-position = Vector2(17860, 300)
 
 [node name="HUD" parent="." unique_id=300448353 instance=ExtResource("6_hud")]
 
@@ -852,19 +819,15 @@ modulate = Color(0.8, 0.88, 0.93, 1)
 z_index = 1
 position = Vector2(1340, 135)
 
-[node name="NPC_Hansel" type="Sprite2D" parent="." unique_id=1412318618]
+[node name="NPC_Hansel" parent="." unique_id=1412318618 instance=ExtResource("npc_hansel_scene")]
 modulate = Color(0.8, 0.88, 0.93, 1)
 z_index = 1
 position = Vector2(9510, 160)
-scale = Vector2(0.3906, 0.3906)
-texture = ExtResource("hyg_hansel")
 
-[node name="NPC_Gretel" type="Sprite2D" parent="." unique_id=2119755408]
+[node name="NPC_Gretel" parent="." unique_id=2119755408 instance=ExtResource("npc_gretel_scene")]
 modulate = Color(0.8, 0.88, 0.93, 1)
 z_index = 1
 position = Vector2(9600, 165)
-scale = Vector2(0.375, 0.375)
-texture = ExtResource("hyg_gretel")
 
 [node name="NPC_Vieja" parent="." unique_id=302949355 instance=ExtResource("npc_vieja_scene")]
 modulate = Color(0.8, 0.88, 0.93, 1)
@@ -873,25 +836,17 @@ position = Vector2(14220, 150)
 
 [editable path="Aldeano_Nino"]
 [editable path="Perro"]
-[editable path="LoboPunch"]
 [editable path="Lobo3Blanco"]
 [editable path="Elliot"]
 [editable path="RangerWood"]
 [editable path="Ethan"]
-[editable path="Wolf1"]
 [editable path="WolfSolo1"]
 [editable path="WolfDuo1"]
 [editable path="WolfDuo2"]
 [editable path="WolfTrio1"]
-[editable path="WolfTrio2"]
-[editable path="WolfTrio3"]
 [editable path="NPC_Mama"]
 [editable path="NPC_Vecina"]
-[editable path="Oleada1_WolfWhite"]
-[editable path="Oleada2_Gnomo"]
 [editable path="Oleada3_WolfWhite"]
 [editable path="Oleada4_Gnomo"]
-[editable path="Oleada5_Wolf2"]
 [editable path="Oleada6_WolfWhite"]
 [editable path="Oleada7_Gnomo"]
-[editable path="Oleada8_Wolf1"]

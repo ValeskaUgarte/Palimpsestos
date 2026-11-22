@@ -47,7 +47,6 @@
 [ext_resource type="PackedScene" uid="uid://drlittrjn26le" path="res://scenes/characters/enemies/Wolf1.tscn" id="Wolf1"]
 [ext_resource type="PackedScene" uid="uid://b5hulsa2v6cik" path="res://scenes/characters/enemies/Wolf2.tscn" id="Wolf2"]
 [ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf3.tscn" id="Wolf3"]
-[ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfPunch.tscn" id="WolfPunch"]
 [ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfWhite.tscn" id="WolfWhite"]
 [ext_resource type="Script" uid="uid://dle2byc7appx4" path="res://scripts/systems/wolf_lie.gd" id="wolf_s2"]
 
@@ -175,41 +174,11 @@ animation = &"idle"
 [node name="Enemigo01_Wolf1" parent="." unique_id=424989429 instance=ExtResource("Wolf1")]
 position = Vector2(1300, 300)
 
-[node name="Enemigo02_Wolf2" parent="." unique_id=830726145 instance=ExtResource("Wolf2")]
-position = Vector2(1750, 285)
-
-[node name="Visual" parent="Enemigo02_Wolf2" index="0" unique_id=450480685]
-frame_progress = 0.0
-
 [node name="Enemigo03_WolfWhite" parent="." unique_id=2100776662 instance=ExtResource("WolfWhite")]
 position = Vector2(2150, 275)
 
 [node name="Visual" parent="Enemigo03_WolfWhite" index="0" unique_id=2054604276]
 animation = &"walk"
-
-[node name="Enemigo04_Gnomo" parent="." unique_id=82875179 instance=ExtResource("Gnomo")]
-position = Vector2(2550, 295)
-
-[node name="Enemigo05_Wolf1" parent="." unique_id=638881562 instance=ExtResource("Wolf1")]
-position = Vector2(2900, 300)
-
-[node name="Visual" parent="Enemigo05_Wolf1" index="0" unique_id=2054604276]
-animation = &"walk"
-
-[node name="Enemigo06_WolfWhite" parent="." unique_id=1747913213 instance=ExtResource("WolfWhite")]
-position = Vector2(3700, 275)
-
-[node name="Visual" parent="Enemigo06_WolfWhite" index="0" unique_id=2054604276]
-animation = &"walk"
-
-[node name="Enemigo07_Wolf2" parent="." unique_id=442233743 instance=ExtResource("Wolf2")]
-position = Vector2(3950, 285)
-
-[node name="Visual" parent="Enemigo07_Wolf2" index="0" unique_id=450480685]
-frame_progress = 0.0
-
-[node name="Enemigo08_Gnomo" parent="." unique_id=1032865766 instance=ExtResource("Gnomo")]
-position = Vector2(5350, 295)
 
 [node name="Enemigo09_Wolf1" parent="." unique_id=462304550 instance=ExtResource("Wolf1")]
 position = Vector2(5650, 300)
@@ -224,12 +193,6 @@ position = Vector2(6000, 285)
 animation = &"idle"
 frame_progress = 0.0
 
-[node name="Enemigo11_WolfPunch" parent="." unique_id=162306455 instance=ExtResource("WolfPunch")]
-position = Vector2(6250, 290)
-
-[node name="Visual" parent="Enemigo11_WolfPunch" index="0" unique_id=2054604276]
-animation = &"walk"
-
 [node name="Enemigo12_WolfWhite" parent="." unique_id=140466656 instance=ExtResource("WolfWhite")]
 position = Vector2(6700, 275)
 
@@ -238,9 +201,6 @@ animation = &"death"
 
 [node name="Enemigo13_RangerWood" parent="." unique_id=522815215 instance=ExtResource("RangerWood")]
 position = Vector2(7100, 270)
-
-[node name="Enemigo14_Gnomo" parent="." unique_id=1318519545 instance=ExtResource("Gnomo")]
-position = Vector2(7550, 295)
 
 [node name="Enemigo15_Wolf1" parent="." unique_id=1463792748 instance=ExtResource("Wolf1")]
 position = Vector2(7900, 300)
@@ -257,42 +217,14 @@ position = Vector2(8900, 285)
 [node name="Visual" parent="Enemigo17_Wolf2" index="0" unique_id=450480685]
 frame_progress = 0.0
 
-[node name="Enemigo18_Gnomo" parent="." unique_id=1035840527 instance=ExtResource("Gnomo")]
-position = Vector2(9300, 295)
-
 [node name="Enemigo19_Wolf1" parent="." unique_id=1526678526 instance=ExtResource("Wolf1")]
 position = Vector2(9700, 300)
 
 [node name="Visual" parent="Enemigo19_Wolf1" index="0" unique_id=2054604276]
 animation = &"walk"
 
-[node name="Enemigo20_WolfWhite" parent="." unique_id=1631465885 instance=ExtResource("WolfWhite")]
-position = Vector2(10100, 275)
-
-[node name="Visual" parent="Enemigo20_WolfWhite" index="0" unique_id=2054604276]
-animation = &"death"
-
-[node name="CollisionShape2D" parent="Enemigo20_WolfWhite/DetectionArea" parent_id_path=PackedInt32Array(1631465885, 2052361832) index="0" unique_id=1195138901]
-position = Vector2(-34, 80)
-
-[node name="Enemigo22_Wolf2" parent="." unique_id=1332438707 instance=ExtResource("Wolf2")]
-position = Vector2(10900, 285)
-
-[node name="Visual" parent="Enemigo22_Wolf2" index="0" unique_id=450480685]
-animation = &"idle"
-frame_progress = 0.0
-
-[node name="CollisionShape2D" parent="Enemigo22_Wolf2/DetectionArea" parent_id_path=PackedInt32Array(1332438707, 1193191947) index="0" unique_id=1639473353]
-position = Vector2(-271, -149)
-
-[node name="Enemigo23_Gnomo" parent="." unique_id=576557712 instance=ExtResource("Gnomo")]
-position = Vector2(11300, 295)
-
 [node name="Enemigo24_WolfWhite" parent="." unique_id=1320892587 instance=ExtResource("WolfWhite")]
 position = Vector2(12100, 275)
-
-[node name="Enemigo25_Wolf1" parent="." unique_id=1607803776 instance=ExtResource("Wolf1")]
-position = Vector2(12500, 300)
 
 [node name="Enemigo26_Wolf3" parent="." unique_id=1074785677 instance=ExtResource("Wolf3")]
 position = Vector2(12900, 290)
@@ -311,6 +243,9 @@ animation = &"idle"
 position = Vector2(4740, 144)
 dialogue_lines = Array[String](["Caperucita-Mamá me dio un pastel y una botella para mi abuelita. Salí de casa esa misma mañana.", "Caperucita-Entré en el bosque y allí me crucé con un lobo muy educado, que me saludó con muy buenos modales.", "Caperucita-Me dijo: «Mira qué flores tan bonitas». Y me aparté del camino a recogerlas.", "Caperucita-Así cuento siempre mi cuento: primero la casa, después el bosque y al final las flores."])
 repeatable = true
+followup_lines = Array[String](["Caperucita-¿Mi abuelita te mandó volver? Entonces la roca debe de saber algo que yo no recuerdo.", "Caperucita-Cuéntale mi cuento tal como lo cuento yo: primero la casa, después el bosque y al final las flores. Anda, pruébala; yo vigilo el camino."])
+followup_requires_flag = "abuela_envia_cueva"
+followup_sets_flag = "caperucita_abre_cueva"
 
 [node name="Motion" parent="Caperucita" index="0" unique_id=822710853]
 position = Vector2(-0.16129032, -76.29032)
@@ -601,23 +536,8 @@ script = ExtResource("riddle")
 [node name="Emboscada02_WolfWhite" parent="." unique_id=1030091209 groups=["emboscada"] instance=ExtResource("WolfWhite")]
 position = Vector2(12700, 270)
 
-[node name="Emboscada03_Wolf2" parent="." unique_id=1707272022 groups=["emboscada"] instance=ExtResource("Wolf2")]
-position = Vector2(11100, 280)
-
-[node name="CollisionShape2D" parent="Emboscada03_Wolf2/DetectionArea" parent_id_path=PackedInt32Array(1707272022, 1193191947) index="0" unique_id=1639473353]
-position = Vector2(-172, 139)
-
-[node name="Emboscada04_Gnomo" parent="." unique_id=1853056427 groups=["emboscada"] instance=ExtResource("Gnomo")]
-position = Vector2(9950, 290)
-
-[node name="CollisionShape2D" parent="Emboscada04_Gnomo/DetectionArea" parent_id_path=PackedInt32Array(1853056427, 1340406709) index="0" unique_id=1054602036]
-position = Vector2(-109, -186)
-
 [node name="Emboscada05_Wolf1" parent="." unique_id=765252800 groups=["emboscada"] instance=ExtResource("Wolf1")]
 position = Vector2(8100, 295)
-
-[node name="Emboscada06_WolfWhite" parent="." unique_id=208167335 groups=["emboscada"] instance=ExtResource("WolfWhite")]
-position = Vector2(6500, 270)
 
 [node name="Emboscada07_Wolf2" parent="." unique_id=2085950071 groups=["emboscada"] instance=ExtResource("Wolf2")]
 position = Vector2(5900, 280)
@@ -638,36 +558,20 @@ shape = SubResource("EncuentroShape")
 [editable path="Elliot"]
 [editable path="Jhon"]
 [editable path="Enemigo01_Wolf1"]
-[editable path="Enemigo02_Wolf2"]
 [editable path="Enemigo03_WolfWhite"]
-[editable path="Enemigo04_Gnomo"]
-[editable path="Enemigo05_Wolf1"]
-[editable path="Enemigo06_WolfWhite"]
-[editable path="Enemigo07_Wolf2"]
-[editable path="Enemigo08_Gnomo"]
 [editable path="Enemigo09_Wolf1"]
 [editable path="Enemigo10_Wolf2"]
-[editable path="Enemigo11_WolfPunch"]
 [editable path="Enemigo12_WolfWhite"]
 [editable path="Enemigo13_RangerWood"]
-[editable path="Enemigo14_Gnomo"]
 [editable path="Enemigo15_Wolf1"]
 [editable path="Enemigo16_WolfWhite"]
 [editable path="Enemigo17_Wolf2"]
-[editable path="Enemigo18_Gnomo"]
 [editable path="Enemigo19_Wolf1"]
-[editable path="Enemigo20_WolfWhite"]
-[editable path="Enemigo22_Wolf2"]
-[editable path="Enemigo23_Gnomo"]
 [editable path="Enemigo24_WolfWhite"]
-[editable path="Enemigo25_Wolf1"]
 [editable path="Enemigo26_Wolf3"]
 [editable path="Ethan"]
 [editable path="Caperucita"]
 [editable path="Abuelita"]
 [editable path="Emboscada02_WolfWhite"]
-[editable path="Emboscada03_Wolf2"]
-[editable path="Emboscada04_Gnomo"]
 [editable path="Emboscada05_Wolf1"]
-[editable path="Emboscada06_WolfWhite"]
 [editable path="Emboscada07_Wolf2"]

@@ -182,23 +182,11 @@ arena_max_x = 12192.1
 [node name="Oleada1_Wolf1" parent="." unique_id=930711030 instance=ExtResource("wave_wolf1")]
 position = Vector2(3555, 280)
 
-[node name="Oleada2_WolfWhite" parent="." unique_id=41540382 instance=ExtResource("wave_wolfwhite")]
-position = Vector2(3862, 300)
-
 [node name="Oleada3_Gnomo" parent="." unique_id=209664788 instance=ExtResource("wave_gnomo")]
 position = Vector2(4705, 290)
 
-[node name="Oleada4_Wolf2" parent="." unique_id=1848293394 instance=ExtResource("wave_wolf2")]
-position = Vector2(5088, 320)
-
 [node name="Oleada5_WolfWhite" parent="." unique_id=440918539 instance=ExtResource("wave_wolfwhite")]
 position = Vector2(9432, 290)
-
-[node name="Oleada6_Gnomo" parent="." unique_id=13894791 instance=ExtResource("wave_gnomo")]
-position = Vector2(10199, 300)
-
-[node name="Oleada7_Wolf2" parent="." unique_id=802082824 instance=ExtResource("wave_wolf2")]
-position = Vector2(9816, 310)
 
 [node name="Oleada8_WolfWhite" parent="." unique_id=1662316271 instance=ExtResource("wave_wolfwhite")]
 position = Vector2(10071, 290)
@@ -206,32 +194,8 @@ position = Vector2(10071, 290)
 [node name="Oleada9_Wolf1" parent="." unique_id=1940151871 instance=ExtResource("wave_wolf1")]
 position = Vector2(1300, 300)
 
-[node name="Oleada10_WolfWhite" parent="." unique_id=1938759155 instance=ExtResource("wave_wolfwhite")]
-position = Vector2(1900, 320)
-
 [node name="Oleada11_Wolf2" parent="." unique_id=1725611005 instance=ExtResource("wave_wolf2")]
 position = Vector2(2500, 300)
-
-[node name="Oleada12_Gnomo" parent="." unique_id=216296220 instance=ExtResource("wave_gnomo")]
-position = Vector2(3050, 310)
-
-[node name="Oleada13_Wolf1" parent="." unique_id=97171229 instance=ExtResource("wave_wolf1")]
-position = Vector2(6150, 300)
-
-[node name="Oleada14_WolfWhite" parent="." unique_id=1528449554 instance=ExtResource("wave_wolfwhite")]
-position = Vector2(6650, 320)
-
-[node name="Oleada15_Gnomo" parent="." unique_id=887558207 instance=ExtResource("wave_gnomo")]
-position = Vector2(7150, 300)
-
-[node name="Oleada16_Wolf2" parent="." unique_id=1176738576 instance=ExtResource("wave_wolf2")]
-position = Vector2(7650, 310)
-
-[node name="Oleada17_Wolf1" parent="." unique_id=564460623 instance=ExtResource("wave_wolf1")]
-position = Vector2(8150, 300)
-
-[node name="Oleada18_WolfWhite" parent="." unique_id=382031104 instance=ExtResource("wave_wolfwhite")]
-position = Vector2(8650, 320)
 
 [node name="Oleada19_Wolf2" parent="." unique_id=1270465696 instance=ExtResource("wave_wolf2")]
 position = Vector2(9100, 300)
@@ -443,10 +407,6 @@ delay = 1.6
 [editable path="RangerWood2"]
 [editable path="Lobo"]
 [editable path="Oleada1_Wolf1"]
-[editable path="Oleada2_WolfWhite"]
 [editable path="Oleada3_Gnomo"]
-[editable path="Oleada4_Wolf2"]
 [editable path="Oleada5_WolfWhite"]
-[editable path="Oleada6_Gnomo"]
-[editable path="Oleada7_Wolf2"]
 [editable path="Oleada8_WolfWhite"]

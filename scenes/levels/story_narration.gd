@@ -61,12 +61,11 @@ const FADE_OUT := 0.5
 func _ready() -> void:
 	layer = 20
 	_panel = PanelContainer.new()
-	_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-	_panel.offset_left = -(panel_width + 18.0)
-	_panel.offset_right = -18.0
-	# Bajado para no quedar encima de los botones Mochila/Mapa (y de la tarjeta del objeto): se lee completo.
-	_panel.offset_top = 96.0
+	# Arriba a la izquierda, bajo las barras de vida/energía/miedo: la esquina superior derecha queda sin texto.
+	_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	_panel.offset_left = 30.0
+	_panel.offset_right = 30.0 + panel_width
+	_panel.offset_top = 170.0
 	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_panel.modulate.a = 0.0
 	# Sin pergamino: solo el texto de la historia, con contorno oscuro para leerse sobre el escenario.
