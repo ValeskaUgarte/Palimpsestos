@@ -56,7 +56,7 @@ size = Vector2(140, 400)
 
 [node name="Cuento1_Escena3" type="Node2D" unique_id=289416566]
 script = ExtResource("1_level")
-camera_bounds = Rect2(-150, -356, 13032, 762)
+camera_bounds = Rect2(-125, -356, 13007, 747)
 ambience_profile = ExtResource("30_ambience")
 
 [node name="Ground" type="ColorRect" parent="." unique_id=513140581]

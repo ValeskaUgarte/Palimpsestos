@@ -32,9 +32,12 @@ func run() -> void:
 			check(component != null,"Falta foley en "+fighter.fighter_id)
 			fighter.set_physics_process(false)
 			fighter.is_jumping=false;fighter.is_attacking=false;fighter.velocity=Vector2(100,0)
+			# El ciclo de caminar actual no tiene 8 fotogramas: se declaran los contactos explícitamente.
+			fighter.anim.sprite_frames.set_meta("walk_contact_frames",PackedInt32Array([0,4]))
 			fighter._play_ground_animation("walk");fighter.anim.pause();fighter.anim.frame=0
 			component._distance=10;component._last_step=-1000;component._on_contact()
 			check(component._sound.stream != null,"Compañero no produce pasos")
+			fighter.anim.sprite_frames.remove_meta("walk_contact_frames")
 			component._sound.stop();component._sound.stream=null
 		# Followers must physically jump a low ledge rather than stall forever.
 		scene.actor.position=Vector2(800,450)

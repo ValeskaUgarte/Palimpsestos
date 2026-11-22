@@ -24,6 +24,8 @@ func run() -> void:
 	a.data=PackedByteArray([0,0,0,0])
 	b.data=PackedByteArray([0,0,0,0])
 	audio.bank.forest.assign([a,b])
+	# El ciclo de caminar actual no tiene 8 fotogramas: se declaran los contactos explícitamente.
+	p.get_node("AnimatedSprite2D").sprite_frames.set_meta("walk_contact_frames",PackedInt32Array([0,4]))
 	p.velocity=Vector2.RIGHT*220
 	p._play_ground_animation("walk")
 	p.anim.pause()
@@ -61,6 +63,7 @@ func run() -> void:
 	foot._last_step=-1000
 	foot._on_contact()
 	check(foot._sound.stream==b,"Zona no cambia superficie")
+	p.get_node("AnimatedSprite2D").sprite_frames.remove_meta("walk_contact_frames")
 	foot._sound.stop()
 	foot._sound.stream=null
 	audio.bank.forest.clear()

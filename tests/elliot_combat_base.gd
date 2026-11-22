@@ -19,6 +19,8 @@ func run() -> void:
 	var frames: SpriteFrames = p.anim.sprite_frames.duplicate(true)
 	p.anim.sprite_frames = frames
 	# A production-sized test clip: changing pose count needs no player code change.
+	if frames.has_animation(&"attack_1"):
+		frames.remove_animation(&"attack_1")   # Elliot ya trae su clip real; la prueba lo reemplaza por uno de 10 poses
 	frames.add_animation(&"attack_1")
 	frames.set_animation_loop(&"attack_1", false)
 	frames.set_animation_speed(&"attack_1", 20)
@@ -67,7 +69,8 @@ func run() -> void:
 	check(p.hitbox_shape.shape.size.x > p.attack_1_profile.hitbox_size.x, "Patada no tiene alcance propio")
 	check(p.active_hit_damage == p.kick_damage, "Daño patada cambiado")
 	var foot: Vector2 = p.ground_position()
-	p.anim.set_frame_and_progress(2, 0)
+	# Avance entre 15% y contact_end del clip: se elige el fotograma según la cantidad real de poses de la patada.
+	p.anim.set_frame_and_progress(int(p.anim.sprite_frames.get_frame_count(p.anim.animation) * 0.3), 0)
 	p._physics_process(0.016)
 	check(p.ground_position().x > foot.x and is_equal_approx(p.ground_position().y, foot.y), "Avance no es lateral sobre suelo")
 	p._end_attack()

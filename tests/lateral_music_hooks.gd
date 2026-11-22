@@ -8,6 +8,8 @@ func run() -> void:
 	root.get_node("LateralStory").enabled=false
 	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-music-prefs.cfg")
 	var audio=root.get_node("AudioLandscape")
+	# El primer fotograma headless trae un delta enorme (arranque) que agota los temporizadores de golpe.
+	for i in 3: await process_frame
 	# Existing wind files are stream fixtures, not new music presented to players.
 	audio.set_music(load("res://assets/audio/original/wind_01.wav"))
 	await create_timer(.7,false,false,true).timeout

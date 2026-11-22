@@ -16,6 +16,8 @@ func run() -> void:
 	var preferences=root.get_node("GamePreferences")
 	session.enabled=false
 	session.set_process(false)
+	# Aísla el test del progreso guardado de quien lo ejecute (la fatiga real frenaba a Elliot).
+	session.reset_progress()
 	session.save_path=OS.get_temp_dir().path_join("palim-experience-save.json")
 	preferences.config_path=OS.get_temp_dir().path_join("palim-experience-preferences.cfg")
 	for suffix in ["",".bak",".tmp"]:
@@ -81,7 +83,10 @@ func run() -> void:
 			survivor_name=String(actor.name);actor.health.current_health=17;break
 	player.present_interaction(player.ground_position()+Vector2(30,0))
 	check(player.anim.animation==&"interact", "No hay gesto de interacción")
-	var drawn_foot=player.anim.global_position.y+696*player.anim.scale.y
+	# Fila de apoyo medida del fotograma actual (el tamaño de los frames ya no es fijo).
+	var foot_texture=player.anim.sprite_frames.get_frame_texture(player.anim.animation,player.anim.frame)
+	var foot_row: float=float(SpriteFit.metrics(foot_texture).get("bottom",foot_texture.get_height()))
+	var drawn_foot=player.anim.global_position.y+(foot_row-(foot_texture.get_height()*0.5 if player.anim.centered else 0.0)+player.anim.offset.y)*player.anim.scale.y
 	check(absf(drawn_foot-player.ground_position().y)<.1,"Gesto desplaza pies")
 	session.record_defeat(level.scene_file_path,"RangerWood")
 	level.get_node("Monolito")._solved=true

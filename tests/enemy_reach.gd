@@ -63,7 +63,11 @@ func run() -> void:
 				elliot._locomotion = Vector2.ZERO
 				var before: int = enemy.health.current_health
 				elliot._do_hit("attack")
-				await create_timer(1.6).timeout
+				# Espera hasta que el golpe conecte y termine el ataque (máximo 1.6 s, igual que antes si nunca conecta).
+				var waited: float = 0.0
+				while waited < 1.6 and (enemy.health.current_health >= before or elliot.is_attacking):
+					await physics_frame
+					waited += 1.0 / float(Engine.physics_ticks_per_second)
 				var dealt: int = before - enemy.health.current_health
 				var label := "izquierda" if side < 0.0 else "derecha"
 				print("REACH %s %s desde_%s dano=%d" % [level.name, enemy.name, label, dealt])

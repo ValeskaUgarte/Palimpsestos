@@ -30,14 +30,26 @@ func run() -> void:
 			scene.queue_free()
 			await process_frame
 			continue
-		var sprite = scene.get_node("Ground/EscenarioCaperusita00" + name.right(1))
-		var art: Rect2 = painting_rect(sprite)
 		if name == "cuento1_escena1":
-			var extension: Rect2 = painting_rect(scene.get_node("EscenarioCaperusita002"))
-			check(art.end.x > extension.position.x + extension.size.x * 0.03, "Solapamiento insuficiente para fade")
-			check(bounds.position.x >= art.position.x and bounds.end.x <= extension.end.x, "Límites X fuera del arte")
-			check(bounds.position.y >= maxf(art.position.y, extension.position.y) and bounds.end.y <= minf(art.end.y, extension.end.y), "Límites Y fuera de ambos fondos")
+			# Escena 1: tres pinturas seguidas (a1, a12, a13) unidas con fades.
+			var arts: Array[Rect2] = []
+			for painting in ["Escena_a1", "Escena_a12", "Escena_a13"]:
+				arts.append(painting_rect(scene.get_node(painting)))
+			var top: float = -INF
+			var bottom: float = INF
+			for i in arts.size():
+				top = maxf(top, arts[i].position.y)
+				bottom = minf(bottom, arts[i].end.y)
+				if i > 0:
+					check(arts[i - 1].end.x > arts[i].position.x + arts[i].size.x * 0.003, "Solapamiento insuficiente para fade")
+			check(bounds.position.x >= arts[0].position.x and bounds.end.x <= arts[2].end.x, "Límites X fuera del arte")
+			# La cámara bloquea la vertical en el horizonte: lo visible (no el rectángulo de límites) debe caer sobre pintura.
+			var view: Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
+			var zoom: float = maxf(maxf(scene.camera_zoom, view.x / bounds.size.x), view.y / bounds.size.y)
+			var half_height: float = view.y / zoom * 0.5
+			check(scene.camera_horizon_y - half_height >= top and scene.camera_horizon_y + half_height <= bottom, "Vista Y fuera de todos los fondos")
 		else:
+			var art: Rect2 = painting_rect(scene.get_node("Ground/EscenarioCaperusita003"))
 			check(art.encloses(bounds), name + ": cámara incluye relleno sin pintura")
 		scene.queue_free()
 		await process_frame

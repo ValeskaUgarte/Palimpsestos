@@ -19,6 +19,10 @@ func run() -> void:
 			anim.frame = 0
 			hero._fit_pose()
 			var expected: float = float(table[clip]) if table.has(clip) else float(table.get("idle", 1.0))
+			# El salto usa SIEMPRE la escala del reposo (player.gd _fit_pose: la figura se estira dentro del clip pero
+			# no cambia de tamaño); clip_scale['jump'] del Inspector no se usa.
+			if clip == "jump":
+				expected = float(table.get("idle", expected))
 			var ok := absf(anim.scale.x - expected) < 0.001
 			if not ok:
 				failures += 1

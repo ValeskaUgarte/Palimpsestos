@@ -88,7 +88,7 @@ size = Vector2(260, 520)
 
 [node name="Cuento1_Escena2" type="Node2D" unique_id=1730214709]
 script = ExtResource("level")
-camera_bounds = Rect2(0, -480, 17220, 880)
+camera_bounds = Rect2(0, -480, 13077, 880)
 ambience_profile = ExtResource("ambience")
 fog_zones = PackedVector2Array(-2000, 3800, 3000, 17220)
 fog_fade = 1400.0
