@@ -202,9 +202,11 @@ func _physics_process(delta: float) -> void:
 	if is_companion:
 		_companion_ai_step(delta)
 		return
-	if _jump_buffer > 0.0 and not _await_action_release:
+	# Con is_jumping el buffer se conserva: al aterrizar el salto pulsado en el aire se ejecuta.
+	if _jump_buffer > 0.0 and not _await_action_release and not is_jumping:
 		_jump_buffer = 0.0
-		_jump_cut_armed = true
+		# El corte de altura solo aplica si el botón sigue pulsado (un salto con el botón ya suelto sale completo).
+		_jump_cut_armed = Input.is_action_pressed("jump")
 		_begin_jump()
 		_jump_cut_armed = false
 
@@ -214,10 +216,11 @@ func _physics_process(delta: float) -> void:
 	).limit_length(1.0)
 
 	var response: float = movement_braking if input_vector == Vector2.ZERO else movement_acceleration
-	if is_jumping:
-		response *= story_air_control
 	if _locomotion.dot(input_vector) < 0.0:
 		response = movement_braking
+	# El control aéreo se aplica al final: también al invertir la dirección en el aire.
+	if is_jumping:
+		response *= story_air_control
 	_locomotion = _locomotion.move_toward(input_vector * speed * PlayerStatus.speed_multiplier(self), response * delta)
 	velocity = _locomotion + knockback
 	_move_on_path()
@@ -591,10 +594,10 @@ func take_damage(amount: int, from_position: Vector2 = Vector2.INF) -> void:
 	if not is_companion:
 		_damage_recoil = 0.035 * (-1.0 if knockback.x < 0 else 1.0)
 		if not is_attacking and not is_jumping:
-			_hurt_presentation_time = 0.24 if SpriteFit.has_clip(anim.sprite_frames, "hurt") else 0.12
+			_hurt_presentation_time = 0.18 if SpriteFit.has_clip(anim.sprite_frames, "hurt") else 0.12
 			_play_ground_animation("hurt" if SpriteFit.has_clip(anim.sprite_frames, "hurt") else "idle")
 	# Un golpe recibido no interrumpe un ataque activo ni deja su hitbox abierto.
-	if is_companion and not is_attacking and SpriteFit.has_clip(anim.sprite_frames, "hurt"):
+	if is_companion and not is_attacking and not is_jumping and SpriteFit.has_clip(anim.sprite_frames, "hurt"):
 		_hurt_presentation_time = 0.32
 		_play_ground_animation("hurt")
 	_damage_flash_id += 1

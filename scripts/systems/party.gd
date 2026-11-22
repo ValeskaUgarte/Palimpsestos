@@ -162,6 +162,8 @@ func _swap_to(new_active: CharacterBody2D, forced: bool = false) -> void:
 	old.add_to_group("companion")
 	old.is_companion = true
 	old.follow_target_path = old.get_path_to(new_active)
+	old._leader_last_pos = Vector2.INF  # sin saltos falsos de velocidad del líder tras el cambio
+	old._leader_speed = 0.0
 	old.velocity = Vector2.ZERO
 	old._locomotion = Vector2.ZERO
 	old.knockback = Vector2.ZERO
@@ -185,6 +187,8 @@ func _swap_to(new_active: CharacterBody2D, forced: bool = false) -> void:
 	for member in members:
 		if member != new_active and member.is_companion and is_alive(member):
 			member.follow_target_path = member.get_path_to(new_active)
+			member._leader_last_pos = Vector2.INF
+			member._leader_speed = 0.0
 	# 3) Cámara, pasos, neblina, enemigos y HUD siguen al nuevo.
 	_move_camera_to(new_active)
 	var footsteps := old.get_node_or_null("Footsteps")

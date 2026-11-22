@@ -146,7 +146,8 @@ func _update_wander(delta: float) -> void:
 # Elige la animación según lo que hace el NPC y muestra Motion o el dibujo fijo.
 func _refresh() -> void:
 	var wanted: StringName = &"idle"
-	if _talking or always_talk or _player_is_near():
+	# Si pasea, camina (no se desliza en la animación de hablar); solo habla quieto.
+	if _talking or ((always_talk or _player_is_near()) and not _moving):
 		wanted = &"talk"
 	elif _moving:
 		wanted = &"run" if _running else &"walk"
