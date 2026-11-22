@@ -170,7 +170,9 @@ func _setup_exits(index: int, right: float) -> void:
 		var segment_exit := Area2D.new()
 		segment_exit.name = "SegmentExit"
 		segment_exit.collision_layer = 0
-		segment_exit.collision_mask = chapter.collision_mask if chapter != null else 2
+		# Capa 2 = jugador. No se lee de "chapter": _disable_subtree ya le puso la máscara en 0
+		# y el SegmentExit nunca detectaba al jugador (no se pasaba a la siguiente parte).
+		segment_exit.collision_mask = 2
 		segment_exit.set_script(LEVEL_EXIT_SCRIPT)
 		segment_exit.next_scene_path = scene_file_path
 		segment_exit.next_part = index + 1

@@ -12,8 +12,8 @@ func settle() -> void:
 func run() -> void:
 	var session=root.get_node("GameSession")
 	session.enabled=false;session.set_process(false)
-	session.save_path="/private/tmp/palim-flow-save.json"
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-flow-preferences.cfg"
+	session.save_path=OS.get_temp_dir().path_join("palim-flow-save.json")
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-flow-preferences.cfg")
 	var level=load("res://scenes/levels/cuento1_escena3.tscn").instantiate()
 	root.add_child(level);current_scene=level
 	for actor in level.get_children():

@@ -65,8 +65,10 @@ func _attack() -> void:
 	attack_cooldown=.75 if _phase_two else 1.1
 	_warn.set("charge",_charge_pattern)
 	_warn.show()
+	# super._attack() suma 1 a _attack_generation al empezar: si un remate la interrumpe, esta cola no debe pisar el ataque nuevo.
+	var generation: int = _attack_generation + 1
 	await super._attack()
-	if _dead:return
+	if _dead or generation != _attack_generation:return
 	_charging=false
 	knockback=Vector2.ZERO
 	_warn.hide()
@@ -76,7 +78,9 @@ func _attack() -> void:
 func _on_died() -> void:
 	if _warn:_warn.hide()
 	_charging=false
-	var presentation=get_parent().get_node_or_null("ChapterPresentation")
-	if presentation:presentation.rewrite("La bestia pierde su nombre. El relato continúa.")
-	AudioLandscape.hush(.2,1.2)
+	# Solo el jefe real cierra el relato; los lobos normales del demo no deben mostrar este texto ni callar el audio.
+	if is_in_group("story_boss"):
+		var presentation=get_parent().get_node_or_null("ChapterPresentation")
+		if presentation:presentation.rewrite("La bestia pierde su nombre. El relato continúa.")
+		AudioLandscape.hush(.2,1.2)
 	super._on_died()

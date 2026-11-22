@@ -19,6 +19,12 @@ extends AnimatedSprite2D
 @export var faces_right_by_default: bool = true
 ## true = se gira hacia el jugador cuando está cerca o mientras habla con él.
 @export var face_player: bool = true
+## true = reproduce la animación "talk" todo el tiempo (por ejemplo dos vecinas conversando entre sí), aunque no esté hablando contigo.
+@export var always_talk: bool = false
+## Si es mayor que 0: reproduce "talk" mientras el jugador está a esta distancia (px). Sirve para NPC cuyo diálogo lo dispara otro nodo de la escena.
+@export var talk_when_near: float = 0.0
+## Hacia dónde mira cuando nadie lo obliga a girar: 1 = derecha, -1 = izquierda, 0 = como esté. Sirve para que dos NPC conversen mirándose.
+@export_range(-1.0, 1.0, 1.0) var idle_face_direction: float = 0.0
 ## Dónde apoya los pies (centro X, suelo Y) respecto al origen del NPC. Se usa cuando el NPC ya no tiene el dibujo fijo \"Visual\".
 ## Mueve el NPC entero en el editor para colocarlo; esto solo ajusta el apoyo fino del dibujo.
 @export var foot_position: Vector2 = Vector2.ZERO
@@ -140,7 +146,7 @@ func _update_wander(delta: float) -> void:
 # Elige la animación según lo que hace el NPC y muestra Motion o el dibujo fijo.
 func _refresh() -> void:
 	var wanted: StringName = &"idle"
-	if _talking:
+	if _talking or always_talk or _player_is_near():
 		wanted = &"talk"
 	elif _moving:
 		wanted = &"run" if _running else &"walk"
@@ -158,12 +164,23 @@ func _refresh() -> void:
 		_fit()
 
 
+func _player_is_near() -> bool:
+	if talk_when_near <= 0.0:
+		return false
+	var player := get_tree().get_first_node_in_group("player") as Node2D
+	return player != null and absf(player.global_position.x - _npc.global_position.x) <= talk_when_near
+
+
 func _face() -> void:
 	var direction: float = _dir if _moving else 0.0
-	if face_player and (_talking or bool(_npc.get("player_in_range"))):
+	# Mientras camina por su recorrido mira hacia donde va; solo se gira al jugador cuando está quieto o hablando con él.
+	var in_range: Variant = _npc.get("player_in_range")
+	if face_player and not (_moving and not _talking) and (_talking or (in_range is bool and in_range)):
 		var player := get_tree().get_first_node_in_group("player") as Node2D
 		if player != null:
 			direction = signf(player.global_position.x - _npc.global_position.x)
+	if direction == 0.0:
+		direction = idle_face_direction
 	if direction == 0.0:
 		return
 	flip_h = (direction < 0.0) if faces_right_by_default else (direction > 0.0)

@@ -6,7 +6,10 @@ const SIZE_BOOST := {"Wolf1":1.45,"Wolf2":1.45,"RangerWood":1.35,"Lobo":1.25,"Wo
 var _fall_velocity: float = 0
 func _ready() -> void:
 	super._ready()
-	if not boss_encounter: remove_from_group("story_boss")
+	if not boss_encounter:
+		remove_from_group("story_boss")
+		# El x4 de daño es solo del lobo final; los enemigos normales ya tienen vida extra (stage.gd).
+		damage_taken_scale = 1.0
 	collision_mask = 1
 	var boost: float = SIZE_BOOST.get(scene_file_path.get_file().get_basename(),1.0)
 	var body := RectangleShape2D.new()
@@ -46,6 +49,7 @@ func _physics_process(delta: float) -> void:
 		return
 	player = get_tree().get_first_node_in_group("player")
 	_stagger_left = maxf(0, _stagger_left - delta)
+	_hurt_hold = maxf(0.0, _hurt_hold - delta)
 	_fall_velocity = minf(_fall_velocity + 1500 * delta, 900)
 	velocity = Vector2(knockback.x, _fall_velocity)
 	if is_instance_valid(player) and not is_attacking and _stagger_left <= 0:
@@ -59,9 +63,9 @@ func _physics_process(delta: float) -> void:
 				var running: bool = run_distance > 0.0 and absf(distance.x) > run_distance
 				if not get_world_2d().direct_space_state.intersect_ray(query).is_empty():
 					velocity.x += _facing_sign * speed * (run_speed_multiplier if running else 1.0)
-				_play_animation("run" if running else "walk")
-			else: _play_animation("idle")
-		else: _play_animation("idle")
+				_play_locomotion("run" if running else "walk")
+			else: _play_locomotion("idle")
+		else: _play_locomotion("idle")
 	if boss_encounter:
 		if _charging and is_attacking and visual.frame == 2: velocity.x = _charge_direction * (440 if _phase_two else 360)
 		_warn.position = Vector2.ZERO
@@ -104,15 +108,16 @@ func _attack() -> void:
 	visual.frame = 2
 	hitbox_shape.set_deferred("disabled", false)
 	await get_tree().physics_frame
+	if not is_inside_tree(): return
 	await get_tree().physics_frame
-	if _dead or generation != _attack_generation: return
+	if _dead or generation != _attack_generation or not is_inside_tree(): return
 	for area in $Hitbox.get_overlapping_areas(): _on_hitbox_area_entered(area)
 	await get_tree().create_timer(.18, false).timeout
-	if _dead or generation != _attack_generation: return
+	if _dead or generation != _attack_generation or not is_inside_tree(): return
 	hitbox_shape.set_deferred("disabled", true)
 	visual.frame = 3
 	await get_tree().create_timer(.2, false).timeout
-	if _dead or generation != _attack_generation: return
+	if _dead or generation != _attack_generation or not is_inside_tree(): return
 	is_attacking = false
 	_play_animation("idle")
 	await get_tree().create_timer(attack_cooldown, false).timeout

@@ -33,6 +33,9 @@ var _facing_sign: float = 1.0
 var _flash_generation: int = 0
 var _walkable_path: Node = null
 var _stagger_left: float = 0.0
+## Tiempo en que se mantiene la animación "hurt" tras un golpe (solo visual: no frena al enemigo).
+var _hurt_hold: float = 0.0
+const HURT_VISUAL_TIME := 0.34
 var _attack_generation: int = 0
 
 func _ready() -> void:
@@ -64,7 +67,15 @@ func _play_animation(animation: StringName) -> void:
     # Todas las poses comparten el mismo punto de apoyo, también ataque y muerte.
     visual.position.y = $CollisionShape2D.position.y + 12.0 - 200.0 * visual.scale.y
     visual.play(animation)
+    _apply_flip()
     _apply_frame_alignment()
+
+# Espejo del sprite según hacia dónde mira. Un clip dibujado al revés que el resto (por ejemplo la muerte del Wolf1)
+# se marca en su SpriteFrames con el metadato "flip_<clip>" = true y se invierte solo.
+func _apply_flip() -> void:
+    var base_flip: bool = (_facing_sign < 0.0) if faces_right_by_default else (_facing_sign > 0.0)
+    var clip_flip: bool = bool(visual.sprite_frames.get_meta("flip_" + String(visual.animation), false))
+    visual.flip_h = base_flip != clip_flip
 
 func _apply_frame_alignment() -> void:
     var texture: Texture2D = visual.sprite_frames.get_frame_texture(visual.animation, visual.frame)
@@ -88,7 +99,8 @@ func _apply_frame_alignment() -> void:
                 offset_x = -(float(first["cx"]) - float(first["w"]) * 0.5)
     visual.scale = _ground_scale * art_scale
     visual.position.y = $CollisionShape2D.position.y + 12.0 - baseline * visual.scale.y
-    visual.position.x = _ground_position.x + offset_x * visual.scale.x * _facing_sign
+    # El lado sale del flip real del sprite (no de _facing_sign): con faces_right_by_default=false ambos difieren.
+    visual.position.x = _ground_position.x + offset_x * visual.scale.x * (-1.0 if visual.flip_h else 1.0)
 
 func ground_position() -> Vector2:
     return $CollisionShape2D.global_position + Vector2(0, 12)
@@ -98,6 +110,7 @@ func _physics_process(delta: float) -> void:
         return
     velocity = knockback
     _stagger_left = maxf(0.0, _stagger_left - delta)
+    _hurt_hold = maxf(0.0, _hurt_hold - delta)
     if not is_attacking and _stagger_left <= 0.0:
         if is_instance_valid(player):
             var destination: Vector2 = player.ground_position()
@@ -107,22 +120,41 @@ func _physics_process(delta: float) -> void:
             if displacement.length() > attack_range:
                 var running: bool = run_distance > 0.0 and displacement.length() > run_distance
                 velocity += displacement.normalized() * speed * (run_speed_multiplier if running else 1.0)
-                _play_animation("run" if running else "walk")
+                _play_locomotion("run" if running else "walk")
             elif can_attack:
                 _attack()
             else:
-                _play_animation("idle")
+                _play_locomotion("idle")
         else:
-            _play_animation("idle")
+            _play_locomotion("idle")
     move_and_slide()
     if is_instance_valid(_walkable_path):
         var foot: Vector2 = ground_position()
         global_position += _walkable_path.constrain_foot(foot, 26.0) - foot
     knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
 
+# Animación de movimiento/reposo; no pisa el "hurt" mientras dura su reproducción.
+func _play_locomotion(animation: StringName) -> void:
+    if _hurt_hold > 0.0:
+        return
+    visual.speed_scale = 1.0
+    _play_animation(animation)
+
+# Reacción al golpe: la animación "hurt" se acelera para caber en HURT_VISUAL_TIME y se lee como un impacto seco.
+func _play_hurt() -> void:
+    var clip: StringName = SpriteFit.resolve_clip(visual.sprite_frames, &"hurt")
+    if clip == &"":
+        return
+    _hurt_hold = HURT_VISUAL_TIME if clip == &"hurt" else 0.0
+    _play_animation(&"hurt")
+    if clip == &"hurt":
+        var frames: SpriteFrames = visual.sprite_frames
+        var natural: float = float(frames.get_frame_count(clip)) / maxf(frames.get_animation_speed(clip), 0.01)
+        visual.speed_scale = clampf(natural / HURT_VISUAL_TIME, 1.0, 4.0)
+
 func _face(direction_x: float) -> void:
     _facing_sign = -1.0 if direction_x < 0.0 else 1.0
-    visual.flip_h = (_facing_sign < 0.0) if faces_right_by_default else (_facing_sign > 0.0)
+    _apply_flip()
     $Hitbox.position.x = absf($Hitbox.position.x) * _facing_sign
 
 func _attack() -> void:
@@ -197,11 +229,15 @@ func receive_combat_hit(amount: int, from_position: Vector2, finisher: bool = fa
         can_attack = false
         hitbox_shape.set_deferred("disabled", true)
         visual.speed_scale = 1.0
-        _play_animation("idle")
+        _play_hurt()
+        if _hurt_hold <= 0.0:
+            _play_animation("idle")
         get_tree().create_timer(0.28, false).timeout.connect(_recover_interrupt.bind(generation))
     elif not is_attacking:
         # Animación "hurt" (si ya tiene sprites; si no, idle) mientras dura el aturdimiento.
-        _play_animation("hurt")
+        _play_hurt()
+        if _hurt_hold <= 0.0:
+            _play_animation("hurt")
 
 func _recover_interrupt(generation: int) -> void:
     if not _dead and generation == _attack_generation:
@@ -235,6 +271,7 @@ func _on_died() -> void:
         return
     _dead = true
     AudioLandscape.cue(&"death",ground_position())
+    CombatFX.death_burst(ground_position() + Vector2(0, -50), 1.0)
     is_attacking = false
     remove_from_group("enemy")
     set_physics_process(false)

@@ -343,7 +343,7 @@ func _spawn_boss_display() -> void:
 	sprite.sprite_frames = frames
 	sprite.scale = Vector2(1.9,1.9)
 	# El arte del Lobo mira a la IZQUIERDA y el jugador llega desde la izquierda: sin voltear queda de frente (antes estaba de espaldas).
-	sprite.flip_h = false
+	sprite.flip_h = true  # las hojas actuales del Lobo miran a la derecha; el jugador llega por la izquierda
 	var baseline: float = float(frames.get_frame_texture("idle",0).get_meta("pose_art_baseline",200.0))
 	sprite.position = Vector2(1500,500 - baseline*sprite.scale.y)
 	sprite.z_index = 1

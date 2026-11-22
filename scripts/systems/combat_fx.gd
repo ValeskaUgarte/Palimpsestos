@@ -71,6 +71,9 @@ func hit_impact(global_pos: Vector2, strength: float = 1.0, direction: Vector2 =
 	_spawn_dust(global_pos, strength)
 	if strength >= 1.6 or randf() < leaf_chance:
 		_spawn_leaves(global_pos, strength)
+	_spawn_ink_drops(global_pos, strength, direction)
+	if strength >= 1.6:
+		_spawn_shockwave(global_pos, strength)
 	var scene := get_tree().current_scene
 	if scene != null:
 		var stroke := Node2D.new()
@@ -81,6 +84,15 @@ func hit_impact(global_pos: Vector2, strength: float = 1.0, direction: Vector2 =
 		stroke.global_position = global_pos
 	_do_shake(default_shake_strength * strength, default_shake_duration)
 	_do_hitstop(clampf(default_hitstop_time * strength, 0.025, 0.085))
+
+
+# Estallido al morir un enemigo o personaje: polvo grande + chispas + hojas, centrado en el cuerpo.
+func death_burst(global_pos: Vector2, strength: float = 1.0) -> void:
+	strength = clampf(strength, 0.6, 2.0)
+	_spawn_dust(global_pos, strength * 1.4)
+	_spawn_spark(global_pos, strength * 0.9)
+	_spawn_shockwave(global_pos, strength)
+	_spawn_leaves(global_pos, strength)
 
 
 # Número de golpe flotante sobre quien lo recibe. actor = el personaje (CharacterBody2D) que perdió vida.
@@ -108,6 +120,10 @@ func damage_number(actor: Node, amount: int) -> void:
 
 
 func _do_shake(strength: float, duration: float) -> void:
+	# Respeta la preferencia de accesibilidad (Ajustes > Comodidad > sacudida).
+	strength *= GamePreferences.shake
+	if strength <= 0.0:
+		return
 	var cam := get_viewport().get_camera_2d()
 	if cam == null:
 		return
@@ -148,10 +164,9 @@ func _do_hitstop(duration: float) -> void:
 
 func _spawn_spark(global_pos: Vector2, strength: float) -> void:
 	var root := get_tree().current_scene
-	if root == null:
+	if root == null or not _effect_slot_free():
 		return
-	var p := CPUParticles2D.new()
-	root.add_child(p)
+	var p := _acquire()
 	p.global_position = global_pos
 	p.z_index = 100
 	p.emitting = false
@@ -172,18 +187,15 @@ func _spawn_spark(global_pos: Vector2, strength: float) -> void:
 	p.color_ramp = ink
 	p.gravity = Vector2(0, 65)
 	p.emitting = true
-	var cleanup_timer := get_tree().create_timer(p.lifetime + 0.15, true, false, true)
-	# Bound node callables disconnect when a scene frees their target.
-	cleanup_timer.timeout.connect(p.queue_free)
+	_release_after(p, p.lifetime + 0.15)
 
 
 # --- Polvo: una nube breve que sube y se disipa al golpear.
 func _spawn_dust(global_pos: Vector2, strength: float) -> void:
 	var root := get_tree().current_scene
-	if root == null:
+	if root == null or not _effect_slot_free():
 		return
-	var p := CPUParticles2D.new()
-	root.add_child(p)
+	var p := _acquire()
 	p.global_position = global_pos + Vector2(0, 6)
 	p.z_index = 90
 	p.emitting = false
@@ -203,17 +215,15 @@ func _spawn_dust(global_pos: Vector2, strength: float) -> void:
 	fade.colors = PackedColorArray([Color(1, 1, 1, 0.9), Color(1, 1, 1, 0)])
 	p.color_ramp = fade
 	p.emitting = true
-	var cleanup := get_tree().create_timer(p.lifetime + 0.2, true, false, true)
-	cleanup.timeout.connect(p.queue_free)
+	_release_after(p, p.lifetime + 0.2)
 
 
 # --- Hojas: unas pocas caen despacio desde el punto del golpe, girando.
 func _spawn_leaves(global_pos: Vector2, strength: float) -> void:
 	var root := get_tree().current_scene
-	if root == null:
+	if root == null or not _effect_slot_free():
 		return
-	var p := CPUParticles2D.new()
-	root.add_child(p)
+	var p := _acquire()
 	p.global_position = global_pos + Vector2(0, -40)
 	p.texture = _get_leaf_texture()
 	p.z_index = 60
@@ -241,8 +251,7 @@ func _spawn_leaves(global_pos: Vector2, strength: float) -> void:
 	fade.colors = PackedColorArray([Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)])
 	p.color_ramp = fade
 	p.emitting = true
-	var cleanup := get_tree().create_timer(p.lifetime + 0.3, true, false, true)
-	cleanup.timeout.connect(p.queue_free)
+	_release_after(p, p.lifetime + 0.3)
 
 
 # Textura de hoja dibujada por código (óvalo con nervadura), sin archivos nuevos.
@@ -263,3 +272,115 @@ func _get_leaf_texture() -> Texture2D:
 	_leaf_texture = ImageTexture.create_from_image(img)
 	return _leaf_texture
 
+
+# --- Pool de partículas: en vez de crear y destruir un nodo por golpe, se reutilizan (menos picos de memoria/CPU).
+# Además hay un tope de efectos vivos a la vez para peleas con muchos enemigos.
+const MAX_LIVE_EFFECTS := 24
+const MAX_POOLED := 32
+var _live_effects: int = 0
+var _pool: Array[CPUParticles2D] = []
+
+func _effect_slot_free() -> bool:
+	return _live_effects < MAX_LIVE_EFFECTS
+
+func _acquire() -> CPUParticles2D:
+	var p: CPUParticles2D = null
+	while not _pool.is_empty() and p == null:
+		var candidate: CPUParticles2D = _pool.pop_back()
+		if is_instance_valid(candidate):
+			p = candidate
+	if p == null:
+		p = CPUParticles2D.new()
+	if p.get_parent() != self:
+		if p.get_parent() != null:
+			p.get_parent().remove_child(p)
+		add_child(p)
+	p.visible = true
+	# Valores que no todos los efectos fijan: se limpian para que no hereden los del uso anterior.
+	p.texture = null
+	p.color_ramp = null
+	p.color_initial_ramp = null
+	p.angle_min = 0.0
+	p.angle_max = 0.0
+	p.angular_velocity_min = 0.0
+	p.angular_velocity_max = 0.0
+	p.damping_min = 0.0
+	p.damping_max = 0.0
+	return p
+
+func _release_after(p: CPUParticles2D, lifetime: float) -> void:
+	_live_effects += 1
+	var timer := get_tree().create_timer(lifetime, true, false, true)
+	timer.timeout.connect(func():
+		_live_effects = maxi(_live_effects - 1, 0)
+		if not is_instance_valid(p):
+			return
+		p.emitting = false
+		p.restart()
+		p.emitting = false
+		p.visible = false
+		if _pool.size() < MAX_POOLED:
+			_pool.append(p)
+		else:
+			p.queue_free()
+	)
+
+
+# --- Gotas de tinta: salen lanzadas en la dirección del golpe y caen con gravedad (el estilo "manuscrito" del juego).
+func _spawn_ink_drops(global_pos: Vector2, strength: float, direction: Vector2) -> void:
+	var root := get_tree().current_scene
+	if root == null or not _effect_slot_free():
+		return
+	var p := _acquire()
+	p.global_position = global_pos
+	p.z_index = 95
+	p.emitting = false
+	p.one_shot = true
+	p.explosiveness = 1.0
+	p.amount = int(6 + 5 * strength)
+	p.lifetime = 0.55
+	var dir: Vector2 = direction.normalized() if direction.length() > 0.01 else Vector2.RIGHT
+	p.direction = Vector2(dir.x, -0.45).normalized()
+	p.spread = 38.0
+	p.gravity = Vector2(0, 520)
+	p.initial_velocity_min = 140.0 * strength
+	p.initial_velocity_max = 320.0 * strength
+	p.scale_amount_min = 1.6
+	p.scale_amount_max = 3.4 * minf(strength, 1.5)
+	p.color = Color(0.1, 0.07, 0.05, 0.95)
+	var fade := Gradient.new()
+	fade.colors = PackedColorArray([Color(1, 1, 1, 1), Color(1, 1, 1, 0.9), Color(1, 1, 1, 0)])
+	p.color_ramp = fade
+	p.emitting = true
+	_release_after(p, p.lifetime + 0.2)
+
+
+# --- Onda de choque: anillo de partículas que se abre en el suelo (solo golpes fuertes y muertes).
+func _spawn_shockwave(global_pos: Vector2, strength: float) -> void:
+	var root := get_tree().current_scene
+	if root == null or not _effect_slot_free():
+		return
+	var p := _acquire()
+	p.global_position = global_pos + Vector2(0, 10)
+	p.z_index = 80
+	p.emitting = false
+	p.one_shot = true
+	p.explosiveness = 1.0
+	p.amount = 18
+	p.lifetime = 0.4
+	p.direction = Vector2.RIGHT
+	p.spread = 180.0
+	p.gravity = Vector2.ZERO
+	p.initial_velocity_min = 170.0 * strength
+	p.initial_velocity_max = 190.0 * strength
+	p.damping_min = 160.0
+	p.damping_max = 190.0
+	# Aplastado en horizontal: se lee como un anillo sobre el piso, no como una explosión esférica.
+	p.scale_amount_min = 3.0
+	p.scale_amount_max = 4.0
+	p.color = Color(0.84, 0.75, 0.52, 0.8)
+	var fade := Gradient.new()
+	fade.colors = PackedColorArray([Color(1, 1, 1, 0.9), Color(1, 1, 1, 0)])
+	p.color_ramp = fade
+	p.emitting = true
+	_release_after(p, p.lifetime + 0.2)

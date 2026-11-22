@@ -9,7 +9,7 @@ func ticks(count: int) -> void:
 	for i in count: await physics_frame
 func run() -> void:
 	root.get_node("GameSession").enabled = false
-	root.get_node("GamePreferences").config_path = "/private/tmp/palim-lateral-prefs.cfg"
+	root.get_node("GamePreferences").config_path = OS.get_temp_dir().path_join("palim-lateral-prefs.cfg")
 	var scene = load("res://scenes/prototypes/lateral_movement.tscn").instantiate()
 	root.add_child(scene)
 	current_scene = scene

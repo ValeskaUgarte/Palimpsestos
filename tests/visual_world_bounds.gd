@@ -12,7 +12,7 @@ func run() -> void:
 	root.get_node("GameSession").enabled = false
 	# Geometry-only fixture: avoid cycling live looping audio while inspecting scenes.
 	root.get_node("AudioLandscape").shutdown()
-	root.get_node("GamePreferences").config_path = "/private/tmp/palim-bounds-prefs.cfg"
+	root.get_node("GamePreferences").config_path = OS.get_temp_dir().path_join("palim-bounds-prefs.cfg")
 	for name in ["cuento1_escena1", "cuento1_escena2", "cuento1_escena3"]:
 		var scene = load("res://scenes/levels/" + name + ".tscn").instantiate()
 		root.add_child(scene)

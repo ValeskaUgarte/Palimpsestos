@@ -7,7 +7,7 @@ func _initialize() -> void:
 
 func run() -> void:
 	root.get_node("GameSession").enabled=false
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-preferences-tests.cfg"
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-preferences-tests.cfg")
 	for character in ["Jhon", "Thomas"]:
 		var actor = load("res://scenes/characters/player/" + character + ".tscn").instantiate()
 		actor.is_companion = true

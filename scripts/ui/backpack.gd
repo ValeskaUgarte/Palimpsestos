@@ -68,7 +68,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			_close()
 		return
-	if event.is_action_pressed(TOGGLE) and not event.is_echo() and not DialogueManager.visible \
+	# Un diálogo en pantalla ya no impide abrir la mochila/diario.
+	if event.is_action_pressed(TOGGLE) and not event.is_echo() \
 			and not ScenePages.busy and not get_tree().paused:
 		get_viewport().set_input_as_handled()
 		_open()
@@ -355,7 +356,7 @@ func _open() -> void:
 func open_diary() -> void:
 	if _panel.visible or not _in_story_level():
 		return
-	if DialogueManager.visible or ScenePages.busy or get_tree().paused:
+	if ScenePages.busy or get_tree().paused:
 		return
 	_open()
 

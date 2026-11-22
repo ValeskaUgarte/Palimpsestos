@@ -5,10 +5,10 @@ func check(ok: bool, message: String) -> void:
 	if not ok: failures += 1; push_error(message)
 func run() -> void:
 	root.get_node("GameSession").enabled = false
-	root.get_node("GamePreferences").config_path = "/private/tmp/palim-dialogue-prefs.cfg"
+	root.get_node("GamePreferences").config_path = OS.get_temp_dir().path_join("palim-dialogue-prefs.cfg")
 	root.get_node("AudioLandscape").shutdown()
 	var flow = root.get_node("LateralStory")
-	flow.save_path = "/private/tmp/palim-dialogue-once.json"
+	flow.save_path = OS.get_temp_dir().path_join("palim-dialogue-once.json")
 	flow.set_process(false)
 	flow.chapter = 0; flow.resolved = []; flow.party_health = {}; flow.entry_health = {}
 	flow.selected = "elliot"; flow.encounter_id = ""; flow.completed = false

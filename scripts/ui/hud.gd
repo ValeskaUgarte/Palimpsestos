@@ -204,7 +204,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_map_pressed()
 
 func _on_map_pressed() -> void:
-	if DialogueManager.visible or ScenePages.busy or get_tree().paused:
+	# Un diálogo en pantalla ya no impide abrir el mapa.
+	if ScenePages.busy or get_tree().paused:
 		return
 	# El mapa se abre ENCIMA del juego y la partida queda en pausa; al cerrarlo se sigue jugando.
 	var layer := CanvasLayer.new()

@@ -5,7 +5,7 @@ func check(value: bool, message: String):
 	if not value:failures+=1;push_error(message)
 func run():
 	root.get_node("GameSession").enabled=false
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-branches.cfg"
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-branches.cfg")
 	root.get_node("AudioLandscape").shutdown()
 	var flow=root.get_node("LateralStory")
 	flow.enabled=false;flow.chapter=0;flow.realm="normal";flow.return_x=1800;flow.resolved=["guardian_0","runes_0"];flow.party_health={};flow.completed=false;flow.encounter_id=""

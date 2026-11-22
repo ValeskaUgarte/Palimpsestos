@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	if _timer < 5: return
 	_timer = 0
 	var scene = get_tree().current_scene
-	if scene != null and scene.scene_file_path in WORLDS or scene.scene_file_path in UNDERWORLDS:
+	if scene != null and (scene.scene_file_path in WORLDS or scene.scene_file_path in UNDERWORLDS):
 		var actor = get_tree().get_first_node_in_group("player")
 		if actor and actor.is_on_floor() and not actor.is_attacking and not actor._dead:
 			return_x = clampf(actor.position.x, 100, 2300)

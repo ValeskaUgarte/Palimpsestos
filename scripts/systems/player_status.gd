@@ -60,6 +60,15 @@ var _still_time: float = 0.0  # segundos seguidos que Elliot lleva quieto sin at
 var _fight_time: float = 0.0  # segundos de pelea seguida
 var _since_attack: float = 99.0  # segundos desde el último golpe
 
+## Vuelve cansancio, miedo y pastel de combo a cero (nueva partida): ya no arrastra el estado de la partida anterior.
+func reset() -> void:
+	combo_temp_left = 0.0
+	_fatigue_level = 0
+	_fear_level = 0
+	_still_time = 0.0
+	_fight_time = 0.0
+	_since_attack = 99.0
+
 
 func _process(delta: float) -> void:
 	var player := _hero()

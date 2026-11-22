@@ -31,6 +31,14 @@ const JUMP_FALL_FRAME_SPEED: float = 900.0
 @export var companion_leash: float = 700.0
 ## Separación extra (px) entre un compañero y el siguiente, para que no se amontonen.
 @export var companion_spacing: float = 90.0
+## Distancia mínima (px) al personaje que juegas: más cerca que esto se aparta aunque estés quieto.
+@export var companion_min_distance: float = 110.0
+## Distancia máxima cómoda (px): más lejos que esto se apura (camina más rápido) para alcanzarte.
+@export var companion_max_distance: float = 420.0
+## Qué tan rápido va cuando se apura (multiplica su velocidad).
+@export var companion_hurry_multiplier: float = 1.35
+## Distancia (px) antes de un obstáculo a la que el compañero salta.
+@export var companion_jump_gap: float = 55.0
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Hitbox
@@ -38,6 +46,15 @@ const JUMP_FALL_FRAME_SPEED: float = 900.0
 @onready var health: Node = $HealthComponent
 @onready var hurtbox: Area2D = $Hurtbox
 
+## Control aéreo del salto (1 = igual que en el suelo). Igual que el modo demo, el personaje responde más lento en el aire.
+@export_range(0.2, 1.0, 0.05) var story_air_control: float = 0.75
+## Tiempo (s) que se recuerda un salto pulsado un instante antes de poder ejecutarlo (durante un golpe o al caer).
+@export var jump_buffer_time: float = 0.12
+## Al soltar el botón en la subida, la velocidad vertical se multiplica por esto (salto corto / salto largo).
+@export_range(0.1, 1.0, 0.05) var jump_cut_factor: float = 0.5
+var _jump_buffer: float = 0.0
+var _jump_cut_done: bool = false
+var _jump_cut_armed: bool = false  # true solo cuando el salto lo inició el jugador con el botón (no por código ni IA)
 var is_attacking: bool = false
 var facing: Vector2 = Vector2.RIGHT
 var knockback: Vector2 = Vector2.ZERO
@@ -69,6 +86,7 @@ var _attack_progress: float = 0.0
 var _attack_clip: StringName = &""
 var _attack_duration: float = 0.5
 var _fallback_elapsed: float = 0.0
+const COMPANION_KICK_MAX_TIME: float = 0.5
 var _fallback_attack: bool = false
 var _damage_recoil: float = 0.0
 var attack_phase: StringName = &"recovery"
@@ -123,6 +141,11 @@ func _physics_process(delta: float) -> void:
 	anim.rotation = _damage_recoil
 	if _await_action_release and not (Input.is_action_pressed("jump") or Input.is_action_pressed("attack") or Input.is_action_pressed("kick")):
 		_await_action_release=false
+	# Salto con buffer: el botón pulsado un instante antes (en pleno golpe o aturdimiento) no se pierde.
+	if not is_companion and Input.is_action_just_pressed("jump") and not _await_action_release:
+		_jump_buffer = jump_buffer_time
+	else:
+		_jump_buffer = maxf(0.0, _jump_buffer - delta)
 	_update_jump(delta)
 	if _interaction_time>0 and not is_jumping and not is_attacking:
 		_interaction_time=maxf(0,_interaction_time-delta)
@@ -179,8 +202,11 @@ func _physics_process(delta: float) -> void:
 	if is_companion:
 		_companion_ai_step(delta)
 		return
-	if Input.is_action_just_pressed("jump") and not _await_action_release:
+	if _jump_buffer > 0.0 and not _await_action_release:
+		_jump_buffer = 0.0
+		_jump_cut_armed = true
 		_begin_jump()
+		_jump_cut_armed = false
 
 	var input_vector := Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -188,6 +214,8 @@ func _physics_process(delta: float) -> void:
 	).limit_length(1.0)
 
 	var response: float = movement_braking if input_vector == Vector2.ZERO else movement_acceleration
+	if is_jumping:
+		response *= story_air_control
 	if _locomotion.dot(input_vector) < 0.0:
 		response = movement_braking
 	_locomotion = _locomotion.move_toward(input_vector * speed * PlayerStatus.speed_multiplier(self), response * delta)
@@ -239,6 +267,10 @@ func _play_ground_animation(animation: StringName) -> void:
 		anim.scale = _visual_ground_scale
 		anim.position = _visual_ground_position
 	anim.speed_scale = clampf(velocity.length() / maxf(speed,1.0),0.55,1.15) if animation == &"walk" else 1.0
+	if animation == &"hurt" and _hurt_presentation_time > 0.0:
+		# La reacción al golpe se acelera para caber en el tiempo de aturdimiento (se lee como impacto seco).
+		var natural: float = float(anim.sprite_frames.get_frame_count(animation)) / maxf(anim.sprite_frames.get_animation_speed(animation), 0.01)
+		anim.speed_scale = clampf(natural / _hurt_presentation_time, 1.0, 4.0)
 	anim.play(animation)
 	_apply_companion_pose()
 	_fit_pose()
@@ -349,6 +381,7 @@ func _begin_jump() -> void:
 	is_jumping = true
 	_jump_velocity = jump_impulse
 	_jump_elapsed = 0.0
+	_jump_cut_done = not _jump_cut_armed
 	if SpriteFit.has_clip(anim.sprite_frames, "jump"):
 		anim.scale = _visual_ground_scale * jump_art_scale
 		var ground_shape := $CollisionShape2D as CollisionShape2D
@@ -364,6 +397,10 @@ func _update_jump(delta: float) -> void:
 	if not is_jumping:
 		return
 	_jump_elapsed += delta
+	# Altura variable: soltar el botón durante la subida acorta el salto (el modo demo ya lo hacía).
+	if not is_companion and not _jump_cut_done and _jump_velocity > 0.0 and not Input.is_action_pressed("jump"):
+		_jump_velocity *= jump_cut_factor
+		_jump_cut_done = true
 	# Altura independiente del plano del camino: jamás atraviesa sus paredes.
 	jump_height += _jump_velocity * delta - 0.5 * jump_gravity * delta * delta
 	_jump_velocity -= jump_gravity * delta
@@ -432,6 +469,10 @@ func _do_hit(action: String) -> void:
 		_attack_profile.swing_at = float(maxi(legacy_frame - 1, 0)) / count
 		_attack_profile.hit_cue = &"finisher_hit" if active_hit_finisher else (&"kick_hit" if action == "kick" else &"attack_hit")
 		_attack_profile.impact_strength = 1.8 if active_hit_finisher else (1.2 if action == "kick" else 0.7)
+		# Las patadas de los acompañantes traen clips largos (hasta 2.5 s); se aceleran para no dejarlos inmóviles.
+		if action == "kick" and SpriteFit.has_clip(anim.sprite_frames, "kick"):
+			var natural: float = _attack_profile.clip_duration(anim.sprite_frames, &"kick")
+			_attack_profile.playback_speed = maxf(1.0, natural / COMPANION_KICK_MAX_TIME)
 	anim.flip_h = facing.x < 0
 	# Combat is horizontal even when walking in depth or approaching diagonally.
 	facing = Vector2.LEFT if anim.flip_h else Vector2.RIGHT
@@ -550,7 +591,7 @@ func take_damage(amount: int, from_position: Vector2 = Vector2.INF) -> void:
 	if not is_companion:
 		_damage_recoil = 0.035 * (-1.0 if knockback.x < 0 else 1.0)
 		if not is_attacking and not is_jumping:
-			_hurt_presentation_time = 0.12
+			_hurt_presentation_time = 0.24 if SpriteFit.has_clip(anim.sprite_frames, "hurt") else 0.12
 			_play_ground_animation("hurt" if SpriteFit.has_clip(anim.sprite_frames, "hurt") else "idle")
 	# Un golpe recibido no interrumpe un ataque activo ni deja su hitbox abierto.
 	if is_companion and not is_attacking and SpriteFit.has_clip(anim.sprite_frames, "hurt"):
@@ -591,13 +632,14 @@ func _companion_ai_step(delta: float) -> void:
 	var target := _find_nearest_enemy()
 	var move_target_pos: Vector2 = ground_position()
 	var should_move := false
+	var hurry := false
 
 	if target:
 		var me := ground_position()
 		var tp: Vector2 = target.ground_position()
 		var dx := tp.x - me.x
 		var dy := tp.y - me.y
-		if absf(dx) <= companion_attack_range and absf(dy) <= 45.0:
+		if absf(dx) <= companion_attack_range and absf(dy) <= 45.0 and not is_jumping:
 			# Al alcance y alineado: se queda y ataca.
 			facing = Vector2(signf(dx) if dx != 0.0 else facing.x, 0.0)
 			anim.flip_h = facing.x < 0
@@ -613,28 +655,65 @@ func _companion_ai_step(delta: float) -> void:
 		# Todavía no lo alcanza: avanza solo hasta quedar a su lado (no encima).
 		move_target_pos = Vector2(tp.x - signf(dx) * companion_attack_range * 0.7, tp.y)
 		should_move = me.distance_to(move_target_pos) > 8.0
+		hurry = absf(dx) > companion_attack_range * 4.0
 	elif leader:
 		if leader_moving and absf(leader_dir_x) > 0.2:
 			_follow_side = -signf(leader_dir_x)  # se coloca detrás de hacia donde camina
 		var slot := _companion_slot()
 		var back := absf(companion_follow_offset.x) + companion_spacing * slot
 		var side_y := companion_follow_offset.y + (20.0 if slot % 2 == 1 else 0.0)
-		move_target_pos = leader.ground_position() + Vector2(_follow_side * back, side_y)
-		var too_far := ground_position().distance_to(leader.ground_position()) > companion_leash
-		# Solo se mueve si el personaje camina (o si quedó demasiado lejos). Si el personaje para, se detiene.
-		should_move = (leader_moving or too_far) and ground_position().distance_to(move_target_pos) > 24.0
+		var lead_ground: Vector2 = leader.ground_position()
+		move_target_pos = lead_ground + Vector2(_follow_side * back, side_y)
+		var gap: float = ground_position().distance_to(lead_ground)
+		var too_far: bool = gap > companion_max_distance
+		var too_close: bool = gap < companion_min_distance
+		var off_slot: bool = ground_position().distance_to(move_target_pos) > 24.0
+		# Se mueve si el personaje camina, si quedó lejos o si lo está pisando (para dejarle su espacio).
+		should_move = off_slot and (leader_moving or too_far or too_close)
+		hurry = too_far
 
 	if not should_move:
 		velocity = knockback
-		_play_ground_animation("idle")
+		if not is_jumping:
+			_play_ground_animation("idle")
+			# Quieto y sin enemigos: mira hacia el personaje que juegas.
+			if target == null and leader != null and absf(leader.global_position.x - global_position.x) > 40.0:
+				facing = Vector2.LEFT if leader.global_position.x < global_position.x else Vector2.RIGHT
+				anim.flip_h = facing.x < 0
 	else:
 		var dir := (move_target_pos - ground_position()).normalized()
-		velocity = dir * speed + knockback
-		facing = dir
-		_play_ground_animation("walk")
-		anim.flip_h = dir.x < 0
+		# Obstáculo (piedra, tronco) justo delante: salta antes de chocar.
+		if _companion_obstacle_ahead(dir.x):
+			_begin_jump()
+		velocity = dir * speed * (companion_hurry_multiplier if hurry else 1.0) + knockback
+		# El giro solo cambia con una dirección clara (evita parpadeo al ajustar la posición).
+		if absf(dir.x) > 0.25:
+			facing = Vector2.LEFT if dir.x < 0.0 else Vector2.RIGHT
+		if not is_jumping:
+			_play_ground_animation("walk")
+		anim.flip_h = facing.x < 0
 	_move_on_path()
 	knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
+
+
+# true si hay un obstáculo saltable (grupo "jump_obstacle") justo delante en la dirección en que camina.
+func _companion_obstacle_ahead(dir_x: float) -> bool:
+	if is_jumping or is_attacking or absf(dir_x) < 0.2:
+		return false
+	var foot_x: float = ground_position().x
+	for obstacle in get_tree().get_nodes_in_group("jump_obstacle"):
+		if not is_instance_valid(obstacle) or not (obstacle is Node2D):
+			continue
+		var dx: float = (obstacle as Node2D).global_position.x - foot_x
+		if signf(dx) != signf(dir_x):
+			continue
+		var half: float = float(obstacle.call("_zone_half_width")) if obstacle.has_method("_zone_half_width") else 30.0
+		var gap: float = absf(dx) - half
+		# Solo si el salto alcanza para pasarlo por encima.
+		var reachable: bool = float(obstacle.get("clear_height")) <= (jump_impulse * jump_impulse) / (2.0 * maxf(jump_gravity, 1.0)) - 8.0
+		if reachable and gap <= companion_jump_gap and gap > -half:
+			return true
+	return false
 
 
 # Lleva la cuenta de golpes que no sirvieron. Si son 3 seguidos, el enemigo se ignora 8 segundos.
@@ -688,8 +767,13 @@ func _find_nearest_enemy() -> Node2D:
 		var d_leader: float = leader.ground_position().distance_to(e.ground_position()) if leader else INF
 		if minf(d, d_leader) > companion_detect_range:
 			continue
-		if d < nearest_dist:
-			nearest_dist = d
+		# No se aleja a perseguir enemigos que están lejos del personaje que juegas.
+		if leader != null and d_leader > companion_leash * 0.6 and d > companion_attack_range * 3.0:
+			continue
+		# Prioriza lo que amenaza al personaje que juegas, sin ignorar lo que tiene a su lado.
+		var score: float = d + (d_leader * 0.6 if leader else 0.0)
+		if score < nearest_dist:
+			nearest_dist = score
 			nearest = e
 	return nearest
 
@@ -701,6 +785,7 @@ func _on_died() -> void:
 	if _dead:return
 	_dead=true
 	_contact_active=false
+	CombatFX.death_burst(ground_position() + Vector2(0, -60), 0.8)
 	_damage_recoil=0.0
 	anim.rotation=0.0
 	is_attacking=false
@@ -717,6 +802,13 @@ func _on_died() -> void:
 	if not has_death:anim.pause()
 	anim.modulate=Color(.4,.43,.45)
 	AudioLandscape.cue(&"death",ground_position())
+	if not is_companion:
+		var party:=get_tree().get_first_node_in_group("party")
+		if party!=null and party.on_active_died(self):
+			remove_from_group("companion")
+			$CollisionShape2D.set_deferred("disabled",true)
+			$Hurtbox/CollisionShape2D.set_deferred("disabled",true)
+			return
 	if is_companion:
 		remove_from_group("companion")
 		$CollisionShape2D.set_deferred("disabled",true)
@@ -731,4 +823,5 @@ func present_interaction(target: Vector2) -> void:
 	_interaction_time=0.20
 	_locomotion=Vector2.ZERO
 	anim.flip_h=target.x<ground_position().x
+	facing = Vector2.LEFT if anim.flip_h else Vector2.RIGHT  # que el siguiente golpe salga hacia donde mira
 	_play_ground_animation("interact")

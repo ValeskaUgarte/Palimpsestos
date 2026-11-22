@@ -16,8 +16,8 @@ func run() -> void:
 	var preferences=root.get_node("GamePreferences")
 	session.enabled=false
 	session.set_process(false)
-	session.save_path="/private/tmp/palim-experience-save.json"
-	preferences.config_path="/private/tmp/palim-experience-preferences.cfg"
+	session.save_path=OS.get_temp_dir().path_join("palim-experience-save.json")
+	preferences.config_path=OS.get_temp_dir().path_join("palim-experience-preferences.cfg")
 	for suffix in ["",".bak",".tmp"]:
 		if FileAccess.file_exists(session.save_path+suffix):DirAccess.remove_absolute(session.save_path+suffix)
 	var level=load("res://scenes/levels/cuento1_escena1.tscn").instantiate()

@@ -7,7 +7,7 @@ func check(ok: bool,message: String) -> void:
 		push_error(message)
 func run() -> void:
 	root.get_node("GameSession").enabled=false
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-preferences-tests.cfg"
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-preferences-tests.cfg")
 	var level=load("res://scenes/levels/cuento1_escena1.tscn").instantiate()
 	root.add_child(level)
 	current_scene=level
@@ -16,6 +16,8 @@ func run() -> void:
 	var p=level.get_node("Elliot")
 	var e=level.get_node("RangerWood")
 	p.facing=Vector2.RIGHT
+	# Daño de referencia: sin cansancio, miedo ni sellos heredados de un guardado local.
+	root.get_node("GameSession").progress["status"]={}
 	# Cadena retenida incluso si la preparación/animación consume más de la ventana.
 	p._do_hit("attack")
 	p.anim.pause()

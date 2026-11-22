@@ -12,10 +12,10 @@ func wait_travel() -> void:
 	check(false,"Transición no termina")
 func run() -> void:
 	root.get_node("GameSession").enabled = false
-	root.get_node("GamePreferences").config_path = "/private/tmp/palim-lateral-campaign-prefs.cfg"
+	root.get_node("GamePreferences").config_path = OS.get_temp_dir().path_join("palim-lateral-campaign-prefs.cfg")
 	root.get_node("AudioLandscape").shutdown()
 	var flow = root.get_node("LateralStory")
-	flow.save_path = "/private/tmp/palim-lateral-campaign-test.json"
+	flow.save_path = OS.get_temp_dir().path_join("palim-lateral-campaign-test.json")
 	flow.set_process(false)
 	flow.chapter = 0; flow.selected = "elliot"; flow.encounter_id = ""; flow.resolved = []; flow.party_health = {}; flow.return_x = 300; flow.completed = false
 	var world = load(flow.WORLD).instantiate()
@@ -30,6 +30,7 @@ func run() -> void:
 	check(p.get_node("Hurtbox/CollisionShape2D").position.y == -125,"Hurtbox no sigue cuerpo lateral")
 	wolf.position = p.position + Vector2(95,0)
 	var before: int = wolf.health.current_health
+	root.get_node("GameSession").progress["status"] = {}  # daño de referencia, sin cansancio/miedo heredados
 	p.facing = Vector2.RIGHT
 	p._do_hit("attack")
 	p.anim.pause();p.anim.frame=int(p.anim.sprite_frames.get_frame_count(p.anim.animation)*0.56);p._on_attack_pose()
@@ -79,7 +80,7 @@ func run() -> void:
 	check(flow.continue_game(),"Respaldo lateral no recupera")
 	await wait_travel()
 	flow.chapter = 2; flow.encounter_id = "guardian_2"; flow.selected = "jhon"; flow.party_health = {"elliot":900,"jhon":800,"thomas":700}
-	root.get_node("ScenePages").travel(flow.ARENA)
+	root.get_node("ScenePages").travel(flow.encounter().arena_scene)
 	await wait_travel()
 	var arena = current_scene
 	arena.set_process(false)
@@ -115,8 +116,7 @@ func run() -> void:
 	arena.actor._do_hit("attack")
 	for i in 20:
 		await physics_frame
-		var clip_key: String = String(arena.actor.anim.animation)+":"+str(arena.actor.anim.frame)
-		var feet: float = arena.actor.anim.position.y + float(arena.actor._foot_offsets.get(clip_key,0))*arena.actor.anim.scale.y
+		var feet: float = arena.actor._visual_jump_height() + arena.actor.jump_height
 		check(absf(feet)<.01,"Thomas se eleva visualmente al atacar")
 		check(arena.actor.velocity.y>=0,"Thomas recibe impulso vertical al atacar")
 	arena.actor._end_attack()

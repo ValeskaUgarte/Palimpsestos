@@ -143,12 +143,15 @@ func continue_game() -> bool:
 		ScenePages.travel("res://scenes/levels/chapter_end.tscn")
 		return true
 	resume_requested=true
+	_carry_health.clear()  # la vida viene del guardado, no de la escena anterior
 	current_part=_saved_part()
 	ScenePages.travel(_data.level)
 	return true
 
 func new_game() -> void:
 	_data.clear();_defeated.clear();_carry_health.clear();resume_requested=false;_last_checkpoint=Vector2.INF
+	var status := get_node_or_null("/root/PlayerStatus")
+	if status != null and status.has_method("reset"):status.reset()
 	reset_progress()
 	current_part=0
 	ScenePages.travel(PARTS[0].level)

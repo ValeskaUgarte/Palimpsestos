@@ -22,11 +22,12 @@ extends Node2D
 @export var half_width: float = 0.0
 
 var _sprite: Sprite2D
-var _player: Node
-var _side: float = -1.0
+var _sides: Dictionary = {}  # id del personaje -> lado por el que llegó (-1 izquierda, 1 derecha)
 
 
 func _ready() -> void:
+	if not Engine.is_editor_hint():
+		add_to_group("jump_obstacle")
 	_refresh()
 
 
@@ -63,21 +64,39 @@ func _draw() -> void:
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	if _player == null or not is_instance_valid(_player):
-		_player = get_tree().get_first_node_in_group("player")
-		return
-	var foot_x: float = _player.global_position.x + (_player.get_node("CollisionShape2D") as CollisionShape2D).position.x
-	var dx: float = foot_x - global_position.x
 	var half: float = _zone_half_width()
-	if absf(dx) >= half:
-		_side = signf(dx)
+	# Bloquea a CADA personaje (el que controla el jugador y los acompañantes), cada uno con su lado de origen.
+	for actor in _actors():
+		_block(actor as Node2D, half)
+
+
+func _actors() -> Array:
+	var list: Array = get_tree().get_nodes_in_group("player")
+	for companion in get_tree().get_nodes_in_group("companion"):
+		if not list.has(companion):
+			list.append(companion)
+	return list
+
+
+func _block(actor: Node2D, half: float) -> void:
+	if actor == null or not is_instance_valid(actor):
 		return
-	if float(_player.get("jump_height")) >= clear_height:
+	var shape := actor.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if shape == null:
+		return
+	var id: int = actor.get_instance_id()
+	var foot_x: float = actor.global_position.x + shape.position.x
+	var dx: float = foot_x - global_position.x
+	if absf(dx) >= half:
+		_sides[id] = signf(dx)
+		return
+	if float(actor.get("jump_height")) >= clear_height:
 		return
 	# Choca: lo devuelve al lado por el que venía.
-	var edge: float = global_position.x + _side * half
-	_player.global_position.x += edge - foot_x
-	if _player.get("_locomotion") != null:
-		var motion: Vector2 = _player.get("_locomotion")
+	var side: float = float(_sides.get(id, -1.0))
+	var edge: float = global_position.x + side * half
+	actor.global_position.x += edge - foot_x
+	if actor.get("_locomotion") != null:
+		var motion: Vector2 = actor.get("_locomotion")
 		motion.x = 0.0
-		_player.set("_locomotion", motion)
+		actor.set("_locomotion", motion)

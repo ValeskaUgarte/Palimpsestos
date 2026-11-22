@@ -47,7 +47,7 @@ func settle(frames: int) -> void:
 
 func run() -> void:
 	root.get_node("GameSession").enabled = false
-	root.get_node("GamePreferences").config_path = "/private/tmp/palim-diag-prefs.cfg"
+	root.get_node("GamePreferences").config_path = OS.get_temp_dir().path_join("palim-diag-prefs.cfg")
 	level = load("res://scenes/levels/cuento1_escena1.tscn").instantiate()
 	root.add_child(level)
 	current_scene = level

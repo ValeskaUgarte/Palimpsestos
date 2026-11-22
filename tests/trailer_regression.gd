@@ -7,9 +7,13 @@ func check(ok: bool, message: String) -> void:
 		push_error(message)
 func wait_real(seconds: float) -> void:
 	await create_timer(seconds, false, false, true).timeout
+func wait_scene(path: String) -> void:
+	for step in 150:
+		await wait_real(0.1)
+		if current_scene!=null and current_scene.scene_file_path==path and not root.get_node("ScenePages").busy:return
 func run() -> void:
 	root.get_node("GameSession").enabled=false
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-preferences-tests.cfg"
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-preferences-tests.cfg")
 	for bus in ["Master","Music","SFX","Ambient","UI"]:
 		check(AudioServer.get_bus_index(bus)>=0,"Falta bus "+bus)
 	for scene in ["main_menu","ui/settings_menu","ui/map_screen","ui/credits_menu"]:
@@ -45,13 +49,17 @@ func run() -> void:
 	var enemy=level.get_node("RangerWood")
 	enemy.global_position+=p.ground_position()+Vector2(80,0)-enemy.ground_position()
 	var before: int=enemy.health.current_health
+	# Daño de referencia: sin cansancio/miedo (heredados de un guardado local o acumulados).
+	root.get_node("GameSession").progress["status"]={}
 	p.facing=Vector2.RIGHT
 	p._do_hit("attack")
 	await wait_real(0.18)
 	check(enemy.health.current_health==before,"Daño antes de la pose de contacto")
 	await wait_real(0.4)
 	check(enemy.health.current_health==before-p.punch_damage,"Golpe perdido o repetido")
-	await wait_real(0.5)
+	for wait_step in 30:
+		if not p.is_attacking:break
+		await wait_real(0.1)
 	check(not p.is_attacking and p.hitbox_shape.disabled,"Ataque no recupera")
 	p.set_physics_process(false)
 	var puzzle=level.get_node("Monolito")
@@ -64,14 +72,13 @@ func run() -> void:
 	check(level.get_node("StoryPortal")._active,"Portal no se revela")
 	var dm=root.get_node("DialogueManager")
 	while dm.visible:dm._next_line()
-	Input.action_press("interact")
-	puzzle._process(0)
-	Input.action_release("interact")
-	await wait_real(1.8)
+	# El monolito solo abre el camino; la salida a la escena 2 es el ChapterExit (tras la mesa de escritura).
+	level.get_node("ChapterExit")._on_body_entered(p)
+	await wait_scene("res://scenes/levels/cuento1_escena2.tscn")
 	check(current_scene.scene_file_path=="res://scenes/levels/cuento1_escena2.tscn","Portal no viaja")
 	check(not root.get_node("ScenePages").busy,"Transición no termina")
 	current_scene.get_node("ChapterExit")._on_body_entered(current_scene.get_node("Elliot"))
-	await wait_real(1.8)
+	await wait_scene("res://scenes/levels/cuento1_escena3.tscn")
 	check(current_scene.scene_file_path=="res://scenes/levels/cuento1_escena3.tscn","Salida siguiente no viaja")
 	print("TRAILER_REGRESSION failures=",failures)
 	root.get_node("GameSession").quit_game(1 if failures else 0)

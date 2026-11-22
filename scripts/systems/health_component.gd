@@ -14,6 +14,7 @@ func _ready() -> void:
 	current_health = max_health
 
 func take_damage(amount: int) -> void:
+	amount = maxi(amount, 0)
 	var was_alive: bool = current_health > 0
 	current_health = max(current_health - amount, 0)
 	health_changed.emit(current_health, max_health)
@@ -23,5 +24,5 @@ func take_damage(amount: int) -> void:
 			var fx: Node = get_node_or_null("/root/CombatFX")
 			if fx != null and fx.has_method("damage_number"):
 				fx.damage_number(get_parent(), amount)
-	if current_health <= 0:
+	if was_alive and current_health <= 0:
 		died.emit()

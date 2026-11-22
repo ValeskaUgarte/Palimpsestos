@@ -5,7 +5,7 @@ func check(ok: bool, message: String) -> void:
 	if not ok: failures+=1;push_error(message)
 func run() -> void:
 	root.get_node("GameSession").enabled=false
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-expanded-prefs.cfg"
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-expanded-prefs.cfg")
 	var flow=root.get_node("LateralStory")
 	flow.enabled=false;flow.chapter=2;flow.return_x=390;flow.party_health={};flow.resolved=[];flow.completed=false;flow.encounter_id=""
 	var audio=root.get_node("AudioLandscape")

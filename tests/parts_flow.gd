@@ -19,8 +19,8 @@ func run() -> void:
 	var session = root.get_node("GameSession")
 	session.enabled = false
 	session.set_process(false)
-	session.save_path = "/private/tmp/palim-parts-save.json"
-	root.get_node("GamePreferences").config_path = "/private/tmp/palim-parts-prefs.cfg"
+	session.save_path = OS.get_temp_dir().path_join("palim-parts-save.json")
+	root.get_node("GamePreferences").config_path = OS.get_temp_dir().path_join("palim-parts-prefs.cfg")
 	var parts: Array = session.PARTS
 	for index in parts.size():
 		var part: Dictionary = parts[index]
@@ -46,6 +46,7 @@ func run() -> void:
 			if child is Area2D and child.get_script() != null and "next_part" in child and child.process_mode != Node.PROCESS_MODE_DISABLED and child.monitoring:
 				if child.next_part == expected_next:
 					exit_found = true
+					check((child.collision_mask & 2) != 0, "Escena %d: salida %s no detecta al jugador (máscara %d)" % [index + 1, child.name, child.collision_mask])
 				elif child.name == "SegmentExit" or child.name == "ChapterExit" or child.name == "ExitCueva":
 					check(false, "Escena %d: salida %s lleva a %d y debía ir a %d" % [index + 1, child.name, child.next_part, expected_next])
 		check(exit_found, "Escena %d: no hay salida hacia el tramo %d" % [index + 1, expected_next])

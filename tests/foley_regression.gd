@@ -7,7 +7,7 @@ func check(ok: bool,message: String) -> void:
 		push_error(message)
 func run() -> void:
 	root.get_node("GameSession").enabled=false
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-preferences-tests.cfg"
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-preferences-tests.cfg")
 	var level: Node=load("res://scenes/levels/cuento1_escena1.tscn").instantiate()
 	root.add_child(level)
 	current_scene=level

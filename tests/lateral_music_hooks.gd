@@ -6,7 +6,7 @@ func check(ok: bool, message: String) -> void:
 func run() -> void:
 	root.get_node("GameSession").enabled=false
 	root.get_node("LateralStory").enabled=false
-	root.get_node("GamePreferences").config_path="/private/tmp/palim-music-prefs.cfg"
+	root.get_node("GamePreferences").config_path=OS.get_temp_dir().path_join("palim-music-prefs.cfg")
 	var audio=root.get_node("AudioLandscape")
 	# Existing wind files are stream fixtures, not new music presented to players.
 	audio.set_music(load("res://assets/audio/original/wind_01.wav"))

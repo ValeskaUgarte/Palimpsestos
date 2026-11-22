@@ -15,8 +15,13 @@ var _talking: bool = false
 var _completed: bool = false
 var _started_this_visit: bool = false
 
+var _cached_key: String = ""
+
 func _dialogue_key() -> String:
-	return "dialogue:" + scene_file_path + ":" + "\n".join(dialogue_lines).sha256_text()
+	# Se calcula una sola vez: _process lo consultaba cada cuadro (join + sha256 por NPC).
+	if _cached_key == "":
+		_cached_key = "dialogue:" + scene_file_path + ":" + "\n".join(dialogue_lines).sha256_text()
+	return _cached_key
 
 func _on_dialogue_finished() -> void:
 	if not _talking: return
@@ -43,6 +48,9 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = false
+		if _talking and not DialogueManager.visible:
+			_talking = false
+			conversation_finished.emit()
 
 func _process(_delta: float) -> void:
 	# El "not DialogueManager.visible" es clave: sin este chequeo, si te quedas
