@@ -5,7 +5,8 @@
 
 [node name="Perro" type="Node2D"]
 script = ExtResource("1_walker")
-auto_fit = false
+auto_fit = true
+standing_height = 125.0
 frames = ExtResource("2_frames")
 x_min = -300.0
 x_max = 300.0

@@ -39,7 +39,7 @@ theme_override_colors/font_shadow_color = Color(0.025, 0.02, 0.03, 0.9)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 12
-text = "P A L I M P S E S T O S   /   C U E N T O  I"
+text = "P A L I M P S E S T O S"
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="TitleCard" unique_id=1267783364]

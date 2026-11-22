@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/npc/Padre_HyG.png" id="2_texture"]
+[ext_resource type="Script" uid="uid://n5et6o07pksb" path="res://scripts/characters/npc_motion.gd" id="motion_script"]
+[ext_resource type="SpriteFrames" path="res://assets/npc/padre_hyg.tres" id="motion_frames"]
+
+[node name="NPC_Padre_HyG" type="Node2D"]
+
+[node name="Visual" type="Sprite2D" parent="."]
+scale = Vector2(0.5156, 0.5156)
+texture = ExtResource("2_texture")
+
+[node name="Motion" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("motion_frames")
+animation = &"idle"
+script = ExtResource("motion_script")
+always_talk = true
+face_player = false
+idle_face_direction = 1.0

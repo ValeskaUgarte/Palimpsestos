@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://ctvbxmmtda3f5" path="res://assets/npc/Vieja.png" id="2_texture"]
+[ext_resource type="Script" uid="uid://n5et6o07pksb" path="res://scripts/characters/npc_motion.gd" id="motion_script"]
+[ext_resource type="SpriteFrames" path="res://assets/npc/vieja.tres" id="motion_frames"]
+
+[node name="NPC_Vieja" type="Node2D"]
+
+[node name="Visual" type="Sprite2D" parent="."]
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_texture")
+
+[node name="Motion" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("motion_frames")
+animation = &"idle"
+script = ExtResource("motion_script")
+standing_height = 268.65
+talk_when_near = 500.0
+idle_face_direction = -1.0

@@ -21,7 +21,7 @@ scale = Vector2(0.989375, 0.93859375)
 sprite_frames = ExtResource("motion_frames")
 animation = &"walk"
 script = ExtResource("motion_script")
-standing_height = 360.0
+standing_height = 335.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=806882543]
 position = Vector2(83, 92)

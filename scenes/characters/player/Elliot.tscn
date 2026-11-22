@@ -25,7 +25,7 @@ clip_scale = {
 "attack_1": 1.6316,
 "attack_2": 1.8902,
 "finisher": 1.7514,
-"hurt": 1.7664,
+"hurt": 1.51,
 "idle": 1.6146,
 "interact": 1.6146,
 "jump": 1.8902,

@@ -6,7 +6,8 @@
 [node name="Mujer" type="Node2D" unique_id=1759099347]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_walker")
-auto_fit = false
+auto_fit = true
+standing_height = 283.0
 frames = ExtResource("2_frames")
 x_min = -300.0
 x_max = 300.0

@@ -36,7 +36,9 @@
 [ext_resource type="Texture2D" uid="uid://ctd15os2tr87o" path="res://assets/npc/Hansel.png" id="hyg_hansel"]
 [ext_resource type="Texture2D" uid="uid://cwew6mcas2vd6" path="res://assets/npc/Madre_HyG.png" id="hyg_madre"]
 [ext_resource type="Texture2D" uid="uid://trcj4v0qasv5" path="res://assets/npc/Padre_HyG.png" id="hyg_padre"]
-[ext_resource type="Texture2D" uid="uid://ctvbxmmtda3f5" path="res://assets/npc/Vieja.png" id="hyg_vieja"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Vieja.tscn" id="npc_vieja_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Padre_HyG.tscn" id="npc_padre_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Madre_HyG.tscn" id="npc_madre_scene"]
 [ext_resource type="Texture2D" uid="uid://b8dmc8tthot7m" path="res://assets/ui/items/empanada.png" id="it_empanada"]
 [ext_resource type="Texture2D" uid="uid://djr7gbywwa1gs" path="res://assets/ui/items/mate.png" id="it_mate"]
 [ext_resource type="Texture2D" uid="uid://b1nry0m0x7fjq" path="res://assets/ui/items/pan.png" id="it_pan"]
@@ -145,65 +147,6 @@ speed = 110.0
 [node name="Sprite" parent="Aldeano_Nino" index="0"]
 scale = Vector2(0.6, 0.6)
 
-[node name="Aldeano_Guardia" parent="." unique_id=348331811 instance=ExtResource("amb_guardia")]
-position = Vector2(1000, 245)
-
-[node name="Aldeano_Hombre" parent="." unique_id=1311580142 instance=ExtResource("amb_hombre")]
-position = Vector2(-700, 250)
-x_min = -250.0
-x_max = 250.0
-
-[node name="Sprite" parent="Aldeano_Hombre" index="0"]
-position = Vector2(-23.619518, -120.79399)
-scale = Vector2(1.1064028, 1.2047344)
-animation = &"walk"
-frame = 13
-frame_progress = 1.0
-
-[node name="Aldeano_Anciano" parent="." unique_id=1963293875 instance=ExtResource("amb_anciano")]
-position = Vector2(500, 270)
-
-[node name="Sprite" parent="Aldeano_Anciano" index="0"]
-position = Vector2(34.64631, -114.79209)
-scale = Vector2(1.4894243, 1.5953742)
-animation = &"walk"
-frame_progress = 0.26988703
-
-[node name="Aldeano_Mujer" parent="." unique_id=1253616783 instance=ExtResource("amb_mujer")]
-position = Vector2(-612, 263)
-
-[node name="Sprite" parent="Aldeano_Mujer" index="0"]
-position = Vector2(-339.99997, -106.250015)
-scale = Vector2(1.5278322, 1.6374509)
-animation = &"walk"
-frame_progress = 0.7874064
-
-[node name="Caballo" parent="." unique_id=1630862842 instance=ExtResource("amb_caballo")]
-position = Vector2(1424, 253)
-x_min = -125.0
-x_max = 125.0
-
-[node name="Sprite" parent="Caballo" index="0"]
-position = Vector2(220.99997, -153)
-
-[node name="Aldeano_Nino2" parent="." unique_id=815524378 instance=ExtResource("amb_nino")]
-position = Vector2(2750, 245)
-x_min = -450.0
-x_max = 450.0
-speed = 100.0
-
-[node name="Sprite" parent="Aldeano_Nino2" index="0"]
-position = Vector2(-62.999985, -44)
-scale = Vector2(1.403966, 1.1923003)
-animation = &"walk"
-frame = 19
-frame_progress = 1.0
-
-[node name="Aldeano_Anciano2" parent="." unique_id=1417433480 instance=ExtResource("amb_anciano")]
-position = Vector2(3250, 275)
-x_min = -350.0
-x_max = 350.0
-
 [node name="Obstaculo1_pila" parent="." unique_id=1548712512 instance=ExtResource("jump_obstacle")]
 position = Vector2(3600, 275)
 region = Rect2(439, 18, 247, 168)
@@ -258,24 +201,10 @@ region = Rect2(1188, 62, 251, 119)
 clear_height = 10.0
 half_width = 10.0
 
-[node name="Aldeana_Nina" parent="." unique_id=1218587646 instance=ExtResource("amb_nina")]
-position = Vector2(800, 305)
-
-[node name="Sprite" parent="Aldeana_Nina" index="0"]
-position = Vector2(21.516172, -76.28575)
-scale = Vector2(0.9884079, 1.2008924)
-animation = &"walk"
-frame_progress = 0.6744161
-
 [node name="Perro" parent="." unique_id=2127423587 instance=ExtResource("amb_perro")]
 position = Vector2(-100, 312)
 x_min = -400.0
 x_max = 400.0
-
-[node name="Gato" parent="." unique_id=1156564016 instance=ExtResource("amb_gato")]
-position = Vector2(1075, 318)
-x_min = -175.0
-x_max = 175.0
 
 [node name="LoboPunch" parent="." unique_id=1986360575 instance=ExtResource("new_wolfpunch")]
 position = Vector2(7245, 205)
@@ -355,13 +284,13 @@ position = Vector2(394, -24)
 position = Vector2(391, 4)
 
 [node name="CollisionShape2D" parent="RangerWood/Hurtbox" parent_id_path=PackedInt32Array(2069088770, 139528050) index="0" unique_id=1409883443]
-position = Vector2(423, -79)
+position = Vector2(420, -71)
 
 [node name="CollisionShape2D" parent="RangerWood/Hitbox" parent_id_path=PackedInt32Array(2069088770, 1424869262) index="0" unique_id=1987142242]
-position = Vector2(431, -48)
+position = Vector2(427, -43)
 
 [node name="CollisionShape2D" parent="RangerWood/DetectionArea" parent_id_path=PackedInt32Array(2069088770, 1340406709) index="0" unique_id=1054602036]
-position = Vector2(398, -73)
+position = Vector2(397, -66)
 
 [node name="Ethan" parent="." unique_id=952834545 instance=ExtResource("12_ethan")]
 position = Vector2(6209, 299)
@@ -417,19 +346,25 @@ position = Vector2(-746, 193)
 [node name="Motion" parent="NPC_Mama" index="0"]
 position = Vector2(321.2925, -43.002045)
 scale = Vector2(0.2242023, 0.2242023)
-standing_height = 330.25
+standing_height = 305.0
 foot_position = Vector2(318.49, 116.63)
+always_talk = true
+face_player = false
+idle_face_direction = -1.0
 
 [node name="CollisionShape2D" parent="NPC_Mama" index="1" unique_id=1172121729]
 position = Vector2(326, -36)
 
 [node name="NPC_Vecina" parent="." unique_id=2091243322 instance=ExtResource("5_npc")]
-position = Vector2(-477, 211)
+position = Vector2(-840, 211)
 dialogue_lines = Array[String]([])
 
 [node name="Motion" parent="NPC_Vecina" index="0" unique_id=1815825590]
 position = Vector2(-52.68662, -52.000916)
 scale = Vector2(0.22686721, 0.22686721)
+always_talk = true
+face_player = false
+idle_face_direction = 1.0
 
 [node name="CollisionShape2D" parent="NPC_Vecina" index="1" unique_id=183638987]
 position = Vector2(-103, -39)
@@ -813,9 +748,9 @@ position = Vector2(1295, 260)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_speakers = Array[String](["Madre", "Padre", "Madre", "Padre", "Madre", "Padre", "Madre", "Padre"])
-conversation_lines = Array[String](["No queda ni una corteza, y los niños lloran de hambre por las noches.", "Todavía nos queda un último pan.", "Para los cuatro no alcanza. Para dos, quizá.", "¿Qué estás diciendo, mujer?", "Mañana, al amanecer, los llevaremos a lo más espeso del bosque. Les daremos un trozo de pan, encenderemos un fuego y los dejaremos allí.", "¿Y las fieras? Se los comerán.", "¿Prefieres oír cómo se apagan de hambre aquí?", "Que Dios me perdone."])
-conversation_portraits = Array[Texture2D]([null, null, null, null, null, null, null, null])
+conversation_speakers = Array[String](["Madre", "Padre", "Madre", "Padre"])
+conversation_lines = Array[String](["No queda ni una corteza, y los niños lloran de hambre.", "Solo nos queda un último pan. Para los cuatro no alcanza.", "Mañana los dejaremos en lo más espeso del bosque.", "Que Dios me perdone."])
+conversation_portraits = Array[Texture2D]([null, null, null, null])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Conv_Padres_HyG" unique_id=1914116767]
 shape = SubResource("ZonaConversacion")
@@ -907,19 +842,15 @@ lines = Array[String](["Quien llega al final de un camino cree haberlo recorrido
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Narr_Cierre" unique_id=1600769081]
 shape = SubResource("ZonaNarracion")
 
-[node name="NPC_Padre_HyG" type="Sprite2D" parent="." unique_id=397359071]
+[node name="NPC_Padre_HyG" parent="." unique_id=397359071 instance=ExtResource("npc_padre_scene")]
 modulate = Color(0.8, 0.88, 0.93, 1)
 z_index = 1
 position = Vector2(1250, 120)
-scale = Vector2(0.5156, 0.5156)
-texture = ExtResource("hyg_padre")
 
-[node name="NPC_Madre_HyG" type="Sprite2D" parent="." unique_id=1599234376]
+[node name="NPC_Madre_HyG" parent="." unique_id=1599234376 instance=ExtResource("npc_madre_scene")]
 modulate = Color(0.8, 0.88, 0.93, 1)
 z_index = 1
 position = Vector2(1340, 135)
-scale = Vector2(0.4688, 0.4688)
-texture = ExtResource("hyg_madre")
 
 [node name="NPC_Hansel" type="Sprite2D" parent="." unique_id=1412318618]
 modulate = Color(0.8, 0.88, 0.93, 1)
@@ -935,24 +866,13 @@ position = Vector2(9600, 165)
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("hyg_gretel")
 
-[node name="NPC_Vieja" type="Sprite2D" parent="." unique_id=302949355]
+[node name="NPC_Vieja" parent="." unique_id=302949355 instance=ExtResource("npc_vieja_scene")]
 modulate = Color(0.8, 0.88, 0.93, 1)
 z_index = 1
 position = Vector2(14220, 150)
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("hyg_vieja")
 
 [editable path="Aldeano_Nino"]
-[editable path="Aldeano_Guardia"]
-[editable path="Aldeano_Hombre"]
-[editable path="Aldeano_Anciano"]
-[editable path="Aldeano_Mujer"]
-[editable path="Caballo"]
-[editable path="Aldeano_Nino2"]
-[editable path="Aldeano_Anciano2"]
-[editable path="Aldeana_Nina"]
 [editable path="Perro"]
-[editable path="Gato"]
 [editable path="LoboPunch"]
 [editable path="Lobo3Blanco"]
 [editable path="Elliot"]
