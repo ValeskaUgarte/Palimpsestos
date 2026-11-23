@@ -15,6 +15,22 @@ cambiar** para cada tipo de cosa, y qué calcula el juego solo al ejecutar.
 **Si el nodo que quieres mover es hijo de una escena instanciada** (por ejemplo el `Motion` de un NPC dentro del nivel): clic
 derecho sobre la instancia en el árbol de escena → **Hijos editables**. Sin eso solo puedes seleccionar la raíz.
 
+### Posición de Elliot y de los aliados al empezar
+
+En el **primer tramo de cada escena** el juego respeta exactamente donde pongas a Elliot, Jhon y Thomas en el editor: nada los recoloca.
+Hay una casilla en el nodo raíz del nivel (`level.gd`):
+
+* **`auto_place_party`** = desactivada (por defecto): manda el editor. Actívala si quieres que el juego recoloque siempre a Elliot al
+  inicio del tramo y a los aliados junto a él.
+* `snap_actors_to_path` = desactivada: NPC y enemigos tampoco se pegan al camino; se quedan donde los pongas.
+
+Dos excepciones que no se pueden editar a mano, porque tu posición del editor no corresponde al sitio donde se entra:
+tramos que empiezan **a mitad de la escena** (ej. "El rastro de las flores") y **llegadas desde otro tramo** al volver atrás.
+Ahí el juego coloca a Elliot en la entrada y a los aliados detrás de él, sobre el camino. Los puntos de inicio de esos tramos
+están en `GameSession.PARTS` (`start`).
+
+Elliot siempre queda apoyado sobre la franja del camino (`WalkablePath`): puedes cambiar su X, pero su Y se ajusta al suelo.
+
 ## 2. Tamaño y apoyo en el suelo
 
 El juego ajusta solo el tamaño y los pies de cada fotograma para que no "salten" entre animaciones. Por eso escalar un

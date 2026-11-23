@@ -10,6 +10,12 @@ extends Node2D
 ## true = escena de interior (casa): sin marco de follaje, niebla, lluvia ni efectos de bosque.
 @export var interior: bool = false
 @export var snap_actors_to_path: bool = false
+## false (recomendado) = en el PRIMER tramo de cada escena, Elliot y los aliados aparecen donde los pusiste en el editor: nada los recoloca.
+## true = el juego recoloca siempre a Elliot (inicio del tramo) y a los aliados (junto a Elliot, sobre el camino).
+## Aunque esté en false, la colocación automática se usa donde no hay otra opción: tramos que empiezan a mitad de la escena
+## y llegadas desde otro tramo (al volver atrás), porque ahí tu posición del editor no corresponde al sitio donde se entra.
+@export var auto_place_party: bool = false
+var _auto_party: bool = true
 # Niebla por zonas: cada Vector2 es (X inicial, X final) del mundo. Vacío = sin niebla.
 @export var fog_zones: PackedVector2Array = PackedVector2Array()
 @export var fog_fade: float = 700.0
@@ -104,12 +110,15 @@ func _apply_part(index: int) -> void:
 	# Al volver atrás desde el tramo siguiente, Elliot aparece junto a su salida derecha (GameSession.part_start_override).
 	_part_index = index
 	_arrival_dir = GameSession.part_arrival_dir
+	var first_part_of_scene: bool = index == 0 or String(GameSession.PARTS[index - 1].level) != scene_file_path
+	var arrived_from_other_part: bool = GameSession.part_start_override != INF
+	_auto_party = auto_place_party or arrived_from_other_part or not first_part_of_scene
 	if GameSession.part_start_override != INF:
 		start = clampf(GameSession.part_start_override, left + 120.0, right - 120.0)
 	GameSession.part_start_override = INF
 	GameSession.part_arrival_dir = 1.0
 	var elliot := get_node_or_null("Elliot") as Node2D
-	if elliot != null and not GameSession.resume_requested:
+	if elliot != null and not GameSession.resume_requested and _auto_party:
 		elliot.global_position.x = start
 	_setup_exits(index, right)
 	var presentation := get_node_or_null("ChapterPresentation")
@@ -125,7 +134,7 @@ const COMPANION_SPACING := 45.0
 const COMPANION_WALL_MARGIN := 50.0
 
 func _place_companions() -> void:
-	if _part_index < 0 or GameSession.resume_requested or player == null:
+	if _part_index < 0 or GameSession.resume_requested or player == null or not _auto_party:
 		return
 	var part: Dictionary = GameSession.PARTS[_part_index]
 	var left: float = part.from
