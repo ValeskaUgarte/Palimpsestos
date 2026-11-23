@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://3p36cjprpd2q" path="res://scenes/characters/player/Elliot.tscn" id="elliot"]
 [ext_resource type="PackedScene" uid="uid://dx7lq25hkulp5" path="res://scenes/characters/npc/Ethan.tscn" id="ethan"]
 [ext_resource type="Script" uid="uid://2go41el7ernn" path="res://scripts/systems/level_exit.gd" id="exit"]
-[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Gnomo.tscn" id="Gnomo"]
 [ext_resource type="PackedScene" uid="uid://ce7ioblmk5vao" path="res://scenes/ui/hud.tscn" id="hud"]
 [ext_resource type="Texture2D" uid="uid://cgwqh42aljhmc" path="res://assets/escenas/cuento1/escena_02a_casa.png" id="img_a"]
 [ext_resource type="Texture2D" uid="uid://bht7a6gey44ng" path="res://assets/escenas/cuento1/escena_02b_cueva.png" id="img_b"]
@@ -46,7 +45,6 @@
 [ext_resource type="Script" uid="uid://blsfycm1a7crf" path="res://scripts/systems/story_trail.gd" id="trail_s2"]
 [ext_resource type="PackedScene" uid="uid://drlittrjn26le" path="res://scenes/characters/enemies/Wolf1.tscn" id="Wolf1"]
 [ext_resource type="PackedScene" uid="uid://b5hulsa2v6cik" path="res://scenes/characters/enemies/Wolf2.tscn" id="Wolf2"]
-[ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf3.tscn" id="Wolf3"]
 [ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfWhite.tscn" id="WolfWhite"]
 [ext_resource type="Script" uid="uid://dle2byc7appx4" path="res://scripts/systems/wolf_lie.gd" id="wolf_s2"]
 
@@ -75,9 +73,6 @@ size = Vector2(54, 1100)
 
 [sub_resource type="CircleShape2D" id="ClueShape2"]
 radius = 90.0
-
-[sub_resource type="RectangleShape2D" id="ExitShape2"]
-size = Vector2(60, 1000)
 
 [sub_resource type="RectangleShape2D" id="ExitCaveShape2"]
 size = Vector2(200, 1000)
@@ -161,7 +156,7 @@ shape = SubResource("WallV2")
 position = Vector2(500, 270)
 
 [node name="AnimatedSprite2D" parent="Elliot" index="0" unique_id=2041307235]
-frame = 22
+frame = 18
 
 [node name="Jhon" parent="." unique_id=1241934697 instance=ExtResource("jhon")]
 position = Vector2(1120, 285)
@@ -211,23 +206,11 @@ animation = &"walk"
 [node name="Enemigo16_WolfWhite" parent="." unique_id=2031981707 instance=ExtResource("WolfWhite")]
 position = Vector2(8300, 275)
 
-[node name="Enemigo17_Wolf2" parent="." unique_id=1838702337 instance=ExtResource("Wolf2")]
-position = Vector2(8900, 285)
-
-[node name="Visual" parent="Enemigo17_Wolf2" index="0" unique_id=450480685]
-frame_progress = 0.0
-
 [node name="Enemigo19_Wolf1" parent="." unique_id=1526678526 instance=ExtResource("Wolf1")]
 position = Vector2(9700, 300)
 
 [node name="Visual" parent="Enemigo19_Wolf1" index="0" unique_id=2054604276]
 animation = &"walk"
-
-[node name="Enemigo24_WolfWhite" parent="." unique_id=1320892587 instance=ExtResource("WolfWhite")]
-position = Vector2(12100, 275)
-
-[node name="Enemigo26_Wolf3" parent="." unique_id=1074785677 instance=ExtResource("Wolf3")]
-position = Vector2(12900, 290)
 
 [node name="Ethan" parent="." unique_id=962963380 instance=ExtResource("ethan")]
 position = Vector2(3350, 272)
@@ -235,8 +218,8 @@ dialogue_lines = Array[String](["Ethan-Ese cartel dice camino corto y camino de 
 repeatable = true
 
 [node name="Motion" parent="Ethan" index="0" unique_id=606193905]
-position = Vector2(-13.743243, -173.1892)
-scale = Vector2(0.24324325, 0.24324325)
+position = Vector2(-12.788852, -161.16216)
+scale = Vector2(0.22635135, 0.22635135)
 animation = &"idle"
 
 [node name="Caperucita" parent="." unique_id=216227411 instance=ExtResource("caperucita")]
@@ -248,8 +231,8 @@ followup_requires_flag = "abuela_envia_cueva"
 followup_sets_flag = "caperucita_abre_cueva"
 
 [node name="Motion" parent="Caperucita" index="0" unique_id=822710853]
-position = Vector2(-0.16129032, -76.29032)
-scale = Vector2(0.16129032, 0.16129032)
+position = Vector2(7.376682, -121.18834)
+scale = Vector2(1.0538117, 1.0538117)
 animation = &"idle"
 
 [node name="Abuelita" parent="." unique_id=978886099 instance=ExtResource("abuelita")]
@@ -257,8 +240,8 @@ position = Vector2(10640, 278)
 dialogue_lines = Array[String](["Abuelita-¡Ay, qué bien que llegan! Pasen, pasen.", "Abuelita-Antes de comer, vuelve a la cueva. La roca guarda un camino que aún no leíste.", "Elliot-¿Qué cueva? No vi ninguna.", "Jhon-Quizás no prestaste atención.", "Abuelita-La roca solo se abre a quien cuenta el cuento en orden: casa, lobo y flores.", "Abuelita-Los anillos se leen de fuera hacia dentro. El de fuera y el de dentro giran con el sol; el del medio, contra él. La luna y el hongo no cuentan."])
 
 [node name="Motion" parent="Abuelita" index="0" unique_id=1628143642]
-position = Vector2(-3.2410533, -145.44228)
-scale = Vector2(0.20256583, 0.20256583)
+position = Vector2(0.64935064, -145.45454)
+scale = Vector2(1.2987013, 1.2987013)
 
 [node name="CollisionShape2D" parent="Abuelita" index="1" unique_id=511505746]
 position = Vector2(-240, 131)
@@ -316,27 +299,9 @@ target_height = 55.0
 clear_height = 10.0
 half_width = 10.0
 
-[node name="Piedra8_plana" parent="." unique_id=148507732 instance=ExtResource("jump_obstacle")]
-position = Vector2(13000, 275)
-region = Rect2(1044, 109, 125, 50)
-target_height = 38.0
-clear_height = 10.0
-half_width = 10.0
-
 [node name="HUD" parent="." unique_id=2049749602 instance=ExtResource("hud")]
 
 [node name="PauseMenu" parent="." unique_id=696504915 instance=ExtResource("pause")]
-
-[node name="ChapterExit" type="Area2D" parent="." unique_id=1048287227]
-position = Vector2(13100, 31)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("exit")
-next_scene_path = "res://scenes/levels/cuento1_escena3.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChapterExit" unique_id=1487071748]
-position = Vector2(-162, -24)
-shape = SubResource("ExitShape2")
 
 [node name="ExitCueva" type="Area2D" parent="." unique_id=2147483001]
 position = Vector2(4365, 20)
@@ -374,8 +339,7 @@ draw_width = 185.0
 poster_texture = ExtResource("29_jy5gy")
 
 [node name="Tablero_nina_perdida" type="Area2D" parent="RutaCuento" unique_id=1806833996]
-position = Vector2(9000, 347)
-scale = Vector2(1.5, 1.5)
+position = Vector2(9222, 254)
 script = ExtResource("pickup_gd")
 lines = Array[String](["Cuidado con los lobos del camino de las flores. Anoche atacaron dos ovejas al atardecer."])
 key = "escena2_1"
@@ -401,8 +365,7 @@ icon_texture = ExtResource("pk_tex_5")
 draw_width = 120.0
 
 [node name="Pista_TablaAnillos" type="Area2D" parent="RutaCuento" unique_id=296753879]
-position = Vector2(2645, 342.00003)
-scale = Vector2(1.5, 1.5)
+position = Vector2(2642, 259)
 script = ExtResource("pickup_gd")
 lines = Array[String](["Una tabla con tres anillos grabados y flechas: el de fuera y el de dentro giran con el sol; el del medio, contra él.", "Debajo: «El cuento se lee de fuera hacia dentro, y siempre bajo la marca de arriba.»"])
 key = "escena2_5"
@@ -503,7 +466,7 @@ icon_texture = ExtResource("it_sopa")
 draw_width = 56.0
 
 [node name="Objeto_sello_verde_n4" type="Area2D" parent="RutaCuento" unique_id=1145315824]
-position = Vector2(12200, 270)
+position = Vector2(11400, 147)
 script = ExtResource("pickup_gd")
 item_id = "sello_verde"
 key = "escena2_n4"
@@ -519,7 +482,7 @@ icon_texture = ExtResource("it_leche")
 draw_width = 44.0
 
 [node name="Objeto_pan_n6" type="Area2D" parent="RutaCuento" unique_id=1419682145]
-position = Vector2(11780, 224)
+position = Vector2(11247, 209)
 script = ExtResource("pickup_gd")
 item_id = "pan"
 key = "escena2_n6"
@@ -529,12 +492,10 @@ draw_width = 60.0
 [node name="MentiraLobo" type="Node2D" parent="." unique_id=1268966410]
 script = ExtResource("wolf_s2")
 crossing_position = Vector2(8250, 270)
+exit_path = NodePath("")
 
 [node name="CaveRiddle" type="Node2D" parent="." unique_id=1106394670]
 script = ExtResource("riddle")
-
-[node name="Emboscada02_WolfWhite" parent="." unique_id=1030091209 groups=["emboscada"] instance=ExtResource("WolfWhite")]
-position = Vector2(12700, 270)
 
 [node name="Emboscada05_Wolf1" parent="." unique_id=765252800 groups=["emboscada"] instance=ExtResource("Wolf1")]
 position = Vector2(8100, 295)
@@ -565,13 +526,9 @@ shape = SubResource("EncuentroShape")
 [editable path="Enemigo13_RangerWood"]
 [editable path="Enemigo15_Wolf1"]
 [editable path="Enemigo16_WolfWhite"]
-[editable path="Enemigo17_Wolf2"]
 [editable path="Enemigo19_Wolf1"]
-[editable path="Enemigo24_WolfWhite"]
-[editable path="Enemigo26_Wolf3"]
 [editable path="Ethan"]
 [editable path="Caperucita"]
 [editable path="Abuelita"]
-[editable path="Emboscada02_WolfWhite"]
 [editable path="Emboscada05_Wolf1"]
 [editable path="Emboscada07_Wolf2"]

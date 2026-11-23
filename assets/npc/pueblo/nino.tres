@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bf0jin7eb3bl1"]
 
-[ext_resource type="Texture2D" path="res://assets/npc/pueblo/Niño01.png" id="1_idle"]
-[ext_resource type="Texture2D" path="res://assets/npc/pueblo/Niño01-run-trimmed.png" id="2_walk"]
+[ext_resource type="Texture2D" uid="uid://d3h6hkyepqp6j" path="res://assets/npc/pueblo/Niño01.png" id="1_idle"]
+[ext_resource type="Texture2D" uid="uid://b327pwwkbu3ba" path="res://assets/npc/pueblo/Niño01-run-trimmed.png" id="2_walk"]
 
 [sub_resource type="AtlasTexture" id="I0"]
 atlas = ExtResource("1_idle")

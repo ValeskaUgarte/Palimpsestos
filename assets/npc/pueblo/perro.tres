@@ -1,7 +1,7 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://c4hmyun8u5jyq"]
 
-[ext_resource type="Texture2D" path="res://assets/npc/Animales/Perro01-run.png" id="2_walk"]
-[ext_resource type="Texture2D" path="res://assets/npc/Animales/Perro01-idle.png" id="3_idle"]
+[ext_resource type="Texture2D" uid="uid://bl1v4pgihwgsu" path="res://assets/npc/Animales/Perro01-run.png" id="2_walk"]
+[ext_resource type="Texture2D" uid="uid://dbk2h5e3vsyxp" path="res://assets/npc/Animales/Perro01-idle.png" id="3_idle"]
 
 [sub_resource type="AtlasTexture" id="I0"]
 atlas = ExtResource("3_idle")
@@ -9,144 +9,168 @@ region = Rect2(0, 0, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 79.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I1"]
 atlas = ExtResource("3_idle")
 region = Rect2(256, 0, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 79.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I2"]
 atlas = ExtResource("3_idle")
 region = Rect2(512, 0, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 79.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I3"]
 atlas = ExtResource("3_idle")
 region = Rect2(768, 0, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 79.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I4"]
 atlas = ExtResource("3_idle")
 region = Rect2(1024, 0, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 78.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I5"]
 atlas = ExtResource("3_idle")
 region = Rect2(0, 256, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I6"]
 atlas = ExtResource("3_idle")
 region = Rect2(256, 256, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I7"]
 atlas = ExtResource("3_idle")
 region = Rect2(512, 256, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I8"]
 atlas = ExtResource("3_idle")
 region = Rect2(768, 256, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I9"]
 atlas = ExtResource("3_idle")
 region = Rect2(1024, 256, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 76.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I10"]
 atlas = ExtResource("3_idle")
 region = Rect2(0, 512, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I11"]
 atlas = ExtResource("3_idle")
 region = Rect2(256, 512, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I12"]
 atlas = ExtResource("3_idle")
 region = Rect2(512, 512, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I13"]
 atlas = ExtResource("3_idle")
 region = Rect2(768, 512, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I14"]
 atlas = ExtResource("3_idle")
 region = Rect2(1024, 512, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 76.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I15"]
 atlas = ExtResource("3_idle")
 region = Rect2(0, 768, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I16"]
 atlas = ExtResource("3_idle")
 region = Rect2(256, 768, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I17"]
 atlas = ExtResource("3_idle")
 region = Rect2(512, 768, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I18"]
 atlas = ExtResource("3_idle")
 region = Rect2(768, 768, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I19"]
 atlas = ExtResource("3_idle")
 region = Rect2(1024, 768, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 76.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I20"]
 atlas = ExtResource("3_idle")
 region = Rect2(0, 1024, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I21"]
 atlas = ExtResource("3_idle")
 region = Rect2(256, 1024, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 77.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I22"]
 atlas = ExtResource("3_idle")
 region = Rect2(512, 1024, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I23"]
 atlas = ExtResource("3_idle")
 region = Rect2(768, 1024, 256, 256)
 metadata/fit_scale = 1.0965
 metadata/fit_baseline = 75.0
 metadata/fit_offset_x = 0.0
+
 [sub_resource type="AtlasTexture" id="I24"]
 atlas = ExtResource("3_idle")
 region = Rect2(1024, 1024, 256, 256)
@@ -332,22 +356,22 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("I24")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 8.0
 }, {
 "frames": [],
-"loop": false,
+"loop": 0,
 "name": &"react",
 "speed": 10.0
 }, {
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 12.0
 }, {
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"talk",
 "speed": 8.0
 }, {
@@ -427,7 +451,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("W24")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 12.0
 }]

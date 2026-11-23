@@ -1,88 +1,8 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://be3updmvfrjdj"]
 
+[ext_resource type="Texture2D" uid="uid://bhadbxgx4xh6b" path="res://assets/enemies/Wolf1/Wolf1-hurt.png" id="HURT_SHEET"]
 [ext_resource type="Texture2D" uid="uid://puvn6ipsgyye" path="res://assets/enemies/Wolf1/Wolf1-actions.png" id="S1"]
 [ext_resource type="Texture2D" uid="uid://djjkph7xmfq51" path="res://assets/enemies/Wolf1/Wolf1-walk.png" id="S2"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Wolf1/Wolf1-hurt.png" id="HURT_SHEET"]
-
-[sub_resource type="AtlasTexture" id="HURT1"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(0, 0, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT2"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(256, 0, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT3"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(512, 0, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT4"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(768, 0, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT5"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(0, 256, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT6"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(256, 256, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT7"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(512, 256, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT8"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(768, 256, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT9"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(0, 512, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT10"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(256, 512, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT11"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(512, 512, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT12"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(768, 512, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT13"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(0, 768, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT14"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(256, 768, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT15"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(512, 768, 256, 256)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="HURT16"]
-atlas = ExtResource("HURT_SHEET")
-region = Rect2(768, 768, 256, 256)
-filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxpdx"]
 atlas = ExtResource("S1")
@@ -171,6 +91,86 @@ filter_clip = true
 metadata/pose_art_scale = 1.0
 metadata/pose_art_baseline = 61.5
 metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="HURT1"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT2"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT3"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT4"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 0, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT5"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT6"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT7"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT8"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT9"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT10"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT11"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT12"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 512, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT13"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(0, 768, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT14"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(256, 768, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT15"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(512, 768, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="HURT16"]
+atlas = ExtResource("HURT_SHEET")
+region = Rect2(768, 768, 256, 256)
+filter_clip = true
 
 [sub_resource type="AtlasTexture" id="F1"]
 atlas = ExtResource("S1")

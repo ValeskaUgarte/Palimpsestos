@@ -1,7 +1,61 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://chk1req5fejgl"]
 
 [ext_resource type="Texture2D" uid="uid://hddk4t0ii43p" path="res://assets/enemies/WolfWhite/wolfwhite-sheet.png" id="1_sheet"]
-[ext_resource type="Texture2D" path="res://assets/enemies/WolfWhite/wolfwhite-hurt.png" id="HURT_SHEET"]
+[ext_resource type="Texture2D" uid="uid://bar13kbfm8t20" path="res://assets/enemies/WolfWhite/wolfwhite-hurt.png" id="HURT_SHEET"]
+
+[sub_resource type="AtlasTexture" id="F13"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1980, 238, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F14"]
+atlas = ExtResource("1_sheet")
+region = Rect2(2376, 238, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F15"]
+atlas = ExtResource("1_sheet")
+region = Rect2(2772, 238, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F16"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 476, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F17"]
+atlas = ExtResource("1_sheet")
+region = Rect2(396, 476, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F18"]
+atlas = ExtResource("1_sheet")
+region = Rect2(792, 476, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F19"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1188, 476, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F20"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1584, 476, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
+
+[sub_resource type="AtlasTexture" id="F21"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1980, 476, 396, 238)
+metadata/pose_art_scale = 1.0
+metadata/pose_art_baseline = 111.0
 
 [sub_resource type="AtlasTexture" id="HURT1"]
 atlas = ExtResource("HURT_SHEET")
@@ -82,60 +136,6 @@ filter_clip = true
 atlas = ExtResource("HURT_SHEET")
 region = Rect2(768, 768, 256, 256)
 filter_clip = true
-
-[sub_resource type="AtlasTexture" id="F13"]
-atlas = ExtResource("1_sheet")
-region = Rect2(1980, 238, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F14"]
-atlas = ExtResource("1_sheet")
-region = Rect2(2376, 238, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F15"]
-atlas = ExtResource("1_sheet")
-region = Rect2(2772, 238, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F16"]
-atlas = ExtResource("1_sheet")
-region = Rect2(0, 476, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F17"]
-atlas = ExtResource("1_sheet")
-region = Rect2(396, 476, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F18"]
-atlas = ExtResource("1_sheet")
-region = Rect2(792, 476, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F19"]
-atlas = ExtResource("1_sheet")
-region = Rect2(1188, 476, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F20"]
-atlas = ExtResource("1_sheet")
-region = Rect2(1584, 476, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
-
-[sub_resource type="AtlasTexture" id="F21"]
-atlas = ExtResource("1_sheet")
-region = Rect2(1980, 476, 396, 238)
-metadata/pose_art_scale = 1.0
-metadata/pose_art_baseline = 111.0
 
 [sub_resource type="AtlasTexture" id="F0"]
 atlas = ExtResource("1_sheet")

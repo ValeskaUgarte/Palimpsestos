@@ -23,24 +23,8 @@
 [ext_resource type="Script" uid="uid://xhnwp8w1jf3s" path="res://scripts/systems/story_portal.gd" id="24_portal"]
 [ext_resource type="Texture2D" uid="uid://b4dylkcx3tkn8" path="res://assets/ui/tableros/desaparecida.png" id="49_lqi5l"]
 [ext_resource type="Texture2D" uid="uid://dxvjnspfns01o" path="res://assets/ui/tableros/nina_perdida.png" id="50_lqi5l"]
-[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Anciano.tscn" id="amb_anciano"]
-[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Caballo.tscn" id="amb_caballo"]
-[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Gato.tscn" id="amb_gato"]
-[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Guardia.tscn" id="amb_guardia"]
-[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Hombre.tscn" id="amb_hombre"]
-[ext_resource type="PackedScene" uid="uid://de7vssn6faim0" path="res://scenes/characters/pueblo/Mujer.tscn" id="amb_mujer"]
-[ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Nina.tscn" id="amb_nina"]
 [ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Nino.tscn" id="amb_nino"]
 [ext_resource type="PackedScene" path="res://scenes/characters/pueblo/Perro.tscn" id="amb_perro"]
-[ext_resource type="Texture2D" uid="uid://beoagtch4mo4q" path="res://assets/npc/Gretel.png" id="hyg_gretel"]
-[ext_resource type="Texture2D" uid="uid://ctd15os2tr87o" path="res://assets/npc/Hansel.png" id="hyg_hansel"]
-[ext_resource type="Texture2D" uid="uid://cwew6mcas2vd6" path="res://assets/npc/Madre_HyG.png" id="hyg_madre"]
-[ext_resource type="Texture2D" uid="uid://trcj4v0qasv5" path="res://assets/npc/Padre_HyG.png" id="hyg_padre"]
-[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Vieja.tscn" id="npc_vieja_scene"]
-[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Padre_HyG.tscn" id="npc_padre_scene"]
-[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Hansel.tscn" id="npc_hansel_scene"]
-[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Gretel.tscn" id="npc_gretel_scene"]
-[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Madre_HyG.tscn" id="npc_madre_scene"]
 [ext_resource type="Texture2D" uid="uid://b8dmc8tthot7m" path="res://assets/ui/items/empanada.png" id="it_empanada"]
 [ext_resource type="Texture2D" uid="uid://djr7gbywwa1gs" path="res://assets/ui/items/mate.png" id="it_mate"]
 [ext_resource type="Texture2D" uid="uid://b1nry0m0x7fjq" path="res://assets/ui/items/pan.png" id="it_pan"]
@@ -53,6 +37,11 @@
 [ext_resource type="Shader" uid="uid://dt4xchaj55h3q" path="res://scripts/shaders/forest_join.gdshader" id="join_shader"]
 [ext_resource type="PackedScene" path="res://scenes/props/JumpObstacle.tscn" id="jump_obstacle"]
 [ext_resource type="PackedScene" path="res://scenes/characters/enemies/Wolf3.tscn" id="new_wolf3"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Gretel.tscn" id="npc_gretel_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Hansel.tscn" id="npc_hansel_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Madre_HyG.tscn" id="npc_madre_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Padre_HyG.tscn" id="npc_padre_scene"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc/NPC_Vieja.tscn" id="npc_vieja_scene"]
 [ext_resource type="Script" uid="uid://cg851yyi33cds" path="res://scripts/systems/cilindros.gd" id="pares_mesa"]
 [ext_resource type="Script" uid="uid://d1wb2ekkvc6r5" path="res://scripts/systems/story_pickup.gd" id="pickup_gd"]
 [ext_resource type="Texture2D" uid="uid://c8v37ecilef1s" path="res://assets/ui/diario/item_flores.png" id="pk_tex_1"]
@@ -135,8 +124,8 @@ texture = ExtResource("scene_a12")
 
 [node name="Escena_a13" type="Sprite2D" parent="." unique_id=1063920286]
 material = SubResource("ShaderMaterial_join_scene")
-position = Vector2(16225.1, -44.1)
-scale = Vector2(3.4177, 3.4177)
+position = Vector2(16403, -155.00002)
+scale = Vector2(3.3338501, 4.275314)
 texture = ExtResource("scene_a13")
 
 [node name="Aldeano_Nino" parent="." unique_id=1135289572 instance=ExtResource("amb_nino")]
@@ -146,7 +135,8 @@ x_max = 400.0
 speed = 110.0
 
 [node name="Sprite" parent="Aldeano_Nino" index="0"]
-scale = Vector2(0.6, 0.6)
+position = Vector2(0.33846155, -109.323074)
+scale = Vector2(0.6769231, 0.6769231)
 
 [node name="Obstaculo1_pila" parent="." unique_id=1548712512 instance=ExtResource("jump_obstacle")]
 position = Vector2(3600, 275)
@@ -206,6 +196,10 @@ half_width = 10.0
 position = Vector2(-100, 312)
 x_min = -400.0
 x_max = 400.0
+
+[node name="Sprite" parent="Perro" index="0"]
+position = Vector2(0, -86.6235)
+scale = Vector2(1.0965, 1.0965)
 
 [node name="Lobo3Blanco" parent="." unique_id=505055407 instance=ExtResource("new_wolf3")]
 position = Vector2(13400, 273)
@@ -291,8 +285,8 @@ position = Vector2(397, -66)
 position = Vector2(6209, 299)
 
 [node name="Motion" parent="Ethan" index="0" unique_id=606193905]
-position = Vector2(-13.743243, -173.1892)
-scale = Vector2(0.24324325, 0.24324325)
+position = Vector2(-12.788852, -161.16216)
+scale = Vector2(0.22635135, 0.22635135)
 animation = &"idle"
 
 [node name="EthanEncuentro" type="Area2D" parent="." unique_id=808560117]
@@ -320,33 +314,32 @@ position = Vector2(8635, 236)
 position = Vector2(11605, 248)
 
 [node name="NPC_Mama" parent="." unique_id=1777418703 instance=ExtResource("5_mama")]
-position = Vector2(-746, 193)
+position = Vector2(-877, 157)
 
 [node name="Motion" parent="NPC_Mama" index="0"]
-position = Vector2(321.2925, -43.002045)
-scale = Vector2(0.2242023, 0.2242023)
-standing_height = 305.0
-foot_position = Vector2(318.49, 116.63)
-always_talk = true
+position = Vector2(182, -17.999994)
+scale = Vector2(0.20706043, 0.20706043)
 face_player = false
+always_talk = true
 idle_face_direction = -1.0
+foot_position = Vector2(318.49, 116.63)
 
 [node name="CollisionShape2D" parent="NPC_Mama" index="1" unique_id=1172121729]
-position = Vector2(326, -36)
+position = Vector2(285, -34)
 
 [node name="NPC_Vecina" parent="." unique_id=2091243322 instance=ExtResource("5_npc")]
-position = Vector2(-840, 211)
+position = Vector2(-650, 202)
 dialogue_lines = Array[String]([])
 
 [node name="Motion" parent="NPC_Vecina" index="0" unique_id=1815825590]
-position = Vector2(-52.68662, -52.000916)
-scale = Vector2(0.22686721, 0.22686721)
-always_talk = true
+position = Vector2(132, -37)
+scale = Vector2(0.2109267, 0.2109267)
 face_player = false
+always_talk = true
 idle_face_direction = 1.0
 
 [node name="CollisionShape2D" parent="NPC_Vecina" index="1" unique_id=183638987]
-position = Vector2(-103, -39)
+position = Vector2(244, -24)
 
 [node name="Oleada3_WolfWhite" parent="." unique_id=1586392776 instance=ExtResource("wave_wolfwhite")]
 position = Vector2(12753, 236)
@@ -534,8 +527,7 @@ key = "escena1_0"
 icon_texture = ExtResource("pk_tex_1")
 
 [node name="Tablero_periodico" type="Area2D" parent="RutaCuento" unique_id=475069575]
-position = Vector2(3198, 353)
-scale = Vector2(1.5, 1.5)
+position = Vector2(3215, 259)
 script = ExtResource("pickup_gd")
 lines = Array[String](["Cuidado con los lobos del camino. Anoche atacaron dos ovejas al atardecer."])
 key = "escena1_1"
@@ -559,7 +551,8 @@ key = "escena1_3"
 icon_texture = ExtResource("pk_tex_5")
 
 [node name="Tablero_pasteles_caseros" type="Area2D" parent="RutaCuento" unique_id=49021456]
-position = Vector2(8158, 368)
+position = Vector2(8115, 229)
+scale = Vector2(0.7, 0.7)
 script = ExtResource("pickup_gd")
 lines = Array[String](["Hallado en el río: un zapato pequeño y rojo. Su dueña, avisar a la guardia."])
 key = "escena1_4"
@@ -568,8 +561,7 @@ draw_width = 185.0
 poster_texture = ExtResource("49_lqi5l")
 
 [node name="Tablero_se_busca_ayuda" type="Area2D" parent="RutaCuento" unique_id=693242836]
-position = Vector2(12287, 357)
-scale = Vector2(1.5, 1.5)
+position = Vector2(12267, 249)
 script = ExtResource("pickup_gd")
 lines = Array[String](["Los niños no deben hablar con desconocidos del bosque. Los que lo hacen tardan en volver."])
 key = "escena1_5"

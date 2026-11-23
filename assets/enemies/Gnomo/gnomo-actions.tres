@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dslurvvhyl2yt"]
 
 [ext_resource type="Texture2D" uid="uid://bgarwd2ho2yur" path="res://assets/enemies/Gnomo/gnomo-sheet.png" id="1_sheet"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Gnomo/gnomo-hurt.png" id="H_hurt"]
+[ext_resource type="Texture2D" uid="uid://dte18bdwmoyhh" path="res://assets/enemies/Gnomo/gnomo-hurt.png" id="H_hurt"]
 
 [sub_resource type="AtlasTexture" id="F30"]
 atlas = ExtResource("1_sheet")
@@ -68,6 +68,134 @@ atlas = ExtResource("1_sheet")
 region = Rect2(0, 1090, 236, 218)
 metadata/pose_art_scale = 1.0
 metadata/pose_art_baseline = 101.0
+
+[sub_resource type="AtlasTexture" id="2lquy"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 0, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 109
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="fevh2"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 109
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="0idrt"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="1b10f"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 107
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="ucvwg"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 256, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 107
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="28nbx"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 107
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="xi7f8"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="ykb1n"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 107
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="74t37"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 512, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="kbuu1"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 106
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="r6nap"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 108
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="i3w0s"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 108
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="x8e75"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 768, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 109
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="uv7g6"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 109
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="i14td"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 109
+metadata/pose_art_offset_x = 6.5
+
+[sub_resource type="AtlasTexture" id="dg8v0"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 1024, 256, 256)
+filter_clip = true
+metadata/pose_art_scale = 0.91628
+metadata/pose_art_baseline = 109
+metadata/pose_art_offset_x = 6.5
 
 [sub_resource type="AtlasTexture" id="F0"]
 atlas = ExtResource("1_sheet")
@@ -249,134 +377,6 @@ region = Rect2(1180, 654, 236, 218)
 metadata/pose_art_scale = 1.0
 metadata/pose_art_baseline = 101.0
 
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_0"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 0, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 109
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_1"]
-atlas = ExtResource("H_hurt")
-region = Rect2(0, 256, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 109
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_2"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 256, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 106
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_3"]
-atlas = ExtResource("H_hurt")
-region = Rect2(768, 256, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 107
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_4"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 256, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 107
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_5"]
-atlas = ExtResource("H_hurt")
-region = Rect2(0, 512, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 107
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_6"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 512, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 106
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_7"]
-atlas = ExtResource("H_hurt")
-region = Rect2(768, 512, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 107
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_8"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 512, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 106
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_9"]
-atlas = ExtResource("H_hurt")
-region = Rect2(0, 768, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 106
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_10"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 768, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 108
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_11"]
-atlas = ExtResource("H_hurt")
-region = Rect2(768, 768, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 108
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_12"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 768, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 109
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_13"]
-atlas = ExtResource("H_hurt")
-region = Rect2(0, 1024, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 109
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_14"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 1024, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 109
-metadata/pose_art_offset_x = 6.5
-
-[sub_resource type="AtlasTexture" id="Hhurt_gnomo-hu_15"]
-atlas = ExtResource("H_hurt")
-region = Rect2(768, 1024, 256, 256)
-filter_clip = true
-metadata/pose_art_scale = 0.91628
-metadata/pose_art_baseline = 109
-metadata/pose_art_offset_x = 6.5
-
 [resource]
 animations = [{
 "frames": [{
@@ -424,52 +424,52 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_0")
+"texture": SubResource("2lquy")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_1")
+"texture": SubResource("fevh2")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_2")
+"texture": SubResource("0idrt")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_3")
+"texture": SubResource("1b10f")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_4")
+"texture": SubResource("ucvwg")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_5")
+"texture": SubResource("28nbx")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_6")
+"texture": SubResource("xi7f8")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_7")
+"texture": SubResource("ykb1n")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_8")
+"texture": SubResource("74t37")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_9")
+"texture": SubResource("kbuu1")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_10")
+"texture": SubResource("r6nap")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_11")
+"texture": SubResource("i3w0s")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_12")
+"texture": SubResource("x8e75")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_13")
+"texture": SubResource("uv7g6")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_14")
+"texture": SubResource("i14td")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_gnomo-hu_15")
+"texture": SubResource("dg8v0")
 }],
 "loop": 0,
 "name": &"hurt",

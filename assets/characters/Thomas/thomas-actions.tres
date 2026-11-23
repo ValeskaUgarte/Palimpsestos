@@ -4,10 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://beev6dwuds00i" path="res://assets/characters/Thomas/thomas-jump.png" id="3_d55w3"]
 [ext_resource type="Texture2D" uid="uid://csq2xnevo26yt" path="res://assets/characters/Thomas/thomas-kick-v1.png" id="3_urjjf"]
 [ext_resource type="Texture2D" uid="uid://cbid2jbjplxnn" path="res://assets/characters/Thomas/Thomas-walk-v1.png" id="5_wvntf"]
+[ext_resource type="Texture2D" uid="uid://uculkbv3q4ut" path="res://assets/characters/Thomas/Thomas-hurt-v1.png" id="H_hurt"]
 [ext_resource type="Texture2D" uid="uid://28aqooth1mmc" path="res://assets/characters/Thomas/Thomas-punch.png" id="S3"]
-[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas-hurt-v1.png" id="H_hurt"]
-[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas-idle.png" id="H_idle"]
-[ext_resource type="Texture2D" path="res://assets/characters/Thomas/Thomas-idle-anim.png" id="TI_sheet"]
+[ext_resource type="Texture2D" uid="uid://c23xrd7qhmo5x" path="res://assets/characters/Thomas/Thomas-idle-anim.png" id="TI_sheet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mqbq"]
 atlas = ExtResource("S3")
@@ -209,12 +208,169 @@ region = Rect2(768, 1024, 256, 256)
 atlas = ExtResource("2_d55w3")
 region = Rect2(1024, 1024, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q8o7e"]
-atlas = ExtResource("H_idle")
-region = Rect2(0, 0, 250, 272)
-metadata/fit_scale = 1.17
-metadata/fit_baseline = 134.0
-metadata/fit_offset_x = 3.0
+[sub_resource type="AtlasTexture" id="j1bbc"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="eunu2"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ml71o"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="1rb7c"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="3c5mg"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="vmhoh"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="kvv6d"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="qm0xl"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="all68"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="dr4j6"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="vmw3t"]
+atlas = ExtResource("H_hurt")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="dd44a"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ns7af"]
+atlas = ExtResource("H_hurt")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="tacky"]
+atlas = ExtResource("H_hurt")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="gqk7l"]
+atlas = ExtResource("H_hurt")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="xg3ok"]
+atlas = ExtResource("H_hurt")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_0"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_1"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_2"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_3"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_4"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_5"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_6"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_7"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_8"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_9"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_10"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_11"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_12"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_13"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_14"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_15"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_16"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_17"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_18"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_19"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_20"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_21"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_22"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_23"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="TI_24"]
+atlas = ExtResource("TI_sheet")
+region = Rect2(1024, 1024, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r78al"]
 atlas = ExtResource("3_d55w3")
@@ -484,170 +640,6 @@ region = Rect2(512, 1024, 256, 256)
 atlas = ExtResource("5_wvntf")
 region = Rect2(768, 1024, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_0"]
-atlas = ExtResource("H_hurt")
-region = Rect2(256, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_1"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_2"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_3"]
-atlas = ExtResource("H_hurt")
-region = Rect2(0, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_4"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_5"]
-atlas = ExtResource("H_hurt")
-region = Rect2(768, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_6"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_7"]
-atlas = ExtResource("H_hurt")
-region = Rect2(256, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_8"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_9"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_10"]
-atlas = ExtResource("H_hurt")
-region = Rect2(0, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_11"]
-atlas = ExtResource("H_hurt")
-region = Rect2(256, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_12"]
-atlas = ExtResource("H_hurt")
-region = Rect2(768, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_13"]
-atlas = ExtResource("H_hurt")
-region = Rect2(1024, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_14"]
-atlas = ExtResource("H_hurt")
-region = Rect2(256, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="Hhurt_Thomas-h_15"]
-atlas = ExtResource("H_hurt")
-region = Rect2(512, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_0"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_1"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(256, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_2"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(512, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_3"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(768, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_4"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(1024, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_5"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(0, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_6"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(256, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_7"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(512, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_8"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(768, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_9"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(1024, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_10"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(0, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_11"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(256, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_12"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(512, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_13"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(768, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_14"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(1024, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_15"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(0, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_16"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(256, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_17"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(512, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_18"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(768, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_19"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(1024, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_20"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(0, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_21"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(256, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_22"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(512, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_23"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(768, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="TI_24"]
-atlas = ExtResource("TI_sheet")
-region = Rect2(1024, 1024, 256, 256)
-
 [resource]
 animations = [{
 "frames": [{
@@ -827,52 +819,52 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_0")
+"texture": SubResource("j1bbc")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_1")
+"texture": SubResource("eunu2")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_2")
+"texture": SubResource("ml71o")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_3")
+"texture": SubResource("1rb7c")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_4")
+"texture": SubResource("3c5mg")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_5")
+"texture": SubResource("vmhoh")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_6")
+"texture": SubResource("kvv6d")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_7")
+"texture": SubResource("qm0xl")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_8")
+"texture": SubResource("all68")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_9")
+"texture": SubResource("dr4j6")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_10")
+"texture": SubResource("vmw3t")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_11")
+"texture": SubResource("dd44a")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_12")
+"texture": SubResource("ns7af")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_13")
+"texture": SubResource("tacky")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_14")
+"texture": SubResource("gqk7l")
 }, {
 "duration": 1.0,
-"texture": SubResource("Hhurt_Thomas-h_15")
+"texture": SubResource("xg3ok")
 }],
 "loop": 0,
 "name": &"hurt",

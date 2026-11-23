@@ -1,109 +1,109 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://b1xy26txvkt0m"]
 
 [ext_resource type="Texture2D" uid="uid://c73p7bnqghecg" path="res://assets/npc/VecinaCaperusita.png" id="1_vecina"]
-[ext_resource type="Texture2D" path="res://assets/npc/Vecina-talk.png" id="H_talk"]
+[ext_resource type="Texture2D" uid="uid://dqv4ypm4p6axa" path="res://assets/npc/Vecina-talk.png" id="H_talk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vecina_idle"]
 atlas = ExtResource("1_vecina")
 region = Rect2(0, 0, 1024, 1536)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_0"]
+[sub_resource type="AtlasTexture" id="uijii"]
 atlas = ExtResource("H_talk")
 region = Rect2(0, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_1"]
+[sub_resource type="AtlasTexture" id="xqi7h"]
 atlas = ExtResource("H_talk")
 region = Rect2(256, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_2"]
+[sub_resource type="AtlasTexture" id="sd5ax"]
 atlas = ExtResource("H_talk")
 region = Rect2(512, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_3"]
+[sub_resource type="AtlasTexture" id="an5fu"]
 atlas = ExtResource("H_talk")
 region = Rect2(768, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_4"]
+[sub_resource type="AtlasTexture" id="3wrqy"]
 atlas = ExtResource("H_talk")
 region = Rect2(1024, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_5"]
+[sub_resource type="AtlasTexture" id="o5sl5"]
 atlas = ExtResource("H_talk")
 region = Rect2(0, 256, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_6"]
+[sub_resource type="AtlasTexture" id="npikt"]
 atlas = ExtResource("H_talk")
 region = Rect2(256, 256, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_7"]
+[sub_resource type="AtlasTexture" id="xctsb"]
 atlas = ExtResource("H_talk")
 region = Rect2(512, 256, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_8"]
+[sub_resource type="AtlasTexture" id="wurru"]
 atlas = ExtResource("H_talk")
 region = Rect2(768, 256, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_9"]
+[sub_resource type="AtlasTexture" id="rr5av"]
 atlas = ExtResource("H_talk")
 region = Rect2(1024, 256, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_10"]
+[sub_resource type="AtlasTexture" id="0bj5r"]
 atlas = ExtResource("H_talk")
 region = Rect2(0, 512, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_11"]
+[sub_resource type="AtlasTexture" id="uj4oc"]
 atlas = ExtResource("H_talk")
 region = Rect2(256, 512, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_12"]
+[sub_resource type="AtlasTexture" id="vavoo"]
 atlas = ExtResource("H_talk")
 region = Rect2(512, 512, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_13"]
+[sub_resource type="AtlasTexture" id="2mm6g"]
 atlas = ExtResource("H_talk")
 region = Rect2(768, 512, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_14"]
+[sub_resource type="AtlasTexture" id="sqo6j"]
 atlas = ExtResource("H_talk")
 region = Rect2(1024, 512, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_15"]
+[sub_resource type="AtlasTexture" id="coyh2"]
 atlas = ExtResource("H_talk")
 region = Rect2(0, 768, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_16"]
+[sub_resource type="AtlasTexture" id="3oe1j"]
 atlas = ExtResource("H_talk")
 region = Rect2(256, 768, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_17"]
+[sub_resource type="AtlasTexture" id="3lbb0"]
 atlas = ExtResource("H_talk")
 region = Rect2(512, 768, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_18"]
+[sub_resource type="AtlasTexture" id="jje8p"]
 atlas = ExtResource("H_talk")
 region = Rect2(768, 768, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_19"]
+[sub_resource type="AtlasTexture" id="f8l2n"]
 atlas = ExtResource("H_talk")
 region = Rect2(1024, 768, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_20"]
+[sub_resource type="AtlasTexture" id="8kv78"]
 atlas = ExtResource("H_talk")
 region = Rect2(0, 1024, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_21"]
+[sub_resource type="AtlasTexture" id="f5wxv"]
 atlas = ExtResource("H_talk")
 region = Rect2(256, 1024, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_22"]
+[sub_resource type="AtlasTexture" id="hymgk"]
 atlas = ExtResource("H_talk")
 region = Rect2(512, 1024, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_23"]
+[sub_resource type="AtlasTexture" id="qv30y"]
 atlas = ExtResource("H_talk")
 region = Rect2(768, 1024, 256, 256)
 
-[sub_resource type="AtlasTexture" id="Htalk_Vecina-t_24"]
+[sub_resource type="AtlasTexture" id="7rpfr"]
 atlas = ExtResource("H_talk")
 region = Rect2(1024, 1024, 256, 256)
 
@@ -129,79 +129,79 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_0")
+"texture": SubResource("uijii")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_1")
+"texture": SubResource("xqi7h")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_2")
+"texture": SubResource("sd5ax")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_3")
+"texture": SubResource("an5fu")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_4")
+"texture": SubResource("3wrqy")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_5")
+"texture": SubResource("o5sl5")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_6")
+"texture": SubResource("npikt")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_7")
+"texture": SubResource("xctsb")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_8")
+"texture": SubResource("wurru")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_9")
+"texture": SubResource("rr5av")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_10")
+"texture": SubResource("0bj5r")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_11")
+"texture": SubResource("uj4oc")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_12")
+"texture": SubResource("vavoo")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_13")
+"texture": SubResource("2mm6g")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_14")
+"texture": SubResource("sqo6j")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_15")
+"texture": SubResource("coyh2")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_16")
+"texture": SubResource("3oe1j")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_17")
+"texture": SubResource("3lbb0")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_18")
+"texture": SubResource("jje8p")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_19")
+"texture": SubResource("f8l2n")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_20")
+"texture": SubResource("8kv78")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_21")
+"texture": SubResource("f5wxv")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_22")
+"texture": SubResource("hymgk")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_23")
+"texture": SubResource("qv30y")
 }, {
 "duration": 1.0,
-"texture": SubResource("Htalk_Vecina-t_24")
+"texture": SubResource("7rpfr")
 }],
 "loop": 1,
 "name": &"talk",

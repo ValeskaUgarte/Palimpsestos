@@ -1,10 +1,10 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dl68fjdomxivu"]
 
-[ext_resource type="Texture2D" path="res://assets/enemies/Lobo/Lobo-walk.png" id="S_walk"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Lobo/Lobo-punch-v1.png" id="S_punch"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Lobo/Lobo-death-v1.png" id="S_death"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Lobo/Lobo-hurt.png" id="S_hurt"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Lobo/Lobo-idle.png" id="S_idle"]
+[ext_resource type="Texture2D" uid="uid://dlova3c3stgn4" path="res://assets/enemies/Lobo/Lobo-death-v1.png" id="S_death"]
+[ext_resource type="Texture2D" uid="uid://bqg4xh1yhojx3" path="res://assets/enemies/Lobo/Lobo-hurt.png" id="S_hurt"]
+[ext_resource type="Texture2D" uid="uid://c000qmsy4a1h6" path="res://assets/enemies/Lobo/Lobo-idle.png" id="S_idle"]
+[ext_resource type="Texture2D" uid="uid://xkqulrv4wuxk" path="res://assets/enemies/Lobo/Lobo-punch-v1.png" id="S_punch"]
+[ext_resource type="Texture2D" uid="uid://d33f46c4yyxgc" path="res://assets/enemies/Lobo/Lobo-walk.png" id="S_walk"]
 
 [sub_resource type="AtlasTexture" id="A_punch_0"]
 atlas = ExtResource("S_punch")
@@ -111,10 +111,105 @@ atlas = ExtResource("S_hurt")
 region = Rect2(768, 768, 256, 256)
 filter_clip = true
 
-[sub_resource type="AtlasTexture" id="A_walk_0"]
-atlas = ExtResource("S_walk")
+[sub_resource type="AtlasTexture" id="LI_0"]
+atlas = ExtResource("S_idle")
 region = Rect2(0, 0, 256, 256)
-filter_clip = true
+
+[sub_resource type="AtlasTexture" id="LI_1"]
+atlas = ExtResource("S_idle")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_2"]
+atlas = ExtResource("S_idle")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_3"]
+atlas = ExtResource("S_idle")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_4"]
+atlas = ExtResource("S_idle")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_5"]
+atlas = ExtResource("S_idle")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_6"]
+atlas = ExtResource("S_idle")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_7"]
+atlas = ExtResource("S_idle")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_8"]
+atlas = ExtResource("S_idle")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_9"]
+atlas = ExtResource("S_idle")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_10"]
+atlas = ExtResource("S_idle")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_11"]
+atlas = ExtResource("S_idle")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_12"]
+atlas = ExtResource("S_idle")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_13"]
+atlas = ExtResource("S_idle")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_14"]
+atlas = ExtResource("S_idle")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_15"]
+atlas = ExtResource("S_idle")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_16"]
+atlas = ExtResource("S_idle")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_17"]
+atlas = ExtResource("S_idle")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_18"]
+atlas = ExtResource("S_idle")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_19"]
+atlas = ExtResource("S_idle")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_20"]
+atlas = ExtResource("S_idle")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_21"]
+atlas = ExtResource("S_idle")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_22"]
+atlas = ExtResource("S_idle")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_23"]
+atlas = ExtResource("S_idle")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="LI_24"]
+atlas = ExtResource("S_idle")
+region = Rect2(1024, 1024, 256, 256)
 
 [sub_resource type="AtlasTexture" id="A_walk_0"]
 atlas = ExtResource("S_walk")
@@ -241,106 +336,6 @@ atlas = ExtResource("S_walk")
 region = Rect2(1024, 1024, 256, 256)
 filter_clip = true
 
-[sub_resource type="AtlasTexture" id="LI_0"]
-atlas = ExtResource("S_idle")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_1"]
-atlas = ExtResource("S_idle")
-region = Rect2(256, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_2"]
-atlas = ExtResource("S_idle")
-region = Rect2(512, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_3"]
-atlas = ExtResource("S_idle")
-region = Rect2(768, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_4"]
-atlas = ExtResource("S_idle")
-region = Rect2(1024, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_5"]
-atlas = ExtResource("S_idle")
-region = Rect2(0, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_6"]
-atlas = ExtResource("S_idle")
-region = Rect2(256, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_7"]
-atlas = ExtResource("S_idle")
-region = Rect2(512, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_8"]
-atlas = ExtResource("S_idle")
-region = Rect2(768, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_9"]
-atlas = ExtResource("S_idle")
-region = Rect2(1024, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_10"]
-atlas = ExtResource("S_idle")
-region = Rect2(0, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_11"]
-atlas = ExtResource("S_idle")
-region = Rect2(256, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_12"]
-atlas = ExtResource("S_idle")
-region = Rect2(512, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_13"]
-atlas = ExtResource("S_idle")
-region = Rect2(768, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_14"]
-atlas = ExtResource("S_idle")
-region = Rect2(1024, 512, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_15"]
-atlas = ExtResource("S_idle")
-region = Rect2(0, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_16"]
-atlas = ExtResource("S_idle")
-region = Rect2(256, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_17"]
-atlas = ExtResource("S_idle")
-region = Rect2(512, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_18"]
-atlas = ExtResource("S_idle")
-region = Rect2(768, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_19"]
-atlas = ExtResource("S_idle")
-region = Rect2(1024, 768, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_20"]
-atlas = ExtResource("S_idle")
-region = Rect2(0, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_21"]
-atlas = ExtResource("S_idle")
-region = Rect2(256, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_22"]
-atlas = ExtResource("S_idle")
-region = Rect2(512, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_23"]
-atlas = ExtResource("S_idle")
-region = Rect2(768, 1024, 256, 256)
-
-[sub_resource type="AtlasTexture" id="LI_24"]
-atlas = ExtResource("S_idle")
-region = Rect2(1024, 1024, 256, 256)
-
 [resource]
 animations = [{
 "frames": [{
@@ -356,7 +351,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("A_punch_20")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack",
 "speed": 10.0
 }, {
@@ -388,7 +383,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("A_death_24")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 9.0
 }, {
@@ -417,7 +412,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("A_hurt_18")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hurt",
 "speed": 16.0
 }, {
@@ -502,12 +497,12 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [],
-"loop": false,
+"loop": 0,
 "name": &"kick",
 "speed": 10.0
 }, {
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 12.0
 }, {
@@ -587,7 +582,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("A_walk_24")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 14.0
 }]

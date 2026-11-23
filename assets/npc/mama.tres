@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://cjjaf7opn80mx"]
 
 [ext_resource type="Texture2D" uid="uid://b2vgbsluhq2ip" path="res://assets/npc/MamaCaperusita.png" id="1_v7tpc"]
-[ext_resource type="Texture2D" path="res://assets/npc/MamaCaperusita-talk.png" id="H_talk"]
+[ext_resource type="Texture2D" uid="uid://d0n6w6h0sdfuh" path="res://assets/npc/MamaCaperusita-talk.png" id="H_talk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xs8hm"]
 atlas = ExtResource("1_v7tpc")
