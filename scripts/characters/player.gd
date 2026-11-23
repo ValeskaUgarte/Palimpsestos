@@ -37,6 +37,9 @@ const JUMP_FALL_FRAME_SPEED: float = 900.0
 @export var companion_max_distance: float = 420.0
 ## Qué tan rápido va cuando se apura (multiplica su velocidad).
 @export var companion_hurry_multiplier: float = 1.35
+## Si no está vacío, este compañero se queda quieto (mirando al jugador) hasta que exista esa bandera de GameSession.
+## Sirve para encuentros de la historia: Thomas espera junto a la foto hasta que termina la conversación.
+@export var companion_wait_for_flag: String = ""
 ## Distancia (px) antes de un obstáculo a la que el compañero salta.
 @export var companion_jump_gap: float = 60.0
 
@@ -623,6 +626,18 @@ func take_damage(amount: int, from_position: Vector2 = Vector2.INF) -> void:
 func _companion_ai_step(delta: float) -> void:
 	if _companion_attack_cooldown > 0.0:
 		_companion_attack_cooldown -= delta
+	if companion_wait_for_flag != "" and not GameSession.has_flag(companion_wait_for_flag):
+		# Esperando su encuentro: quieto, mirando hacia el jugador.
+		velocity = knockback
+		if not is_jumping:
+			_play_ground_animation("idle")
+			var watched := get_node_or_null(follow_target_path) as Node2D
+			if watched != null and absf(watched.global_position.x - global_position.x) > 40.0:
+				facing = Vector2.LEFT if watched.global_position.x < global_position.x else Vector2.RIGHT
+				anim.flip_h = facing.x < 0
+		_move_on_path()
+		knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
+		return
 
 	var leader := get_node_or_null(follow_target_path) as Node2D
 	# Velocidad real del líder: se mide por cuánto cambió su posición (más fiable que leer su "velocity").

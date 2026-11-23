@@ -24,7 +24,8 @@ func run() -> void:
 		collect(lvl, areas)
 		var bad := 0
 		for a in areas:
-			if a.get_script() == null or not is_instance_valid(a) or not a.is_inside_tree(): continue
+			# Se saltan las zonas que ya se dispararon durante la propia prueba (apagan su monitoring) o que salieron del árbol.
+			if a.get_script() == null or not is_instance_valid(a) or not a.is_inside_tree() or not a.monitoring: continue
 			var cs := a.get_node("CollisionShape2D") as CollisionShape2D
 			var path_node = lvl.get_node_or_null("WalkablePath")
 			var foot_y: float = el.ground_position().y

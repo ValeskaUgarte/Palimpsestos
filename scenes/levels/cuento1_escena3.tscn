@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://bbrb10y4ayq4l" path="res://assets/characters/Thomas/Thomas.png" id="14_thomas_portrait"]
 [ext_resource type="Texture2D" uid="uid://slfd3fg80ua7" path="res://assets/characters/elliot/Elliot.png" id="15_elliot_portrait"]
 [ext_resource type="Texture2D" uid="uid://nwy5lrb7gtti" path="res://assets/characters/ethan/Ethan.png" id="16_ethan_portrait"]
+[ext_resource type="Texture2D" path="res://assets/characters/John/Jhon.png" id="17_jhon_portrait"]
+[ext_resource type="Texture2D" path="res://assets/ui/acertijos/foto_familiar.png" id="foto_poster"]
 [ext_resource type="PackedScene" uid="uid://bw2lsbac70y7n" path="res://scenes/ui/chapter_presentation.tscn" id="20_presentation"]
 [ext_resource type="Script" uid="uid://ckl6gi28axmih" path="res://scripts/systems/walkable_path.gd" id="21_path"]
 [ext_resource type="Resource" path="res://resources/audio/corrupted_forest.tres" id="30_ambience"]
@@ -28,7 +30,6 @@
 [ext_resource type="Texture2D" uid="uid://him4mvrxeiei" path="res://assets/ui/items/sello_azul.png" id="it_sello_azul"]
 [ext_resource type="Texture2D" uid="uid://dqtv4er2gb3dn" path="res://assets/ui/items/sopa.png" id="it_sopa"]
 [ext_resource type="Script" uid="uid://d1wb2ekkvc6r5" path="res://scripts/systems/story_pickup.gd" id="pickup_gd"]
-[ext_resource type="Texture2D" uid="uid://cd8vh2cvd0ww0" path="res://assets/ui/acertijos/prueba_familia.png" id="pk_foto"]
 [ext_resource type="Texture2D" uid="uid://c1p7efssab16c" path="res://assets/ui/diario/item_huella.png" id="pk_tex_1"]
 [ext_resource type="Texture2D" uid="uid://bey2rf4tqpyt7" path="res://assets/ui/diario/cartel_tablero.png" id="pk_tex_2"]
 [ext_resource type="Texture2D" uid="uid://bgk75bkyj3oxs" path="res://assets/ui/tableros/venta_caza.png" id="pk_tex_3"]
@@ -125,29 +126,29 @@ position = Vector2(5344, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_speakers = Array[String](["Thomas", "Elliot", "Thomas", "Ethan", "Thomas"])
-conversation_lines = Array[String](["¿Acaso no ven tremenda bestia tras esa niña y ustedes solo miran?", "¿Qué demonios? Yo no vi nada, solo a una jovencita corriendo - contesta Elliot con temor.", "¿Acaso no ves? Una bestia enorme, tenemos que hacer algo.", "No, no, no, a mí no me metan. - dice Ethan retrocediendo.", "Cobarde. - y se dirige a Jhon y Elliot - ¿Y ustedes?"])
-conversation_portraits = Array[Texture2D]([ExtResource("14_thomas_portrait"), ExtResource("15_elliot_portrait"), ExtResource("14_thomas_portrait"), ExtResource("16_ethan_portrait"), ExtResource("14_thomas_portrait")])
+conversation_speakers = Array[String](["Thomas", "Elliot", "Thomas", "Ethan", "Thomas", "Jhon", "Elliot"])
+conversation_lines = Array[String](["¿Acaso no ven tremenda bestia tras esa niña y ustedes solo miran?", "¿Qué demonios? Yo no vi nada, solo a una jovencita corriendo - contesta Elliot con temor.", "¿Acaso no ves? Una bestia enorme, tenemos que hacer algo.", "No, no, no, a mí no me metan. - dice Ethan retrocediendo.", "Cobarde. - y se dirige a Jhon y Elliot - ¿Y ustedes?", "Si algo la persigue, no pensamos dejarla sola.", "Entonces vamos. Y tú, Ethan, no te alejes demasiado."])
+conversation_portraits = Array[Texture2D]([ExtResource("14_thomas_portrait"), ExtResource("15_elliot_portrait"), ExtResource("14_thomas_portrait"), ExtResource("16_ethan_portrait"), ExtResource("14_thomas_portrait"), ExtResource("17_jhon_portrait"), ExtResource("15_elliot_portrait")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThomasIntro" unique_id=82109559]
 shape = SubResource("ThomasIntroShape")
 
 [node name="Thomas" parent="." unique_id=1331697511 instance=ExtResource("5_thomas")]
-position = Vector2(5727, 300)
+position = Vector2(2860, 300)
 is_companion = true
 follow_target_path = NodePath("../Elliot")
-
-[node name="AnimatedSprite2D" parent="Thomas" index="0" unique_id=1088320422]
-animation = &"death"
-frame = 24
+companion_wait_for_flag = "thomas_se_une"
 
 [node name="Ethan" parent="." unique_id=679848846 instance=ExtResource("6_ethan")]
-position = Vector2(6570, 296)
+position = Vector2(5490, 296)
+auto_start = false
 
 [node name="Motion" parent="Ethan" index="0" unique_id=606193905]
 position = Vector2(-13.743243, -173.1892)
 scale = Vector2(0.24324325, 0.24324325)
 animation = &"idle"
+talk_when_near = 480.0
+idle_face_direction = -1.0
 
 [node name="CollisionShape2D" parent="Ethan" index="1" unique_id=806882543]
 position = Vector2(218, 142)
@@ -179,12 +180,6 @@ position = Vector2(10503, 27)
 arena_min_x = 10761.1
 arena_max_x = 12192.1
 
-[node name="Oleada1_Wolf1" parent="." unique_id=930711030 instance=ExtResource("wave_wolf1")]
-position = Vector2(3555, 280)
-
-[node name="Oleada3_Gnomo" parent="." unique_id=209664788 instance=ExtResource("wave_gnomo")]
-position = Vector2(4705, 290)
-
 [node name="Oleada5_WolfWhite" parent="." unique_id=440918539 instance=ExtResource("wave_wolfwhite")]
 position = Vector2(9432, 290)
 
@@ -193,9 +188,6 @@ position = Vector2(10071, 290)
 
 [node name="Oleada9_Wolf1" parent="." unique_id=1940151871 instance=ExtResource("wave_wolf1")]
 position = Vector2(1300, 300)
-
-[node name="Oleada11_Wolf2" parent="." unique_id=1725611005 instance=ExtResource("wave_wolf2")]
-position = Vector2(2500, 300)
 
 [node name="Oleada19_Wolf2" parent="." unique_id=1270465696 instance=ExtResource("wave_wolf2")]
 position = Vector2(9100, 300)
@@ -301,20 +293,16 @@ key = "escena3_n5"
 icon_texture = ExtResource("it_pocion_amarilla")
 draw_width = 46.0
 
-[node name="Foto_familiar" type="Area2D" parent="RutaCuento" unique_id=1820850223]
-position = Vector2(2763, 320)
-script = ExtResource("pickup_gd")
-lines = Array[String](["Una foto familiar, fuera de lugar en mitad del camino. Tras ella, un mensaje escrito a mano:", "«En la salud y en la pobreza… No son solo votos del matrimonio…»"])
-key = "escena3_foto"
-icon_texture = ExtResource("pk_foto")
-draw_width = 58.0
-
 [node name="S3_FotoAviso" type="Area2D" parent="." unique_id=1432800345]
 position = Vector2(2610, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_lines = Array[String](["Jhon detiene su marcha: un objeto fuera de lugar ha llamado su atención. Es una foto familiar y, tras ella, hay un mensaje."])
+conversation_speakers = Array[String](["", "Thomas", "Jhon", "Elliot", "Thomas"])
+conversation_lines = Array[String](["Entre las hojas, un hombre sostiene una foto familiar que halló en el camino. Tras ella, un mensaje escrito a mano.", "«En la salud y en la pobreza…» Esta letra… esta casa. Hacía años que no la recordaba.", "Un recuerdo que vuelve. Aquí le pasa a todos.", "Ninguno de nosotros llegó aquí por casualidad. ¿Vienes con nosotros?", "Si esta foto es una pista, la seguiré hasta el final."])
+conversation_portraits = Array[Texture2D]([null, null, null, null, null])
+poster = ExtResource("foto_poster")
+sets_flag = "thomas_se_une"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S3_FotoAviso" unique_id=1503163969]
 shape = SubResource("TrigShape3")
@@ -324,7 +312,7 @@ position = Vector2(3019, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_lines = Array[String](["Un aullido los saca de sus pensamientos: a Jhon, de la foto y su mensaje; a Elliot, de su curiosidad por ambos. Y, de pronto, un grito desgarrador a poca distancia.", "Elliot-¿Eso fue un grito?", "Jhon-Viene de más adelante. Vamos."])
+conversation_lines = Array[String](["Un aullido los saca de sus pensamientos y, de pronto, un grito desgarrador a poca distancia.", "Elliot-¿Eso fue un grito?", "Jhon-Viene de más adelante. Vamos."])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Aullido" unique_id=1199215463]
 shape = SubResource("TrigShape3")
@@ -406,7 +394,5 @@ delay = 1.6
 [editable path="Caperucita"]
 [editable path="RangerWood2"]
 [editable path="Lobo"]
-[editable path="Oleada1_Wolf1"]
-[editable path="Oleada3_Gnomo"]
 [editable path="Oleada5_WolfWhite"]
 [editable path="Oleada8_WolfWhite"]

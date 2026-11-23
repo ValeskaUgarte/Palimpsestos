@@ -51,6 +51,14 @@ var part_arrival_dir: float = 1.0
 
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
+	# Sin ventana (tests y herramientas) se usan archivos temporales: así ninguna prueba toca tu partida guardada real.
+	if DisplayServer.get_name() == "headless":
+		save_path = OS.get_temp_dir().path_join("palimpsestos-headless-save.json")
+		progress_path = OS.get_temp_dir().path_join("palimpsestos-headless-progress.json")
+		# Cada ejecución de prueba empieza limpia (nada heredado de ejecuciones anteriores).
+		for stale in [save_path, save_path + ".bak", save_path + ".tmp", progress_path]:
+			if FileAccess.file_exists(stale):
+				DirAccess.remove_absolute(stale)
 	load_progress()
 	get_tree().auto_accept_quit=false
 	get_tree().root.close_requested.connect(quit_game)

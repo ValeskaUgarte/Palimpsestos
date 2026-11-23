@@ -92,6 +92,12 @@ const MARGIN := 150.0
 
 # Ajusta este nivel al tramo `index` de GameSession.PARTS: cámara, paredes, inicio de Elliot,
 # enemigos y PNJ fuera del tramo (ocultos y desactivados), salidas y título.
+func _wall_shape_offset(wall: Node2D) -> float:
+	for child in wall.get_children():
+		if child is CollisionShape2D:
+			return (child as CollisionShape2D).position.x
+	return 0.0
+
 func _apply_part(index: int) -> void:
 	var part: Dictionary = GameSession.PARTS[index]
 	var left: float = part.from
@@ -99,12 +105,14 @@ func _apply_part(index: int) -> void:
 	camera_bounds = Rect2(left - 40.0, camera_bounds.position.y, (right - left) + 80.0, camera_bounds.size.y)
 	var walls := get_node_or_null("Walls")
 	if walls != null:
+		# Se cuenta el desplazamiento de la FORMA del muro dentro de su nodo (la escena 3 tiene el muro derecho con la forma 249 px
+		# a la izquierda): sin eso el muro quedaba antes de la salida del tramo y no se podía pasar a la parte siguiente.
 		var wall_left := walls.get_node_or_null("WallLeft") as Node2D
 		if wall_left != null:
-			wall_left.position.x = left - 20.0
+			wall_left.position.x = left - 20.0 - _wall_shape_offset(wall_left)
 		var wall_right := walls.get_node_or_null("WallRight") as Node2D
 		if wall_right != null:
-			wall_right.position.x = right + 20.0
+			wall_right.position.x = right + 20.0 - _wall_shape_offset(wall_right)
 	_cull_children(self, left - MARGIN, right + MARGIN)
 	var start: float = part.start
 	# Al volver atrás desde el tramo siguiente, Elliot aparece junto a su salida derecha (GameSession.part_start_override).
@@ -222,6 +230,22 @@ func _setup_exits(index: int, right: float) -> void:
 	var parts: Array = GameSession.PARTS
 	var has_next_here: bool = index + 1 < parts.size() and parts[index + 1].level == scene_file_path
 	var chapter := get_node_or_null("ChapterExit") as Area2D
+	# Si a la escena le falta su ChapterExit (por ejemplo se borró por error en el editor) y este es el último tramo con otro
+	# después, se crea la salida a la escena siguiente para que la historia no quede bloqueada.
+	if chapter == null and not has_next_here and index + 1 < parts.size():
+		chapter = Area2D.new()
+		chapter.name = "ChapterExit"
+		chapter.collision_layer = 0
+		chapter.collision_mask = 2
+		chapter.set_script(LEVEL_EXIT_SCRIPT)
+		chapter.next_scene_path = String(parts[index + 1].level)
+		var chapter_shape := CollisionShape2D.new()
+		var chapter_box := RectangleShape2D.new()
+		chapter_box.size = Vector2(60, 1200)
+		chapter_shape.shape = chapter_box
+		chapter.add_child(chapter_shape)
+		add_child(chapter)
+		push_warning("%s: no tiene nodo ChapterExit; se creó una salida automática hacia %s" % [scene_file_path, chapter.next_scene_path])
 	if chapter != null:
 		if has_next_here:
 			_disable_subtree(chapter)

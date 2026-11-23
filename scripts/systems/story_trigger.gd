@@ -18,6 +18,10 @@ extends Area2D
 @export var speaker: String = ""  # déjalo vacío para texto de narrador puro
 @export var portrait: Texture2D # opcional: retrato al lado del pergamino
 @export var one_shot: bool = true
+## Imagen que se muestra grande mientras dura la conversación, igual que los anuncios de los tableros (ej. la foto familiar).
+@export var poster: Texture2D
+## Bandera de GameSession que se pone al terminar la conversación (ej. "thomas_se_une").
+@export var sets_flag: String = ""
 
 ## Conversación con VARIOS personajes (ej: Elliot y Ethan hablando por turnos,
 ## tal cual el guion). Si "conversation_speakers"/"conversation_lines" tienen
@@ -107,6 +111,10 @@ func _geometric_inside() -> bool:
 	return false
 
 func _show() -> void:
+	if poster != null:
+		Mochila.show_poster_texture(poster)
+	if poster != null or sets_flag != "":
+		DialogueManager.dialogue_finished.connect(_on_shown_finished, CONNECT_ONE_SHOT)
 	if conversation_lines.size() > 0:
 		var entries: Array = []
 		var last_portrait: Texture2D = null
@@ -118,3 +126,10 @@ func _show() -> void:
 		DialogueManager.show_conversation(entries)
 	else:
 		DialogueManager.show_dialogue(lines, speaker, portrait)
+
+# Fin de la conversación: se cierra la imagen y se pone la bandera.
+func _on_shown_finished() -> void:
+	if poster != null:
+		Mochila.hide_poster()
+	if sets_flag != "":
+		GameSession.set_flag(sets_flag)

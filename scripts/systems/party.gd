@@ -260,6 +260,9 @@ func _check_joins() -> void:
 	for member in members:
 		if is_joined(member) or member == members[0]:
 			continue
+		var waiting: String = String(member.get("companion_wait_for_flag"))
+		if waiting != "" and not GameSession.has_flag(waiting):
+			continue  # su encuentro de la historia aún no ocurrió
 		var pos: Vector2 = member.global_position
 		if absf(pos.x - center.x) <= half.x + SCREEN_MARGIN:
 			_joined[member.get_instance_id()] = true

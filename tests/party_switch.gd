@@ -11,7 +11,10 @@ func check(ok: bool, message: String) -> void:
 func run() -> void:
 	root.get_node("GameSession").enabled = false
 	root.get_node("AudioLandscape").shutdown()
-	root.get_node("GamePreferences").config_path = "/tmp/party-prefs.cfg"
+	root.get_node("GamePreferences").config_path = OS.get_temp_dir().path_join("palim-party-prefs.cfg")
+	# Las introducciones de la escena (texto de los autores) ya vistas: un diálogo abierto bloquea el cambio de personaje.
+	root.get_node("GameSession").set_flag("inicio:escena3")
+	root.get_node("GameSession").set_flag("autores_inicio:escena3")
 	var level = load("res://scenes/levels/cuento1_escena3.tscn").instantiate()
 	root.add_child(level)
 	current_scene = level
@@ -25,11 +28,17 @@ func run() -> void:
 	check(party.active == elliot and elliot.is_in_group("player"), "Empieza controlando a Elliot")
 	check(party.is_joined(jhon), "Jhon ya está en pantalla y se une al inicio")
 	check(not party.is_joined(thomas), "Thomas aún no está en pantalla")
-	# Thomas aparece en pantalla: se une.
-	elliot.global_position = Vector2(thomas.global_position.x - 200.0, elliot.global_position.y)
+	# Thomas espera junto a la foto: aunque aparezca en pantalla NO se une hasta que termina su conversación.
+	# A la derecha de Thomas y fuera de las zonas de conversación (S3_FotoAviso / S3_Aullido), para no abrir un diálogo que bloquee el cambio.
+	elliot.global_position = Vector2(thomas.global_position.x - 40.0, elliot.global_position.y)
 	for i in 90:
 		await process_frame
-	check(party.is_joined(thomas), "Thomas se une al aparecer en pantalla")
+	check(not party.is_joined(thomas), "Thomas no debe unirse antes de su encuentro")
+	# Terminado el encuentro (bandera) se une al aparecer en pantalla.
+	root.get_node("GameSession").set_flag("thomas_se_une")
+	for i in 90:
+		await process_frame
+	check(party.is_joined(thomas), "Thomas se une tras su encuentro")
 	# Tecla 2 -> Jhon.
 	party._unhandled_input(_key(KEY_2))
 	check(party.active == jhon, "Tecla 2 cambia a Jhon")

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cvfys2mxsin0r" path="res://assets/characters/ethan/Ethan-walk.png" id="1_walk"]
 [ext_resource type="Texture2D" uid="uid://nwy5lrb7gtti" path="res://assets/characters/ethan/Ethan.png" id="2_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/ethan/Ethan-talk.png" id="ET_sheet"]
 
 [sub_resource type="AtlasTexture" id="IDLE"]
 atlas = ExtResource("2_idle")
@@ -210,6 +211,106 @@ metadata/fit_scale = 2.0895
 metadata/fit_baseline = 96.0
 metadata/fit_offset_x = 7.0
 
+[sub_resource type="AtlasTexture" id="ET_0"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_1"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_2"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_3"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_4"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_5"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_6"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_7"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_8"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_9"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_10"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_11"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_12"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_13"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(768, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_14"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(1024, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_15"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_16"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(256, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_17"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(512, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_18"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(768, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_19"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(1024, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_20"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_21"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(256, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_22"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(512, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_23"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(768, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="ET_24"]
+atlas = ExtResource("ET_sheet")
+region = Rect2(1024, 1024, 256, 256)
+
 [resource]
 animations = [{
 "frames": [{
@@ -230,10 +331,85 @@ animations = [{
 "name": &"run",
 "speed": 12.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("ET_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_16")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_17")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_18")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_19")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_20")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_21")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_22")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_23")
+}, {
+"duration": 1.0,
+"texture": SubResource("ET_24")
+}],
 "loop": 1,
 "name": &"talk",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
