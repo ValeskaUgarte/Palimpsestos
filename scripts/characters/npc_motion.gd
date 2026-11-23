@@ -15,6 +15,9 @@ extends AnimatedSprite2D
 @export var standing_height: float = 0.0
 ## true = el tamaño y los pies de cada frame se ajustan solos. Desmárcalo si prefieres escalar el nodo a mano.
 @export var auto_fit: bool = true
+## true = este script NO toca la posición ni la escala del nodo Motion (ni en el editor ni en el juego): colócalo y escálalo
+## tú a mano en el editor. El giro hacia el jugador y las animaciones siguen funcionando.
+@export var manual_placement: bool = false
 ## true = tus sprites miran a la derecha. Si los dibujaste mirando a la izquierda, desmárcalo.
 @export var faces_right_by_default: bool = true
 ## true = se gira hacia el jugador cuando está cerca o mientras habla con él.
@@ -59,8 +62,10 @@ func _ready() -> void:
 	_legacy = _npc.get_node_or_null("Visual") as Node2D
 	if Engine.is_editor_hint():
 		# Vista previa fiel: en el editor el NPC se ve con el mismo tamaño y apoyo que tendrá en el juego.
+		# Ya NO se fuerza la animación idle: puedes elegir cualquier animación en el panel SpriteFrames y verla.
 		_measure_legacy()
 		_preview()
+		_editor_signature = _current_signature()
 		return
 	_rng.randomize()
 	_home_x = _npc.position.x
@@ -96,23 +101,35 @@ func _measure_legacy() -> void:
 			_center_x = sprite.position.x + (float(metrics["cx"]) - float(metrics["w"]) * 0.5) * sprite.scale.x
 
 
+# Vista previa en el editor: solo ajusta tamaño y pies. La animación y el cuadro los eliges tú (panel SpriteFrames);
+# solo se pone idle si el nodo no tiene una animación válida.
 func _preview() -> void:
-	if sprite_frames == null or not auto_fit:
+	if sprite_frames == null or not auto_fit or manual_placement:
 		return
-	var clip: StringName = SpriteFit.resolve_clip(sprite_frames, &"idle", false)
-	if clip == &"":
-		return
-	if animation != clip:
+	if animation == &"" or not SpriteFit.has_clip(sprite_frames, animation):
+		var clip: StringName = SpriteFit.resolve_clip(sprite_frames, &"idle", false)
+		if clip == &"":
+			return
 		animation = clip
-	frame = 0
+		frame = 0
 	_fit()
+
+
+var _editor_signature: String = ""
+
+# Qué cosas, si cambian, obligan a recalcular el ajuste en el editor (así no se pisa tu edición cuadro a cuadro).
+func _current_signature() -> String:
+	return "%s|%d|%s|%s|%s|%s|%s" % [str(animation), frame, str(flip_h), str(standing_height), str(foot_position), str(sprite_frames.get_instance_id() if sprite_frames != null else 0), str(auto_fit) + str(manual_placement)]
 
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
-		if _npc != null:
-			_measure_legacy()
-			_preview()
+		if _npc != null and not manual_placement:
+			var signature := _current_signature()
+			if signature != _editor_signature:
+				_editor_signature = signature
+				_measure_legacy()
+				_preview()
 		return
 	if _npc == null:
 		return
@@ -210,6 +227,8 @@ func _reference(animation_name: StringName) -> Dictionary:
 
 
 func _fit() -> void:
+	if manual_placement:
+		return
 	var texture: Texture2D = sprite_frames.get_frame_texture(animation, frame)
 	if texture == null:
 		return

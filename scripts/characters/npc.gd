@@ -12,6 +12,11 @@ extends Area2D
 @export var followup_lines: Array[String] = []
 @export var followup_requires_flag: String = ""
 @export var followup_sets_flag: String = ""
+## Margen vertical (px) de la zona de conversación: el personaje camina siempre sobre la misma línea del suelo, así que la
+## zona no necesita llegar exactamente a sus pies; basta con estar a su altura horizontal.
+## (Caperucita en la escena 2 tenía la zona demasiado arriba y nunca hablaba al acercarse.)
+@export var interaction_vertical_slack: float = 320.0
+var _geo_in_range: bool = false
 ## Se emite cada vez que termina de hablar contigo (útil para destrabar cosas de la escena).
 signal conversation_finished
 ## Se emite justo cuando empieza a hablar contigo (el nodo Motion la usa para reproducir la animación "talk").
@@ -93,7 +98,33 @@ func _on_body_entered(body: Node2D) -> void:
 		player_in_range = true
 		_started_this_visit = false
 
+# ¿Está el jugador dentro de la zona de conversación? Se calcula por geometría (x exacta, y con margen) en vez de depender
+# solo del solapamiento físico del Area2D, que exige que los pies toquen la zona.
+func _geometric_in_range() -> bool:
+	if not is_inside_tree():
+		return false
+	var cs := get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if cs == null or cs.shape == null or cs.disabled or not monitoring:
+		return false
+	var player := get_tree().get_first_node_in_group("player") as Node2D
+	if player == null or not is_instance_valid(player):
+		return false
+	var foot := player.get_node_or_null("CollisionShape2D") as Node2D
+	var point: Vector2 = foot.global_position if foot != null else player.global_position
+	var scale := cs.global_scale.abs()
+	var half := Vector2.ZERO
+	if cs.shape is CircleShape2D:
+		var radius: float = (cs.shape as CircleShape2D).radius * maxf(scale.x, scale.y)
+		half = Vector2(radius, radius)
+	elif cs.shape is RectangleShape2D:
+		half = (cs.shape as RectangleShape2D).size * 0.5 * scale
+	else:
+		return false
+	return absf(point.x - cs.global_position.x) <= half.x and absf(point.y - cs.global_position.y) <= half.y + interaction_vertical_slack
+
 func _on_body_exited(body: Node2D) -> void:
+	if _geo_in_range:
+		return  # la geometría manda: sigue dentro aunque los pies ya no toquen la zona
 	if body.is_in_group("player"):
 		player_in_range = false
 		if _talking and not DialogueManager.visible:
@@ -101,6 +132,17 @@ func _on_body_exited(body: Node2D) -> void:
 			conversation_finished.emit()
 
 func _process(_delta: float) -> void:
+	var inside := _geometric_in_range()
+	if inside and not _geo_in_range:
+		_geo_in_range = true
+		player_in_range = true
+		_started_this_visit = false
+	elif not inside and _geo_in_range:
+		_geo_in_range = false
+		player_in_range = false
+		if _talking and not DialogueManager.visible:
+			_talking = false
+			conversation_finished.emit()
 	# El "not DialogueManager.visible" es clave: sin este chequeo, si te quedas
 	# parado dentro del área del NPC, cada vez que apretabas E para AVANZAR el
 	# diálogo, este script también detectaba ese mismo E y volvía a llamar

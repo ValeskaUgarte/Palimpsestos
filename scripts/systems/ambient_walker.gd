@@ -31,6 +31,8 @@ var _hi: float = 400.0
 @export var react_distance: float = 0.0
 ## Si está activo, el tamaño se ajusta solo a standing_height. Desactívalo para cambiar el tamaño a mano (Sprite > Scale).
 @export var auto_fit: bool = true
+## true = el script NO toca la posición ni la escala del nodo Sprite (ni en el editor ni en el juego): colócalo y escálalo a mano.
+@export var manual_placement: bool = false
 
 var _sprite: AnimatedSprite2D
 var _target_x: float = 0.0
@@ -54,7 +56,8 @@ func _setup_editor_preview() -> void:
 	if _sprite == null:
 		_sprite = _get_sprite()
 	_sprite.sprite_frames = frames
-	if frames != null and frames.has_animation(&"idle"):
+	# No se fuerza idle: si ya elegiste otra animación en el panel SpriteFrames, se respeta.
+	if frames != null and frames.has_animation(&"idle") and (_sprite.animation == &"" or not frames.has_animation(_sprite.animation)):
 		_sprite.animation = &"idle"
 		_sprite.frame = 0
 	if auto_fit:
@@ -157,7 +160,7 @@ func _process(delta: float) -> void:
 
 # Tamaño y apoyo de cada frame (metadatos fit_*), igual que en los personajes jugables.
 func _fit() -> void:
-	if not auto_fit or frames == null or _sprite == null:
+	if not auto_fit or manual_placement or frames == null or _sprite == null:
 		return
 	var texture: Texture2D = frames.get_frame_texture(_sprite.animation, _sprite.frame)
 	if texture == null:
