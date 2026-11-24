@@ -14,9 +14,9 @@ var bindings: Dictionary = {}
 # Versión de la configuración de diálogo. Si el archivo guardado es anterior, el diálogo automático se activa una vez.
 const DIALOGUE_VERSION: int = 2
 var _joy_events: Dictionary = {}
-const ACTIONS = ["move_left","move_right","move_up","move_down","attack","kick","jump","interact","pause"]
+const ACTIONS = ["move_left","move_right","move_up","move_down","attack","kick","block","run","jump","interact","pause"]
 # Acciones que se pueden asignar a cualquier botón del mando (en la pantalla de controles).
-const JOY_ACTIONS = ["jump","attack","kick","interact","pause"]
+const JOY_ACTIONS = ["jump","attack","kick","run","interact","pause"]
 
 func _ready() -> void:
 	_setup_controller()
@@ -155,6 +155,8 @@ static func _joy_button_text(button: int) -> String:
 		JOY_BUTTON_X: return "X"
 		JOY_BUTTON_Y: return "Y"
 		JOY_BUTTON_START: return "Start"
+		JOY_BUTTON_LEFT_STICK: return "L3"
+		JOY_BUTTON_RIGHT_STICK: return "R3"
 	return "Botón %d" % button
 
 # Etiqueta para los textos de ayuda: el botón del mando si el control está activo y conectado, si no la tecla.
@@ -224,7 +226,13 @@ func _setup_controller() -> void:
 		motion.axis = JOY_AXIS_LEFT_X if action in ["move_left","move_right"] else JOY_AXIS_LEFT_Y
 		motion.axis_value = -1.0 if action in ["move_left","move_up"] else 1.0
 		_joy_events[action] = [motion]
-	var buttons := {"jump":JOY_BUTTON_A,"attack":JOY_BUTTON_X,"kick":JOY_BUTTON_Y,"interact":JOY_BUTTON_B,"pause":JOY_BUTTON_START}
+	# Bloquear: gatillo derecho (RT/R2), se mantiene apretado. Correr: pulsar el stick izquierdo (L3).
+	var guard := InputEventJoypadMotion.new()
+	guard.device = -1
+	guard.axis = JOY_AXIS_TRIGGER_RIGHT
+	guard.axis_value = 1.0
+	_joy_events["block"] = [guard]
+	var buttons := {"jump":JOY_BUTTON_A,"attack":JOY_BUTTON_X,"kick":JOY_BUTTON_Y,"run":JOY_BUTTON_LEFT_STICK,"interact":JOY_BUTTON_B,"pause":JOY_BUTTON_START}
 	for action in buttons:
 		var event := InputEventJoypadButton.new()
 		event.device=-1

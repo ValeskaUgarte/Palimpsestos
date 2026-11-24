@@ -64,7 +64,7 @@ func _add_controls_hint() -> void:
 	_hint.add_theme_color_override("font_color",Color("e2d6b6"))
 	_hint.add_theme_color_override("font_shadow_color",Color(.01,.02,.02))
 	_hint.add_theme_constant_override("shadow_offset_y",2)
-	_hint.text="%s/%s caminar · %s salto · %s golpe · %s patada · %s interactuar" % [GamePreferences.key_label("move_left"),GamePreferences.key_label("move_right"),GamePreferences.key_label("jump"),GamePreferences.key_label("attack"),GamePreferences.key_label("kick"),GamePreferences.key_label("interact")]
+	_hint.text="%s/%s caminar · %s correr · %s salto · %s golpe · %s patada · %s bloquear · %s interactuar" % [GamePreferences.key_label("move_left"),GamePreferences.key_label("move_right"),GamePreferences.key_label("run"),GamePreferences.key_label("jump"),GamePreferences.key_label("attack"),GamePreferences.key_label("kick"),GamePreferences.key_label("block"),GamePreferences.key_label("interact")]
 	add_child(_hint)
 
 var _memory: Label

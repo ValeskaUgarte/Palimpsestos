@@ -27,3 +27,9 @@ func _ready() -> void:
 	menu.pressed.connect(func():ScenePages.travel("res://scenes/main_menu.tscn"))
 	retry.grab_focus()
 	get_tree().paused=true
+	# Aparece con un fundido (no de golpe).
+	dim.modulate.a=0.0
+	box.modulate.a=0.0
+	var appear:=create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	appear.tween_property(dim,"modulate:a",1.0,0.6)
+	appear.tween_property(box,"modulate:a",1.0,0.7)

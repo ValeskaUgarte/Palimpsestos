@@ -1,5 +1,6 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://dvgmprkaw4u45"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://dvgmprkaw4u45"]
 
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_88tjm"]
 [ext_resource type="Texture2D" uid="uid://b37dmfeaxqme2" path="res://assets/npc/Abuelita-idle.png" id="H_idle"]
 [ext_resource type="Texture2D" uid="uid://car50jannmujd" path="res://assets/npc/Abuelita-talk.png" id="H_talk"]
 
@@ -380,3 +381,5 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+script = ExtResource("3_88tjm")
+character_height = 300.0

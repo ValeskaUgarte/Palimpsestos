@@ -23,6 +23,7 @@ script = ExtResource("1_ai")
 speed = 115.0
 attack_damage = 8
 attack_range = 125.0
+size_multiplier = 1.08
 
 [node name="Visual" type="AnimatedSprite2D" parent="." unique_id=450480685]
 self_modulate = Color(0.86, 0.8, 0.72, 1)

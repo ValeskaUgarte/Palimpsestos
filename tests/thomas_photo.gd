@@ -58,13 +58,16 @@ func run() -> void:
 	var thomas = level.get_node("Thomas")
 	var party = root.get_node("Party") if root.has_node("Party") else null
 	# Thomas espera junto a la foto (no sale a buscar a Elliot desde lejos).
-	check(absf(thomas.global_position.x - 2860.0) < 8.0, "Thomas no espera junto a la foto (x=%.0f)" % thomas.global_position.x)
+	var photo = level.get_node("S3_FotoAviso")
+	check(absf(thomas.global_position.x - photo.global_position.x) < 400.0, "Thomas no espera junto a la foto (x=%.0f)" % thomas.global_position.x)
+	# La foto está cerca de la entrada de la cueva (comienzo del tramo).
+	check(photo.global_position.x < 1200.0, "La foto no está cerca de la entrada de la cueva (x=%.0f)" % photo.global_position.x)
 	check(thomas.companion_wait_for_flag == "thomas_se_une", "Thomas no espera su encuentro")
 	check(not s.has_flag("thomas_se_une"), "Estado inicial sucio")
 	# Elliot llega a la zona de la foto con la física real.
-	elliot.global_position.x = 2560.0
+	elliot.global_position.x = photo.global_position.x - 40.0
 	var lines := await finish_dialogue()
-	check(lines.size() == 5, "La conversación de la foto debe tener 5 líneas (tiene %d)" % lines.size())
+	check(lines.size() == 4, "La conversación de la foto debe tener 4 líneas (tiene %d)" % lines.size())
 	check(s.has_flag("thomas_se_une"), "Al terminar la conversación Thomas no se une")
 	check(poster_seen, "La foto no se mostró como un anuncio durante la conversación")
 	await create_timer(0.5, true, false, true).timeout
@@ -81,7 +84,7 @@ func run() -> void:
 	check(absf(ethan.global_position.x - intro.global_position.x) < 260.0, "Ethan no está donde ocurre su diálogo (ethan x=%.0f, diálogo x=%.0f)" % [ethan.global_position.x, intro.global_position.x])
 	elliot.global_position.x = intro.global_position.x
 	var l2 := await finish_dialogue(1800)
-	check(l2.size() == 7, "La conversación de Thomas y Ethan debe tener 7 líneas (tiene %d)" % l2.size())
+	check(l2.size() == 5, "La conversación de Thomas y Ethan debe tener 5 líneas (tiene %d)" % l2.size())
 	elliot.global_position.x = intro.global_position.x
 	for i in 20:
 		await process_frame

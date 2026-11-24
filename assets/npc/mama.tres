@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://cjjaf7opn80mx"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://cjjaf7opn80mx"]
 
 [ext_resource type="Texture2D" uid="uid://b2vgbsluhq2ip" path="res://assets/npc/MamaCaperusita.png" id="1_v7tpc"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_uvfj3"]
 [ext_resource type="Texture2D" uid="uid://d0n6w6h0sdfuh" path="res://assets/npc/MamaCaperusita-talk.png" id="H_talk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xs8hm"]
@@ -212,3 +213,5 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+script = ExtResource("3_uvfj3")
+character_height = 305.0

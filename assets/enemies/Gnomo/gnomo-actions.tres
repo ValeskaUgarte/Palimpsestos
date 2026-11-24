@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://dslurvvhyl2yt"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://dslurvvhyl2yt"]
 
 [ext_resource type="Texture2D" uid="uid://bgarwd2ho2yur" path="res://assets/enemies/Gnomo/gnomo-sheet.png" id="1_sheet"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_xa1an"]
 [ext_resource type="Texture2D" uid="uid://dte18bdwmoyhh" path="res://assets/enemies/Gnomo/gnomo-hurt.png" id="H_hurt"]
 
 [sub_resource type="AtlasTexture" id="F30"]
@@ -585,3 +586,5 @@ animations = [{
 "name": &"walk",
 "speed": 16.0
 }]
+script = ExtResource("3_xa1an")
+character_height = 256.0

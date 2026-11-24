@@ -36,7 +36,11 @@ func run() -> void:
 	p=level.get_node("Elliot");boss=level.get_node("Lobo");ally=get_first_node_in_group("companion")
 	check(boss.health.current_health==75 and ally.health.current_health==31,"Recarga altera salud del combate/compañero")
 	p._begin_jump();p.take_damage(10000)
-	await process_frame;await process_frame
+	# La derrota llega tras una transición (se ve la caída y la imagen se oscurece): se espera a que termine.
+	for i in 900:
+		await process_frame
+		if paused:
+			break
 	check(paused and p._dead and not p.is_jumping and p.hitbox_shape.disabled,"Derrota no detiene correctamente el combate")
 	var pause_event=InputEventAction.new();pause_event.action="pause";pause_event.pressed=true
 	level.get_node("PauseMenu")._input(pause_event)

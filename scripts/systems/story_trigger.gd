@@ -34,9 +34,30 @@ extends Area2D
 @export var conversation_lines: Array[String] = []
 @export var conversation_portraits: Array[Texture2D] = []
 
+## Solo se dispara si existe esta bandera de GameSession (vacío = siempre). Ej. comentar algo después de una conversación.
+@export var requires_flag: String = ""
+
+## ENCUENTRO CON UN ENEMIGO FUERTE (Ranger, lobo gigante, el Lobo...):
+##  - encounter_enemy: el enemigo queda dormido (no persigue ni ataca) hasta que termina esta conversación; entonces
+##    despierta y se lanza corriendo hacia el jugador.
+##  - Mientras dura la conversación el jugador no se mueve (lock_player).
+##  - La cámara va a focus_node (por defecto, el enemigo) durante las primeras focus_first_lines líneas y cada vez que
+##    habla alguien de focus_speakers (ej. "Ranger"); con el resto de líneas vuelve al jugador. Rápido: corte y diálogo.
+@export var encounter_enemy: NodePath
+@export var focus_node: NodePath
+@export var focus_speakers: Array[String] = []
+@export var focus_first_lines: int = 0
+@export var lock_player: bool = false
+
 var _triggered: bool = false
 var _pending: bool = false  # Elliot entró a la zona pero el cuadro de diálogo estaba ocupado
 var _session_key: String = ""
+var _cutscene: bool = false
+var _line_total: int = 0
+var _focus_cam: Camera2D = null
+var _focus_y: float = 0.0
+var _focused_on: Node2D = null
+var _locked: Array = []
 
 # Clave de sesión: escena + nombre del nodo + hash del texto. Así la narración no se repite al recargar el tramo.
 func _text_for_key() -> String:
@@ -52,12 +73,23 @@ func _ready() -> void:
 		if one_shot and GameSession.dialogue_seen(_session_key):
 			_triggered = true
 	body_entered.connect(_on_body_entered)
+	# El enemigo del encuentro duerme hasta que termine la conversación (si ya se vio, pelea normal).
+	if not (_triggered and one_shot):
+		var enemy := get_node_or_null(encounter_enemy)
+		if enemy != null and "dormant" in enemy:
+			enemy.dormant = true
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and not (_triggered and one_shot):
+	if body.is_in_group("player") and not (_triggered and one_shot) and (requires_flag == "" or GameSession.has_flag(requires_flag)):
 		_pending = true
 
 func _physics_process(_delta: float) -> void:
+	if _cutscene:
+		_update_focus()
+		return
+	if requires_flag != "" and not GameSession.has_flag(requires_flag):
+		_pending = false
+		return
 	if not _pending:
 		# El jugador camina siempre por la misma línea del suelo: si la zona quedó colocada más arriba, el solapamiento
 		# físico nunca ocurre (ej. S3_LoboAmenaza). Con este chequeo por geometría basta con estar a su altura horizontal.
@@ -113,8 +145,17 @@ func _geometric_inside() -> bool:
 func _show() -> void:
 	if poster != null:
 		Mochila.show_poster_texture(poster)
-	if poster != null or sets_flag != "":
+	var encounter := String(encounter_enemy) != ""
+	_cutscene = encounter or lock_player or String(focus_node) != ""
+	if poster != null or sets_flag != "" or _cutscene:
 		DialogueManager.dialogue_finished.connect(_on_shown_finished, CONNECT_ONE_SHOT)
+	if _cutscene:
+		_line_total = conversation_lines.size() if conversation_lines.size() > 0 else lines.size()
+		if encounter or lock_player:
+			for actor in get_tree().get_nodes_in_group("player"):
+				if "input_locked" in actor:
+					actor.input_locked = true
+					_locked.append(actor)
 	if conversation_lines.size() > 0:
 		var entries: Array = []
 		var last_portrait: Texture2D = null
@@ -133,3 +174,82 @@ func _on_shown_finished() -> void:
 		Mochila.hide_poster()
 	if sets_flag != "":
 		GameSession.set_flag(sets_flag)
+	if _cutscene:
+		_cutscene = false
+		_release_focus()
+		for actor in _locked:
+			if is_instance_valid(actor):
+				actor.input_locked = false
+		_locked.clear()
+		var enemy := get_node_or_null(encounter_enemy)
+		if enemy != null and enemy.has_method("engage"):
+			enemy.engage(get_tree().get_first_node_in_group("player"))
+
+
+# --- Cámara del encuentro -----------------------------------------------------------------------------
+func _focus_target() -> Node2D:
+	var node := get_node_or_null(focus_node) as Node2D
+	if node == null:
+		node = get_node_or_null(encounter_enemy) as Node2D
+	return node
+
+
+# Línea que se muestra ahora (0, 1, 2...) y si la cámara debe ir al enemigo/personaje enfocado.
+func _update_focus() -> void:
+	if not DialogueManager.visible:
+		return
+	var target := _focus_target()
+	if target == null:
+		return
+	var index: int = _line_total - DialogueManager.queue.size() - 1
+	var wanted: bool = index < focus_first_lines
+	if not wanted and DialogueManager.current_speaker_key != "":
+		for speaker_name in focus_speakers:
+			if DialogueManager.speaker_key(speaker_name) == DialogueManager.current_speaker_key:
+				wanted = true
+				break
+	var player := get_tree().get_first_node_in_group("player") as Node2D
+	var aim: Node2D = target if wanted else player
+	if aim == null:
+		return
+	if _focus_cam == null:
+		if not wanted:
+			return
+		var current := get_viewport().get_camera_2d()
+		_focus_cam = Camera2D.new()
+		_focus_cam.name = "EncounterCamera"
+		if current != null:
+			_focus_cam.zoom = current.zoom
+			_focus_cam.limit_left = current.limit_left
+			_focus_cam.limit_right = current.limit_right
+			_focus_cam.limit_top = current.limit_top
+			_focus_cam.limit_bottom = current.limit_bottom
+		_focus_cam.position_smoothing_enabled = true
+		_focus_cam.position_smoothing_speed = 5.0
+		get_tree().current_scene.add_child(_focus_cam)
+		_focus_cam.global_position = current.get_screen_center_position() if current != null else player.global_position
+		# Misma altura que la cámara del juego: solo se desplaza en horizontal (en la cueva, bajar la vista dejaba ver
+		# la zona sin fondo).
+		_focus_y = _focus_cam.global_position.y
+		_focus_cam.reset_smoothing()
+		_focus_cam.make_current()
+	if aim != _focused_on:
+		_focused_on = aim
+		# Al pasar al enemigo, grita (sacudón del dibujo).
+		if wanted and aim.has_method("taunt"):
+			aim.taunt()
+	var point: Vector2 = aim.ground_position() if aim.has_method("ground_position") else aim.global_position
+	_focus_cam.global_position = Vector2(point.x, _focus_y)
+
+
+func _release_focus() -> void:
+	_focused_on = null
+	if _focus_cam == null:
+		return
+	var cam := _focus_cam
+	_focus_cam = null
+	var player := get_tree().get_first_node_in_group("player") as Node2D
+	var own := player.get_node_or_null("Camera2D") as Camera2D if player != null else null
+	if own != null:
+		own.make_current()
+	cam.queue_free()

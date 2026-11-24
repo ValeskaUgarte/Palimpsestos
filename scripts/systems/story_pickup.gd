@@ -33,6 +33,9 @@ extends Area2D
 		queue_redraw()
 ## Cartel grande que se muestra al pulsar E (tablero con anuncio).
 @export var poster_texture: Texture2D
+## Líneas que se dicen una sola vez al cerrar el cartel (ej. lo que piensa Elliot tras leerlo). Admiten "Nombre-texto".
+@export var after_read_lines: Array[String] = []
+var _after_pending: bool = false
 
 ## Zona de cada tablero donde se "clava" el anuncio (fracciones del dibujo: x, y, ancho, alto).
 ## Si pones un tablero nuevo con otra imagen, añade aquí su nombre de archivo (sin .png).
@@ -164,6 +167,7 @@ func _on_body_exited(body: Node2D) -> void:
 		# Al alejarte del tablero el cartel se cierra solo (los de la escena usan poster_texture, no poster_path).
 		if poster_texture != null or poster_path != "":
 			Mochila.hide_poster()
+			_after_read()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -173,6 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		if Mochila.poster_open():
 			Mochila.hide_poster()
+			_after_read()
 		else:
 			_read()
 
@@ -180,8 +185,28 @@ func _unhandled_input(event: InputEvent) -> void:
 func _read() -> void:
 	if poster_texture != null:
 		Mochila.show_poster_texture(poster_texture)
+		if not after_read_lines.is_empty() and not GameSession.has_flag("leido:" + key):
+			_after_pending = true
 	elif not lines.is_empty():
 		DialogueManager.show_dialogue(lines.duplicate(), "", null)
+
+
+# Al cerrar el cartel: lo que piensan al leerlo (una sola vez).
+func _after_read() -> void:
+	if not _after_pending:
+		return
+	_after_pending = false
+	GameSession.set_flag("leido:" + key)
+	while not DialogueManager.can_start_dialogue():
+		if not is_inside_tree():
+			return
+		await get_tree().process_frame
+	if not is_inside_tree():
+		return
+	var entries: Array = []
+	for line in after_read_lines:
+		entries.append({"text": line, "speaker": "", "portrait": null})
+	DialogueManager.show_conversation(entries)
 
 
 func _pick_item() -> void:

@@ -1,7 +1,8 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://bv8mm7qwrwgkt"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://bv8mm7qwrwgkt"]
 
 [ext_resource type="Texture2D" uid="uid://cwew6mcas2vd6" path="res://assets/npc/Madre_HyG.png" id="1_idle"]
 [ext_resource type="Texture2D" uid="uid://recmdqxgfdxs" path="res://assets/npc/Madre_HyG-talk.png" id="2_talk"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_3qar1"]
 
 [sub_resource type="AtlasTexture" id="I0"]
 atlas = ExtResource("1_idle")
@@ -212,3 +213,5 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+script = ExtResource("3_3qar1")
+character_height = 292.0

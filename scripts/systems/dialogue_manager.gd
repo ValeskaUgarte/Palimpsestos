@@ -14,6 +14,9 @@ func can_start_dialogue() -> bool:
 @onready var portrait: TextureRect = $DialogueBox/Portrait
 
 var queue: Array = []
+## Quién dice la línea que se muestra ahora (clave normalizada: "ethan", "caperucita"...). Vacío = narrador o nadie.
+## Los NPC lo usan para animar "talk" solo cuando les toca hablar.
+var current_speaker_key: String = ""
 var _text_reveal: Tween
 var _auto_left: float = -1.0
 
@@ -49,7 +52,7 @@ const PORTRAITS := {
 	"gato": "res://assets/characters/Gato/Gato.png",
 }
 const DISPLAY_NAMES := {"mama": "Mamá", "john": "Jhon"}
-const _SPEAKER_PREFIX := "^\\s*([A-Za-zÁÉÍÓÚáéíóúÑñ_ ]{2,16}?)\\s*[-–—:]\\s*(\\S.*)$"
+const _SPEAKER_PREFIX := "^\\s*([A-Za-zÁÉÍÓÚáéíóúÑñ_ ]{2,20}?)\\s*[-–—:]\\s*(\\S.*)$"
 
 static func speaker_key(raw: String) -> String:
 	var key := raw.strip_edges().to_lower()
@@ -87,7 +90,7 @@ func _resolve_entry(entry: Dictionary) -> Dictionary:
 	return out
 
 func _ready() -> void:
-	label.add_theme_font_size_override("font_size",int(19 * GamePreferences.text_scale))
+	label.add_theme_font_size_override("font_size",int(21 * GamePreferences.text_scale))
 	# Sin recuadro oscuro tras el nombre: el nombre va en tinta marrón directamente sobre el pergamino.
 	speaker_label.add_theme_stylebox_override("normal",StyleBoxEmpty.new())
 	speaker_label.add_theme_color_override("font_color",Color(0.3,0.16,0.08))
@@ -98,7 +101,7 @@ func _ready() -> void:
 # speaker_name es opcional; si no se pasa, no se muestra el nombre.
 # portrait_texture es el idle del personaje: aparece al lado del pergamino.
 func show_dialogue(lines: Array, speaker_name: String = "", portrait_texture: Texture2D = null) -> void:
-	label.add_theme_font_size_override("font_size",int(19 * GamePreferences.text_scale))
+	label.add_theme_font_size_override("font_size",int(21 * GamePreferences.text_scale))
 	var entries: Array = []
 	for line in lines:
 		entries.append({"text": line, "speaker": speaker_name, "portrait": portrait_texture})
@@ -111,7 +114,7 @@ func show_dialogue(lines: Array, speaker_name: String = "", portrait_texture: Te
 # "portrait": preload("res://...")}, {"text":"...", "speaker":"Jhon", ...}, ...]
 func show_conversation(entries: Array) -> void:
 	if not can_start_dialogue(): return
-	label.add_theme_font_size_override("font_size",int(19 * GamePreferences.text_scale))
+	label.add_theme_font_size_override("font_size",int(21 * GamePreferences.text_scale))
 	queue = entries.duplicate()
 	visible = true
 	box.modulate.a = 0.0
@@ -122,11 +125,13 @@ func show_conversation(entries: Array) -> void:
 func _next_line() -> void:
 	if queue.is_empty():
 		visible = false
+		current_speaker_key = ""
 		_closed_frame = Engine.get_process_frames()
 		if _text_reveal: _text_reveal.kill()
 		dialogue_finished.emit()
 		return
 	var entry = _resolve_entry(queue.pop_front())
+	current_speaker_key = speaker_key(str(entry.get("speaker", "")))
 	if _text_reveal: _text_reveal.kill()
 	label.text = entry.get("text", "")
 	_fit_text()
@@ -134,7 +139,8 @@ func _next_line() -> void:
 	_text_reveal = create_tween()
 	_text_reveal.tween_property(label, "visible_characters", label.text.length(), minf(label.text.length() / 110.0, 0.8))
 	# Diálogo automático: avanza solo tras un tiempo de lectura corto (más rápido que antes).
-	_auto_left = clampf(0.7 + label.text.length() * 0.022, 1.0, 4.0) + minf(label.text.length() / 120.0, 0.6)
+	# Más ágil: no hay que esperar tanto para seguir caminando (E sigue adelantando al instante).
+	_auto_left = clampf(0.5 + label.text.length() * 0.016, 0.9, 3.0) + minf(label.text.length() / 160.0, 0.4)
 	speaker_label.text = entry.get("speaker", "")
 	var tex = entry.get("portrait", null)
 	portrait.texture = tex

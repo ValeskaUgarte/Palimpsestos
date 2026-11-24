@@ -16,6 +16,9 @@ func run() -> void:
 	var p = level.get_node("Elliot")
 	var e = level.get_node("RangerWood")
 	var victim = e.get_node("Hurtbox")
+	# Esta prueba mide el contacto de los golpes de Elliot: sin bloqueos ni caídas al azar del Ranger.
+	e.block_chance = 0.0
+	e.knockdown_chance = 0.0
 	var frames: SpriteFrames = p.anim.sprite_frames.duplicate(true)
 	p.anim.sprite_frames = frames
 	# A production-sized test clip: changing pose count needs no player code change.
@@ -130,7 +133,7 @@ func run() -> void:
 	p.take_damage(1, p.ground_position() - Vector2(30, 150))
 	check(p._hurt_presentation_time > 0 and p._damage_recoil != 0, "Elliot sin reacción al daño")
 	check(p.knockback.y == 0 and p.jump_height == 0, "Daño eleva Elliot")
-	p._physics_process(0.2)
+	p._physics_process(0.3)
 	check(p._hurt_presentation_time == 0, "Hurt no devuelve control")
 	p.combo_step = 0
 	p._do_hit("attack")

@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://chk1req5fejgl"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://chk1req5fejgl"]
 
 [ext_resource type="Texture2D" uid="uid://hddk4t0ii43p" path="res://assets/enemies/WolfWhite/wolfwhite-sheet.png" id="1_sheet"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_y7fel"]
 [ext_resource type="Texture2D" uid="uid://bar13kbfm8t20" path="res://assets/enemies/WolfWhite/wolfwhite-hurt.png" id="HURT_SHEET"]
 
 [sub_resource type="AtlasTexture" id="F13"]
@@ -366,3 +367,5 @@ animations = [{
 "name": &"walk",
 "speed": 14.0
 }]
+script = ExtResource("3_y7fel")
+character_height = 186.0

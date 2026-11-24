@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://b1xy26txvkt0m"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://b1xy26txvkt0m"]
 
 [ext_resource type="Texture2D" uid="uid://c73p7bnqghecg" path="res://assets/npc/VecinaCaperusita.png" id="1_vecina"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_ivr8h"]
 [ext_resource type="Texture2D" uid="uid://dqv4ypm4p6axa" path="res://assets/npc/Vecina-talk.png" id="H_talk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vecina_idle"]
@@ -212,3 +213,5 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+script = ExtResource("3_ivr8h")
+character_height = 305.0

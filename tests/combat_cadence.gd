@@ -15,6 +15,10 @@ func run() -> void:
 		if actor is CharacterBody2D:actor.set_physics_process(false)
 	var p=level.get_node("Elliot")
 	var e=level.get_node("RangerWood")
+	# Esta prueba mide la cadencia: sin bloqueos, caídas ni golpes fuertes al azar del Ranger.
+	e.block_chance=0.0
+	e.knockdown_chance=0.0
+	e.heavy_attack_chance=0.0
 	p.facing=Vector2.RIGHT
 	# Daño de referencia: sin cansancio, miedo ni sellos heredados de un guardado local.
 	root.get_node("GameSession").progress["status"]={}

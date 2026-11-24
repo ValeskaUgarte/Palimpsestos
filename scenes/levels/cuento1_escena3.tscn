@@ -122,25 +122,25 @@ follow_target_path = NodePath("../Elliot")
 position = Vector2(4194, 200)
 
 [node name="ThomasIntro" type="Area2D" parent="." unique_id=20677953]
-position = Vector2(5344, 230)
+position = Vector2(5150, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_speakers = Array[String](["Thomas", "Elliot", "Thomas", "Ethan", "Thomas", "Jhon", "Elliot"])
-conversation_lines = Array[String](["¿Acaso no ven tremenda bestia tras esa niña y ustedes solo miran?", "¿Qué demonios? Yo no vi nada, solo a una jovencita corriendo - contesta Elliot con temor.", "¿Acaso no ves? Una bestia enorme, tenemos que hacer algo.", "No, no, no, a mí no me metan. - dice Ethan retrocediendo.", "Cobarde. - y se dirige a Jhon y Elliot - ¿Y ustedes?", "Si algo la persigue, no pensamos dejarla sola.", "Entonces vamos. Y tú, Ethan, no te alejes demasiado."])
-conversation_portraits = Array[Texture2D]([ExtResource("14_thomas_portrait"), ExtResource("15_elliot_portrait"), ExtResource("14_thomas_portrait"), ExtResource("16_ethan_portrait"), ExtResource("14_thomas_portrait"), ExtResource("17_jhon_portrait"), ExtResource("15_elliot_portrait")])
+conversation_speakers = Array[String](["Thomas", "Elliot", "Ethan", "Thomas", "Jhon"])
+conversation_lines = Array[String](["¿No vieron a la bestia que perseguía a esa niña?", "Yo solo vi a una jovencita corriendo.", "A mí no me metan en esto. - dice Ethan, retrocediendo.", "Cobarde. ¿Y ustedes?", "Si algo la persigue, no la vamos a dejar sola."])
+lock_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThomasIntro" unique_id=82109559]
 shape = SubResource("ThomasIntroShape")
 
 [node name="Thomas" parent="." unique_id=1331697511 instance=ExtResource("5_thomas")]
-position = Vector2(2860, 300)
+position = Vector2(1000, 300)
 is_companion = true
 follow_target_path = NodePath("../Elliot")
 companion_wait_for_flag = "thomas_se_une"
 
 [node name="Ethan" parent="." unique_id=679848846 instance=ExtResource("6_ethan")]
-position = Vector2(5490, 296)
+position = Vector2(5330, 296)
 auto_start = false
 
 [node name="Motion" parent="Ethan" index="0" unique_id=606193905]
@@ -177,7 +177,7 @@ position = Vector2(8794, 200)
 
 [node name="Lobo" parent="." unique_id=1525697113 instance=ExtResource("9_lobo")]
 position = Vector2(10503, 27)
-arena_min_x = 10761.1
+arena_min_x = 9700.0
 arena_max_x = 12192.1
 
 [node name="Oleada5_WolfWhite" parent="." unique_id=440918539 instance=ExtResource("wave_wolfwhite")]
@@ -294,13 +294,13 @@ icon_texture = ExtResource("it_pocion_amarilla")
 draw_width = 46.0
 
 [node name="S3_FotoAviso" type="Area2D" parent="." unique_id=1432800345]
-position = Vector2(2610, 230)
+position = Vector2(760, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_speakers = Array[String](["", "Thomas", "Jhon", "Elliot", "Thomas"])
-conversation_lines = Array[String](["Entre las hojas, un hombre sostiene una foto familiar que halló en el camino. Tras ella, un mensaje escrito a mano.", "«En la salud y en la pobreza…» Esta letra… esta casa. Hacía años que no la recordaba.", "Un recuerdo que vuelve. Aquí le pasa a todos.", "Ninguno de nosotros llegó aquí por casualidad. ¿Vienes con nosotros?", "Si esta foto es una pista, la seguiré hasta el final."])
-conversation_portraits = Array[Texture2D]([null, null, null, null, null])
+conversation_speakers = Array[String](["", "Thomas", "Elliot", "Thomas"])
+conversation_lines = Array[String](["Junto a la entrada de la cueva, un hombre sostiene una foto familiar. Tras ella, un mensaje escrito a mano.", "«En la salud y en la pobreza...» Esta casa... hacía años que no la recordaba.", "Ninguno de nosotros llegó aquí por casualidad. ¿Vienes?", "Si esta foto es una pista, la seguiré hasta el final."])
+conversation_portraits = Array[Texture2D]([null, null, null, null])
 poster = ExtResource("foto_poster")
 sets_flag = "thomas_se_une"
 
@@ -308,21 +308,23 @@ sets_flag = "thomas_se_une"
 shape = SubResource("TrigShape3")
 
 [node name="S3_Aullido" type="Area2D" parent="." unique_id=1921678176]
-position = Vector2(3019, 230)
+position = Vector2(2000, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_lines = Array[String](["Un aullido los saca de sus pensamientos y, de pronto, un grito desgarrador a poca distancia.", "Elliot-¿Eso fue un grito?", "Jhon-Viene de más adelante. Vamos."])
+conversation_lines = Array[String](["Un aullido, y enseguida un grito desgarrador, no muy lejos.", "Jhon-Viene de más adelante. ¡Vamos!"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Aullido" unique_id=1199215463]
 shape = SubResource("TrigShape3")
 
 [node name="S3_RangerVuelve" type="Area2D" parent="." unique_id=1199375951]
-position = Vector2(3376, 230)
+position = Vector2(3450, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_lines = Array[String](["Al dirigir su atención al grito, vuelve a aparecer el mismo hombre del comienzo: el guardabosque, con nuevas ganas de atacar.", "Ranger-¡¡¡Criaturas apestosas, van a ver!!!", "Jhon-¿Lo conocemos?", "Elliot-Un viejo amigo.", "Ranger Wood ataca, y Elliot y Jhon contraatacan con desesperación. Ninguno de los dos sabe pelear, y las criaturas ya fueron bastante difíciles como para enfrentarse a un hombre tan grande y agresivo."])
+conversation_lines = Array[String](["Elliot-Mira nada más... un viejo conocido.", "Jhon-¿Qué?", "Ranger-¡¡Criaturas apestosas!! ¡Esta vez no se me escapan!"])
+encounter_enemy = NodePath("../RangerWood")
+focus_speakers = Array[String](["Ranger"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S3_RangerVuelve" unique_id=594545906]
 shape = SubResource("TrigShape3")
@@ -330,10 +332,10 @@ shape = SubResource("TrigShape3")
 [node name="S3_RangerCae" type="Node" parent="." unique_id=1261459702]
 script = ExtResource("defeat_gd")
 enemy_path = NodePath("../RangerWood")
-lines = Array[String](["La pelea fue agotadora, pero por fin lograron derrotarlo. Mientras cae, el guardabosque dice algo que los deja intrigados y más asustados que al principio.", "Ranger-No continúen... este no es su lugar.", "Elliot-¿Qué quiso decir con eso? Esta es la tercera cosa rara que nos pasa hoy.", "Jhon-Primero la foto, luego el grito, ahora esto. Algo en este bosque no encaja.", "Siguen su camino con la cabeza llena de preguntas."])
+lines = Array[String](["Jhon-¡Ja! Simpático tu amigo.", "Elliot-¿Por qué estará tan molesto? Ni siquiera sé qué le hice."])
 
 [node name="S3_Casa" type="Area2D" parent="." unique_id=1620208162]
-position = Vector2(4961, 230)
+position = Vector2(4650, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
@@ -357,7 +359,9 @@ position = Vector2(8410, 230)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_lines = Array[String](["Comienza el siguiente combate. El guardabosque se interpone una vez más, y Thomas se enfurece.", "Thomas-¿Te enfrentas a nosotros y dejas escapar a esa bestia? ¿Dónde está tu conciencia?", "Elliot-Este tipo está loco. Es la segunda vez que me ataca hoy."])
+conversation_lines = Array[String](["Ranger-¡Ustedes otra vez!", "Thomas-¿Te enfrentas a nosotros y dejas escapar a esa bestia? ¿Dónde está tu conciencia?", "Elliot-Es la tercera vez que me ataca hoy. Ya es personal."])
+encounter_enemy = NodePath("../RangerWood2")
+focus_speakers = Array[String](["Ranger"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Combate2" unique_id=822569007]
 shape = SubResource("TrigShape3")
@@ -365,7 +369,7 @@ shape = SubResource("TrigShape3")
 [node name="S3_Ranger2Cae" type="Node" parent="." unique_id=1992159606]
 script = ExtResource("defeat_gd")
 enemy_path = NodePath("../RangerWood2")
-lines = Array[String](["Cae el guardabosque, todavía sin explicación para su actitud, mientras la joven y Stephy siguen temblando, aterradas.", "Caperucita-¿Y el lobo?", "Elliot-¿Cuál lobo? ¿Esa bestia gigante es un lobo?", "Thomas-Ya vamos por él, princesita.", "Elliot-¡¡¿QUÉ?!!", "Al ver a las dos chicas temblando, aflora su naturaleza protectora y, sin pensarlo, afirma:", "Elliot-Tranquila, pequeña. Hoy cenamos lobo a las brasas.", "Thomas mira a Ethan, que desvía la mirada, y luego se dirige a Elliot y a Jhon.", "Thomas-Vamos.", "Corren hacia donde huyó el lobo para darle alcance. Thomas se arrepiente un poco: era enorme."])
+lines = Array[String](["Cae el guardabosque. La joven y Stephy siguen temblando.", "Caperucita-¿Y el lobo?", "Elliot-¿Lobo? ¿Esa bestia gigante es un lobo?", "Thomas-Ya vamos por él, princesita.", "Elliot-Tranquila, pequeña. Hoy cenamos lobo a las brasas.", "Thomas-Vamos."])
 delay = 1.2
 
 [node name="S3_LoboAmenaza" type="Area2D" parent="." unique_id=835155954]
@@ -373,7 +377,10 @@ position = Vector2(9852, 39)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
-conversation_lines = Array[String](["Siguiendo los aullidos llegan a una gran sala de piedra: un círculo rojo en el suelo y dos cabezas de lobo talladas en la roca. Algo enorme los espera sin prisa.", "Lobo-Qué amables... Me traen la cena hasta la puerta.", "Elliot-Así que eres tú lo que asustó a esa niña.", "Lobo-Ella eligió el camino largo y yo el corto. Siempre llego primero, y siempre encuentro la mesa puesta.", "Lobo-Huelo su miedo desde aquí. Es casi tan dulce como el de ella.", "Lobo-Ya cené. Y aún tengo hambre. Vengan, uno por uno o todos juntos: mi estómago no distingue."])
+conversation_lines = Array[String](["Una gran sala de piedra: un círculo rojo en el suelo y dos cabezas de lobo talladas en la roca. Algo enorme los espera sin prisa.", "Lobo-Qué amables... me traen la cena hasta la puerta.", "Elliot-Así que tú asustaste a esa niña.", "Lobo-Ella tomó el camino largo; yo, el corto. Siempre llego primero... y siempre encuentro la mesa puesta.", "Lobo-Vengan. Uno por uno o todos juntos: mi estómago no distingue."])
+encounter_enemy = NodePath("../Lobo")
+focus_speakers = Array[String](["Lobo"])
+focus_first_lines = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S3_LoboAmenaza" unique_id=825108012]
 position = Vector2(-325, -117)
@@ -384,6 +391,16 @@ script = ExtResource("defeat_gd")
 enemy_path = NodePath("../Lobo")
 lines = Array[String](["La bestia cae por fin y su último aullido se apaga entre los árboles.", "Elliot-Se acabó.", "Al fondo de la cueva hay una salida, y al otro lado, una casa con la puerta abierta."])
 delay = 1.6
+
+[node name="S3_LoboPresagio" type="Area2D" parent="."]
+position = Vector2(8950, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["El suelo tiembla bajo sus pies. Un gruñido grave rueda por la roca, tan hondo que se siente en el pecho.", "Jhon-Eso no es un perro...", "Elliot-Díganme que es el eco."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_LoboPresagio"]
+shape = SubResource("TrigShape3")
 
 [editable path="Elliot"]
 [editable path="Jhon"]

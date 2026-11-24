@@ -6,12 +6,14 @@ const ACTION_PLAQUES := {
 	"move_left": "row_izquierda", "move_right": "row_derecha",
 	"move_up": "row_prof_arriba", "move_down": "row_prof_abajo",
 	"attack": "row_golpe", "kick": "row_patada", "jump": "row_salto",
+	"block": "row_bloqueo",
 	"interact": "row_interactuar", "pause": "row_pausa",
 }
 const ACTION_NAMES := {
 	"move_left": "Izquierda", "move_right": "Derecha",
 	"move_up": "Profundidad arriba", "move_down": "Profundidad abajo",
 	"attack": "Golpe", "kick": "Patada", "jump": "Salto",
+	"block": "Bloquear", "run": "Correr",
 	"interact": "Interactuar", "pause": "Pausa",
 }
 
@@ -124,7 +126,7 @@ func _ready() -> void:
 	_refresh_controller_status()
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
-	var note := UIKit.ink_label("Mando: stick · A saltar · X golpear · Y patada · B interactuar · Start pausa", 15, UIKit.INK)
+	var note := UIKit.ink_label("Mando: stick · A saltar · X golpear · Y patada · RT bloquear · L3 correr · B interactuar · Start pausa", 15, UIKit.INK)
 	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(note)

@@ -21,6 +21,10 @@ radius = 426.0
 collision_layer = 4
 script = ExtResource("1_ai")
 attack_range = 136.0
+attack_damage = 20
+heavy_attack_chance = 0.35
+block_chance = 0.3
+knockdown_chance = 0.5
 
 [node name="Visual" type="AnimatedSprite2D" parent="." unique_id=1223183067]
 scale = Vector2(1.63, 1.63)
@@ -49,7 +53,7 @@ shape = SubResource("HitShape_rw")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=815028786]
 script = ExtResource("3_health")
-max_health = 40
+max_health = 160
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1340406709]
 collision_layer = 0

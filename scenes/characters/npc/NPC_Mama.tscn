@@ -18,7 +18,6 @@ dialogue_lines = Array[String](["Vecina-Dame la receta, esos panes te quedan exq
 sprite_frames = ExtResource("motion_frames")
 animation = &"idle"
 script = ExtResource("motion_script")
-standing_height = 305.0
 foot_position = Vector2(-24.49, 147.11)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1172121729]

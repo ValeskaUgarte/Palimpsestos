@@ -33,15 +33,31 @@ Elliot siempre queda apoyado sobre la franja del camino (`WalkablePath`): puedes
 
 ## 2. Tamaño y apoyo en el suelo
 
-El juego ajusta solo el tamaño y los pies de cada fotograma para que no "salten" entre animaciones. Por eso escalar un
-`AnimatedSprite2D` a mano **no tiene efecto** salvo que uses la propiedad correcta:
+El juego ajusta solo el tamaño y los pies de cada fotograma para que no "salten" entre animaciones. **El tamaño se cambia en el
+propio recurso de animaciones (SpriteFrames)**, igual para jugables, NPC, enemigos, aldeanos y animales:
 
-| Qué | Propiedad que sí manda |
+1. Selecciona el nodo de animación (`AnimatedSprite2D` en jugables, `Visual` en enemigos, `Motion` en NPC, `Sprite` en aldeanos).
+2. En el Inspector, haz clic sobre el recurso **Sprite Frames** (es un `CharacterFrames`): se despliegan sus propiedades.
+3. Cambia:
+   * **`character_height`**: alto en pantalla (px) de la figura de pie. **Todas** las animaciones miden esto: el juego mide el
+     cuadro más alto de cada animación y la escala sola (idle, caminar, golpe, bloqueo, muerte... del mismo tamaño).
+   * **`animation_scale`**: retoque por animación, ej. `{"attack": 1.05}` si una animación se ve más chica. 1 = igual.
+   * **`animation_offset`**: corrimiento fino por animación, ej. `{"death": Vector2(0, 8)}` para bajar los pies.
+   * **`knockdown_frame`**: cuadro de `death` donde el personaje queda en el suelo al caer por un golpe fuerte (-1 = la mitad).
+
+El panel **SpriteFrames** de abajo sigue funcionando igual para agregar o quitar cuadros. En los NPC y aldeanos el cambio se ve en
+el editor; en jugables y enemigos se ve al ejecutar.
+
+**Jugables (Elliot, Jhon, Thomas):** su SpriteFrames tiene `character_height = 0`, así que conservan su ajuste fino de siempre:
+`clip_scale` en el nodo raíz (un valor por animación, incluidos `block` y `run`). Si algún día quieres pasarlos al sistema
+parejo, basta con poner un `character_height` en su SpriteFrames.
+
+Excepciones por instancia (un mismo personaje con otro tamaño solo en un lugar):
+
+| Qué | Propiedad |
 |---|---|
-| NPC con nodo `Motion` | `standing_height` (alto en pantalla, px) y `foot_position` (dónde apoya los pies) en el nodo **Motion**. |
-| Aldeanos y animales | `standing_height` en el nodo raíz (script `ambient_walker`). |
-| Enemigos | La escala del nodo `Visual` es la base del tamaño. |
-| Jugables (Elliot, Jhon, Thomas) | `clip_scale` en el nodo raíz (un valor por animación). |
+| Enemigo más grande que los de su especie (p. ej. el lobo gigante) | `size_multiplier` (también agranda su alcance y su radio de detección) y `health_multiplier` en el nodo raíz del enemigo. |
+| NPC más chico o grande solo en una escena (p. ej. Stephy lejana entre las casas) | `standing_height` en su nodo **Motion** (0 = usa el del SpriteFrames). |
 
 **Control total a mano:** en NPC (`Motion`) y en aldeanos/animales hay una casilla **`manual_placement`**. Márcala y el script
 deja de tocar la posición y la escala de ese nodo, en el editor y en el juego: lo colocas y escalas tú.

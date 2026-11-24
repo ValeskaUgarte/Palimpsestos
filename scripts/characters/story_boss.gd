@@ -60,6 +60,8 @@ func _attack() -> void:
 	if _dead or is_attacking:return
 	_charge_direction=_facing_sign
 	_charging=_charge_pattern
+	# La embestida es un golpe fuerte: si no se bloquea, derriba.
+	_attack_is_heavy=_charge_pattern
 	attack_windup=.8 if _charge_pattern else .5
 	attack_active_time=.3 if _charge_pattern else .16
 	attack_cooldown=.75 if _phase_two else 1.1

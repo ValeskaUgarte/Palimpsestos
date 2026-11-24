@@ -119,7 +119,11 @@ var _editor_signature: String = ""
 
 # Qué cosas, si cambian, obligan a recalcular el ajuste en el editor (así no se pisa tu edición cuadro a cuadro).
 func _current_signature() -> String:
-	return "%s|%d|%s|%s|%s|%s|%s" % [str(animation), frame, str(flip_h), str(standing_height), str(foot_position), str(sprite_frames.get_instance_id() if sprite_frames != null else 0), str(auto_fit) + str(manual_placement)]
+	var frames_size: String = ""
+	if sprite_frames is CharacterFrames:
+		var cf := sprite_frames as CharacterFrames
+		frames_size = "%s|%s|%s" % [str(cf.character_height), str(cf.animation_scale), str(cf.animation_offset)]
+	return "%s|%d|%s|%s|%s|%s|%s|%s" % [str(animation), frame, str(flip_h), str(standing_height), str(foot_position), str(sprite_frames.get_instance_id() if sprite_frames != null else 0), str(auto_fit) + str(manual_placement), frames_size]
 
 
 func _process(delta: float) -> void:
@@ -137,8 +141,41 @@ func _process(delta: float) -> void:
 	_refresh()
 
 
+## Otros nombres con los que aparece en los diálogos (ej. "Madre", "Niño"): cuando la línea es de uno de ellos, reproduce "talk".
+@export var speaker_names: Array[String] = []
+## Distancia (px) al jugador dentro de la que el NPC se detiene a escuchar cuando hay una conversación en pantalla.
+@export var listen_distance: float = 1400.0
+## true = cuando su idle es un dibujo fijo (1 cuadro) respira suavemente para no verse congelado.
+@export var breathing_idle: bool = true
+var _breath_scale: float = 1.0
+var _breath_stretch: float = 1.0
+var _breath_time: float = 0.0
+
+
+# ¿Hay una conversación en pantalla cerca de este NPC? Entonces se queda quieto escuchando (no pasea ni corre).
+func _dialogue_nearby() -> bool:
+	if not DialogueManager.visible:
+		return false
+	var player := get_tree().get_first_node_in_group("player") as Node2D
+	return player == null or absf(player.global_position.x - _npc.global_position.x) <= listen_distance
+
+
+# ¿La línea que se está mostrando la dice este NPC?
+func _is_current_speaker() -> bool:
+	var current: String = DialogueManager.current_speaker_key
+	if current == "":
+		return _talking
+	var keys: Array = [DialogueManager.speaker_key(String(_npc.name))]
+	var label: Variant = _npc.get("speaker_label")
+	if label is String and label != "":
+		keys.append(DialogueManager.speaker_key(label))
+	for alias in speaker_names:
+		keys.append(DialogueManager.speaker_key(alias))
+	return current in keys
+
+
 func _update_wander(delta: float) -> void:
-	if wander_range <= 0.0 or _talking:
+	if wander_range <= 0.0 or _talking or _dialogue_nearby():
 		_moving = false
 		return
 	if _pause_left > 0.0:
@@ -163,19 +200,38 @@ func _update_wander(delta: float) -> void:
 # Elige la animación según lo que hace el NPC y muestra Motion o el dibujo fijo.
 func _refresh() -> void:
 	var wanted: StringName = &"idle"
+	if _dialogue_nearby():
+		# Conversación en pantalla: habla (talk) solo cuando la línea es suya; si no, escucha quieto.
+		if _is_current_speaker() or (always_talk and DialogueManager.current_speaker_key == ""):
+			wanted = &"talk"
 	# Si pasea, camina (no se desliza en la animación de hablar); solo habla quieto.
-	if _talking or ((always_talk or _player_is_near()) and not _moving):
+	elif _talking or ((always_talk or _player_is_near()) and not _moving):
 		wanted = &"talk"
 	elif _moving:
 		wanted = &"run" if _running else &"walk"
 	var clip: StringName = SpriteFit.resolve_clip(sprite_frames, wanted, false)
+	# Idle de un solo dibujo: respiración suave (sube y baja un poco el pecho) para que no se vea como una foto fija.
+	_breath_scale = 1.0
+	_breath_stretch = 1.0
+	if breathing_idle and clip != &"" and sprite_frames.get_frame_count(clip) <= 1:
+		_breath_time += get_process_delta_time()
+		_breath_stretch = 1.0 + 0.014 * sin(_breath_time * 2.4)
+		_breath_scale = 1.0 + 0.004 * sin(_breath_time * 2.4 + 0.6)
 	var has_art: bool = clip != &""
 	visible = has_art
 	if _legacy != null:
 		_legacy.visible = not has_art
 	if not has_art:
 		return
-	if animation != clip or not is_playing():
+	# Reposo con un idle de un solo dibujo: se usa el primer cuadro de "talk" (mismo dibujo que al hablar), así al
+	# terminar de hablar o al alejarse el jugador no salta a una imagen distinta.
+	var still_talk: bool = clip == &"idle" and sprite_frames.get_frame_count(&"idle") <= 1 and SpriteFit.has_clip(sprite_frames, &"talk")
+	if still_talk:
+		if animation != &"talk" or is_playing():
+			play(&"talk")
+			pause()
+			frame = 0
+	elif animation != clip or not is_playing():
 		play(clip)
 	_face()
 	if auto_fit:
@@ -240,8 +296,16 @@ func _fit() -> void:
 	if visible_height <= 0.0:
 		return
 	var fit_scale: float = _target_height / visible_height
+	var shift := Vector2.ZERO
+	# Tamaño parejo editable en el propio SpriteFrames (CharacterFrames: character_height / animation_scale).
+	if SpriteFit.uses_height(sprite_frames) and standing_height <= 0.0:
+		var cf := sprite_frames as CharacterFrames
+		fit_scale = cf.character_height * cf.scale_of(animation) / visible_height
+		shift = cf.offset_of(animation)
+	fit_scale *= _breath_scale
 	var baseline: float = float(measured["bottom"]) - float(measured["h"]) * 0.5
 	var offset_x: float = -(float(first["cx"]) - float(first["w"]) * 0.5)
 	var side: float = -1.0 if flip_h else 1.0
 	scale = Vector2.ONE * fit_scale
-	position = Vector2(_center_x + offset_x * fit_scale * side, _foot_y - baseline * fit_scale)
+	scale.y *= _breath_stretch
+	position = Vector2(_center_x + offset_x * fit_scale * side + shift.x * side, _foot_y - baseline * scale.y + shift.y)

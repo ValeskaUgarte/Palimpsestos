@@ -17,7 +17,16 @@ size = Vector2(150, 300)
 [node name="Thomas" type="CharacterBody2D" unique_id=366295946]
 collision_layer = 2
 script = ExtResource("6_player")
-clip_scale = {"attack": 1.74, "hurt": 1.72, "idle": 1.42, "kick": 1.73, "walk": 1.78}
+clip_scale = {
+"attack": 1.67,
+"hurt": 1.72,
+"idle": 1.42,
+"kick": 1.805,
+"walk": 1.78,
+"block": 1.6685,
+"jump": 1.65,
+"death": 1.687
+}
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1088320422]
 position = Vector2(0, 15)

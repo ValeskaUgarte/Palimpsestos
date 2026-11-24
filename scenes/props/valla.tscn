@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/vallas/valla_larga.png" id="1_tex"]
 
 [node name="Valla" type="Node2D"]
-z_index = 0
+z_index = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_tex")

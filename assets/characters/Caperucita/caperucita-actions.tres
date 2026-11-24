@@ -1,5 +1,6 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://daqw71utprd6a"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://daqw71utprd6a"]
 
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="4_tbpe8"]
 [ext_resource type="Texture2D" uid="uid://gpapomofiyp" path="res://assets/characters/Caperucita/Caperucita-idle.png" id="S_idle"]
 [ext_resource type="Texture2D" uid="uid://d4i2x7n2egdto" path="res://assets/characters/Caperucita/Caperucita-run-grounded.png" id="S_rung"]
 [ext_resource type="Texture2D" uid="uid://c5dkyba3c034a" path="res://assets/characters/Caperucita/Caperucita-talk.png" id="S_talk"]
@@ -591,3 +592,5 @@ animations = [{
 "name": &"walk",
 "speed": 8.0
 }]
+script = ExtResource("4_tbpe8")
+character_height = 235.0

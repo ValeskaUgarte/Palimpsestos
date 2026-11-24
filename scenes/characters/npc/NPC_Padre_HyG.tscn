@@ -14,6 +14,7 @@ texture = ExtResource("2_texture")
 sprite_frames = ExtResource("motion_frames")
 animation = &"idle"
 script = ExtResource("motion_script")
+speaker_names = Array[String](["Padre"])
 always_talk = true
 face_player = false
 idle_face_direction = 1.0

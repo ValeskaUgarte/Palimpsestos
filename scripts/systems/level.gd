@@ -340,7 +340,9 @@ func _prepare_path_collisions() -> void:
 			var body_height: float = clampf(image.get_used_rect().size.y * visual.scale.y * 0.85, 120, 520 if actor.is_in_group("story_boss") else 350)
 			var hurt_shape := actor.get_node("Hurtbox/CollisionShape2D") as CollisionShape2D
 			var hurt_rectangle := RectangleShape2D.new()
-			hurt_rectangle.size = Vector2(170 if actor.is_in_group("story_boss") else 110, body_height)
+			var body_scale: float = float(actor.get("size_multiplier")) if actor.get("size_multiplier") != null else 1.0
+			# Un enemigo más grande se para más lejos: su zona de daño también es más ancha, para que se le pueda golpear.
+			hurt_rectangle.size = Vector2((170.0 if actor.is_in_group("story_boss") else 110.0) * (body_scale * 1.8 if body_scale > 1.0 else 1.0), body_height)
 			hurt_shape.shape = hurt_rectangle
 			# La hurtbox sigue la X del cuerpo (no el origen): así cuerpo y zona de golpe nunca se separan,
 			# aunque el dibujo se haya movido en el editor.
@@ -349,8 +351,15 @@ func _prepare_path_collisions() -> void:
 			var attack_rectangle := RectangleShape2D.new()
 			attack_rectangle.size = Vector2(300 if actor.is_in_group("story_boss") else 130, maxf(body_height * 0.6, 90))
 			attack_shape.shape = attack_rectangle
-			attack_shape.position = Vector2.ZERO
-			actor.get_node("Hitbox").position = Vector2(190 if actor.is_in_group("story_boss") else 75, foot_y - body_height * 0.45)
+			# El golpe sale desde el CUERPO (no desde el origen del nodo): si el dibujo y el cuerpo se movieron en el editor
+			# (p. ej. el Ranger de la escena 1, corrido ~390 px), antes el golpe salía en el aire y nunca tocaba al jugador.
+			attack_shape.position = Vector2(shape_node.position.x, 0.0)
+			var reach_scale: float = float(actor.get("size_multiplier")) if actor.get("size_multiplier") != null else 1.0
+			var reach_x: float = (190.0 if actor.is_in_group("story_boss") else 75.0) * reach_scale
+			# Que el golpe llegue hasta donde se detiene a atacar (los enemigos grandes se paran más lejos para no tapar al jugador).
+			if not actor.is_in_group("story_boss") and actor.get("attack_range") != null:
+				reach_x = maxf(reach_x, float(actor.get("attack_range")) * 0.65)
+			actor.get_node("Hitbox").position = Vector2(reach_x, foot_y - body_height * 0.45)
 			actor.get_node("DetectionArea/CollisionShape2D").position = Vector2(0, foot_y - 12)
 		if actor.is_in_group("companion"):
 			# Las zonas de combate siguen el cuerpo visible, no el padding del atlas.
@@ -515,7 +524,8 @@ func _setup_depth_sorting() -> void:
 
 func _depth_foot_y(node: Node2D) -> float:
 	if node.has_method("ground_position"):
-		return node.ground_position().y
+		# El personaje que controlas se dibuja delante de quien está casi en su misma línea (un enemigo grande no lo tapa).
+		return node.ground_position().y + (40.0 if node.is_in_group("player") else 0.0)
 	var motion := node.get_node_or_null("Motion")
 	if motion != null and motion.get("foot_position") is Vector2:
 		return node.global_position.y + (motion.get("foot_position") as Vector2).y

@@ -1,6 +1,8 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://cntw0dppqacw8"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://cntw0dppqacw8"]
 
 [ext_resource type="Texture2D" uid="uid://dxy1x0kucykkh" path="res://assets/characters/elliot/Elliot-punch.png" id="2_u5t8c"]
+[ext_resource type="Texture2D" uid="uid://3h7yj7jdhhe6" path="res://assets/characters/elliot/Elliot-block.png" id="3_2sd6g"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="9_mxxsf"]
 [ext_resource type="Texture2D" uid="uid://dsildxv301ci4" path="res://assets/characters/elliot/Elliot-death.png" id="H_death"]
 [ext_resource type="Texture2D" uid="uid://cwwfkwm6np0fm" path="res://assets/characters/elliot/Elliot-jump.png" id="S1"]
 [ext_resource type="Texture2D" uid="uid://c158fgmvbigwt" path="res://assets/characters/elliot/Elliot-walk-trimmed.png" id="S2"]
@@ -368,6 +370,36 @@ filter_clip = true
 metadata/fit_scale = 1.48
 metadata/fit_baseline = 94.0
 metadata/fit_offset_x = -12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk858"]
+atlas = ExtResource("3_2sd6g")
+region = Rect2(0, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv0bl"]
+atlas = ExtResource("3_2sd6g")
+region = Rect2(256, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adtpy"]
+atlas = ExtResource("3_2sd6g")
+region = Rect2(512, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luss3"]
+atlas = ExtResource("3_2sd6g")
+region = Rect2(768, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yixf0"]
+atlas = ExtResource("3_2sd6g")
+region = Rect2(1024, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm8w1"]
+atlas = ExtResource("3_2sd6g")
+region = Rect2(0, 512, 256, 256)
+filter_clip = true
 
 [sub_resource type="AtlasTexture" id="vw8v4"]
 atlas = ExtResource("H_death")
@@ -1356,6 +1388,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gk858")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv0bl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adtpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luss3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yixf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wm8w1")
+}],
+"loop": 0,
+"name": &"block",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("vw8v4")
 }, {
 "duration": 1.0,
@@ -1753,3 +1808,4 @@ animations = [{
 "name": &"walk",
 "speed": 16.0
 }]
+script = ExtResource("9_mxxsf")

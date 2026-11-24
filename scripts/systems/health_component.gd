@@ -26,3 +26,10 @@ func take_damage(amount: int) -> void:
 				fx.damage_number(get_parent(), amount)
 	if was_alive and current_health <= 0:
 		died.emit()
+
+## Recupera vida (sin pasar del máximo). amount <= 0 = vida completa. No revive a quien ya cayó.
+func heal(amount: int = 0) -> void:
+	if current_health <= 0:
+		return
+	current_health = max_health if amount <= 0 else mini(current_health + amount, max_health)
+	health_changed.emit(current_health, max_health)

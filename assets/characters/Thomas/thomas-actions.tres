@@ -1,9 +1,11 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://btgsrfnxcpss0"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://btgsrfnxcpss0"]
 
+[ext_resource type="Texture2D" uid="uid://bduo4o7s0yhaq" path="res://assets/characters/Thomas/Thomas-block-v1.png" id="2_2mqbq"]
 [ext_resource type="Texture2D" uid="uid://cxkcmagfwqept" path="res://assets/characters/Thomas/Thomas-death-v1.png" id="2_d55w3"]
 [ext_resource type="Texture2D" uid="uid://beev6dwuds00i" path="res://assets/characters/Thomas/thomas-jump.png" id="3_d55w3"]
 [ext_resource type="Texture2D" uid="uid://csq2xnevo26yt" path="res://assets/characters/Thomas/thomas-kick-v1.png" id="3_urjjf"]
 [ext_resource type="Texture2D" uid="uid://cbid2jbjplxnn" path="res://assets/characters/Thomas/Thomas-walk-v1.png" id="5_wvntf"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="9_0e1mj"]
 [ext_resource type="Texture2D" uid="uid://uculkbv3q4ut" path="res://assets/characters/Thomas/Thomas-hurt-v1.png" id="H_hurt"]
 [ext_resource type="Texture2D" uid="uid://28aqooth1mmc" path="res://assets/characters/Thomas/Thomas-punch.png" id="S3"]
 [ext_resource type="Texture2D" uid="uid://c23xrd7qhmo5x" path="res://assets/characters/Thomas/Thomas-idle-anim.png" id="TI_sheet"]
@@ -107,6 +109,36 @@ region = Rect2(768, 1024, 256, 256)
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4ipx"]
 atlas = ExtResource("S3")
 region = Rect2(1024, 1024, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw1pj"]
+atlas = ExtResource("2_2mqbq")
+region = Rect2(0, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvi54"]
+atlas = ExtResource("2_2mqbq")
+region = Rect2(256, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvi47"]
+atlas = ExtResource("2_2mqbq")
+region = Rect2(512, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1oq8f"]
+atlas = ExtResource("2_2mqbq")
+region = Rect2(768, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck3rp"]
+atlas = ExtResource("2_2mqbq")
+region = Rect2(1024, 256, 256, 256)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l5fb"]
+atlas = ExtResource("2_2mqbq")
+region = Rect2(0, 512, 256, 256)
+filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0fhny"]
 atlas = ExtResource("2_d55w3")
@@ -734,6 +766,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vw1pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvi54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvi47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1oq8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck3rp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l5fb")
+}],
+"loop": 0,
+"name": &"block",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0fhny")
 }, {
 "duration": 1.0,
@@ -1191,3 +1246,4 @@ animations = [{
 "name": &"walk",
 "speed": 16.0
 }]
+script = ExtResource("9_0e1mj")

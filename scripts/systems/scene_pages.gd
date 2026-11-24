@@ -19,6 +19,8 @@ func travel(path: String) -> void:
 		push_error("Página inexistente: "+path)
 		return
 	busy=true
+	# Si se sale a mitad de la transición de derrota (cámara lenta), la escena siguiente arranca a velocidad normal.
+	Engine.time_scale=1.0
 	_travel.call_deferred(path)
 func _set_coverage(value: float) -> void:
 	_material.set_shader_parameter("coverage",value)

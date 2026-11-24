@@ -12,17 +12,16 @@ func run() -> void:
 		hero.set_physics_process(false)   # que el controlador no cambie la animación durante la prueba
 		var anim: AnimatedSprite2D = hero.get_node("AnimatedSprite2D")
 		var table: Dictionary = hero.clip_scale
-		for clip in ["idle", "walk", "attack_1", "attack_2", "finisher", "kick", "jump", "hurt"]:
+		for clip in ["idle", "walk", "run", "attack_1", "attack_2", "finisher", "kick", "jump", "hurt", "block"]:
 			if not anim.sprite_frames.has_animation(clip) or anim.sprite_frames.get_frame_count(clip) == 0:
 				continue
 			anim.play(clip)
 			anim.frame = 0
 			hero._fit_pose()
 			var expected: float = float(table[clip]) if table.has(clip) else float(table.get("idle", 1.0))
-			# El salto usa SIEMPRE la escala del reposo (player.gd _fit_pose: la figura se estira dentro del clip pero
-			# no cambia de tamaño); clip_scale['jump'] del Inspector no se usa.
+			# El salto usa clip_scale['jump'] si existe; si no, la escala del reposo.
 			if clip == "jump":
-				expected = float(table.get("idle", expected))
+				expected = float(table.get("jump", table.get("idle", expected)))
 			var ok := absf(anim.scale.x - expected) < 0.001
 			if not ok:
 				failures += 1

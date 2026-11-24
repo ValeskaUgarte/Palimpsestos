@@ -48,6 +48,8 @@
 [ext_resource type="PackedScene" path="res://scenes/characters/enemies/WolfWhite.tscn" id="WolfWhite"]
 [ext_resource type="Script" uid="uid://dle2byc7appx4" path="res://scripts/systems/wolf_lie.gd" id="wolf_s2"]
 
+[ext_resource type="Script" path="res://scripts/systems/defeat_dialogue.gd" id="defeat_gd"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_join_02a"]
 shader = ExtResource("join_shader")
 shader_parameter/blend_width = 0.007
@@ -226,9 +228,10 @@ animation = &"idle"
 position = Vector2(4740, 144)
 dialogue_lines = Array[String](["Caperucita-Mamá me dio un pastel y una botella para mi abuelita. Salí de casa esa misma mañana.", "Caperucita-Entré en el bosque y allí me crucé con un lobo muy educado, que me saludó con muy buenos modales.", "Caperucita-Me dijo: «Mira qué flores tan bonitas». Y me aparté del camino a recogerlas.", "Caperucita-Así cuento siempre mi cuento: primero la casa, después el bosque y al final las flores."])
 repeatable = true
-followup_lines = Array[String](["Caperucita-¿Mi abuelita te mandó volver? Entonces la roca debe de saber algo que yo no recuerdo.", "Caperucita-Cuéntale mi cuento tal como lo cuento yo: primero la casa, después el bosque y al final las flores. Anda, pruébala; yo vigilo el camino."])
+followup_lines = Array[String](["Caperucita-¿Mi abuelita te mandó volver? Entonces la roca debe de saber algo que yo no recuerdo.", "Caperucita-Cuéntale mi cuento tal como lo cuento yo: primero la casa, después el bosque y al final las flores. Anda, pruébala; yo vigilo el camino.", "Jhon-Elliot, mira la roca de la cueva... Hay algo extraño en ella."])
 followup_requires_flag = "abuela_envia_cueva"
 followup_sets_flag = "caperucita_abre_cueva"
+finish_flag = "caperucita_cuento_oido"
 
 [node name="Motion" parent="Caperucita" index="0" unique_id=822710853]
 position = Vector2(7.376682, -121.18834)
@@ -348,7 +351,7 @@ draw_width = 185.0
 poster_texture = ExtResource("pk_tex_3")
 
 [node name="Pista_NotaCasa" type="Area2D" parent="RutaCuento" unique_id=441340141]
-position = Vector2(590, 283)
+position = Vector2(1750, 283)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("pickup_gd")
 lines = Array[String](["Una nota clavada en un tronco, con letra de madre: «Lleva este pastel y esta botella a tu abuela. Sal de casa ahora, y no te apartes del camino.»", "Así empezó el cuento: con una niña saliendo de la casa de su madre."])
@@ -507,13 +510,33 @@ position = Vector2(5900, 280)
 position = Vector2(203, 139)
 
 [node name="S2_EncuentroJhon" type="Area2D" parent="." unique_id=1996751635]
-position = Vector2(900, 260)
+position = Vector2(760, 260)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("story_trigger_s2")
-conversation_lines = Array[String](["Un hombre de traje roto se defendía solo de un lobo. Elliot no lo pensó: corrió a ayudarlo.", "Elliot se maravilla ante su compañero: él no entendió absolutamente nada de los símbolos que aparecieron.", "Elliot-¡Fantástico, Jhon! Eres un genio.", "Jhon-Muchas finanzas y creaciones de empresas, ya sabes... ¡Espera!"])
+conversation_lines = Array[String](["A lo lejos, un hombre de traje roto se defiende solo de un lobo.", "Elliot-¡Aguanta! ¡Ya voy!"])
+focus_node = NodePath("../Jhon")
+focus_first_lines = 1
+lock_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S2_EncuentroJhon" unique_id=1037752856]
+shape = SubResource("EncuentroShape")
+
+[node name="S2_JhonTrasPelea" type="Node" parent="."]
+script = ExtResource("defeat_gd")
+enemy_path = NodePath("../Enemigo01_Wolf1")
+delay = 0.8
+lines = Array[String](["Elliot-¡Fantástico! ¿Dónde aprendiste a pelear así?", "Jhon-En reuniones de directorio: muchas finanzas, muchas empresas... ya sabes. ¡Espera! ¿Dónde estamos?", "Elliot-Ojalá lo supiera. Soy Elliot.", "Jhon-Jhon. Y si hay más bestias como esa, mejor no separarnos."])
+
+[node name="S2_DejaVu" type="Area2D" parent="."]
+position = Vector2(5300, 260)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("story_trigger_s2")
+requires_flag = "caperucita_cuento_oido"
+conversation_lines = Array[String](["Elliot-¿Escuchaste eso? De la nada se puso a contar su cuento, como si se lo supiera de memoria.", "Elliot-Y nadie le había preguntado nada.", "Jhon-Lo raro no es eso... Yo ya lo había escuchado. Así, igual, palabra por palabra.", "Jhon-Fue como un déjà vu."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S2_DejaVu"]
 shape = SubResource("EncuentroShape")
 
 [editable path="Elliot"]

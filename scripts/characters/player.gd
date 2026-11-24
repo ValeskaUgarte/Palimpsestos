@@ -55,6 +55,25 @@ const JUMP_FALL_FRAME_SPEED: float = 900.0
 @export var jump_buffer_time: float = 0.12
 ## Al soltar el botón en la subida, la velocidad vertical se multiplica por esto (salto corto / salto largo).
 @export_range(0.1, 1.0, 0.05) var jump_cut_factor: float = 0.5
+## --- Acciones de combate extra ---
+## Correr: Shift (teclado) o L3 (mando). Multiplica la velocidad al caminar.
+@export var run_speed_multiplier: float = 1.65
+## Bloquear: L (teclado) o gatillo derecho RT (mando), mantenido. Fracción del daño que pasa al bloquear un golpe de frente.
+@export_range(0.0, 1.0, 0.05) var block_damage_factor: float = 0.25
+## Un golpe que quita al menos esto (o un golpe "fuerte" de un enemigo) derriba al personaje: cae al suelo y se levanta.
+@export var knockdown_damage: int = 24
+## Segundos que se queda en el suelo antes de levantarse.
+@export var knockdown_hold: float = 0.65
+## true = el jugador no controla al personaje (escenas: un enemigo grita, beber la poción...). Lo pone el juego.
+var input_locked: bool = false
+var is_blocking: bool = false
+var _run_latched: bool = false
+var _knockdown_phase: int = 0  # 0 de pie · 1 cayendo · 2 en el suelo · 3 levantándose
+var _knockdown_timer: float = 0.0
+var _knockdown_frame: int = 0
+var _heavy_incoming: bool = false
+var _drink_time: float = 0.0
+signal drink_finished
 var _jump_buffer: float = 0.0
 var _jump_cut_done: bool = false
 var _jump_cut_armed: bool = false  # true solo cuando el salto lo inició el jugador con el botón (no por código ni IA)
@@ -90,6 +109,10 @@ var _attack_clip: StringName = &""
 var _attack_duration: float = 0.5
 var _fallback_elapsed: float = 0.0
 const COMPANION_KICK_MAX_TIME: float = 0.5
+## Golpes del personaje que controlas con clips de más de PLAYER_ATTACK_LONG s se aceleran hasta durar PLAYER_ATTACK_MAX_TIME.
+## (Solo afecta a la patada de Jhon, de 2,5 s; los golpes de Elliot y Thomas quedan igual.)
+const PLAYER_ATTACK_LONG: float = 1.5
+const PLAYER_ATTACK_MAX_TIME: float = 0.9
 var _fallback_attack: bool = false
 var _damage_recoil: float = 0.0
 var attack_phase: StringName = &"recovery"
@@ -150,6 +173,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		_jump_buffer = maxf(0.0, _jump_buffer - delta)
 	_update_jump(delta)
+	if _knockdown_phase > 0:
+		_update_knockdown(delta)
+		return
+	if _drink_time > 0.0:
+		_update_drink(delta)
+		return
 	if _interaction_time>0 and not is_jumping and not is_attacking:
 		_interaction_time=maxf(0,_interaction_time-delta)
 		if not Input.is_action_just_pressed("attack") and not Input.is_action_just_pressed("kick"):
@@ -205,6 +234,35 @@ func _physics_process(delta: float) -> void:
 	if is_companion:
 		_companion_ai_step(delta)
 		return
+	if input_locked:
+		# Escena en curso: el personaje se queda quieto (sin caminar, saltar ni golpear).
+		_jump_buffer = 0.0
+		buffered_action = ""
+		is_blocking = false
+		_locomotion = _locomotion.move_toward(Vector2.ZERO, movement_braking * delta)
+		velocity = _locomotion + knockback
+		_move_on_path()
+		knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
+		if not is_jumping:
+			_play_ground_animation("walk" if _locomotion.length() > 8.0 else "idle")
+		return
+	# Bloqueo: mientras se mantiene, el personaje se cubre (no camina) y los golpes de frente quitan mucho menos.
+	if Input.is_action_pressed("block") and not is_jumping and not _await_action_release:
+		if not is_blocking:
+			is_blocking = true
+			_locomotion = Vector2.ZERO
+			_play_ground_animation("block")
+		velocity = knockback
+		_move_on_path()
+		knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
+		var turn: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		if absf(turn) > 0.5:
+			facing = Vector2.LEFT if turn < 0.0 else Vector2.RIGHT
+			anim.flip_h = facing.x < 0
+		return
+	elif is_blocking:
+		is_blocking = false
+		_play_ground_animation("idle")
 	# Con is_jumping el buffer se conserva: al aterrizar el salto pulsado en el aire se ejecuta.
 	if _jump_buffer > 0.0 and not _await_action_release and not is_jumping:
 		_jump_buffer = 0.0
@@ -224,7 +282,14 @@ func _physics_process(delta: float) -> void:
 	# El control aéreo se aplica al final: también al invertir la dirección en el aire.
 	if is_jumping:
 		response *= story_air_control
-	_locomotion = _locomotion.move_toward(input_vector * speed * PlayerStatus.speed_multiplier(self), response * delta)
+	# Correr: Shift o L3. Con el mando basta pulsar L3 una vez: sigue corriendo hasta que se detiene.
+	if Input.is_action_just_pressed("run"):
+		_run_latched = true
+	if input_vector == Vector2.ZERO:
+		_run_latched = false
+	var running: bool = input_vector != Vector2.ZERO and (Input.is_action_pressed("run") or _run_latched)
+	var top_speed: float = speed * PlayerStatus.speed_multiplier(self) * (run_speed_multiplier if running else 1.0)
+	_locomotion = _locomotion.move_toward(input_vector * top_speed, response * (1.3 if running else 1.0) * delta)
 	velocity = _locomotion + knockback
 	_move_on_path()
 	knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
@@ -233,7 +298,7 @@ func _physics_process(delta: float) -> void:
 		if absf(input_vector.x)>0.1:
 			facing = Vector2.LEFT if input_vector.x<0 else Vector2.RIGHT
 		if not is_jumping:
-			_play_ground_animation("walk")
+			_play_ground_animation("run" if running else "walk")
 		if absf(facing.x) > 0.1:
 			anim.flip_h = facing.x < 0
 	else:
@@ -251,6 +316,7 @@ func _physics_process(delta: float) -> void:
 func _play_ground_animation(animation: StringName) -> void:
 	# Ranura todavía sin sprites (0 frames): se usa la de respaldo (run -> walk -> idle, hurt -> idle...).
 	# Así puedes ir agregando animaciones nuevas en el editor sin que el personaje desaparezca.
+	var requested: StringName = animation
 	animation = SpriteFit.resolve_clip(anim.sprite_frames, animation)
 	if animation == &"":
 		return
@@ -273,6 +339,9 @@ func _play_ground_animation(animation: StringName) -> void:
 		anim.scale = _visual_ground_scale
 		anim.position = _visual_ground_position
 	anim.speed_scale = clampf(velocity.length() / maxf(speed,1.0),0.55,1.15) if animation == &"walk" else 1.0
+	if requested == &"run":
+		# Correr sin hoja propia: la caminata se reproduce más rápido para que se note el cambio de ritmo.
+		anim.speed_scale = 1.7 if animation == &"walk" else clampf(velocity.length() / maxf(speed * run_speed_multiplier, 1.0), 0.8, 1.25)
 	if animation == &"hurt" and _hurt_presentation_time > 0.0:
 		# La reacción al golpe se acelera para caber en el tiempo de aturdimiento (se lee como impacto seco).
 		var natural: float = float(anim.sprite_frames.get_frame_count(animation)) / maxf(anim.sprite_frames.get_animation_speed(animation), 0.01)
@@ -330,6 +399,16 @@ func _fit_pose() -> void:
 	var texture: Texture2D = anim.sprite_frames.get_frame_texture(anim.animation, anim.frame)
 	if texture == null:
 		return
+	# Tamaño parejo editable en el propio SpriteFrames (CharacterFrames: character_height / animation_scale).
+	var hf: Dictionary = SpriteFit.height_fit(anim.sprite_frames, anim.animation, anim.frame)
+	if not hf.is_empty():
+		var hside: float = -1.0 if anim.flip_h else 1.0
+		var hscale: float = float(hf["scale"])
+		var shift: Vector2 = hf["shift"]
+		anim.scale = Vector2.ONE * hscale
+		anim.position.x = _visual_ground_position.x + (float(hf["offset_x"]) * hscale + shift.x) * hside
+		anim.position.y = _foot_line() - float(hf["baseline"]) * hscale + shift.y - _visual_jump_height()
+		return
 	var fit_scale: float = 1.0
 	var fit_baseline: float = 0.0
 	var fit_offset_x: float = 0.0
@@ -359,7 +438,8 @@ func _fit_pose() -> void:
 	if key == "jump":
 		# Escala constante del salto = la del reposo. La figura se agacha y se estira dentro del salto,
 		# pero no cambia de tamaño. Solo el punto de apoyo (pies) sigue al fotograma.
-		fit_scale = float(clip_scale.get("idle", fit_scale))
+		# Si el salto tiene su propio valor en clip_scale (hoja dibujada a otra escala), se usa ese; si no, el del reposo.
+		fit_scale = float(clip_scale.get("jump", clip_scale.get("idle", fit_scale)))
 		var frame_metrics: Dictionary = SpriteFit.metrics(texture)
 		if not frame_metrics.is_empty():
 			fit_baseline = float(frame_metrics["bottom"]) - float(frame_metrics["h"]) * 0.5
@@ -508,6 +588,11 @@ func _do_hit(action: String) -> void:
 		push_warning("%s: REQUIERE ANIMACIÓN %s; contacto temporal con anticipación segura." % [name, _attack_clip])
 	else:
 		_attack_duration = _attack_profile.clip_duration(anim.sprite_frames, _attack_clip)
+		# Golpes con hojas muy largas (la patada de Jhon dura 2,5 s): se aceleran para que no dejen al personaje clavado.
+		if not is_companion and _attack_duration > PLAYER_ATTACK_LONG:
+			_attack_profile = _attack_profile.duplicate()
+			_attack_profile.playback_speed *= _attack_duration / PLAYER_ATTACK_MAX_TIME
+			_attack_duration = PLAYER_ATTACK_MAX_TIME
 		_play_ground_animation(_attack_clip)
 		anim.speed_scale = _attack_profile.playback_speed
 		anim.set_frame_and_progress(0, 0.0)
@@ -584,23 +669,45 @@ func _on_animation_finished() -> void:
 		_end_attack()
 
 
+## Golpe fuerte de un enemigo (lo llama el hurtbox): si no se bloquea, derriba al personaje.
+func take_heavy_hit(amount: int, from_position: Vector2 = Vector2.INF) -> void:
+	_heavy_incoming = true
+	take_damage(amount, from_position)
+	_heavy_incoming = false
+
+
 func take_damage(amount: int, from_position: Vector2 = Vector2.INF) -> void:
 	if _dead:return
+	# En el suelo o levantándose no recibe más golpes (no se le puede rematar en el aire).
+	if _knockdown_phase > 0:return
+	var direction: float = -1.0 if facing.x >= 0.0 else 1.0
+	if from_position != Vector2.INF and not is_zero_approx(ground_position().x - from_position.x):
+		direction = signf(ground_position().x - from_position.x)
+	# Bloqueo de frente: pasa solo una parte del daño, retrocede un poco y no se interrumpe.
+	var blocked: bool = is_blocking and (from_position == Vector2.INF or signf(from_position.x - ground_position().x) == signf(facing.x))
+	if blocked:
+		amount = maxi(1, int(round(amount * block_damage_factor)))
 	# El sello de guardia reduce el daño que recibe el personaje que controla el jugador.
 	health.take_damage(PlayerStatus.damage_in(amount, self))
+	if blocked:
+		AudioLandscape.cue(&"impact", ground_position())
+		CombatFX.hit_impact(ground_position() + Vector2(facing.x * 50.0, -150.0), 0.5)
+		knockback = Vector2(direction * 140.0, 0.0)
+		if _dead:return
+		return
 	AudioLandscape.cue(&"damage" if is_companion else &"player_hurt",ground_position())
 	if _dead:return
+	if _heavy_incoming or amount >= knockdown_damage:
+		_begin_knockdown(direction)
+		return
 	# El impacto empuja lateralmente sobre el suelo, nunca eleva al actor.
 	if from_position != Vector2.INF:
-		var direction: float = signf(ground_position().x - from_position.x)
-		if is_zero_approx(direction):
-			direction = -1.0 if facing.x >= 0.0 else 1.0
-		knockback = Vector2(direction * 260.0, 0.0)
+		knockback = Vector2(direction * 300.0, 0.0)
 	# Recoil is visual only: never raises the body or grants invulnerability.
 	if not is_companion:
-		_damage_recoil = 0.035 * (-1.0 if knockback.x < 0 else 1.0)
+		_damage_recoil = 0.05 * (-1.0 if knockback.x < 0 else 1.0)
 		if not is_attacking and not is_jumping:
-			_hurt_presentation_time = 0.18 if SpriteFit.has_clip(anim.sprite_frames, "hurt") else 0.12
+			_hurt_presentation_time = 0.26 if SpriteFit.has_clip(anim.sprite_frames, "hurt") else 0.14
 			_play_ground_animation("hurt" if SpriteFit.has_clip(anim.sprite_frames, "hurt") else "idle")
 	# Un golpe recibido no interrumpe un ataque activo ni deja su hitbox abierto.
 	if is_companion and not is_attacking and not is_jumping and SpriteFit.has_clip(anim.sprite_frames, "hurt"):
@@ -612,6 +719,114 @@ func take_damage(amount: int, from_position: Vector2 = Vector2.INF) -> void:
 	await get_tree().create_timer(0.12, false).timeout
 	if is_instance_valid(anim) and flash_id == _damage_flash_id:
 		anim.modulate = Color.WHITE
+
+
+# --- Caída por golpe fuerte: cae hasta quedar en el suelo (animación "death" hasta knockdown_frame), espera y se levanta
+# reproduciendo esos mismos cuadros al revés. Si no tiene animación de muerte, usa "hurt" un rato más largo.
+func _begin_knockdown(direction: float) -> void:
+	if is_attacking:
+		is_attacking = false
+		_contact_active = false
+		buffered_action = ""
+		hitbox_shape.set_deferred("disabled", true)
+	is_blocking = false
+	_hurt_presentation_time = 0.0
+	_locomotion = Vector2.ZERO
+	knockback = Vector2(direction * 380.0, 0.0)
+	_knockdown_phase = 1
+	_damage_recoil = 0.0
+	anim.rotation = 0.0
+	CombatFX.hit_impact(ground_position() + Vector2(0, -140), 1.6)
+	if SpriteFit.has_clip(anim.sprite_frames, &"death"):
+		var count: int = anim.sprite_frames.get_frame_count(&"death")
+		var target: int = count / 2
+		if anim.sprite_frames is CharacterFrames and (anim.sprite_frames as CharacterFrames).knockdown_frame >= 0:
+			target = (anim.sprite_frames as CharacterFrames).knockdown_frame
+		_knockdown_frame = clampi(target, 1, count - 1)
+		anim.play(&"death")
+		anim.speed_scale = 1.8
+		anim.set_frame_and_progress(0, 0.0)
+		_fit_pose()
+	else:
+		_knockdown_frame = -1
+		_knockdown_timer = knockdown_hold + 0.3
+		_play_ground_animation("hurt")
+
+
+func _update_knockdown(delta: float) -> void:
+	velocity = knockback
+	_move_on_path()
+	knockback = knockback.move_toward(Vector2.ZERO, 700.0 * delta)
+	match _knockdown_phase:
+		1:
+			if _knockdown_frame < 0 or anim.frame >= _knockdown_frame:
+				anim.pause()
+				_knockdown_phase = 2
+				if _knockdown_frame >= 0:
+					_knockdown_timer = knockdown_hold
+		2:
+			_knockdown_timer -= delta
+			if _knockdown_timer <= 0.0:
+				if _knockdown_frame < 0:
+					_end_knockdown()
+				else:
+					_knockdown_phase = 3
+					anim.speed_scale = 2.0
+					anim.play_backwards(&"death")
+		3:
+			if anim.frame <= 0 or not anim.is_playing():
+				_end_knockdown()
+
+
+func _end_knockdown() -> void:
+	_knockdown_phase = 0
+	anim.speed_scale = 1.0
+	_play_ground_animation("idle")
+
+
+func is_knocked_down() -> bool:
+	return _knockdown_phase > 0
+
+
+# --- Beber una poción: el personaje se detiene, levanta el frasco y bebe; al terminar emite drink_finished. ---
+func drink_potion(potion_texture: Texture2D = null, duration: float = 1.3) -> void:
+	if _dead or _drink_time > 0.0:
+		return
+	_drink_time = duration
+	_locomotion = Vector2.ZERO
+	is_blocking = false
+	anim.flip_h = facing.x < 0
+	_play_ground_animation("drink")
+	if potion_texture != null:
+		var bottle := Sprite2D.new()
+		bottle.texture = potion_texture
+		var size: float = maxf(potion_texture.get_width(), potion_texture.get_height())
+		bottle.scale = Vector2.ONE * (46.0 / maxf(size, 1.0))
+		bottle.z_index = 1
+		bottle.position = Vector2(facing.x * 34.0, $CollisionShape2D.position.y - 150.0)
+		bottle.modulate.a = 0.0
+		add_child(bottle)
+		var t := create_tween()
+		t.tween_property(bottle, "modulate:a", 1.0, 0.15)
+		t.parallel().tween_property(bottle, "position:y", bottle.position.y - 70.0, duration * 0.3)
+		t.tween_property(bottle, "rotation", facing.x * 2.1, duration * 0.35)
+		t.tween_interval(duration * 0.2)
+		t.tween_property(bottle, "modulate:a", 0.0, 0.15)
+		t.tween_callback(bottle.queue_free)
+	AudioLandscape.cue(&"clue", ground_position())
+
+
+func _update_drink(delta: float) -> void:
+	velocity = knockback
+	_move_on_path()
+	knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
+	# Leve inclinación hacia atrás mientras bebe (se lee el gesto aunque el dibujo sea una sola pose).
+	anim.rotation = -0.06 * facing.x * sin(clampf(1.0 - _drink_time / 1.3, 0.0, 1.0) * PI)
+	_drink_time = maxf(0.0, _drink_time - delta)
+	if _drink_time <= 0.0:
+		anim.rotation = 0.0
+		_play_ground_animation("idle")
+		drink_finished.emit()
 
 
 # --- IA del compañero (solo corre si is_companion = true) ---
@@ -711,7 +926,8 @@ func _companion_ai_step(delta: float) -> void:
 		if absf(dir.x) > 0.25:
 			facing = Vector2.LEFT if dir.x < 0.0 else Vector2.RIGHT
 		if not is_jumping:
-			_play_ground_animation("walk")
+			# Cuando se apura para alcanzarte, corre (si tiene hoja de correr; si no, camina más rápido).
+			_play_ground_animation("run" if hurry else "walk")
 		anim.flip_h = facing.x < 0
 	_move_on_path()
 	knockback = knockback.move_toward(Vector2.ZERO, 900.0 * delta)
@@ -805,6 +1021,9 @@ func ground_position() -> Vector2:
 func _on_died() -> void:
 	if _dead:return
 	_dead=true
+	_knockdown_phase=0
+	_drink_time=0.0
+	is_blocking=false
 	_contact_active=false
 	CombatFX.death_burst(ground_position() + Vector2(0, -60), 0.8)
 	_damage_recoil=0.0
@@ -835,9 +1054,41 @@ func _on_died() -> void:
 		$CollisionShape2D.set_deferred("disabled",true)
 		$Hurtbox/CollisionShape2D.set_deferred("disabled",true)
 		return
+	_present_defeat()
+
+
+## Cayó el último del grupo: se deja ver la caída completa (en cámara lenta), la imagen se oscurece despacio
+## y recién entonces aparece la página de derrota (con fundido, sin corte brusco).
+func _present_defeat() -> void:
+	var level := get_parent()
+	Engine.time_scale = 0.55
+	if SpriteFit.has_clip(anim.sprite_frames, "death"):
+		var frames: SpriteFrames = anim.sprite_frames
+		var natural: float = float(frames.get_frame_count("death")) / maxf(frames.get_animation_speed("death"), 0.01)
+		await get_tree().create_timer(minf(natural, 2.5) + 0.6, true, false, true).timeout
+	else:
+		await get_tree().create_timer(1.2, true, false, true).timeout
+	Engine.time_scale = 1.0
+	if not is_instance_valid(level) or not level.is_inside_tree():
+		return
+	var veil := CanvasLayer.new()
+	veil.layer = 85
+	veil.process_mode = Node.PROCESS_MODE_ALWAYS
+	var black := ColorRect.new()
+	black.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	black.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	black.color = Color(0.01, 0.012, 0.018, 0.0)
+	veil.add_child(black)
+	level.add_child(veil)
+	AudioLandscape.hush(0.2, 1.4)
+	var fade := veil.create_tween()
+	fade.tween_property(black, "color:a", 0.7, 1.4).set_trans(Tween.TRANS_SINE)
+	await fade.finished
+	if not is_instance_valid(level) or not level.is_inside_tree():
+		return
 	var page:=CanvasLayer.new()
 	page.set_script(preload("res://scripts/ui/defeat_page.gd"))
-	get_parent().add_child.call_deferred(page)
+	level.add_child(page)
 
 func present_interaction(target: Vector2) -> void:
 	if _dead or is_companion or is_attacking or is_jumping or not SpriteFit.has_clip(anim.sprite_frames, "interact"):return

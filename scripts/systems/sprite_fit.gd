@@ -54,6 +54,64 @@ static func metrics(texture: Texture2D) -> Dictionary:
 	return result
 
 
+static var _reference_cache: Dictionary = {}
+
+
+## Cuadro de referencia de una animación: su PRIMER cuadro con dibujo (la pose base: de pie, en guardia...).
+## No se usa el más alto porque un brazo en alto o un salto harían ver chico al personaje en esa animación.
+## El salto ("jump") se mide con la referencia del reposo: la figura se encoge y se estira dentro del salto sin cambiar de tamaño.
+static func reference_frame(frames: SpriteFrames, animation: StringName) -> Dictionary:
+	if animation == &"jump" and has_clip(frames, &"idle"):
+		animation = &"idle"
+	var key := "%d|%s|%d" % [frames.get_instance_id(), animation, frames.get_frame_count(animation)]
+	if _reference_cache.has(key):
+		return _reference_cache[key]
+	var best: Dictionary = {}
+	for index in frames.get_frame_count(animation):
+		var m: Dictionary = metrics(frames.get_frame_texture(animation, index))
+		if not m.is_empty() and int(m["bottom"]) - int(m["top"]) > 0:
+			best = m
+			break
+	_reference_cache[key] = best
+	return best
+
+
+## true si el SpriteFrames trae un alto de personaje (CharacterFrames con character_height > 0).
+static func uses_height(frames: SpriteFrames) -> bool:
+	return frames is CharacterFrames and (frames as CharacterFrames).character_height > 0.0
+
+
+## Ajuste común de tamaño y apoyo para un cuadro (todos los personajes usan esto cuando su SpriteFrames tiene
+## character_height). Devuelve {scale, baseline, offset_x, shift}:
+##   scale: escala del sprite · baseline: fila de los pies medida desde el centro del cuadro (en px de la textura)
+##   offset_x: corrimiento para centrar la figura (px de textura) · shift: corrimiento extra en px de pantalla.
+## Vacío si el SpriteFrames no usa el sistema o el cuadro no tiene dibujo.
+static func height_fit(frames: SpriteFrames, animation: StringName, frame: int) -> Dictionary:
+	if not uses_height(frames) or not frames.has_animation(animation):
+		return {}
+	var texture: Texture2D = frames.get_frame_texture(animation, frame)
+	var measured: Dictionary = metrics(texture)
+	var ref: Dictionary = reference_frame(frames, animation)
+	if measured.is_empty() or ref.is_empty():
+		return {}
+	var ref_height: float = float(int(ref["bottom"]) - int(ref["top"]))
+	if ref_height <= 0.0:
+		return {}
+	var cf := frames as CharacterFrames
+	# Centrado: con el primer cuadro de la propia animación (el salto toma la escala del reposo, pero se centra con su hoja).
+	var center: Dictionary = ref
+	if animation == &"jump":
+		var own: Dictionary = metrics(frames.get_frame_texture(animation, 0))
+		if not own.is_empty():
+			center = own
+	return {
+		"scale": cf.character_height * cf.scale_of(animation) / ref_height,
+		"baseline": float(measured["bottom"]) - float(measured["h"]) * 0.5,
+		"offset_x": -(float(center["cx"]) - float(center["w"]) * 0.5),
+		"shift": cf.offset_of(animation),
+	}
+
+
 # ---------------------------------------------------------------------------------------------
 # ANIMACIONES EDITABLES (ranuras de movimiento)
 # Todos los personajes, NPC, enemigos, aldeanos y animales traen sus ranuras de animación ya
@@ -79,6 +137,9 @@ const FALLBACKS := {
 	&"kick": [&"attack", &"idle"],
 	&"attack": [&"idle"],
 	&"react": [&"talk", &"idle"],
+	&"block": [&"idle"],
+	&"drink": [&"interact", &"idle"],
+	&"taunt": [&"talk", &"idle"],
 }
 
 

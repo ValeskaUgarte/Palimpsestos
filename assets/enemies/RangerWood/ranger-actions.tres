@@ -1,5 +1,6 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://bacjpchus0q2y"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://bacjpchus0q2y"]
 
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="5_qfvjw"]
 [ext_resource type="Texture2D" uid="uid://b4u31a01qac6q" path="res://assets/enemies/RangerWood/RangerWood-hit_react-v1.png" id="H_hurt"]
 [ext_resource type="Texture2D" uid="uid://o0veiomdpkad" path="res://assets/enemies/RangerWood/RangerWood-attack.png" id="S1"]
 [ext_resource type="Texture2D" uid="uid://bs4sckoacwt5n" path="res://assets/enemies/RangerWood/RangerWood-walk-trimmed.png" id="S2"]
@@ -592,3 +593,5 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+script = ExtResource("5_qfvjw")
+character_height = 440.0

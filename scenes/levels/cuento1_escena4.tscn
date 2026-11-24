@@ -28,6 +28,9 @@ size = Vector2(60, 1000)
 [sub_resource type="RectangleShape2D" id="TrigShape4"]
 size = Vector2(140, 400)
 
+[sub_resource type="RectangleShape2D" id="CierreShape4"]
+size = Vector2(80, 400)
+
 [node name="Cuento1_Escena4" type="Node2D" unique_id=717385309]
 script = ExtResource("1_level")
 camera_bounds = Rect2(-64, -383, 2558, 792)
@@ -109,6 +112,17 @@ x_max = 50.0
 
 [node name="PauseMenu" parent="." unique_id=1832822332 instance=ExtResource("11_pause")]
 
+[node name="S4_Cierre" type="Area2D" parent="."]
+position = Vector2(2315, 230)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_story")
+conversation_lines = Array[String](["La verdad les cae encima de golpe: lo que quedaba en la mesa era la abuela. El lobo la cocinó, la sirvió con cuidado, y la niña comió sin saber a quién.", "Stephy-No fue culpa tuya. Él te puso la mesa.", "Caperucita-Él sigue aquí... Habla cuando yo hablo. Tiene hambre cuando yo tengo hambre.", "Por un instante, la voz de la joven no es la suya: es más grave, y huele a tierra mojada.", "Elliot-Pero lo vencimos. Lo vimos caer.", "Thomas-Cayó una página. El lobo no.", "Jhon-En el cuento de verdad no hay cazador. Nadie le abre la panza al lobo. Nadie sale vivo.", "Esta historia nunca tuvo un final feliz. Y a quien nunca fue derrotado en el cuento no se le puede matar a golpes.", "Elliot-Entonces habrá que escribirle uno."])
+lock_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Cierre"]
+shape = SubResource("CierreShape4")
+
 [node name="ChapterExit" type="Area2D" parent="." unique_id=991086270]
 position = Vector2(2400, 20)
 collision_layer = 0
@@ -174,6 +188,7 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_story")
 conversation_lines = Array[String](["Un gato gris los observa desde lo alto de la cómoda, con los ojos muy abiertos. Mira a la joven. Solo a ella.", "Gato-¡Cochina!", "Gato-Has comido la carne y has bebido la sangre de tu abuela.", "Nadie se mueve. La joven tampoco.", "Caperucita-Estaba muy rica.", "Caperucita-Me dijo que comiera. Que en la alacena había carne y vino, y que ella ya no podía.", "Caperucita-Me pidió que echara mis cosas al fuego, una por una: el delantal, la capa... Y cada vez me decía lo mismo: «Nunca más la necesitarás».", "Caperucita-Yo le pregunté por sus manos, por sus ojos, por sus uñas, por sus dientes. Cada respuesta me la sabía antes de oírla.", "Caperucita-Pero seguí preguntando. Así es como se cuenta, ¿no? Así tiene que contarse.", "Caperucita-Y la última respuesta fue: «Para comerte mejor».", "La joven se mira las manos, como si buscara en ellas lo que ya no está.", "Stephy-No sigas. Mírame a mí.", "Caperucita-Pero estoy aquí... ¿Por qué sigo aquí?"])
+lock_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Gato" unique_id=26464357]
 position = Vector2(-86, -11)
@@ -188,3 +203,15 @@ conversation_lines = Array[String](["La cama está deshecha. Las sábanas conser
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="S4_Cama" unique_id=977043895]
 shape = SubResource("TrigShape4")
+
+[node name="Motion" parent="Caperucita" index="0"]
+wander_range = 0.0
+run_chance = 0.0
+
+[node name="Motion" parent="Stephy" index="0"]
+wander_range = 0.0
+run_chance = 0.0
+
+[editable path="Caperucita"]
+
+[editable path="Stephy"]

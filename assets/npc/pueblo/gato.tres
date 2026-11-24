@@ -1,10 +1,10 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://assets/npc/Animales/Gato1-walk-trimmed.png" id="1_idle"]
+[ext_resource type="Script" path="res://scripts/systems/character_frames.gd" id="2_sv5j0"]
 [ext_resource type="Texture2D" path="res://assets/npc/Animales/Gato1-walk-trimmed.png" id="2_walk"]
 
 [sub_resource type="AtlasTexture" id="I0"]
-atlas = ExtResource("1_idle")
+atlas = ExtResource("2_walk")
 region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="W0"]
@@ -184,3 +184,5 @@ animations = [{
 "name": &"walk",
 "speed": 12.0
 }]
+script = ExtResource("2_sv5j0")
+character_height = 102.0

@@ -1,7 +1,8 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://brvvg0fqfrkdo"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://brvvg0fqfrkdo"]
 
 [ext_resource type="Texture2D" path="res://assets/npc/pueblo/Aldeano01.png" id="1_idle"]
 [ext_resource type="Texture2D" path="res://assets/npc/pueblo/Aldeano01-walk-trimmed.png" id="2_walk"]
+[ext_resource type="Script" path="res://scripts/systems/character_frames.gd" id="3_n8vjx"]
 
 [sub_resource type="AtlasTexture" id="I0"]
 atlas = ExtResource("1_idle")
@@ -135,3 +136,5 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+script = ExtResource("3_n8vjx")
+character_height = 300.0

@@ -16,6 +16,8 @@ extends Area2D
 ## zona no necesita llegar exactamente a sus pies; basta con estar a su altura horizontal.
 ## (Caperucita en la escena 2 tenía la zona demasiado arriba y nunca hablaba al acercarse.)
 @export var interaction_vertical_slack: float = 320.0
+## Bandera de GameSession que se pone al terminar la PRIMERA conversación (ej. para que otros comenten lo que dijo).
+@export var finish_flag: String = ""
 var _geo_in_range: bool = false
 ## Se emite cada vez que termina de hablar contigo (útil para destrabar cosas de la escena).
 signal conversation_finished
@@ -70,6 +72,8 @@ func _on_dialogue_finished() -> void:
 		GameSession.set_flag(followup_sets_flag)
 	else:
 		_completed = not repeatable
+		if finish_flag != "":
+			GameSession.set_flag(finish_flag)
 	# La conversación nueva sustituye a la primera: tampoco ésta vuelve a empezar sola.
 	_auto_done = true
 	var session_key := _session_dialogue_key()

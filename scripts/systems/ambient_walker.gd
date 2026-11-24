@@ -168,6 +168,15 @@ func _fit() -> void:
 	var fit_scale: float = 1.0
 	var fit_baseline: float = 0.0
 	var fit_offset_x: float = 0.0
+	# Tamaño parejo editable en el propio SpriteFrames (CharacterFrames: character_height / animation_scale).
+	var hf: Dictionary = SpriteFit.height_fit(frames, _sprite.animation, _sprite.frame)
+	if not hf.is_empty():
+		var hscale: float = float(hf["scale"])
+		var hside: float = -1.0 if _sprite.flip_h else 1.0
+		var shift: Vector2 = hf["shift"]
+		_sprite.scale = Vector2.ONE * hscale
+		_sprite.position = Vector2((float(hf["offset_x"]) * hscale + shift.x) * hside, -float(hf["baseline"]) * hscale + shift.y)
+		return
 	if texture.has_meta("fit_scale"):
 		fit_scale = float(texture.get_meta("fit_scale"))
 		fit_baseline = float(texture.get_meta("fit_baseline", 0.0))

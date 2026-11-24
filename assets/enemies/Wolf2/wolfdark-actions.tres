@@ -1,7 +1,72 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://oroio6gjmy0y"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://oroio6gjmy0y"]
 
-[ext_resource type="Texture2D" uid="uid://dor0lgivycxic" path="res://assets/enemies/Wolf2/Wolf2-movement.png" id="S1"]
+[ext_resource type="Script" path="res://scripts/systems/character_frames.gd" id="3_j16py"]
 [ext_resource type="Texture2D" path="res://assets/enemies/Wolf2/WolfDark-hurt.png" id="HURT_SHEET"]
+[ext_resource type="Texture2D" uid="uid://dor0lgivycxic" path="res://assets/enemies/Wolf2/Wolf2-movement.png" id="S1"]
+
+[sub_resource type="AtlasTexture" id="F14"]
+atlas = ExtResource("S1")
+region = Rect2(21, 436, 194, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 61.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F15"]
+atlas = ExtResource("S1")
+region = Rect2(426, 436, 165, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 62.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F16"]
+atlas = ExtResource("S1")
+region = Rect2(788, 436, 155, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 52.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F17"]
+atlas = ExtResource("S1")
+region = Rect2(1356, 436, 163, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 59.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F18"]
+atlas = ExtResource("S1")
+region = Rect2(1356, 436, 163, 130)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 59.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F19"]
+atlas = ExtResource("S1")
+region = Rect2(411, 308, 168, 122)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 49.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F20"]
+atlas = ExtResource("S1")
+region = Rect2(13, 572, 207, 276)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 129.0
+metadata/pose_art_offset_x = 0.0
+
+[sub_resource type="AtlasTexture" id="F21"]
+atlas = ExtResource("S1")
+region = Rect2(613, 572, 364, 276)
+filter_clip = true
+metadata/pose_art_scale = 1.47015
+metadata/pose_art_baseline = 133.0
+metadata/pose_art_offset_x = 0.0
 
 [sub_resource type="AtlasTexture" id="HURT1"]
 atlas = ExtResource("HURT_SHEET")
@@ -82,70 +147,6 @@ filter_clip = true
 atlas = ExtResource("HURT_SHEET")
 region = Rect2(768, 768, 256, 256)
 filter_clip = true
-
-[sub_resource type="AtlasTexture" id="F14"]
-atlas = ExtResource("S1")
-region = Rect2(21, 436, 194, 130)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 61.0
-metadata/pose_art_offset_x = 0.0
-
-[sub_resource type="AtlasTexture" id="F15"]
-atlas = ExtResource("S1")
-region = Rect2(426, 436, 165, 130)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 62.0
-metadata/pose_art_offset_x = 0.0
-
-[sub_resource type="AtlasTexture" id="F16"]
-atlas = ExtResource("S1")
-region = Rect2(788, 436, 155, 130)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 52.0
-metadata/pose_art_offset_x = 0.0
-
-[sub_resource type="AtlasTexture" id="F17"]
-atlas = ExtResource("S1")
-region = Rect2(1356, 436, 163, 130)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 59.0
-metadata/pose_art_offset_x = 0.0
-
-[sub_resource type="AtlasTexture" id="F18"]
-atlas = ExtResource("S1")
-region = Rect2(1356, 436, 163, 130)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 59.0
-metadata/pose_art_offset_x = 0.0
-
-[sub_resource type="AtlasTexture" id="F19"]
-atlas = ExtResource("S1")
-region = Rect2(411, 308, 168, 122)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 49.0
-metadata/pose_art_offset_x = 0.0
-
-[sub_resource type="AtlasTexture" id="F20"]
-atlas = ExtResource("S1")
-region = Rect2(13, 572, 207, 276)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 129.0
-metadata/pose_art_offset_x = 0.0
-
-[sub_resource type="AtlasTexture" id="F21"]
-atlas = ExtResource("S1")
-region = Rect2(613, 572, 364, 276)
-filter_clip = true
-metadata/pose_art_scale = 1.47015
-metadata/pose_art_baseline = 133.0
-metadata/pose_art_offset_x = 0.0
 
 [sub_resource type="AtlasTexture" id="F1"]
 atlas = ExtResource("S1")
@@ -399,3 +400,5 @@ animations = [{
 "name": &"walk",
 "speed": 12.0
 }]
+script = ExtResource("3_j16py")
+character_height = 210.0

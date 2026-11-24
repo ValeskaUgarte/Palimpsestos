@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://c4hmyun8u5jyq"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://c4hmyun8u5jyq"]
 
 [ext_resource type="Texture2D" uid="uid://bl1v4pgihwgsu" path="res://assets/npc/Animales/Perro01-run.png" id="2_walk"]
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_3my4n"]
 [ext_resource type="Texture2D" uid="uid://dbk2h5e3vsyxp" path="res://assets/npc/Animales/Perro01-idle.png" id="3_idle"]
 
 [sub_resource type="AtlasTexture" id="I0"]
@@ -455,3 +456,5 @@ animations = [{
 "name": &"walk",
 "speed": 12.0
 }]
+script = ExtResource("3_3my4n")
+character_height = 125.0

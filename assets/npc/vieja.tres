@@ -1,5 +1,6 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://bbfijxn5ba7qd"]
+[gd_resource type="SpriteFrames" script_class="CharacterFrames" format=3 uid="uid://bbfijxn5ba7qd"]
 
+[ext_resource type="Script" uid="uid://dgwhjfjg35hw5" path="res://scripts/systems/character_frames.gd" id="3_bu2g7"]
 [ext_resource type="Texture2D" uid="uid://c6q60mfkrodn8" path="res://assets/npc/Vieja-idle.png" id="H_idle"]
 [ext_resource type="Texture2D" uid="uid://cmuss0n55g2r5" path="res://assets/npc/Vieja-talk.png" id="H_talk"]
 
@@ -380,3 +381,5 @@ animations = [{
 "name": &"walk",
 "speed": 10.0
 }]
+script = ExtResource("3_bu2g7")
+character_height = 269.0

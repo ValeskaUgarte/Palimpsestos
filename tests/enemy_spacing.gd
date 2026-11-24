@@ -32,6 +32,9 @@ func run() -> void:
 		var npcs: Array = []
 		var enemies: Array = []
 		for child in level.get_children():
+			# Figuras de fondo (p. ej. Stephy lejana entre las casas): no son PNJ del camino.
+			if child.is_in_group("decorado"):
+				continue
 			var scripted: bool = child is Area2D and child.get_script() != null and String(child.get_script().resource_path).ends_with("characters/npc.gd")
 			if scripted or String(child.name).begins_with("NPC_") or (child is Area2D and child.get_node_or_null("Motion") != null):
 				npcs.append(child)

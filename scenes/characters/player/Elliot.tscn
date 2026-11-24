@@ -28,9 +28,10 @@ clip_scale = {
 "hurt": 1.51,
 "idle": 1.6146,
 "interact": 1.6146,
-"jump": 1.8902,
+"jump": 1.6146,
 "kick": 1.7033,
-"walk": 1.4155
+"walk": 1.4155,
+"block": 1.5049
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2041307235]
