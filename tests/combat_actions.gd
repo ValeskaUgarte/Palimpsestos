@@ -44,7 +44,10 @@ func run() -> void:
 		e._apply_frame_alignment()
 		heights.append(visible_height(e.visual))
 	for h in heights:
-		check(absf(h - cf.character_height) < 2.0, "Ranger: animación con alto distinto (%.1f, esperado %.1f)" % [h, cf.character_height])
+		pass
+	for k in heights.size():
+		var expected: float = cf.character_height * cf.scale_of([&"idle", &"walk", &"attack", &"hurt"][k])
+		check(absf(heights[k] - expected) < 2.0, "Ranger: animación con alto distinto (%.1f, esperado %.1f)" % [heights[k], expected])
 
 	# Bloqueo: de frente pasa solo una parte del daño y no derriba.
 	p.facing = Vector2.RIGHT

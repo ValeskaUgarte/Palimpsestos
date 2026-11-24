@@ -55,6 +55,8 @@ static func metrics(texture: Texture2D) -> Dictionary:
 
 
 static var _reference_cache: Dictionary = {}
+## Animaciones en las que el apoyo de los pies se mide en cada cuadro (en el resto se usa el del primer cuadro).
+const PER_FRAME_FEET := [&"walk", &"run", &"jump", &"death", &"land"]
 
 
 ## Cuadro de referencia de una animación: su PRIMER cuadro con dibujo (la pose base: de pie, en guardia...).
@@ -104,9 +106,19 @@ static func height_fit(frames: SpriteFrames, animation: StringName, frame: int) 
 		var own: Dictionary = metrics(frames.get_frame_texture(animation, 0))
 		if not own.is_empty():
 			center = own
+	# Apoyo de los pies: la medida guardada del cuadro si la tiene; si no, la del primer cuadro de la animación.
+	# (Medirlo en cada cuadro hacía subir y bajar al personaje cuando un cuadro se medía mal.)
+	var baseline: float = float(ref["bottom"]) - float(ref["h"]) * 0.5
+	# Caminar, correr, saltar y caer cambian de pie de apoyo en cada cuadro: ahí se mide cuadro a cuadro.
+	if animation in PER_FRAME_FEET:
+		baseline = float(measured["bottom"]) - float(measured["h"]) * 0.5
+	if texture.has_meta("pose_art_baseline"):
+		baseline = float(texture.get_meta("pose_art_baseline"))
+	elif texture.has_meta("fit_baseline"):
+		baseline = float(texture.get_meta("fit_baseline"))
 	return {
 		"scale": cf.character_height * cf.scale_of(animation) / ref_height,
-		"baseline": float(measured["bottom"]) - float(measured["h"]) * 0.5,
+		"baseline": baseline,
 		"offset_x": -(float(center["cx"]) - float(center["w"]) * 0.5),
 		"shift": cf.offset_of(animation),
 	}

@@ -595,3 +595,7 @@ animations = [{
 }]
 script = ExtResource("5_qfvjw")
 character_height = 440.0
+animation_scale = {
+"hurt": 1.12,
+"walk": 1.12
+}

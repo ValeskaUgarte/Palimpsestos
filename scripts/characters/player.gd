@@ -97,6 +97,9 @@ var _render_pass: bool = false   # true solo dentro de _process: ahí la altura 
 ## Escala fija de CADA animación (todas miden lo mismo en pantalla). Se edita en el Inspector.
 ## Si una animación no está aquí, usa la de "idle".
 @export var clip_scale: Dictionary = {}
+## Animaciones en las que los pies se apoyan como en su primer cuadro (en vez de medirlos en cada cuadro).
+## Útil cuando una hoja tiene cuadros mal medidos y el personaje parece hundirse o flotar (ej. la patada de Jhon).
+@export var fixed_feet_clips: Array[StringName] = []
 var _interaction_time: float = 0.0
 var _swing_presented: bool = false
 var _await_action_release: bool = false
@@ -425,6 +428,10 @@ func _fit_pose() -> void:
 			return
 		fit_scale = standing_height / float(int(first["bottom"]) - int(first["top"]))
 		fit_baseline = float(measured["bottom"]) - float(measured["h"]) * 0.5
+		# Animaciones de fixed_feet_clips: los pies del PRIMER cuadro para toda la animación (si se miden cuadro a
+		# cuadro el personaje sube y baja; en la patada de Jhon se hundía en el suelo).
+		if anim.animation in fixed_feet_clips:
+			fit_baseline = float(first["bottom"]) - float(first["h"]) * 0.5
 		fit_offset_x = -(float(first["cx"]) - float(first["w"]) * 0.5)
 	var side: float = -1.0 if anim.flip_h else 1.0
 	# Tamaño fijo por animación (Inspector: clip_scale). Mismo alto en caminar, golpear, patear y saltar.
